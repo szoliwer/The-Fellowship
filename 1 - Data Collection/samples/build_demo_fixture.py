@@ -1,10 +1,15 @@
-"""Builds the canonical demo history for user_a (researcher_014) as a ChatGPT export.
+"""Builds the canonical demo histories as ChatGPT exports:
+  user_a (researcher_014): demo_chatgpt_user_a.json, 9 chats
+  user_b (cellbio_027):    demo_chatgpt_user_b.json, 2 chats
 
 ALL PEOPLE, DISEASES, PATIENTS, ACCOUNTS AND RESULTS HERE ARE SYNTHETIC.
 They exist to test the pipeline (see the shared brief, section 11), not to state facts.
+Disease A, Disease B, protein P7, receptor R1 and transporter T2 are invented.
 
-Source IDs a_s01 … a_s09 are used by every step, so don't renumber them.
-Expected after Step 2: a_s01–a_s05 eligible; a_s06–a_s09 held back.
+Source IDs a_s01 … a_s09 and b_s01 … b_s02 are used by every step, so don't renumber them.
+Expected after Step 2: a_s01–a_s05 eligible; a_s06–a_s09 held back; b_s01–b_s02 eligible.
+Expected ideas (2 - Noise Filter/HANDOFF.md): A1 from a_s01–a_s03, A2 from a_s04–a_s05,
+B1 from b_s01–b_s02 (a *pilot* assay that is not validated).
 
 The output mimics ChatGPT's real `conversations.json` (a message tree in `mapping`,
 `current_node` pointing at the selected branch), including a few awkward cases the
@@ -18,7 +23,7 @@ Run from the repo root to regenerate:
 import json
 from pathlib import Path
 
-OUT = Path(__file__).resolve().parent / "demo_chatgpt_user_a.json"
+HERE = Path(__file__).resolve().parent
 DAY = 86400
 T0 = 1788523200.0  # 2026-09-04 12:00 UTC
 
@@ -111,6 +116,36 @@ CONVERSATIONS = [
     ]),
 ]
 
+CONVERSATIONS_B = [
+    ("b_s01", "Functional readouts beyond localization in Disease B", T0 + 2 * DAY, [
+        (U, "In Disease B cells, transporter T2 shows up in the wrong compartment by imaging. I want to "
+            "know whether that actually changes its function. Which functional readouts would complement "
+            "the localization data?"),
+        (A, "Localization and function can come apart, so pair the imaging with a measurement of what "
+            "T2 does: uptake of a labelled substrate, surface labelling to quantify how much reaches the "
+            "membrane, or a pulse-chase to follow delivery over time."),
+        (U, "I've been piloting a synchronized-release assay: hold T2 in the ER, release it all at once, "
+            "and time its arrival at the surface. Early runs suggest slower arrival in Disease B cells, "
+            "but it's only a pilot: few replicates and I haven't validated it."),
+        (A, "That's a good fit for a trafficking question, because it measures movement over time. "
+            "Treat the slower arrival as preliminary until it replicates across cell lines and conditions."),
+        (U, "So my working plan is to compare localization with these functional readouts in the same "
+            "cells, rather than relying on imaging alone."),
+    ]),
+    ("b_s02", "Controls to separate assay artifacts from a real trafficking effect", T0 + 5 * DAY, [
+        (U, "For the synchronized-release pilot, how do I tell a real trafficking defect from an artifact "
+            "of the assay itself? The tag on T2 might slow it down, for example."),
+        (A, "Use controls that each rule out one explanation: a condition that blocks the pathway "
+            "completely, a cargo like receptor R1 that should be unaffected, an untagged or "
+            "differently tagged T2, and matched expression levels so faster or slower arrival isn't "
+            "just about how much protein there is."),
+        (U, "I've considered the blocked-pathway control and the unaffected cargo. I haven't tried a "
+            "second tag yet, and I'm unsure how to match expression between Disease B and control cells."),
+        (A, "Sorting cells into matched expression bins, or using an inducible promoter, are common "
+            "ways to handle that. The assay still needs those controls before it can be called validated."),
+    ]),
+]
+
 ABANDONED_BRANCH = {  # an earlier version of a_s02's first question, later edited
     "conversation": "a_s02",
     "messages": [
@@ -180,9 +215,12 @@ def build_conversation(conv_id, title, t_start, messages):
 
 
 def main():
-    export = [build_conversation(*c) for c in CONVERSATIONS]
-    OUT.write_text(json.dumps(export, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Wrote {len(export)} synthetic conversations to {OUT}")
+    for name, conversations in [("demo_chatgpt_user_a.json", CONVERSATIONS),
+                                ("demo_chatgpt_user_b.json", CONVERSATIONS_B)]:
+        out = HERE / name
+        export = [build_conversation(*c) for c in conversations]
+        out.write_text(json.dumps(export, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(f"Wrote {len(export)} synthetic conversations to {out}")
 
 
 if __name__ == "__main__":

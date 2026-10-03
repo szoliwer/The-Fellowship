@@ -38,6 +38,11 @@ The Fellowship/
 ├── README.md                  ← you are here: project overview
 ├── CLAUDE.md                  ← the "harness": context + rules for any AI assistant working in this repo
 ├── .gitignore                 ← keeps secrets and real user data out of GitHub
+├── app.py                     ← the shared app: joins the steps' screens (see "Run the app")
+├── requirements.txt           ← what the shared app needs installed
+├── .env.example               ← template for .env (your Anthropic API key; .env is git-ignored)
+├── .streamlit/config.toml     ← app settings: this laptop only, no usage statistics
+├── data/                      ← (git-ignored, on your laptop only) accounts, uploads, pipeline files
 ├── docs/
 │   ├── PROGRESS.md            ← team status board: who's doing what, what's done
 │   ├── DECISIONS.md           ← project-wide decisions (stack, data format, privacy, etc.)
@@ -72,6 +77,15 @@ People's AI chats are personal. These rules hold even for the hackathon demo:
 3. Read [`CLAUDE.md`](./CLAUDE.md) (the ground rules) and [`docs/PROGRESS.md`](./docs/PROGRESS.md) (who's on what).
 4. Work inside the folder for your step. Log what you did in that step's `README.md`.
 5. When you're ready to save to GitHub, follow [`docs/HOW_WE_WORK.md`](./docs/HOW_WE_WORK.md).
+
+## Run the app
+
+In Terminal, from the repo folder (GitHub Desktop: *Repository → Open in Terminal*):
+
+1. First time only: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`. For privacy screening (Step 2), also copy `.env.example` to `.env` and paste your Anthropic API key into it.
+2. Every time: `.venv/bin/streamlit run app.py`, then open http://localhost:8501
+
+You can create an account, or pick **Try a demo account** → `researcher_014` → **Demo history** to load the synthetic chats. Everything you create is stored in `data/` on your laptop only.
 
 ## Team
 

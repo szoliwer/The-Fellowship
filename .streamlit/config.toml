@@ -1,0 +1,12 @@
+# Streamlit settings for the shared app (read when running `streamlit run app.py` from the repo root).
+
+[server]
+# Only this laptop can open the app; nobody else on the Wi-Fi can reach sign-ups or chats.
+address = "localhost"
+port = 8501
+# Max upload size in MB (matches the importer's limit).
+maxUploadSize = 200
+
+[browser]
+# Don't send usage statistics to Streamlit.
+gatherUsageStats = false
