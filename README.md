@@ -1,2 +1,82 @@
 # The Fellowship
-Bringin Together People Through AI Chats
+
+**An AI-native discovery network that matches people on what they're actually thinking about, not on static profiles.**
+
+Most networking tools match people on job titles, schools, and self-written bios. Those go stale fast and don't say much about what someone is working through right now. The Fellowship starts from a better signal: the conversations people already have with AI assistants.
+
+Users choose to import their LLM chat histories (ChatGPT, Claude, Gemini, and so on). We filter out the noise, pull out the ideas and interests underneath, and rank them. Then we match users whose ideas are **similar** (working on the same problem) or **complementary** (one person has what the other needs). Each match comes with a short warm intro explaining *why* the two people should talk, so the first conversation starts in the right place.
+
+> Built live at a hackathon by a team of four.
+
+---
+
+## How it works: the 7-step pipeline
+
+| # | Step | What it does | Folder |
+|---|------|--------------|--------|
+| 0 | **User Registration** | Sign up, give consent, set basic preferences (what kinds of matches they want). | [`0 - User Registration`](./0%20-%20User%20Registration/) |
+| 1 | **Data Collection** | User uploads chat exports from the LLM tools they choose. We read them into one common format. | [`1 - Data Collection`](./1%20-%20Data%20Collection/) |
+| 2 | **Noise Filter** | Throw out the chatter that says nothing about the person (debugging a typo, "write me an email", recipes) and remove sensitive personal details. | [`2 - Noise Filter`](./2%20-%20Noise%20Filter/) |
+| 3 | **Idea Generation** | Turn the remaining conversations into a short list of the user's real ideas, questions, interests and skills. | [`3 - Idea Generation`](./3%20-%20Idea%20Generation/) |
+| 4 | **Idea Ranking** | Score each idea for how central and current it is to this person (how often, how recently, how deeply they engage with it). | [`4 - Idea Ranking`](./4%20-%20Idea%20Ranking/) |
+| 5 | **Match Generation** | Compare users' ranked ideas and score pairs on similarity and complementarity. Produce a ranked list of suggested matches. | [`5 - Match Generation`](./5%20-%20Match%20Generation/) |
+| 6 | **Matching Interface** | Show a user their suggested matches. They accept or pass, and on a mutual accept both see a warm intro explaining why they matched. | [`6 - Matching Interface`](./6%20-%20Matching%20Interface/) |
+
+```
+ Register ─► Upload chats ─► Filter noise ─► Extract ideas ─► Rank ideas ─► Match people ─► Accept + warm intro
+   (0)           (1)             (2)             (3)              (4)             (5)               (6)
+```
+
+Each step's output becomes the next step's input. Every step folder has its own `README.md` that describes what goes in, what comes out, and keeps a running log of **decisions**, **progress**, and **code fixes** for that step.
+
+---
+
+## Repository layout
+
+```
+The Fellowship/
+├── README.md                  ← you are here: project overview
+├── CLAUDE.md                  ← the "harness": context + rules for any AI assistant working in this repo
+├── .gitignore                 ← keeps secrets and real user data out of GitHub
+├── docs/
+│   ├── PROGRESS.md            ← team status board: who's doing what, what's done
+│   ├── DECISIONS.md           ← project-wide decisions (stack, data format, privacy, etc.)
+│   └── HOW_WE_WORK.md         ← GitHub Desktop workflow for the team
+├── 0 - User Registration/
+│   └── README.md              ← step spec + decisions / progress / fixes log
+├── 1 - Data Collection/
+├── 2 - Noise Filter/
+├── 3 - Idea Generation/
+├── 4 - Idea Ranking/
+├── 5 - Match Generation/
+└── 6 - Matching Interface/
+```
+
+---
+
+## Privacy principles
+
+People's AI chats are personal. These rules hold even for the hackathon demo:
+
+1. **Opt-in only.** Users choose which exports to upload. Nothing is pulled automatically.
+2. **Raw chats never leave the pipeline.** Other users only ever see high-level ideas and the warm intro, never chat text.
+3. **Mutual consent to connect.** Contact details are shared only after both people accept.
+4. **No real user data in GitHub.** Use sample or synthetic chats for development. Real exports go in `data/`, which is git-ignored.
+
+---
+
+## Getting started (team)
+
+1. Open **GitHub Desktop** → make sure *The-Fellowship* is the current repository → click **Fetch origin** / **Pull**.
+2. Read [`CLAUDE.md`](./CLAUDE.md) (the ground rules) and [`docs/PROGRESS.md`](./docs/PROGRESS.md) (who's on what).
+3. Work inside the folder for your step. Log what you did in that step's `README.md`.
+4. When you're ready to save to GitHub, follow [`docs/HOW_WE_WORK.md`](./docs/HOW_WE_WORK.md).
+
+## Team
+
+| Name | Role / Steps owned |
+|------|--------------------|
+| Oliver | _TBD_ |
+| _Teammate 2_ | _TBD_ |
+| _Teammate 3_ | _TBD_ |
+| _Teammate 4_ | _TBD_ |
