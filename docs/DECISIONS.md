@@ -12,6 +12,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 ```
 
 ---
+### D-005 — Shared app, accounts and where private data is stored
+- **Date / who:** 2026-10-03 — Herman
+- **Decision:** The shared Streamlit app is `app.py` at the repo root (run: `.venv/bin/streamlit run app.py`); each step keeps its logic and screens in its own folder and `app.py` only shows them. `.streamlit/config.toml` keeps the app on this laptop only and turns off Streamlit's usage statistics. Accounts (email + password, salted scrypt hashes) live in SQLite at `data/fellowship.db`; user records are also written to `data/users.json`. Each user's imports live in `data/sources/<user_id>.json`, with original files and upload history in `data/uploads/<user_id>/`. Step 1 adds `source_type`s `claude_json` and `text_file` and `provenance.upload_id` to the brief's `SourceContextV1`.
+- **Why:** users need to come back to their data; SQLite and scrypt are built into Python (no new installs); keeping files per user makes ownership obvious and matches D-004's "steps pass data as files". Considered: a hosted login service (too slow to set up for the hackathon).
+- **Affects:** all steps (shared app, data locations); Step 2 reads the new `source_type`s.
+
 ### D-004 — Stack Choice; `main` changes only via pull request
 - **Date / who:** 2026-10-03 — Herman
 - **Decision:** Stack for the MVP: Python + Streamlit. Each step is plain Python code in its own folder that reads input files and writes output files; one Streamlit app is the shell that runs the steps and shows the screens. Steps pass data as files (e.g. the Noise Filter → Idea Generation handoff). 

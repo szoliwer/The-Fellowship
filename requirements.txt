@@ -1,0 +1,4 @@
+# What the shared app (app.py) needs. Install with:
+#   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+# Steps with extra needs list them in their own folder's requirements.txt.
+streamlit>=1.65

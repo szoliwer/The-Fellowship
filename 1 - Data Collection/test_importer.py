@@ -14,10 +14,32 @@ import importer as im
 
 FIXTURE_BYTES = im.DEMO_FIXTURE.read_bytes()
 
+CLAUDE_EXPORT = [  # synthetic, in the shape of claude.ai's conversations.json
+    {
+        "uuid": "c-0001", "name": "Assay controls", "created_at": "2026-09-01T10:00:00.123456Z",
+        "chat_messages": [
+            {"uuid": "m1", "sender": "human", "text": "Which controls rule out assay artifacts?",
+             "created_at": "2026-09-01T10:00:01Z"},
+            {"uuid": "m2", "sender": "assistant", "text": "",
+             "content": [{"type": "text", "text": "Use a pathway blocker and an unaffected protein."}],
+             "created_at": "2026-09-01T10:00:05Z"},
+        ],
+    },
+    {"uuid": "c-0002", "name": "", "created_at": "2026-09-02T10:00:00Z", "chat_messages": []},
+]
+
+
+def make_zip(files):
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as zf:
+        for name, data in files.items():
+            zf.writestr(name, data)
+    return buf.getvalue()
+
 
 class DemoHistoryTests(unittest.TestCase):
     def setUp(self):
-        self.sources, self.skipped = im.import_demo_history("user_a", imported_at="2026-10-03T20:00:00Z")
+        self.sources, self.skipped = im.parse_demo_history("user_a", imported_at="2026-10-03T20:00:00Z")
         self.by_id = {s["source_id"]: s for s in self.sources}
 
     def test_baseline_nine_conversations_with_shared_ids(self):
@@ -46,90 +68,121 @@ class DemoHistoryTests(unittest.TestCase):
         self.assertNotIn("ABANDONED-BRANCH", self.by_id["a_s02"]["raw_text"])
 
     def test_hidden_system_messages_and_images_are_skipped(self):
-        for s in self.sources:
-            self.assertTrue(all(m["role"] in ("user", "assistant") for m in s["messages"]))
         texts = [m["text"] for m in self.by_id["a_s04"]["messages"]]
         self.assertIn("Here's a screenshot of two runs on the same paper. The second run missed two variants.", texts)
         self.assertNotIn("file-service", self.by_id["a_s04"]["raw_text"])
 
     def test_demo_history_only_for_its_demo_owner(self):
         with self.assertRaises(im.ImportFailed) as ctx:
-            im.import_demo_history("user_b")
+            im.parse_demo_history("user_b")
         self.assertEqual(ctx.exception.code, "demo_not_available")
 
 
-class ChatGPTExportTests(unittest.TestCase):
-    def test_real_uploads_get_owner_specific_ids(self):
-        a, _ = im.import_chatgpt_export(FIXTURE_BYTES, "conversations.json", "user_x")
-        b, _ = im.import_chatgpt_export(FIXTURE_BYTES, "conversations.json", "user_y")
-        self.assertTrue(all(s["source_id"].startswith("src_") for s in a))
-        self.assertTrue(all(s["source_type"] == "chatgpt_json" for s in a))
+class ExportTests(unittest.TestCase):
+    def test_chatgpt_json_and_zip(self):
+        a, _ = im.parse_upload(FIXTURE_BYTES, "conversations.json", "user_x")
+        z, _ = im.parse_upload(make_zip({"export/conversations.json": FIXTURE_BYTES, "export/user.json": "{}"}),
+                               "chatgpt-export.zip", "user_x")
+        self.assertEqual(len(a), 9)
+        self.assertEqual([s["source_id"] for s in a], [s["source_id"] for s in z])
+        self.assertTrue(all(s["source_type"] == "chatgpt_json" and s["source_id"].startswith("src_") for s in a))
+
+    def test_ids_are_per_owner_and_stable(self):
+        a, _ = im.parse_upload(FIXTURE_BYTES, "conversations.json", "user_x")
+        b, _ = im.parse_upload(FIXTURE_BYTES, "conversations.json", "user_y")
+        again, _ = im.parse_upload(FIXTURE_BYTES, "conversations.json", "user_x")
         self.assertTrue({s["source_id"] for s in a}.isdisjoint({s["source_id"] for s in b}))
-        again, _ = im.import_chatgpt_export(FIXTURE_BYTES, "conversations.json", "user_x")
         self.assertEqual([s["source_id"] for s in a], [s["source_id"] for s in again])
 
-    def test_zip_export(self):
-        buf = io.BytesIO()
-        with zipfile.ZipFile(buf, "w") as zf:
-            zf.writestr("export-2026/conversations.json", FIXTURE_BYTES)
-            zf.writestr("export-2026/user.json", "{}")
-        sources, _ = im.import_chatgpt_export(buf.getvalue(), "chatgpt-export.zip", "user_x")
-        self.assertEqual(len(sources), 9)
+    def test_claude_export(self):
+        data = json.dumps(CLAUDE_EXPORT).encode()
+        sources, skipped = im.parse_upload(make_zip({"conversations.json": data, "users.json": "[]"}),
+                                           "claude-export.zip", "user_x")
+        [s] = sources
+        self.assertEqual(s["source_type"], "claude_json")
+        self.assertEqual(s["provenance"]["title"], "Assay controls")
+        self.assertEqual(s["provenance"]["created_at"], "2026-09-01T10:00:00Z")
+        self.assertEqual([m["role"] for m in s["messages"]], ["user", "assistant"])
+        self.assertEqual(s["messages"][1]["text"], "Use a pathway blocker and an unaffected protein.")
+        self.assertEqual(skipped, [{"title": "Untitled conversation", "reason": "no user or assistant messages"}])
 
     def test_clear_errors_for_bad_input(self):
         cases = [
             (b"not json", "c.json", "malformed_json"),
             (b"[]", "c.json", "empty_export"),
-            (b'{"hello": 1}', "c.json", "not_a_chatgpt_export"),
-            (b"%PDF", "notes.pdf", "unsupported_file_type"),
+            (b'{"hello": 1}', "c.json", "not_a_chat_export"),
+            (b"%PDF-1.7", "paper.pdf", "unsupported_file_type"),
             (b"not a zip", "export.zip", "bad_zip"),
+            (b"", "notes.md", "empty_file"),
+            (b"\x00\x01binary", "notes.txt", "not_text"),
+            (make_zip({"photo.png": b"\x89PNG"}), "photos.zip", "nothing_importable"),
             (b'[{"title": "x", "mapping": {}}]', "c.json", "nothing_importable"),
         ]
         for data, name, code in cases:
             with self.assertRaises(im.ImportFailed, msg=code) as ctx:
-                im.import_chatgpt_export(data, name, "user_x")
-            self.assertEqual(ctx.exception.code, code)
+                im.parse_upload(data, name, "user_x")
+            self.assertEqual(ctx.exception.code, code, msg=name)
             self.assertEqual(set(ctx.exception.as_dict()), {"code", "message", "retryable"})
-
-    def test_zip_without_conversations(self):
-        buf = io.BytesIO()
-        with zipfile.ZipFile(buf, "w") as zf:
-            zf.writestr("user.json", "{}")
-        with self.assertRaises(im.ImportFailed) as ctx:
-            im.import_chatgpt_export(buf.getvalue(), "export.zip", "user_x")
-        self.assertEqual(ctx.exception.code, "missing_conversations_json")
-
-    def test_empty_conversations_are_reported_not_imported(self):
-        export = json.loads(FIXTURE_BYTES)[:1] + [{"title": "Empty", "id": "e1", "mapping": {
-            "root": {"id": "root", "message": None, "parent": None, "children": []}}, "current_node": "root"}]
-        sources, skipped = im.import_chatgpt_export(json.dumps(export).encode(), "c.json", "user_x")
-        self.assertEqual(len(sources), 1)
-        self.assertEqual(skipped, [{"title": "Empty", "reason": "no user or assistant messages"}])
 
     def test_import_requires_a_user(self):
         with self.assertRaises(im.ImportFailed) as ctx:
-            im.import_chatgpt_export(FIXTURE_BYTES, "c.json", "")
+            im.parse_upload(FIXTURE_BYTES, "c.json", "")
         self.assertEqual(ctx.exception.code, "missing_user")
 
 
-class PastedTextTests(unittest.TestCase):
-    def test_labelled_turns(self):
-        text = "User: How do I test this?\nIt has two lines.\nChatGPT: Use a control.\nYou: Thanks"
-        [s], _ = im.import_pasted_text(text, "user_x", title="Pasted test")
+class TextTests(unittest.TestCase):
+    def parse(self, text, name="notes.md"):
+        [s], _ = im.parse_upload(text.encode(), name, "user_x")
+        return s
+
+    def roles(self, s):
+        return [m["role"] for m in s["messages"]]
+
+    def test_markdown_headings(self):
+        s = self.parse("# Assay planning\n\n## User\nWhich assay?\n\n## ChatGPT\nTry pulse-chase.\n\n---\n\n## User\nThanks")
+        self.assertEqual(s["source_type"], "text_file")
+        self.assertEqual(s["provenance"]["title"], "Assay planning")
+        self.assertEqual(self.roles(s), ["user", "assistant", "user"])
+        self.assertEqual(s["messages"][1]["text"], "Try pulse-chase.")
+
+    def test_bold_labels_and_quotes(self):
+        s = self.parse("**You:** First question\nsecond line\n\n**Claude**: An answer\n> **User:** Follow-up")
+        self.assertEqual(self.roles(s), ["user", "assistant", "user"])
+        self.assertEqual(s["messages"][0]["text"], "First question\nsecond line")
+
+    def test_chatgpt_copy_paste_said_labels(self):
+        s = self.parse("You said:\nIs this a trafficking defect?\nChatGPT said:\nPossibly.", "chat.txt")
+        self.assertEqual(self.roles(s), ["user", "assistant"])
+        self.assertEqual(s["provenance"]["title"], "chat")
+
+    def test_front_matter_is_skipped(self):
+        s = self.parse("---\ntitle: x\ndate: 2026-09-01\n---\nUser: Hello\nAssistant: Hi")
+        self.assertEqual(self.roles(s), ["user", "assistant"])
+        self.assertNotIn("date:", s["raw_text"])
+
+    def test_unlabelled_notes_are_one_user_message(self):
+        s = self.parse("Notes on assays.\n\nAI models might help here too.", "lab-notes.txt")
+        self.assertEqual(self.roles(s), ["user"])
+        self.assertEqual(s["provenance"]["title"], "lab-notes")
+
+    def test_zip_of_text_files(self):
+        data = make_zip({
+            "chats/a.md": "User: one\nAssistant: two",
+            "chats/b.txt": "plain notes",
+            "chats/empty.md": "   ",
+            "chats/picture.png": b"\x89PNG",
+            "__MACOSX/chats/._a.md": "junk",
+            ".DS_Store": "junk",
+        })
+        sources, skipped = im.parse_upload(data, "notes.zip", "user_x")
+        self.assertEqual(sorted(s["provenance"]["title"] for s in sources), ["a", "b"])
+        self.assertEqual(sorted(s["title"] for s in skipped), ["chats/empty.md", "chats/picture.png"])
+
+    def test_pasted_text(self):
+        [s], _ = im.parse_pasted_text("User: How do I test this?\nChatGPT: Use a control.", "user_x", title="T")
         self.assertEqual(s["source_type"], "pasted_text")
-        self.assertEqual([m["role"] for m in s["messages"]], ["user", "assistant", "user"])
-        self.assertEqual(s["messages"][0]["text"], "How do I test this?\nIt has two lines.")
-        self.assertEqual(s["provenance"]["title"], "Pasted test")
-
-    def test_unlabelled_text_is_one_user_message(self):
-        [s], _ = im.import_pasted_text("Just my notes on assays.", "user_x")
-        self.assertEqual([m["role"] for m in s["messages"]], ["user"])
-        self.assertEqual(s["provenance"]["title"], "Just my notes on assays.")
-
-    def test_empty_paste(self):
-        with self.assertRaises(im.ImportFailed) as ctx:
-            im.import_pasted_text("   ", "user_x")
-        self.assertEqual(ctx.exception.code, "empty_paste")
+        self.assertEqual(self.roles(s), ["user", "assistant"])
+        self.assertEqual(s["provenance"]["title"], "T")
 
 
 class StorageTests(unittest.TestCase):
@@ -140,25 +193,50 @@ class StorageTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def test_save_load_and_reimport_without_duplicates(self):
-        sources, _ = im.import_demo_history("user_a")
-        im.save_sources("user_a", sources, self.dir)
-        im.save_sources("user_a", sources, self.dir)
-        self.assertEqual(len(im.load_sources("user_a", self.dir)), 9)
-        saved = json.loads((self.dir / "user_a.json").read_text())
-        self.assertEqual(saved["schema_version"], "1.0")
-        self.assertEqual(saved["user_id"], "user_a")
+    def test_upload_keeps_original_file_history_and_sources(self):
+        result = im.import_file("user_x", FIXTURE_BYTES, "conversations.json", data_dir=self.dir)
+        entry = result["upload"]
+        self.assertEqual((entry["status"], entry["imported_count"]), ("imported", 9))
+        self.assertEqual((self.dir / entry["stored_file"]).read_bytes(), FIXTURE_BYTES)
+        self.assertEqual(len(im.load_sources("user_x", self.dir)), 9)
+        self.assertTrue(all(s["provenance"]["upload_id"] == entry["upload_id"]
+                            for s in im.load_sources("user_x", self.dir)))
+        self.assertEqual(im.load_upload_log("user_x", self.dir), [entry])
 
-    def test_cannot_save_someone_elses_chats(self):
-        sources, _ = im.import_demo_history("user_a")
-        with self.assertRaises(im.ImportFailed) as ctx:
-            im.save_sources("user_b", sources, self.dir)
-        self.assertEqual(ctx.exception.code, "wrong_owner")
-        self.assertFalse((self.dir / "user_b.json").exists())
+    def test_reuploading_does_not_duplicate_conversations(self):
+        im.import_file("user_x", FIXTURE_BYTES, "conversations.json", data_dir=self.dir)
+        second = im.import_file("user_x", FIXTURE_BYTES, "conversations.json", data_dir=self.dir)
+        self.assertEqual(second["total_sources"], 9)
+        self.assertEqual(len(im.load_upload_log("user_x", self.dir)), 2)
 
-    def test_users_cannot_read_other_files(self):
+    def test_failed_upload_is_logged_but_the_file_is_not_kept(self):
+        with self.assertRaises(im.ImportFailed):
+            im.import_file("user_x", b"%PDF-1.7 secret", "passport.pdf", data_dir=self.dir)
+        [entry] = im.load_upload_log("user_x", self.dir)
+        self.assertEqual(entry["status"], "failed")
+        self.assertEqual(entry["error"]["code"], "unsupported_file_type")
+        self.assertIsNone(entry["stored_file"])
+        self.assertFalse((self.dir / "uploads" / "user_x" / "files").exists())
+        self.assertEqual(im.load_sources("user_x", self.dir), [])
+
+    def test_paste_and_demo_are_stored(self):
+        im.import_paste("user_a", "User: hi\nAssistant: hello", data_dir=self.dir)
+        im.import_demo("user_a", data_dir=self.dir)
+        self.assertEqual(len(im.load_sources("user_a", self.dir)), 10)
+        self.assertEqual([e["kind"] for e in im.load_upload_log("user_a", self.dir)], ["paste", "demo"])
+
+    def test_users_storage_is_separate(self):
+        im.import_file("user_x", FIXTURE_BYTES, "conversations.json", data_dir=self.dir)
+        self.assertEqual(im.load_sources("user_y", self.dir), [])
+        with self.assertRaises(im.ImportFailed):
+            im.save_sources("user_y", im.load_sources("user_x", self.dir), self.dir)
         with self.assertRaises(im.ImportFailed):
             im.load_sources("../users", self.dir)
+
+    def test_stored_filename_is_made_safe(self):
+        result = im.import_file("user_x", b"User: hi", "../../etc/evil notes.md", data_dir=self.dir)
+        stored = (self.dir / result["upload"]["stored_file"]).resolve()
+        self.assertTrue(str(stored).startswith(str((self.dir / "uploads" / "user_x" / "files").resolve())))
 
 
 if __name__ == "__main__":

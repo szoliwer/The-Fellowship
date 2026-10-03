@@ -4,66 +4,117 @@
 """
 
 import json
+import sqlite3
 import tempfile
 import unittest
+from datetime import timedelta
 from pathlib import Path
 
 import registration as reg
 
+PASSWORD = "correct horse battery"  # test value only
 
-class RegistrationTests(unittest.TestCase):
+
+class AccountTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
-        self.data_file = Path(self.tmp.name) / "data" / "users.json"
+        self.db = Path(self.tmp.name) / "fellowship.db"
 
     def tearDown(self):
         self.tmp.cleanup()
 
-    def create(self, pseudonym="neuro_lab_17", consent=True, **kwargs):
-        return reg.create_user(pseudonym, consent, data_file=self.data_file, **kwargs)
+    def create(self, pseudonym="neuro_lab_17", email="ada@example.com", password=PASSWORD, consent=True, **kw):
+        return reg.create_account(pseudonym, email, password, consent, db_file=self.db, **kw)
 
     def test_demo_users_match_the_shared_fixture_ids(self):
-        demos = {u["user_id"]: u["pseudonym"] for u in reg.demo_users()}
+        demos = {u["user_id"]: u["pseudonym"] for u in reg.demo_users(self.db)}
         self.assertEqual(demos, {"user_a": "researcher_014", "user_b": "cellbio_027"})
 
-    def test_create_user_saves_record_in_agreed_format(self):
-        user = self.create(name="Ada Lovelace", email="ada@example.com")
+    def test_create_account_returns_agreed_record(self):
+        user = self.create(name="Ada Lovelace", affiliation="MIT")
         self.assertEqual(
             set(user), {"user_id", "pseudonym", "connection_intent", "is_demo_account", "private", "consent"}
         )
-        self.assertEqual(user["connection_intent"], "research collaboration")
+        self.assertEqual(user["private"], {"name": "Ada Lovelace", "email": "ada@example.com", "affiliation": "MIT"})
+        self.assertFalse(user["is_demo_account"])
         self.assertIs(user["consent"]["process_imported_chats"], True)
-        self.assertTrue(user["consent"]["timestamp"].endswith("Z"))
-        saved = json.loads(self.data_file.read_text())
-        self.assertEqual(saved, [user])
+        self.assertEqual(reg.get_user(user["user_id"], self.db), user)
+
+    def test_password_is_never_stored_in_plain_text(self):
+        self.create()
+        raw = self.db.read_bytes()
+        self.assertNotIn(PASSWORD.encode(), raw)
+        with sqlite3.connect(self.db) as conn:
+            stored = conn.execute("SELECT password_hash FROM credentials").fetchone()[0]
+        self.assertTrue(stored.startswith("scrypt$"))
+
+    def test_users_export_for_later_steps_has_no_password_data(self):
+        self.create()
+        exported = json.loads((self.db.parent / "users.json").read_text())
+        self.assertEqual([u["pseudonym"] for u in exported], ["researcher_014", "cellbio_027", "neuro_lab_17"])
+        self.assertNotIn("scrypt", json.dumps(exported))
+
+    def test_log_in_with_right_password_case_insensitive_email(self):
+        user = self.create()
+        self.assertEqual(reg.log_in("  ADA@example.com ", PASSWORD, db_file=self.db), user)
+
+    def test_wrong_password_and_unknown_email_give_the_same_error(self):
+        self.create()
+        for email, password in [("ada@example.com", "wrong password!"), ("nobody@example.com", PASSWORD)]:
+            with self.assertRaises(reg.RegistrationError) as ctx:
+                reg.log_in(email, password, db_file=self.db)
+            self.assertEqual(ctx.exception.code, "bad_credentials")
+
+    def test_lockout_after_repeated_wrong_passwords(self):
+        self.create()
+        now = reg._now()
+        for _ in range(reg.MAX_FAILED_LOGINS):
+            with self.assertRaises(reg.RegistrationError):
+                reg.log_in("ada@example.com", "wrong password!", db_file=self.db, now=now)
+        with self.assertRaises(reg.RegistrationError) as ctx:
+            reg.log_in("ada@example.com", PASSWORD, db_file=self.db, now=now)
+        self.assertEqual(ctx.exception.code, "locked")
+        later = now + timedelta(minutes=reg.LOCKOUT_MINUTES + 1)
+        self.assertEqual(reg.log_in("ada@example.com", PASSWORD, db_file=self.db, now=later)["pseudonym"],
+                         "neuro_lab_17")
+
+    def test_demo_accounts_cannot_be_logged_into_with_a_password(self):
+        with self.assertRaises(reg.RegistrationError):
+            reg.log_in("", "", db_file=self.db)
 
     def test_consent_is_required(self):
         with self.assertRaises(reg.RegistrationError) as ctx:
             self.create(consent=False)
         self.assertEqual(ctx.exception.code, "consent_required")
-        self.assertFalse(self.data_file.exists())
 
-    def test_pseudonym_rules(self):
-        for bad in ["", "ab", "Has Caps", "x" * 31, "bad-dash"]:
-            with self.assertRaises(reg.RegistrationError, msg=bad):
-                self.create(pseudonym=bad)
+    def test_input_rules(self):
+        cases = [
+            (dict(pseudonym="Has Caps"), "invalid_pseudonym"),
+            (dict(pseudonym="ab"), "invalid_pseudonym"),
+            (dict(email="not-an-email"), "invalid_email"),
+            (dict(password="short"), "weak_password"),
+            (dict(password="neuro_lab_17"), "weak_password"),
+            (dict(pseudonym="lovelace_lab", name="Ada Lovelace"), "pseudonym_reveals_name"),
+        ]
+        for kwargs, code in cases:
+            with self.assertRaises(reg.RegistrationError, msg=code) as ctx:
+                self.create(**kwargs)
+            self.assertEqual(ctx.exception.code, code)
 
-    def test_pseudonym_cannot_be_taken_twice_or_reuse_demo_names(self):
-        self.create(pseudonym="neuro_lab_17")
+    def test_email_and_pseudonym_must_be_unique(self):
+        self.create()
+        with self.assertRaises(reg.RegistrationError) as ctx:
+            self.create(pseudonym="other_lab_99", email="ADA@example.com")
+        self.assertEqual(ctx.exception.code, "email_taken")
         for taken in ["neuro_lab_17", "researcher_014"]:
             with self.assertRaises(reg.RegistrationError) as ctx:
-                self.create(pseudonym=taken)
+                self.create(pseudonym=taken, email="new@example.com")
             self.assertEqual(ctx.exception.code, "pseudonym_taken")
 
-    def test_pseudonym_cannot_contain_real_name(self):
-        with self.assertRaises(reg.RegistrationError) as ctx:
-            self.create(pseudonym="lovelace_lab", name="Ada Lovelace")
-        self.assertEqual(ctx.exception.code, "pseudonym_reveals_name")
-
     def test_public_view_hides_private_details(self):
-        user = self.create(name="Ada Lovelace", email="ada@example.com", affiliation="MIT")
-        public = reg.public_view(user)
-        self.assertEqual(public, {"pseudonym": "neuro_lab_17", "connection_intent": "research collaboration"})
+        user = self.create(name="Ada Lovelace", affiliation="MIT")
+        self.assertEqual(reg.public_view(user),
+                         {"pseudonym": "neuro_lab_17", "connection_intent": "research collaboration"})
 
 
 if __name__ == "__main__":
