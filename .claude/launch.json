@@ -2,16 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "step0-signup",
+      "name": "fellowship-app",
       "runtimeExecutable": ".venv/bin/streamlit",
-      "runtimeArgs": ["run", "0 - User Registration/app.py", "--server.port", "8501", "--server.headless", "true", "--server.address", "localhost", "--browser.gatherUsageStats", "false"],
+      "runtimeArgs": ["run", "app.py", "--server.headless", "true"],
       "port": 8501
-    },
-    {
-      "name": "step1-import",
-      "runtimeExecutable": ".venv/bin/streamlit",
-      "runtimeArgs": ["run", "1 - Data Collection/app.py", "--server.port", "8502", "--server.headless", "true", "--server.address", "localhost", "--browser.gatherUsageStats", "false"],
-      "port": 8502
     }
   ]
 }

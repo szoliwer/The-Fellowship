@@ -1,0 +1,348 @@
+[
+  {
+    "title": "Functional readouts beyond localization in Disease B",
+    "create_time": 1788696000.0,
+    "update_time": 1788696900.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "b_s01-sys"
+        ]
+      },
+      "b_s01-sys": {
+        "id": "b_s01-sys",
+        "message": {
+          "id": "b_s01-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "b_s01-m00"
+        ]
+      },
+      "b_s01-m00": {
+        "id": "b_s01-m00",
+        "message": {
+          "id": "b_s01-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788696600.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "In Disease B cells, transporter T2 shows up in the wrong compartment by imaging. I want to know whether that actually changes its function. Which functional readouts would complement the localization data?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s01-sys",
+        "children": [
+          "b_s01-m01"
+        ]
+      },
+      "b_s01-m01": {
+        "id": "b_s01-m01",
+        "message": {
+          "id": "b_s01-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788696660.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Localization and function can come apart, so pair the imaging with a measurement of what T2 does: uptake of a labelled substrate, surface labelling to quantify how much reaches the membrane, or a pulse-chase to follow delivery over time."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s01-m00",
+        "children": [
+          "b_s01-m02"
+        ]
+      },
+      "b_s01-m02": {
+        "id": "b_s01-m02",
+        "message": {
+          "id": "b_s01-m02",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788696720.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "I've been piloting a synchronized-release assay: hold T2 in the ER, release it all at once, and time its arrival at the surface. Early runs suggest slower arrival in Disease B cells, but it's only a pilot: few replicates and I haven't validated it."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s01-m01",
+        "children": [
+          "b_s01-m03"
+        ]
+      },
+      "b_s01-m03": {
+        "id": "b_s01-m03",
+        "message": {
+          "id": "b_s01-m03",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788696780.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "That's a good fit for a trafficking question, because it measures movement over time. Treat the slower arrival as preliminary until it replicates across cell lines and conditions."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s01-m02",
+        "children": [
+          "b_s01-m04"
+        ]
+      },
+      "b_s01-m04": {
+        "id": "b_s01-m04",
+        "message": {
+          "id": "b_s01-m04",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788696840.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "So my working plan is to compare localization with these functional readouts in the same cells, rather than relying on imaging alone."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s01-m03",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "b_s01-m04",
+    "conversation_id": "b_s01",
+    "id": "b_s01"
+  },
+  {
+    "title": "Controls to separate assay artifacts from a real trafficking effect",
+    "create_time": 1788955200.0,
+    "update_time": 1788956040.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "b_s02-sys"
+        ]
+      },
+      "b_s02-sys": {
+        "id": "b_s02-sys",
+        "message": {
+          "id": "b_s02-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "b_s02-m00"
+        ]
+      },
+      "b_s02-m00": {
+        "id": "b_s02-m00",
+        "message": {
+          "id": "b_s02-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788955800.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "For the synchronized-release pilot, how do I tell a real trafficking defect from an artifact of the assay itself? The tag on T2 might slow it down, for example."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s02-sys",
+        "children": [
+          "b_s02-m01"
+        ]
+      },
+      "b_s02-m01": {
+        "id": "b_s02-m01",
+        "message": {
+          "id": "b_s02-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788955860.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Use controls that each rule out one explanation: a condition that blocks the pathway completely, a cargo like receptor R1 that should be unaffected, an untagged or differently tagged T2, and matched expression levels so faster or slower arrival isn't just about how much protein there is."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s02-m00",
+        "children": [
+          "b_s02-m02"
+        ]
+      },
+      "b_s02-m02": {
+        "id": "b_s02-m02",
+        "message": {
+          "id": "b_s02-m02",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788955920.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "I've considered the blocked-pathway control and the unaffected cargo. I haven't tried a second tag yet, and I'm unsure how to match expression between Disease B and control cells."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s02-m01",
+        "children": [
+          "b_s02-m03"
+        ]
+      },
+      "b_s02-m03": {
+        "id": "b_s02-m03",
+        "message": {
+          "id": "b_s02-m03",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788955980.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Sorting cells into matched expression bins, or using an inducible promoter, are common ways to handle that. The assay still needs those controls before it can be called validated."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "b_s02-m02",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "b_s02-m03",
+    "conversation_id": "b_s02",
+    "id": "b_s02"
+  }
+]
