@@ -1,0 +1,678 @@
+{
+  "_note": "SYNTHETIC test data in the Step 3/4 spec format (one idea per row). Not real people.",
+  "ideas": [
+    {
+      "user_id": "u_maya",
+      "idea_id": "i_001",
+      "type": "project",
+      "summary": "Using underwater soundscapes to monitor coral reef health",
+      "keywords": [
+        "reef soundscapes",
+        "hydrophones",
+        "acoustic diversity"
+      ],
+      "evidence": [
+        "c_003"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.95,
+      "score_parts": {
+        "frequency": 0.9,
+        "recency": 1,
+        "depth": 0.95
+      }
+    },
+    {
+      "user_id": "u_maya",
+      "idea_id": "i_002",
+      "type": "need",
+      "summary": "Automatic classification of fish calls in reef audio with very few labeled examples",
+      "keywords": [
+        "fish calls",
+        "audio classification",
+        "few labels"
+      ],
+      "evidence": [
+        "c_006"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.9,
+      "score_parts": {
+        "frequency": 0.85,
+        "recency": 0.95,
+        "depth": 0.9
+      }
+    },
+    {
+      "user_id": "u_maya",
+      "idea_id": "i_003",
+      "type": "skill",
+      "summary": "Six years of hydrophone recordings from 40 Pacific coral reefs",
+      "keywords": [
+        "hydrophone recordings",
+        "field audio",
+        "coral reefs"
+      ],
+      "evidence": [
+        "c_009"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.8,
+      "score_parts": {
+        "frequency": 0.75,
+        "recency": 0.85,
+        "depth": 0.8
+      }
+    },
+    {
+      "user_id": "u_maya",
+      "idea_id": "i_004",
+      "type": "open_question",
+      "summary": "Do acoustic indices track fish abundance and reef recovery after bleaching?",
+      "keywords": [
+        "acoustic indices",
+        "reef recovery"
+      ],
+      "evidence": [
+        "c_012"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.6,
+      "score_parts": {
+        "frequency": 0.55,
+        "recency": 0.65,
+        "depth": 0.6
+      }
+    },
+    {
+      "user_id": "u_maya",
+      "idea_id": "i_005",
+      "type": "need",
+      "summary": "Long-term field data on coral reef recovery after bleaching",
+      "keywords": [
+        "bleaching recovery",
+        "monitoring data"
+      ],
+      "evidence": [
+        "c_015"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.55,
+      "score_parts": {
+        "frequency": 0.5,
+        "recency": 0.6,
+        "depth": 0.55
+      }
+    },
+    {
+      "user_id": "u_dev",
+      "idea_id": "i_006",
+      "type": "project",
+      "summary": "Self-supervised representation learning for audio",
+      "keywords": [
+        "contrastive pretraining",
+        "audio representations"
+      ],
+      "evidence": [
+        "c_018"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.9,
+      "score_parts": {
+        "frequency": 0.85,
+        "recency": 0.95,
+        "depth": 0.9
+      }
+    },
+    {
+      "user_id": "u_dev",
+      "idea_id": "i_007",
+      "type": "skill",
+      "summary": "Few-shot audio classification using contrastive pretraining on unlabeled recordings",
+      "keywords": [
+        "few-shot learning",
+        "audio classification"
+      ],
+      "evidence": [
+        "c_021"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.85,
+      "score_parts": {
+        "frequency": 0.8,
+        "recency": 0.9,
+        "depth": 0.85
+      }
+    },
+    {
+      "user_id": "u_dev",
+      "idea_id": "i_008",
+      "type": "need",
+      "summary": "Large real-world field audio recordings beyond speech and music to test robustness",
+      "keywords": [
+        "field recordings",
+        "non-speech audio"
+      ],
+      "evidence": [
+        "c_024"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.7,
+      "score_parts": {
+        "frequency": 0.65,
+        "recency": 0.75,
+        "depth": 0.7
+      }
+    },
+    {
+      "user_id": "u_dev",
+      "idea_id": "i_009",
+      "type": "interest",
+      "summary": "Robustness of audio classifiers to environmental noise such as wind, rain and boat engines",
+      "keywords": [
+        "noise robustness",
+        "augmentation"
+      ],
+      "evidence": [
+        "c_027"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.5,
+      "score_parts": {
+        "frequency": 0.45,
+        "recency": 0.55,
+        "depth": 0.5
+      }
+    },
+    {
+      "user_id": "u_lena",
+      "idea_id": "i_010",
+      "type": "project",
+      "summary": "Thermal tolerance of corals during marine heatwaves",
+      "keywords": [
+        "Acropora",
+        "heat-stress experiments",
+        "symbiont shuffling",
+        "coral bleaching"
+      ],
+      "evidence": [
+        "c_030"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.9,
+      "score_parts": {
+        "frequency": 0.85,
+        "recency": 0.95,
+        "depth": 0.9
+      }
+    },
+    {
+      "user_id": "u_lena",
+      "idea_id": "i_011",
+      "type": "skill",
+      "summary": "Eight years of field monitoring data on coral bleaching and reef recovery",
+      "keywords": [
+        "reef monitoring",
+        "bleaching recovery"
+      ],
+      "evidence": [
+        "c_033"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.8,
+      "score_parts": {
+        "frequency": 0.75,
+        "recency": 0.85,
+        "depth": 0.8
+      }
+    },
+    {
+      "user_id": "u_lena",
+      "idea_id": "i_012",
+      "type": "need",
+      "summary": "Cheap automated continuous monitoring of coral reef health between diver surveys",
+      "keywords": [
+        "automated monitoring",
+        "reef health"
+      ],
+      "evidence": [
+        "c_036"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.6,
+      "score_parts": {
+        "frequency": 0.55,
+        "recency": 0.65,
+        "depth": 0.6
+      }
+    },
+    {
+      "user_id": "u_omar",
+      "idea_id": "i_013",
+      "type": "project",
+      "summary": "Population coding in mouse visual cortex with two-photon calcium imaging",
+      "keywords": [
+        "calcium imaging",
+        "visual cortex",
+        "neural populations"
+      ],
+      "evidence": [
+        "c_039"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.9,
+      "score_parts": {
+        "frequency": 0.85,
+        "recency": 0.95,
+        "depth": 0.9
+      }
+    },
+    {
+      "user_id": "u_omar",
+      "idea_id": "i_014",
+      "type": "need",
+      "summary": "Statistical deconvolution of calcium fluorescence traces with uncertainty estimates for spike inference",
+      "keywords": [
+        "spike inference",
+        "deconvolution",
+        "uncertainty"
+      ],
+      "evidence": [
+        "c_042"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.85,
+      "score_parts": {
+        "frequency": 0.8,
+        "recency": 0.9,
+        "depth": 0.85
+      }
+    },
+    {
+      "user_id": "u_omar",
+      "idea_id": "i_015",
+      "type": "skill",
+      "summary": "Calcium imaging recordings from thousands of neurons in mouse visual cortex",
+      "keywords": [
+        "large-scale recordings",
+        "calcium imaging data"
+      ],
+      "evidence": [
+        "c_045"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.75,
+      "score_parts": {
+        "frequency": 0.7,
+        "recency": 0.8,
+        "depth": 0.75
+      }
+    },
+    {
+      "user_id": "u_omar",
+      "idea_id": "i_016",
+      "type": "interest",
+      "summary": "How running and arousal change visual cortex responses",
+      "keywords": [
+        "behavioral state",
+        "arousal",
+        "pupil"
+      ],
+      "evidence": [
+        "c_048"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.45,
+      "score_parts": {
+        "frequency": 0.4,
+        "recency": 0.5,
+        "depth": 0.45
+      }
+    },
+    {
+      "user_id": "u_grace",
+      "idea_id": "i_017",
+      "type": "project",
+      "summary": "Bayesian state-space models for noisy time series",
+      "keywords": [
+        "sequential Monte Carlo",
+        "latent state inference",
+        "variational inference"
+      ],
+      "evidence": [
+        "c_051"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.85,
+      "score_parts": {
+        "frequency": 0.8,
+        "recency": 0.9,
+        "depth": 0.85
+      }
+    },
+    {
+      "user_id": "u_grace",
+      "idea_id": "i_018",
+      "type": "skill",
+      "summary": "Bayesian deconvolution and uncertainty quantification for noisy time series",
+      "keywords": [
+        "deconvolution",
+        "uncertainty quantification"
+      ],
+      "evidence": [
+        "c_054"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.8,
+      "score_parts": {
+        "frequency": 0.75,
+        "recency": 0.85,
+        "depth": 0.8
+      }
+    },
+    {
+      "user_id": "u_grace",
+      "idea_id": "i_019",
+      "type": "need",
+      "summary": "Real scientific datasets with thousands of parallel noisy time series",
+      "keywords": [
+        "applications",
+        "high-dimensional time series"
+      ],
+      "evidence": [
+        "c_057"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.65,
+      "score_parts": {
+        "frequency": 0.6,
+        "recency": 0.7,
+        "depth": 0.65
+      }
+    },
+    {
+      "user_id": "u_kenji",
+      "idea_id": "i_020",
+      "type": "project",
+      "summary": "Open-source pipeline for calcium imaging analysis in zebrafish",
+      "keywords": [
+        "motion correction",
+        "cell segmentation",
+        "calcium imaging"
+      ],
+      "evidence": [
+        "c_060"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.85,
+      "score_parts": {
+        "frequency": 0.8,
+        "recency": 0.9,
+        "depth": 0.85
+      }
+    },
+    {
+      "user_id": "u_kenji",
+      "idea_id": "i_021",
+      "type": "need",
+      "summary": "More reliable spike inference from calcium fluorescence traces",
+      "keywords": [
+        "spike inference",
+        "calcium traces"
+      ],
+      "evidence": [
+        "c_063"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.75,
+      "score_parts": {
+        "frequency": 0.7,
+        "recency": 0.8,
+        "depth": 0.75
+      }
+    },
+    {
+      "user_id": "u_kenji",
+      "idea_id": "i_022",
+      "type": "skill",
+      "summary": "Spike inference benchmarks against simultaneous electrophysiology ground truth",
+      "keywords": [
+        "ground truth",
+        "electrophysiology",
+        "benchmarks"
+      ],
+      "evidence": [
+        "c_066"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.7,
+      "score_parts": {
+        "frequency": 0.65,
+        "recency": 0.75,
+        "depth": 0.7
+      }
+    },
+    {
+      "user_id": "u_kenji",
+      "idea_id": "i_023",
+      "type": "interest",
+      "summary": "Whole-brain light-sheet imaging in larval zebrafish",
+      "keywords": [
+        "light-sheet microscopy",
+        "zebrafish"
+      ],
+      "evidence": [
+        "c_069"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.5,
+      "score_parts": {
+        "frequency": 0.45,
+        "recency": 0.55,
+        "depth": 0.5
+      }
+    },
+    {
+      "user_id": "u_priya",
+      "idea_id": "i_024",
+      "type": "project",
+      "summary": "Biological nitrogen fixation by cyanobacteria in flooded rice paddies",
+      "keywords": [
+        "nitrogen fixation",
+        "cyanobacteria",
+        "rice"
+      ],
+      "evidence": [
+        "c_072"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.9,
+      "score_parts": {
+        "frequency": 0.85,
+        "recency": 0.95,
+        "depth": 0.9
+      }
+    },
+    {
+      "user_id": "u_priya",
+      "idea_id": "i_025",
+      "type": "need",
+      "summary": "Partner farms in Southeast Asia for multi-season field trials",
+      "keywords": [
+        "field trials",
+        "partner farms"
+      ],
+      "evidence": [
+        "c_075"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.7,
+      "score_parts": {
+        "frequency": 0.65,
+        "recency": 0.75,
+        "depth": 0.7
+      }
+    },
+    {
+      "user_id": "u_priya",
+      "idea_id": "i_026",
+      "type": "need",
+      "summary": "Access to greenhouse gas flux chambers for paddy methane measurements",
+      "keywords": [
+        "methane",
+        "flux chambers"
+      ],
+      "evidence": [
+        "c_078"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.5,
+      "score_parts": {
+        "frequency": 0.45,
+        "recency": 0.55,
+        "depth": 0.5
+      }
+    },
+    {
+      "user_id": "u_priya",
+      "idea_id": "i_027",
+      "type": "interest",
+      "summary": "Alternate wetting and drying irrigation to cut methane emissions",
+      "keywords": [
+        "irrigation",
+        "methane"
+      ],
+      "evidence": [
+        "c_081"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.5,
+      "score_parts": {
+        "frequency": 0.45,
+        "recency": 0.55,
+        "depth": 0.5
+      }
+    },
+    {
+      "user_id": "u_tomas",
+      "idea_id": "i_028",
+      "type": "project",
+      "summary": "Trade networks of medieval Venetian merchants from 14th-century notarial contracts",
+      "keywords": [
+        "Venice",
+        "merchant networks",
+        "notarial contracts"
+      ],
+      "evidence": [
+        "c_084"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.9,
+      "score_parts": {
+        "frequency": 0.85,
+        "recency": 0.95,
+        "depth": 0.9
+      }
+    },
+    {
+      "user_id": "u_tomas",
+      "idea_id": "i_029",
+      "type": "need",
+      "summary": "Paleographers familiar with Venetian notarial script and Latin abbreviations",
+      "keywords": [
+        "paleography",
+        "Latin abbreviations"
+      ],
+      "evidence": [
+        "c_087"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.7,
+      "score_parts": {
+        "frequency": 0.65,
+        "recency": 0.75,
+        "depth": 0.7
+      }
+    },
+    {
+      "user_id": "u_tomas",
+      "idea_id": "i_030",
+      "type": "interest",
+      "summary": "Pepper prices in late medieval Venice and Mediterranean shipping disruptions",
+      "keywords": [
+        "spice trade",
+        "prices"
+      ],
+      "evidence": [
+        "c_090"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-09-20",
+      "mentions": 3,
+      "score": 0.4,
+      "score_parts": {
+        "frequency": 0.35,
+        "recency": 0.45,
+        "depth": 0.4
+      }
+    }
+  ]
+}

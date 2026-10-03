@@ -1,0 +1,6 @@
+# Step 5 - Match Generation
+numpy                  # math on vectors
+scikit-learn           # keyword vectors for the offline fallback
+anthropic              # Claude API (profiles + judging). Paid service: needs an API key in .env
+sentence-transformers  # free local embeddings. Large install (~1-2 GB incl. PyTorch); optional,
+                       # without it the script falls back to keyword vectors

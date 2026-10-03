@@ -1,0 +1,148 @@
+[
+  {
+    "user_id": "u_maya",
+    "name": "Maya Okafor",
+    "email": "maya@example.com",
+    "affiliation": "Univ. of Hawaiʻi",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "collaborator"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  },
+  {
+    "user_id": "u_dev",
+    "name": "Dev Raman",
+    "email": "dev@example.com",
+    "affiliation": "CMU",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "collaborator",
+      "peer"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  },
+  {
+    "user_id": "u_lena",
+    "name": "Lena Fischer",
+    "email": "lena@example.com",
+    "affiliation": "James Cook Univ.",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "collaborator"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  },
+  {
+    "user_id": "u_omar",
+    "name": "Omar Haddad",
+    "email": "omar@example.com",
+    "affiliation": "MIT",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "collaborator",
+      "mentor"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  },
+  {
+    "user_id": "u_grace",
+    "name": "Grace Liu",
+    "email": "grace@example.com",
+    "affiliation": "Harvard",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "collaborator"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  },
+  {
+    "user_id": "u_kenji",
+    "name": "Kenji Sato",
+    "email": "kenji@example.com",
+    "affiliation": "RIKEN",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "peer"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  },
+  {
+    "user_id": "u_priya",
+    "name": "Priya Nair",
+    "email": "priya@example.com",
+    "affiliation": "IRRI",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "collaborator"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  },
+  {
+    "user_id": "u_tomas",
+    "name": "Tomás Rivera",
+    "email": "tomas@example.com",
+    "affiliation": "Univ. of Padua",
+    "consent": {
+      "analyse_chats": true,
+      "show_ideas_to_matches": true,
+      "timestamp": "2026-10-03T14:00:00"
+    },
+    "looking_for": [
+      "peer"
+    ],
+    "match_types": [
+      "similar",
+      "complementary"
+    ]
+  }
+]

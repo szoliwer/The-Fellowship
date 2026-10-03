@@ -1,0 +1,267 @@
+{
+  "generated_at": "2026-10-03T20:14:15+00:00",
+  "mode": "offline",
+  "embedder": "keyword-tfidf (offline fallback)",
+  "settings": {
+    "matches_per_user": 5,
+    "candidates_per_signal": 5,
+    "candidate_floor": 0.2,
+    "min_match_score": 0.5,
+    "judge_weight": 0.7,
+    "both_bonus": 0.2,
+    "top_ideas_per_user": 15,
+    "profile_model": "claude-haiku-4-5-20251001",
+    "judge_model": "claude-sonnet-5-5",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "offline": true,
+    "cache_file": "data/llm_cache.json",
+    "workers": 4
+  },
+  "people": {
+    "u_maya": {
+      "name": "Maya Okafor",
+      "summary": "Using underwater soundscapes to monitor coral reef health; Six years of hydrophone recordings from 40 Pacific coral reefs"
+    },
+    "u_dev": {
+      "name": "Dev Raman",
+      "summary": "Self-supervised representation learning for audio; Few-shot audio classification using contrastive pretraining on unlabeled recordings"
+    },
+    "u_lena": {
+      "name": "Lena Fischer",
+      "summary": "Thermal tolerance of corals during marine heatwaves; Eight years of field monitoring data on coral bleaching and reef recovery"
+    },
+    "u_omar": {
+      "name": "Omar Haddad",
+      "summary": "Population coding in mouse visual cortex with two-photon calcium imaging; Calcium imaging recordings from thousands of neurons in mouse visual cortex"
+    },
+    "u_grace": {
+      "name": "Grace Liu",
+      "summary": "Bayesian state-space models for noisy time series; Bayesian deconvolution and uncertainty quantification for noisy time series"
+    },
+    "u_kenji": {
+      "name": "Kenji Sato",
+      "summary": "Open-source pipeline for calcium imaging analysis in zebrafish; Spike inference benchmarks against simultaneous electrophysiology ground truth"
+    },
+    "u_priya": {
+      "name": "Priya Nair",
+      "summary": "Biological nitrogen fixation by cyanobacteria in flooded rice paddies; Alternate wetting and drying irrigation to cut methane emissions"
+    },
+    "u_tomas": {
+      "name": "Tomás Rivera",
+      "summary": "Trade networks of medieval Venetian merchants from 14th-century notarial contracts; Pepper prices in late medieval Venice and Mediterranean shipping disruptions"
+    }
+  },
+  "matches": [
+    {
+      "match_id": "m_0001",
+      "user_a": "u_maya",
+      "user_b": "u_dev",
+      "match_type": "both",
+      "score": 1.0,
+      "similarity": 1.0,
+      "complementarity": 1.0,
+      "shared_or_linked_ideas": [
+        [
+          "i_003",
+          "i_007"
+        ],
+        [
+          "i_002",
+          "i_007"
+        ],
+        [
+          "i_003",
+          "i_008"
+        ]
+      ],
+      "reason": "They work on closely related topics and Dev Raman may have what Maya Okafor needs and Maya Okafor may have what Dev Raman needs.",
+      "status": "suggested",
+      "shared_topics": [
+        "Six years of hydrophone recordings from 40 Pacific coral reefs"
+      ],
+      "a_can_offer_b": "hydrophone recordings",
+      "b_can_offer_a": "audio classification",
+      "intro_for_a": "Dev Raman works on something close to your research: \"Few-shot audio classification using contrastive pretraining on unlabeled recordings\". Dev Raman may have what you need. You noted: \"audio classification\" They bring: \"audio classification\" Dev Raman needs something you have: \"field recordings\"",
+      "intro_for_b": "Maya Okafor works on something close to your research: \"Six years of hydrophone recordings from 40 Pacific coral reefs\". Maya Okafor needs something you have: \"audio classification\" Maya Okafor may have what you need. You noted: \"field recordings\" They bring: \"hydrophone recordings\"",
+      "judged_by": "vectors-only",
+      "debug": {
+        "vector_similarity": 1.0,
+        "vector_complementarity": 1.0,
+        "judge_similarity": 1.0,
+        "judge_complementarity": 1.0
+      }
+    },
+    {
+      "match_id": "m_0002",
+      "user_a": "u_maya",
+      "user_b": "u_lena",
+      "match_type": "both",
+      "score": 1.0,
+      "similarity": 1.0,
+      "complementarity": 1.0,
+      "shared_or_linked_ideas": [
+        [
+          "i_004",
+          "i_011"
+        ],
+        [
+          "i_005",
+          "i_011"
+        ],
+        [
+          "i_003",
+          "i_012"
+        ]
+      ],
+      "reason": "They work on closely related topics and Lena Fischer may have what Maya Okafor needs and Maya Okafor may have what Lena Fischer needs.",
+      "status": "suggested",
+      "shared_topics": [
+        "Eight years of field monitoring data on coral bleaching and reef recovery"
+      ],
+      "a_can_offer_b": "coral reefs",
+      "b_can_offer_a": "bleaching recovery",
+      "intro_for_a": "Lena Fischer works on something close to your research: \"Eight years of field monitoring data on coral bleaching and reef recovery\". Lena Fischer may have what you need. You noted: \"bleaching recovery\" They bring: \"bleaching recovery\" Lena Fischer needs something you have: \"reef health\"",
+      "intro_for_b": "Maya Okafor works on something close to your research: \"Do acoustic indices track fish abundance and reef recovery after bleaching?\". Maya Okafor needs something you have: \"bleaching recovery\" Maya Okafor may have what you need. You noted: \"reef health\" They bring: \"coral reefs\"",
+      "judged_by": "vectors-only",
+      "debug": {
+        "vector_similarity": 1.0,
+        "vector_complementarity": 1.0,
+        "judge_similarity": 1.0,
+        "judge_complementarity": 1.0
+      }
+    },
+    {
+      "match_id": "m_0003",
+      "user_a": "u_omar",
+      "user_b": "u_grace",
+      "match_type": "complementary",
+      "score": 1.0,
+      "similarity": 0.399,
+      "complementarity": 1.0,
+      "shared_or_linked_ideas": [
+        [
+          "i_016",
+          "i_017"
+        ],
+        [
+          "i_014",
+          "i_018"
+        ],
+        [
+          "i_015",
+          "i_019"
+        ]
+      ],
+      "reason": "Grace Liu may have what Omar Haddad needs and Omar Haddad may have what Grace Liu needs.",
+      "status": "suggested",
+      "shared_topics": [],
+      "a_can_offer_b": "Calcium imaging recordings from thousands of neurons in mouse visual cortex",
+      "b_can_offer_a": "deconvolution",
+      "intro_for_a": "Grace Liu may have what you need. You noted: \"deconvolution\" They bring: \"deconvolution\" Grace Liu needs something you have: \"Real scientific datasets with thousands of parallel noisy time series\"",
+      "intro_for_b": "Omar Haddad needs something you have: \"deconvolution\" Omar Haddad may have what you need. You noted: \"Real scientific datasets with thousands of parallel noisy time series\" They bring: \"Calcium imaging recordings from thousands of neurons in mouse visual cortex\"",
+      "judged_by": "vectors-only",
+      "debug": {
+        "vector_similarity": 0.399,
+        "vector_complementarity": 1.0,
+        "judge_similarity": 0.399,
+        "judge_complementarity": 1.0
+      }
+    },
+    {
+      "match_id": "m_0004",
+      "user_a": "u_omar",
+      "user_b": "u_kenji",
+      "match_type": "both",
+      "score": 1.0,
+      "similarity": 1.0,
+      "complementarity": 1.0,
+      "shared_or_linked_ideas": [
+        [
+          "i_013",
+          "i_020"
+        ],
+        [
+          "i_014",
+          "i_022"
+        ],
+        [
+          "i_015",
+          "i_021"
+        ]
+      ],
+      "reason": "They work on closely related topics and Kenji Sato may have what Omar Haddad needs and Omar Haddad may have what Kenji Sato needs.",
+      "status": "suggested",
+      "shared_topics": [
+        "Open-source pipeline for calcium imaging analysis in zebrafish"
+      ],
+      "a_can_offer_b": "calcium imaging data",
+      "b_can_offer_a": "Spike inference benchmarks against simultaneous electrophysiology ground truth",
+      "intro_for_a": "Kenji Sato works on something close to your research: \"Open-source pipeline for calcium imaging analysis in zebrafish\". Kenji Sato may have what you need. You noted: \"spike inference\" They bring: \"Spike inference benchmarks against simultaneous electrophysiology ground truth\" Kenji Sato needs something you have: \"calcium traces\"",
+      "intro_for_b": "Omar Haddad works on something close to your research: \"Population coding in mouse visual cortex with two-photon calcium imaging\". Omar Haddad needs something you have: \"spike inference\" Omar Haddad may have what you need. You noted: \"calcium traces\" They bring: \"calcium imaging data\"",
+      "judged_by": "vectors-only",
+      "debug": {
+        "vector_similarity": 1.0,
+        "vector_complementarity": 1.0,
+        "judge_similarity": 1.0,
+        "judge_complementarity": 1.0
+      }
+    },
+    {
+      "match_id": "m_0005",
+      "user_a": "u_dev",
+      "user_b": "u_omar",
+      "match_type": "complementary",
+      "score": 0.925,
+      "similarity": 0.089,
+      "complementarity": 0.907,
+      "shared_or_linked_ideas": [
+        [
+          "i_007",
+          "i_015"
+        ],
+        [
+          "i_008",
+          "i_015"
+        ]
+      ],
+      "reason": "Omar Haddad may have what Dev Raman needs.",
+      "status": "suggested",
+      "shared_topics": [],
+      "a_can_offer_b": "",
+      "b_can_offer_a": "large-scale recordings",
+      "intro_for_a": "Omar Haddad may have what you need. You noted: \"field recordings\" They bring: \"large-scale recordings\"",
+      "intro_for_b": "Dev Raman needs something you have: \"field recordings\"",
+      "judged_by": "vectors-only",
+      "debug": {
+        "vector_similarity": 0.089,
+        "vector_complementarity": 0.907,
+        "judge_similarity": 0.089,
+        "judge_complementarity": 0.907
+      }
+    }
+  ],
+  "by_user": {
+    "u_maya": [
+      "m_0001",
+      "m_0002"
+    ],
+    "u_dev": [
+      "m_0001",
+      "m_0005"
+    ],
+    "u_lena": [
+      "m_0002"
+    ],
+    "u_omar": [
+      "m_0003",
+      "m_0004",
+      "m_0005"
+    ],
+    "u_grace": [
+      "m_0003"
+    ],
+    "u_kenji": [
+      "m_0004"
+    ]
+  }
+}

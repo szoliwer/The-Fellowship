@@ -1,0 +1,165 @@
+{
+  "_note": "SYNTHETIC test data shaped like Step 4 output. Not real people or real chats.",
+  "users": {
+    "u_maya":  {"name": "Maya Okafor"},
+    "u_dev":   {"name": "Dev Raman"},
+    "u_lena":  {"name": "Lena Fischer"},
+    "u_omar":  {"name": "Omar Haddad"},
+    "u_grace": {"name": "Grace Liu"},
+    "u_kenji": {"name": "Kenji Sato"},
+    "u_priya": {"name": "Priya Nair"},
+    "u_tomas": {"name": "Tomás Rivera"}
+  },
+  "ideas": [
+    {
+      "user_id": "u_maya", "idea_id": "u_maya_c01", "rank_score": 0.95,
+      "main_idea": "Using underwater soundscapes to monitor coral reef health",
+      "insights": [
+        "We have six years of hydrophone recordings from 40 coral reefs across the Pacific.",
+        "Healthy reefs are louder and more acoustically diverse than degraded reefs.",
+        "Bottleneck: we have no reliable way to automatically classify fish calls; manual labeling covers less than 1% of the audio.",
+        "Looking for machine learning audio classification that works with very few labeled examples."
+      ],
+      "raw_text": "(synthetic) How can I classify thousands of hours of reef audio when only a few hundred clips are labeled?"
+    },
+    {
+      "user_id": "u_maya", "idea_id": "u_maya_c02", "rank_score": 0.6,
+      "main_idea": "Tracking coral reef recovery after bleaching with acoustic indices",
+      "insights": [
+        "Acoustic indices may not track fish abundance reliably.",
+        "Need long-term field data on coral reef recovery after bleaching to validate the acoustic indices."
+      ],
+      "raw_text": "(synthetic) Is the acoustic complexity index actually correlated with fish counts?"
+    },
+    {
+      "user_id": "u_dev", "idea_id": "u_dev_c01", "rank_score": 0.9,
+      "main_idea": "Self-supervised representation learning for audio",
+      "insights": [
+        "I developed a contrastive pretraining method that learns audio features from unlabeled recordings.",
+        "Our few-shot audio classification models reach good accuracy with as few as 5 labeled examples per class.",
+        "Most audio benchmarks are speech and music; I am looking for large real-world field recordings to test robustness."
+      ],
+      "raw_text": "(synthetic) Which nonspeech audio datasets are big enough for pretraining?"
+    },
+    {
+      "user_id": "u_dev", "idea_id": "u_dev_c02", "rank_score": 0.5,
+      "main_idea": "Robustness of audio models to environmental noise",
+      "insights": [
+        "Audio classifiers degrade badly under background noise such as wind, rain or boat engines.",
+        "Experimenting with augmentation that simulates environmental noise."
+      ],
+      "raw_text": "(synthetic) How do I simulate rain noise for augmentation?"
+    },
+    {
+      "user_id": "u_lena", "idea_id": "u_lena_c01", "rank_score": 0.9,
+      "main_idea": "Thermal tolerance of corals during marine heatwaves",
+      "insights": [
+        "Running heat-stress experiments on Acropora corals to find heat-tolerant colonies.",
+        "Symbiont shuffling may help some corals recover after bleaching.",
+        "We have eight years of field monitoring data on coral bleaching and reef recovery on the Great Barrier Reef."
+      ],
+      "raw_text": "(synthetic) What explains variation in bleaching recovery between neighbouring colonies?"
+    },
+    {
+      "user_id": "u_lena", "idea_id": "u_lena_c02", "rank_score": 0.55,
+      "main_idea": "Scaling up coral reef monitoring",
+      "insights": [
+        "Diver surveys of reef recovery are slow and expensive.",
+        "Looking for cheaper automated ways to monitor coral reef health continuously between surveys."
+      ],
+      "raw_text": "(synthetic) Are there sensors that can monitor a reef continuously?"
+    },
+    {
+      "user_id": "u_omar", "idea_id": "u_omar_c01", "rank_score": 0.9,
+      "main_idea": "Population coding in mouse visual cortex measured with two-photon calcium imaging",
+      "insights": [
+        "We record calcium imaging from thousands of neurons in mouse visual cortex during natural movies.",
+        "Struggling to infer spike times from noisy, slow calcium fluorescence traces.",
+        "Need better statistical deconvolution of calcium traces, with uncertainty estimates for spike inference."
+      ],
+      "raw_text": "(synthetic) Why do my inferred spikes change so much when I change the deconvolution parameters?"
+    },
+    {
+      "user_id": "u_omar", "idea_id": "u_omar_c02", "rank_score": 0.5,
+      "main_idea": "How behavioral state changes visual responses",
+      "insights": [
+        "Running and arousal change visual cortex responses.",
+        "Pupil tracking used as a measure of arousal."
+      ],
+      "raw_text": "(synthetic) Should I regress out running speed before decoding?"
+    },
+    {
+      "user_id": "u_grace", "idea_id": "u_grace_c01", "rank_score": 0.85,
+      "main_idea": "Bayesian state-space models for noisy time series",
+      "insights": [
+        "I develop sequential Monte Carlo methods for latent state inference in noisy time series.",
+        "Expertise in Bayesian deconvolution and uncertainty quantification.",
+        "Looking for real scientific datasets with thousands of parallel noisy time series to apply these methods."
+      ],
+      "raw_text": "(synthetic) Can particle filters scale to thousands of parallel series?"
+    },
+    {
+      "user_id": "u_grace", "idea_id": "u_grace_c02", "rank_score": 0.5,
+      "main_idea": "Scalable variational inference",
+      "insights": [
+        "Variational inference can scale state-space models to thousands of parallel time series."
+      ],
+      "raw_text": "(synthetic) Amortized inference vs per-series fitting?"
+    },
+    {
+      "user_id": "u_kenji", "idea_id": "u_kenji_c01", "rank_score": 0.85,
+      "main_idea": "Open-source pipeline for calcium imaging analysis",
+      "insights": [
+        "I built an open-source pipeline for motion correction and cell segmentation of calcium imaging data in zebrafish.",
+        "Spike inference from calcium fluorescence traces remains the least reliable step in our pipeline.",
+        "We benchmark spike inference against simultaneous electrophysiology recordings."
+      ],
+      "raw_text": "(synthetic) What ground truth datasets exist for spike inference?"
+    },
+    {
+      "user_id": "u_kenji", "idea_id": "u_kenji_c02", "rank_score": 0.5,
+      "main_idea": "Whole-brain imaging in larval zebrafish",
+      "insights": [
+        "Light-sheet microscopy lets us image the whole zebrafish brain during behavior."
+      ],
+      "raw_text": "(synthetic) Best way to register light-sheet volumes to an atlas?"
+    },
+    {
+      "user_id": "u_priya", "idea_id": "u_priya_c01", "rank_score": 0.9,
+      "main_idea": "Biological nitrogen fixation in flooded rice paddies",
+      "insights": [
+        "Measuring how cyanobacteria fix nitrogen in rice paddy soils.",
+        "Reducing synthetic fertilizer use without lowering rice yields.",
+        "Need partner farms in Southeast Asia for multi-season field trials."
+      ],
+      "raw_text": "(synthetic) How much nitrogen can cyanobacteria realistically supply per hectare?"
+    },
+    {
+      "user_id": "u_priya", "idea_id": "u_priya_c02", "rank_score": 0.5,
+      "main_idea": "Methane emissions from paddy fields",
+      "insights": [
+        "Alternate wetting and drying irrigation may cut methane emissions.",
+        "Looking for access to greenhouse gas flux chambers."
+      ],
+      "raw_text": "(synthetic) Does alternate wetting and drying reduce yields?"
+    },
+    {
+      "user_id": "u_tomas", "idea_id": "u_tomas_c01", "rank_score": 0.9,
+      "main_idea": "Trade networks of medieval Venetian merchants",
+      "insights": [
+        "Reconstructing merchant networks from 14th-century notarial contracts.",
+        "Many contracts are handwritten in Latin abbreviations that are slow to transcribe.",
+        "Looking for paleographers familiar with Venetian notarial script."
+      ],
+      "raw_text": "(synthetic) How were partnership contracts structured in 14th-century Venice?"
+    },
+    {
+      "user_id": "u_tomas", "idea_id": "u_tomas_c02", "rank_score": 0.4,
+      "main_idea": "Spice prices in late medieval Europe",
+      "insights": [
+        "Pepper prices in Venice tracked Mediterranean shipping disruptions."
+      ],
+      "raw_text": "(synthetic) Where can I find price series for pepper before 1500?"
+    }
+  ]
+}
