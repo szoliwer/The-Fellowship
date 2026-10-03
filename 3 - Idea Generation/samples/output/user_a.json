@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_a",
+  "generated_at": "2026-10-03T22:07:30Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "3496b8f938cb7d69",
+  "chats_read": [
+    "a_s01",
+    "a_s02",
+    "a_s03",
+    "a_s04",
+    "a_s05"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Cell biology",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "membrane protein trafficking defects in disease",
+          "mode": "working_on",
+          "direction": "looking_for",
+          "tier": "primary",
+          "source_chat_ids": [
+            "a_s01",
+            "a_s02",
+            "a_s03"
+          ],
+          "chat_count": 3,
+          "user_message_count": 6,
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-10",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Hypothesis, not conclusion",
+              "claim": "Perinuclear build-up of a membrane protein may reflect altered trafficking, but expression changes are not yet ruled out.",
+              "source_chat_ids": [
+                "a_s01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-04",
+              "last_seen": "2026-09-04"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Location is not function",
+              "claim": "Imaging mislocalization alone cannot show whether the protein's function has changed.",
+              "source_chat_ids": [
+                "a_s02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-07",
+              "last_seen": "2026-09-07"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Functional assay gap",
+              "claim": "Testing the hypothesis needs a collaborator who can design a functional trafficking assay with artifact controls.",
+              "source_chat_ids": [
+                "a_s02",
+                "a_s03"
+              ],
+              "chat_count": 2,
+              "user_message_count": 4,
+              "first_seen": "2026-09-07",
+              "last_seen": "2026-09-10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Research methods",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "reproducibility of LLM literature extraction",
+          "mode": "working_on",
+          "direction": "can_offer",
+          "tier": "primary",
+          "source_chat_ids": [
+            "a_s04",
+            "a_s05"
+          ],
+          "chat_count": 2,
+          "user_message_count": 4,
+          "first_seen": "2026-09-13",
+          "last_seen": "2026-09-15",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Run-to-run drift",
+              "claim": "Repeated LLM extraction runs on the same paper return different variant lists.",
+              "source_chat_ids": [
+                "a_s04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-13",
+              "last_seen": "2026-09-13"
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Agreement-based triage",
+              "claim": "Repeated runs plus agreement scoring can send only the disagreements to logged human review.",
+              "source_chat_ids": [
+                "a_s04",
+                "a_s05"
+              ],
+              "chat_count": 2,
+              "user_message_count": 4,
+              "first_seen": "2026-09-13",
+              "last_seen": "2026-09-15"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Mining published phenotypes",
+      "claim": "Agreement-checked LLM extraction could map published trafficking phenotypes to decide which assay to try first.",
+      "bridges": [
+        "t1.s1",
+        "t2.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_t1.s1",
+      "type": "need",
+      "summary": "membrane protein trafficking defects in disease",
+      "insights": [
+        "Perinuclear build-up of a membrane protein may reflect altered trafficking, but expression changes are not yet ruled out.",
+        "Imaging mislocalization alone cannot show whether the protein's function has changed.",
+        "Testing the hypothesis needs a collaborator who can design a functional trafficking assay with artifact controls."
+      ],
+      "keywords": [
+        "Hypothesis, not conclusion",
+        "Location is not function",
+        "Functional assay gap"
+      ],
+      "evidence": [
+        "a_s01",
+        "a_s02",
+        "a_s03"
+      ],
+      "first_seen": "2026-09-04",
+      "last_seen": "2026-09-10",
+      "mentions": 6,
+      "chat_count": 3,
+      "tier": "primary",
+      "theme": "Cell biology",
+      "mode": "working_on",
+      "direction": "looking_for"
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_t2.s1",
+      "type": "skill",
+      "summary": "reproducibility of LLM literature extraction",
+      "insights": [
+        "Repeated LLM extraction runs on the same paper return different variant lists.",
+        "Repeated runs plus agreement scoring can send only the disagreements to logged human review."
+      ],
+      "keywords": [
+        "Run-to-run drift",
+        "Agreement-based triage"
+      ],
+      "evidence": [
+        "a_s04",
+        "a_s05"
+      ],
+      "first_seen": "2026-09-13",
+      "last_seen": "2026-09-15",
+      "mentions": 4,
+      "chat_count": 2,
+      "tier": "primary",
+      "theme": "Research methods",
+      "mode": "working_on",
+      "direction": "can_offer"
+    }
+  ]
+}

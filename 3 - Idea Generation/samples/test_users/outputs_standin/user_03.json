@@ -1,0 +1,376 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_03",
+  "generated_at": "2026-10-03T22:51:55Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "ccc80438f5ab34ab",
+  "chats_read": [
+    "u03_c01",
+    "u03_c02",
+    "u03_c03",
+    "u03_c04",
+    "u03_c05",
+    "u03_c06",
+    "u03_c07",
+    "u03_c08",
+    "u03_c09",
+    "u03_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Weather forecasting",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "ML weather models on unprecedented extremes",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u03_c01",
+            "u03_c04",
+            "u03_c08",
+            "u03_c10"
+          ],
+          "chat_count": 4,
+          "user_message_count": 8,
+          "first_seen": "2026-07-03",
+          "last_seen": "2026-09-22",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Magnitude ceiling on records",
+              "claim": "Data-driven weather models capture record heatwave patterns but underestimate peaks, with error growing beyond the prior record.",
+              "source_chat_ids": [
+                "u03_c01",
+                "u03_c04",
+                "u03_c10"
+              ],
+              "chat_count": 3,
+              "user_message_count": 6,
+              "first_seen": "2026-07-03",
+              "last_seen": "2026-09-22"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Bias persists at short lead",
+              "claim": "Peak underestimation persisting at one-to-two-day leads points to a magnitude ceiling rather than simple error growth.",
+              "source_chat_ids": [
+                "u03_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-30",
+              "last_seen": "2026-07-30"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Rarity versus smoothing confound",
+              "claim": "ML failures on rare storm tracks conflate training-data rarity with loss-induced smoothing, which matched comparisons could disentangle.",
+              "source_chat_ids": [
+                "u03_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-04",
+              "last_seen": "2026-09-04"
+            },
+            {
+              "id": "t1.s1.i4",
+              "handle": "Average skill hides tails",
+              "claim": "Strong average skill scores do not make ML weather models ready for warnings on the highest-impact events.",
+              "source_chat_ids": [
+                "u03_c08",
+                "u03_c10"
+              ],
+              "chat_count": 2,
+              "user_message_count": 4,
+              "first_seen": "2026-09-04",
+              "last_seen": "2026-09-22"
+            },
+            {
+              "id": "t1.s1.i5",
+              "handle": "Standard extremes benchmark",
+              "claim": "A fixed set of out-of-sample record events would let model developers test extreme-magnitude skill themselves.",
+              "source_chat_ids": [
+                "u03_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-22",
+              "last_seen": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "id": "t1.s2",
+          "sub_theme": "Calibration of under-dispersed ML ensembles",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u03_c02",
+            "u03_c06",
+            "u03_c09"
+          ],
+          "chat_count": 3,
+          "user_message_count": 6,
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-09-13",
+          "insights": [
+            {
+              "id": "t1.s2.i1",
+              "handle": "Post-processing before retraining",
+              "claim": "Post-processing calibration is a cheaper first remedy than probabilistic retraining for under-dispersed ML weather ensembles.",
+              "source_chat_ids": [
+                "u03_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-12",
+              "last_seen": "2026-07-12"
+            },
+            {
+              "id": "t1.s2.i2",
+              "handle": "Lost spatial coherence",
+              "claim": "Per-gridpoint ensemble calibration destroys spatial coherence, undermining regional metrics such as heatwave area.",
+              "source_chat_ids": [
+                "u03_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-17",
+              "last_seen": "2026-08-17"
+            },
+            {
+              "id": "t1.s2.i3",
+              "handle": "Member-by-member rescaling",
+              "claim": "Member-by-member rescaling with lead-time-dependent inflation can fix spread while keeping spatial fields coherent.",
+              "source_chat_ids": [
+                "u03_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-13",
+              "last_seen": "2026-09-13"
+            },
+            {
+              "id": "t1.s2.i4",
+              "handle": "Calibration breaks in tails",
+              "claim": "Calibration that works on average remains overconfident at high thresholds, entangling calibration with the extremes problem.",
+              "source_chat_ids": [
+                "u03_c06",
+                "u03_c09"
+              ],
+              "chat_count": 2,
+              "user_message_count": 4,
+              "first_seen": "2026-08-17",
+              "last_seen": "2026-09-13"
+            },
+            {
+              "id": "t1.s2.i5",
+              "handle": "Limits of post-processing",
+              "claim": "If ML ensembles are most overconfident when most biased on record events, post-processing alone cannot fix them.",
+              "source_chat_ids": [
+                "u03_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-13",
+              "last_seen": "2026-09-13"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Research computing",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "GPU job packing for small experiments",
+          "mode": "working_on",
+          "direction": "can_offer",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u03_c03",
+            "u03_c05",
+            "u03_c07"
+          ],
+          "chat_count": 3,
+          "user_message_count": 6,
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-08-26",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Profiled bin-packing",
+              "claim": "Bin-packing small training jobs onto shared GPUs by profiled memory and compute footprint sharply raises cluster utilisation.",
+              "source_chat_ids": [
+                "u03_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-21",
+              "last_seen": "2026-07-21"
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Validation memory spikes",
+              "claim": "Profiling must include evaluation steps, with per-process caps and history-based margins, to protect co-located jobs.",
+              "source_chat_ids": [
+                "u03_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-08",
+              "last_seen": "2026-08-08"
+            },
+            {
+              "id": "t2.s1.i3",
+              "handle": "Two-way tool sharing",
+              "claim": "Internal research tools spread best as two-way exchanges where adopting labs contribute adapters back.",
+              "source_chat_ids": [
+                "u03_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-26",
+              "last_seen": "2026-08-26"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Probabilistic extremes benchmark",
+      "claim": "An extremes benchmark could score tail reliability of calibrated ensembles, not just deterministic peak error, on record events.",
+      "bridges": [
+        "t1.s1",
+        "t1.s2"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Exceedance-conditioned inflation",
+      "claim": "Ensemble inflation conditioned on forecast distance beyond the prior record might partially offset the extrapolation ceiling.",
+      "bridges": [
+        "t1.s2",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a3",
+      "handle": "Cheap loss-function ablations",
+      "claim": "Packed small-GPU sweeps could make systematic loss-function ablations on extreme-magnitude bias affordable without full retraining budgets.",
+      "bridges": [
+        "t2.s1",
+        "t1.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_03",
+      "idea_id": "user_03_t1.s1",
+      "type": "project",
+      "summary": "ML weather models on unprecedented extremes",
+      "insights": [
+        "Data-driven weather models capture record heatwave patterns but underestimate peaks, with error growing beyond the prior record.",
+        "Peak underestimation persisting at one-to-two-day leads points to a magnitude ceiling rather than simple error growth.",
+        "ML failures on rare storm tracks conflate training-data rarity with loss-induced smoothing, which matched comparisons could disentangle.",
+        "Strong average skill scores do not make ML weather models ready for warnings on the highest-impact events.",
+        "A fixed set of out-of-sample record events would let model developers test extreme-magnitude skill themselves."
+      ],
+      "keywords": [
+        "Magnitude ceiling on records",
+        "Bias persists at short lead",
+        "Rarity versus smoothing confound",
+        "Average skill hides tails",
+        "Standard extremes benchmark"
+      ],
+      "evidence": [
+        "u03_c01",
+        "u03_c04",
+        "u03_c08",
+        "u03_c10"
+      ],
+      "first_seen": "2026-07-03",
+      "last_seen": "2026-09-22",
+      "mentions": 8,
+      "chat_count": 4,
+      "tier": "primary",
+      "theme": "Weather forecasting",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_03",
+      "idea_id": "user_03_t1.s2",
+      "type": "project",
+      "summary": "Calibration of under-dispersed ML ensembles",
+      "insights": [
+        "Post-processing calibration is a cheaper first remedy than probabilistic retraining for under-dispersed ML weather ensembles.",
+        "Per-gridpoint ensemble calibration destroys spatial coherence, undermining regional metrics such as heatwave area.",
+        "Member-by-member rescaling with lead-time-dependent inflation can fix spread while keeping spatial fields coherent.",
+        "Calibration that works on average remains overconfident at high thresholds, entangling calibration with the extremes problem.",
+        "If ML ensembles are most overconfident when most biased on record events, post-processing alone cannot fix them."
+      ],
+      "keywords": [
+        "Post-processing before retraining",
+        "Lost spatial coherence",
+        "Member-by-member rescaling",
+        "Calibration breaks in tails",
+        "Limits of post-processing"
+      ],
+      "evidence": [
+        "u03_c02",
+        "u03_c06",
+        "u03_c09"
+      ],
+      "first_seen": "2026-07-12",
+      "last_seen": "2026-09-13",
+      "mentions": 6,
+      "chat_count": 3,
+      "tier": "primary",
+      "theme": "Weather forecasting",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_03",
+      "idea_id": "user_03_t2.s1",
+      "type": "skill",
+      "summary": "GPU job packing for small experiments",
+      "insights": [
+        "Bin-packing small training jobs onto shared GPUs by profiled memory and compute footprint sharply raises cluster utilisation.",
+        "Profiling must include evaluation steps, with per-process caps and history-based margins, to protect co-located jobs.",
+        "Internal research tools spread best as two-way exchanges where adopting labs contribute adapters back."
+      ],
+      "keywords": [
+        "Profiled bin-packing",
+        "Validation memory spikes",
+        "Two-way tool sharing"
+      ],
+      "evidence": [
+        "u03_c03",
+        "u03_c05",
+        "u03_c07"
+      ],
+      "first_seen": "2026-07-21",
+      "last_seen": "2026-08-26",
+      "mentions": 6,
+      "chat_count": 3,
+      "tier": "primary",
+      "theme": "Research computing",
+      "mode": "working_on",
+      "direction": "can_offer"
+    }
+  ]
+}

@@ -1,0 +1,673 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_09",
+  "generated_at": "2026-10-03T22:51:56Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "f2cf1f76326ce1bf",
+  "chats_read": [
+    "u09_c01",
+    "u09_c02",
+    "u09_c03",
+    "u09_c04",
+    "u09_c05",
+    "u09_c06",
+    "u09_c07",
+    "u09_c08",
+    "u09_c09",
+    "u09_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Peer review reform",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "reproducibility checks during peer review",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u09_c01",
+            "u09_c03",
+            "u09_c05",
+            "u09_c08"
+          ],
+          "chat_count": 4,
+          "user_message_count": 12,
+          "first_seen": "2026-07-04",
+          "last_seen": "2026-09-05",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Staged code checking",
+              "claim": "Review should mandate a light check that code runs and reproduces the main figure, with deeper audits optional.",
+              "source_chat_ids": [
+                "u09_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-07-04",
+              "last_seen": "2026-07-04"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Dedicated checker role",
+              "claim": "Running code and verifying data should fall to a dedicated checker, not already-overloaded scientific reviewers.",
+              "source_chat_ids": [
+                "u09_c03",
+                "u09_c05"
+              ],
+              "chat_count": 2,
+              "user_message_count": 6,
+              "first_seen": "2026-07-22",
+              "last_seen": "2026-08-09"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Reproducibility as the floor",
+              "claim": "Formal reproducibility checks set the minimum standard, while open preprint review is an unmeasured bonus.",
+              "source_chat_ids": [
+                "u09_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-07-22",
+              "last_seen": "2026-07-22"
+            },
+            {
+              "id": "t1.s1.i4",
+              "handle": "Post-acceptance randomization",
+              "claim": "Randomizing accepted papers to an added code check can measure errors that standard review lets through.",
+              "source_chat_ids": [
+                "u09_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-09-05",
+              "last_seen": "2026-09-05"
+            },
+            {
+              "id": "t1.s1.i5",
+              "handle": "Filter feeds amplification",
+              "claim": "If review caught shaky code, fewer weak positive results would be published and cited disproportionately.",
+              "source_chat_ids": [
+                "u09_c01",
+                "u09_c08"
+              ],
+              "chat_count": 2,
+              "user_message_count": 6,
+              "first_seen": "2026-07-04",
+              "last_seen": "2026-09-05"
+            }
+          ]
+        },
+        {
+          "id": "t1.s2",
+          "sub_theme": "open post-publication review of preprints",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u09_c02",
+            "u09_c03",
+            "u09_c06",
+            "u09_c09"
+          ],
+          "chat_count": 4,
+          "user_message_count": 12,
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-09-14",
+          "insights": [
+            {
+              "id": "t1.s2.i1",
+              "handle": "Unmeasured revision effect",
+              "claim": "Whether public comments on preprints actually change the final published paper remains largely unstudied.",
+              "source_chat_ids": [
+                "u09_c02",
+                "u09_c03",
+                "u09_c09"
+              ],
+              "chat_count": 3,
+              "user_message_count": 9,
+              "first_seen": "2026-07-13",
+              "last_seen": "2026-09-14"
+            },
+            {
+              "id": "t1.s2.i2",
+              "handle": "Matched version comparison",
+              "claim": "Comparing preprints that received substantive comments against matched uncommented ones can trace published changes to comments.",
+              "source_chat_ids": [
+                "u09_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-07-13",
+              "last_seen": "2026-07-13"
+            },
+            {
+              "id": "t1.s2.i3",
+              "handle": "Comments surfacing null studies",
+              "claim": "Public preprint comments may counter citation bias by prompting authors to cite overlooked null results.",
+              "source_chat_ids": [
+                "u09_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-18",
+              "last_seen": "2026-08-18"
+            },
+            {
+              "id": "t1.s2.i4",
+              "handle": "Structure over comment boxes",
+              "claim": "Open preprint review becomes useful only when structured or invited, rather than an unread comment box.",
+              "source_chat_ids": [
+                "u09_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-09-14",
+              "last_seen": "2026-09-14"
+            },
+            {
+              "id": "t1.s2.i5",
+              "handle": "Private automated flags",
+              "claim": "Automated integrity flags on preprints should go privately to reviewers, never be displayed publicly.",
+              "source_chat_ids": [
+                "u09_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-09-14",
+              "last_seen": "2026-09-14"
+            }
+          ]
+        },
+        {
+          "id": "t1.s3",
+          "sub_theme": "registered reports in field ecology",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u09_c05"
+          ],
+          "chat_count": 1,
+          "user_message_count": 3,
+          "first_seen": "2026-08-09",
+          "last_seen": "2026-08-09",
+          "insights": [
+            {
+              "id": "t1.s3.i1",
+              "handle": "Field-season contingency protocols",
+              "claim": "Registered reports can work in ecology if Stage 1 protocols include contingencies for droughts or floods.",
+              "source_chat_ids": [
+                "u09_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-09",
+              "last_seen": "2026-08-09"
+            },
+            {
+              "id": "t1.s3.i2",
+              "handle": "Post-hoc analysis drift",
+              "claim": "Long field seasons and messy data make ecology especially prone to analysis choices made after seeing data.",
+              "source_chat_ids": [
+                "u09_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-09",
+              "last_seen": "2026-08-09"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Meta-science",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "citation bias toward positive results",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u09_c01",
+            "u09_c04",
+            "u09_c06",
+            "u09_c10"
+          ],
+          "chat_count": 4,
+          "user_message_count": 12,
+          "first_seen": "2026-07-04",
+          "last_seen": "2026-09-23",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Neglected null results",
+              "claim": "Positive findings are cited far more than comparable null studies, distorting what fields consider settled.",
+              "source_chat_ids": [
+                "u09_c01",
+                "u09_c04",
+                "u09_c10"
+              ],
+              "chat_count": 3,
+              "user_message_count": 9,
+              "first_seen": "2026-07-04",
+              "last_seen": "2026-09-23"
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Venue as confounder",
+              "claim": "Citation gaps by result direction must be adjusted for venue and publication year before being attributed to bias.",
+              "source_chat_ids": [
+                "u09_c04",
+                "u09_c10"
+              ],
+              "chat_count": 2,
+              "user_message_count": 6,
+              "first_seen": "2026-07-31",
+              "last_seen": "2026-09-23"
+            },
+            {
+              "id": "t2.s1.i3",
+              "handle": "Hiring-citation feedback loop",
+              "claim": "Hiring by paper counts and citation bias toward positive results reinforce each other as a system-level incentive.",
+              "source_chat_ids": [
+                "u09_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-09-23",
+              "last_seen": "2026-09-23"
+            },
+            {
+              "id": "t2.s1.i4",
+              "handle": "Image problems behind clean results",
+              "claim": "Manipulated images may partly explain why some highly cited positive results look unusually clean.",
+              "source_chat_ids": [
+                "u09_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-07-31",
+              "last_seen": "2026-07-31"
+            },
+            {
+              "id": "t2.s1.i5",
+              "handle": "Nulls deserve write-ups",
+              "claim": "A clear null finding is worth publishing, consistent with the argument that null results deserve citation.",
+              "source_chat_ids": [
+                "u09_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-18",
+              "last_seen": "2026-08-18"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "theme": "Research integrity",
+      "sub_themes": [
+        {
+          "id": "t3.s1",
+          "sub_theme": "automated image duplication detection",
+          "mode": "working_on",
+          "direction": "can_offer",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u09_c02",
+            "u09_c04",
+            "u09_c05",
+            "u09_c07",
+            "u09_c09"
+          ],
+          "chat_count": 5,
+          "user_message_count": 15,
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-09-14",
+          "insights": [
+            {
+              "id": "t3.s1.i1",
+              "handle": "Shareable validated detector",
+              "claim": "An image-duplication detector with documented validation metrics can be shared across research-integrity groups.",
+              "source_chat_ids": [
+                "u09_c02",
+                "u09_c04",
+                "u09_c09"
+              ],
+              "chat_count": 3,
+              "user_message_count": 9,
+              "first_seen": "2026-07-13",
+              "last_seen": "2026-09-14"
+            },
+            {
+              "id": "t3.s1.i2",
+              "handle": "Contrast-robust matching",
+              "claim": "Gradient-based descriptors may catch contrast-adjusted reused images without inflating false positives.",
+              "source_chat_ids": [
+                "u09_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-27",
+              "last_seen": "2026-08-27"
+            },
+            {
+              "id": "t3.s1.i3",
+              "handle": "Submission-stage screening",
+              "claim": "Journals can screen every submission automatically for duplicated images, routing only flags to humans.",
+              "source_chat_ids": [
+                "u09_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-09",
+              "last_seen": "2026-08-09"
+            },
+            {
+              "id": "t3.s1.i4",
+              "handle": "Flags as leads only",
+              "claim": "Automated image flags require blinded human confirmation before being counted as integrity problems.",
+              "source_chat_ids": [
+                "u09_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-07-31",
+              "last_seen": "2026-07-31"
+            },
+            {
+              "id": "t3.s1.i5",
+              "handle": "Tracking image corrections",
+              "claim": "Running the detector on preprint and published versions shows whether publicly flagged image problems get fixed.",
+              "source_chat_ids": [
+                "u09_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-07-13",
+              "last_seen": "2026-07-13"
+            }
+          ]
+        },
+        {
+          "id": "t3.s2",
+          "sub_theme": "statistical reporting error detection",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u09_c07"
+          ],
+          "chat_count": 1,
+          "user_message_count": 3,
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-08-27",
+          "insights": [
+            {
+              "id": "t3.s2.i1",
+              "handle": "Recomputed p-value checks",
+              "claim": "Recomputing p-values from statistics parsed out of messy PDFs should initially flag only gross inconsistencies.",
+              "source_chat_ids": [
+                "u09_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-27",
+              "last_seen": "2026-08-27"
+            },
+            {
+              "id": "t3.s2.i2",
+              "handle": "Co-occurring error types",
+              "claim": "Papers with image problems may also tend to contain statistical reporting errors.",
+              "source_chat_ids": [
+                "u09_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 3,
+              "first_seen": "2026-08-27",
+              "last_seen": "2026-08-27"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Statistical errors in cited positives",
+      "claim": "Statistical reporting inconsistencies may be more frequent in highly cited positive studies than in null ones.",
+      "bridges": [
+        "t3.s2",
+        "t2.s1"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Registered reports and citation parity",
+      "claim": "Registered reports might narrow the citation gap between positive and null findings in ecology.",
+      "bridges": [
+        "t1.s3",
+        "t2.s1"
+      ]
+    },
+    {
+      "id": "a3",
+      "handle": "Automated first-tier checks",
+      "claim": "Automated statistical consistency checks could serve as the cheap mandatory tier of staged reproducibility review.",
+      "bridges": [
+        "t3.s2",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a4",
+      "handle": "Crowd versus algorithm",
+      "claim": "Public preprint commenters may catch different integrity problems than automated image and statistics screens do.",
+      "bridges": [
+        "t1.s2",
+        "t3.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_09",
+      "idea_id": "user_09_t1.s1",
+      "type": "project",
+      "summary": "reproducibility checks during peer review",
+      "insights": [
+        "Review should mandate a light check that code runs and reproduces the main figure, with deeper audits optional.",
+        "Running code and verifying data should fall to a dedicated checker, not already-overloaded scientific reviewers.",
+        "Formal reproducibility checks set the minimum standard, while open preprint review is an unmeasured bonus.",
+        "Randomizing accepted papers to an added code check can measure errors that standard review lets through.",
+        "If review caught shaky code, fewer weak positive results would be published and cited disproportionately."
+      ],
+      "keywords": [
+        "Staged code checking",
+        "Dedicated checker role",
+        "Reproducibility as the floor",
+        "Post-acceptance randomization",
+        "Filter feeds amplification"
+      ],
+      "evidence": [
+        "u09_c01",
+        "u09_c03",
+        "u09_c05",
+        "u09_c08"
+      ],
+      "first_seen": "2026-07-04",
+      "last_seen": "2026-09-05",
+      "mentions": 12,
+      "chat_count": 4,
+      "tier": "primary",
+      "theme": "Peer review reform",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_09",
+      "idea_id": "user_09_t1.s2",
+      "type": "project",
+      "summary": "open post-publication review of preprints",
+      "insights": [
+        "Whether public comments on preprints actually change the final published paper remains largely unstudied.",
+        "Comparing preprints that received substantive comments against matched uncommented ones can trace published changes to comments.",
+        "Public preprint comments may counter citation bias by prompting authors to cite overlooked null results.",
+        "Open preprint review becomes useful only when structured or invited, rather than an unread comment box.",
+        "Automated integrity flags on preprints should go privately to reviewers, never be displayed publicly."
+      ],
+      "keywords": [
+        "Unmeasured revision effect",
+        "Matched version comparison",
+        "Comments surfacing null studies",
+        "Structure over comment boxes",
+        "Private automated flags"
+      ],
+      "evidence": [
+        "u09_c02",
+        "u09_c03",
+        "u09_c06",
+        "u09_c09"
+      ],
+      "first_seen": "2026-07-13",
+      "last_seen": "2026-09-14",
+      "mentions": 12,
+      "chat_count": 4,
+      "tier": "primary",
+      "theme": "Peer review reform",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_09",
+      "idea_id": "user_09_t1.s3",
+      "type": "project",
+      "summary": "registered reports in field ecology",
+      "insights": [
+        "Registered reports can work in ecology if Stage 1 protocols include contingencies for droughts or floods.",
+        "Long field seasons and messy data make ecology especially prone to analysis choices made after seeing data."
+      ],
+      "keywords": [
+        "Field-season contingency protocols",
+        "Post-hoc analysis drift"
+      ],
+      "evidence": [
+        "u09_c05"
+      ],
+      "first_seen": "2026-08-09",
+      "last_seen": "2026-08-09",
+      "mentions": 3,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Peer review reform",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_09",
+      "idea_id": "user_09_t2.s1",
+      "type": "project",
+      "summary": "citation bias toward positive results",
+      "insights": [
+        "Positive findings are cited far more than comparable null studies, distorting what fields consider settled.",
+        "Citation gaps by result direction must be adjusted for venue and publication year before being attributed to bias.",
+        "Hiring by paper counts and citation bias toward positive results reinforce each other as a system-level incentive.",
+        "Manipulated images may partly explain why some highly cited positive results look unusually clean.",
+        "A clear null finding is worth publishing, consistent with the argument that null results deserve citation."
+      ],
+      "keywords": [
+        "Neglected null results",
+        "Venue as confounder",
+        "Hiring-citation feedback loop",
+        "Image problems behind clean results",
+        "Nulls deserve write-ups"
+      ],
+      "evidence": [
+        "u09_c01",
+        "u09_c04",
+        "u09_c06",
+        "u09_c10"
+      ],
+      "first_seen": "2026-07-04",
+      "last_seen": "2026-09-23",
+      "mentions": 12,
+      "chat_count": 4,
+      "tier": "primary",
+      "theme": "Meta-science",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_09",
+      "idea_id": "user_09_t3.s1",
+      "type": "skill",
+      "summary": "automated image duplication detection",
+      "insights": [
+        "An image-duplication detector with documented validation metrics can be shared across research-integrity groups.",
+        "Gradient-based descriptors may catch contrast-adjusted reused images without inflating false positives.",
+        "Journals can screen every submission automatically for duplicated images, routing only flags to humans.",
+        "Automated image flags require blinded human confirmation before being counted as integrity problems.",
+        "Running the detector on preprint and published versions shows whether publicly flagged image problems get fixed."
+      ],
+      "keywords": [
+        "Shareable validated detector",
+        "Contrast-robust matching",
+        "Submission-stage screening",
+        "Flags as leads only",
+        "Tracking image corrections"
+      ],
+      "evidence": [
+        "u09_c02",
+        "u09_c04",
+        "u09_c05",
+        "u09_c07",
+        "u09_c09"
+      ],
+      "first_seen": "2026-07-13",
+      "last_seen": "2026-09-14",
+      "mentions": 15,
+      "chat_count": 5,
+      "tier": "primary",
+      "theme": "Research integrity",
+      "mode": "working_on",
+      "direction": "can_offer"
+    },
+    {
+      "user_id": "user_09",
+      "idea_id": "user_09_t3.s2",
+      "type": "project",
+      "summary": "statistical reporting error detection",
+      "insights": [
+        "Recomputing p-values from statistics parsed out of messy PDFs should initially flag only gross inconsistencies.",
+        "Papers with image problems may also tend to contain statistical reporting errors."
+      ],
+      "keywords": [
+        "Recomputed p-value checks",
+        "Co-occurring error types"
+      ],
+      "evidence": [
+        "u09_c07"
+      ],
+      "first_seen": "2026-08-27",
+      "last_seen": "2026-08-27",
+      "mentions": 3,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Research integrity",
+      "mode": "working_on",
+      "direction": "none"
+    }
+  ]
+}

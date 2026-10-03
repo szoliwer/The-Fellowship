@@ -1,0 +1,2 @@
+# Step 3 - Idea Generation
+anthropic              # Claude API. Paid service: needs an API key in .env

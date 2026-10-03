@@ -1,0 +1,48 @@
+{"themes":[
+{"id":"t1","theme":"Particle physics","sub_themes":[
+{"id":"t1.s1","sub_theme":"WIMP direct-detection limits","mode":"curious_about","direction":"none","insights":[
+{"id":"t1.s1.i1","handle":"Neutrino fog stopping point","claim":"The neutrino fog provides a natural stopping point that answers complaints about endlessly lowering cross-section targets.","source_chat_ids":["u07_c01"]},
+{"id":"t1.s1.i2","handle":"Oversold WIMP paradigm","claim":"The field oversold WIMPs as the obvious dark matter answer for decades.","source_chat_ids":["u07_c01"]}]}]},
+{"id":"t2","theme":"Neuroscience","sub_themes":[
+{"id":"t2.s1","sub_theme":"octopus distributed arm control","mode":"curious_about","direction":"none","insights":[
+{"id":"t2.s1.i1","handle":"Smart reflexes, not minds","claim":"Octopus arm autonomy is better described as sophisticated reflex control than independent thinking.","source_chat_ids":["u07_c02"]},
+{"id":"t2.s1.i2","handle":"Joint-level offloading analogy","claim":"Octopus hierarchical control resembles robots offloading low-level motor control to their joints.","source_chat_ids":["u07_c02"]},
+{"id":"t2.s1.i3","handle":"Untracked limb positions","claim":"If the octopus brain does not precisely track its arms, its body awareness differs fundamentally from ours.","source_chat_ids":["u07_c02"]}]},
+{"id":"t2.s2","sub_theme":"hippocampal replay and memory consolidation","mode":"curious_about","direction":"none","insights":[
+{"id":"t2.s2.i1","handle":"Replay is causal","claim":"Hippocampal replay causally supports memory rather than being a side effect of sleep activity.","source_chat_ids":["u07_c05"]},
+{"id":"t2.s2.i2","handle":"Reverse replay as credit assignment","claim":"Backward replay may propagate reward to earlier path steps, analogous to reinforcement learning credit assignment.","source_chat_ids":["u07_c05"]}]}]},
+{"id":"t3","theme":"Distributed systems","sub_themes":[
+{"id":"t3.s1","sub_theme":"proof-of-stake consensus security","mode":"curious_about","direction":"none","insights":[
+{"id":"t3.s1.i1","handle":"Sybil resistance, not BFT","claim":"Proof-of-stake addresses Sybil resistance, not the Byzantine generals problem, which classic BFT protocols already solve.","source_chat_ids":["u07_c03"]},
+{"id":"t3.s1.i2","handle":"Stake concentration weak point","claim":"Stake concentrating in exchanges and pools makes the one-third-of-stake assumption the real vulnerability.","source_chat_ids":["u07_c03"]}]}]},
+{"id":"t4","theme":"Materials science","sub_themes":[
+{"id":"t4.s1","sub_theme":"self-healing lime-clast concrete","mode":"curious_about","direction":"none","insights":[
+{"id":"t4.s1.i1","handle":"Water exclusion over strength","claim":"Self-healing lime clasts matter for modern concrete mainly by keeping water out to protect rebar, not structural strength.","source_chat_ids":["u07_c04"]},
+{"id":"t4.s1.i2","handle":"Cost and curing barriers","claim":"Cost or curing time likely hinders commercial adoption of hot-mixed lime concrete.","source_chat_ids":["u07_c04"]}]}]},
+{"id":"t5","theme":"Ecology","sub_themes":[
+{"id":"t5.s1","sub_theme":"mycorrhizal network resource transfer","mode":"curious_about","direction":"none","insights":[
+{"id":"t5.s1.i1","handle":"Anthropomorphised mother trees","claim":"The mother tree framing anthropomorphises fungi that move resources according to their own interests.","source_chat_ids":["u07_c06"]},
+{"id":"t5.s1.i2","handle":"Single-link tracer test","claim":"A convincing test must confirm one fungal network links two trees and trace label through only that link.","source_chat_ids":["u07_c06"]}]}]},
+{"id":"t6","theme":"Linguistics","sub_themes":[
+{"id":"t6.s1","sub_theme":"creole language emergence","mode":"curious_about","direction":"none","insights":[
+{"id":"t6.s1.i1","handle":"Children regularise pidgins","claim":"Children do the heavy lifting in turning a messy pidgin into a creole with consistent grammar.","source_chat_ids":["u07_c07"]},
+{"id":"t6.s1.i2","handle":"Demographics drive innovation","claim":"Many children with little access to the colonial language should produce more child-driven grammatical innovation.","source_chat_ids":["u07_c07"]},
+{"id":"t6.s1.i3","handle":"Real-time emergence test","claim":"Observing a language emerge in real time is the cleanest test of child-driven regularisation.","source_chat_ids":["u07_c07"]}]}]},
+{"id":"t7","theme":"Renewable energy","sub_themes":[
+{"id":"t7.s1","sub_theme":"biofouling on tidal-stream turbines","mode":"curious_about","direction":"none","insights":[
+{"id":"t7.s1.i1","handle":"Underrated cost driver","claim":"Biofouling on tidal turbine blades matters more to performance and cost than is commonly admitted.","source_chat_ids":["u07_c08"]},
+{"id":"t7.s1.i2","handle":"Roughness-tolerant blades","claim":"Designing roughness-tolerant blades is smarter than biocide coatings that harm marine environments and erode in high flow.","source_chat_ids":["u07_c08"]}]}]},
+{"id":"t8","theme":"Social choice","sub_themes":[
+{"id":"t8.s1","sub_theme":"ranked-choice voting criteria","mode":"curious_about","direction":"none","insights":[
+{"id":"t8.s1.i1","handle":"Monotonicity failure","claim":"Instant runoff's monotonicity failure is its most troubling flaw because it is so counterintuitive to voters.","source_chat_ids":["u07_c09"]},
+{"id":"t8.s1.i2","handle":"Beyond instant runoff","claim":"If redesigning elections, Condorcet or cardinal methods may be preferable to instant runoff, which still beats plurality.","source_chat_ids":["u07_c09"]}]}]},
+{"id":"t9","theme":"Climate science","sub_themes":[
+{"id":"t9.s1","sub_theme":"permafrost thaw methane feedback","mode":"curious_about","direction":"none","insights":[
+{"id":"t9.s1.i1","handle":"Neither bomb nor negligible","claim":"Permafrost methane is neither a ticking bomb nor negligible; the truth lies between these framings.","source_chat_ids":["u07_c10"]},
+{"id":"t9.s1.i2","handle":"Abrupt thaw underrepresented","claim":"Abrupt thaw processes like thermokarst lakes are poorly represented in models, making uncertainty enormous.","source_chat_ids":["u07_c10"]},
+{"id":"t9.s1.i3","handle":"Sparse Arctic measurements","claim":"Sparse Arctic flux measurements are the biggest obstacle to constraining permafrost methane emissions.","source_chat_ids":["u07_c10"]}]}]}],
+"adjacent_ideas":[
+{"id":"a1","handle":"Validator voting pathologies","claim":"Stake-weighted validator governance may inherit social choice pathologies like monotonicity failures in coalition decisions.","bridges":["t3.s1","t8.s1"]},
+{"id":"a2","handle":"Replay in distributed limbs","claim":"Distributed octopus arm controllers might rely on local offline replay for credit assignment without central tracking.","bridges":["t2.s1","t2.s2"]},
+{"id":"a3","handle":"Self-healing marine surfaces","claim":"Self-healing mineral chemistry could inspire turbine coatings that repair erosion damage from high-flow sediment.","bridges":["t4.s1","t7.s1"]},
+{"id":"a4","handle":"Detection floors and sparse sensing","claim":"Both dark matter searches and Arctic methane monitoring hit limits where background signals swamp sparse measurements.","bridges":["t1.s1","t9.s1"]}]}

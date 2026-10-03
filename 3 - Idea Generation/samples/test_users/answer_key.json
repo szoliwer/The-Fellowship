@@ -1,0 +1,807 @@
+{
+  "_note": "What Step 3 should find for each synthetic test user. Written BEFORE any real run. chats = where the idea is evidenced (short ids, cNN). keywords = any one must appear in the matched sub-theme's text (lower-case substring). type = expected Step 3 row type (checked softly: it can differ if ideas legitimately merge). key=false = nice to have, not counted in the score.",
+  "users": {
+    "user_01": {
+      "pattern": "Focused: all 10 chats on reef soundscape monitoring",
+      "ideas": {
+        "E1": {
+          "label": "Few-label fish-call classification (needs ML help)",
+          "chats": [
+            "c02",
+            "c05",
+            "c08"
+          ],
+          "keywords": [
+            "fish call",
+            "fish-call",
+            "classif",
+            "label"
+          ],
+          "type": "need"
+        },
+        "E2": {
+          "label": "Do acoustic indices track fish abundance / recovery?",
+          "chats": [
+            "c03",
+            "c06",
+            "c09"
+          ],
+          "keywords": [
+            "acoustic ind",
+            "complexity",
+            "abundance",
+            "bleach",
+            "recovery"
+          ]
+        },
+        "E3": {
+          "label": "Long-term hydrophone deployments + recordings archive (can offer)",
+          "chats": [
+            "c01",
+            "c04",
+            "c07",
+            "c10"
+          ],
+          "keywords": [
+            "hydrophone",
+            "deploy",
+            "archive",
+            "duty",
+            "biofoul",
+            "long-term"
+          ],
+          "type": "skill"
+        }
+      },
+      "must_not": [
+        "edna",
+        "environmental dna"
+      ]
+    },
+    "user_02": {
+      "pattern": "Focused: all 10 chats on solid-state batteries",
+      "ideas": {
+        "E1": {
+          "label": "Dendrites through ceramic electrolyte grain boundaries",
+          "chats": [
+            "c01",
+            "c03",
+            "c05",
+            "c07",
+            "c09"
+          ],
+          "keywords": [
+            "dendrite",
+            "grain"
+          ]
+        },
+        "E2": {
+          "label": "Needs operando / in-situ imaging of dendrites",
+          "chats": [
+            "c02",
+            "c06",
+            "c10"
+          ],
+          "keywords": [
+            "operando",
+            "in situ",
+            "in-situ",
+            "imaging",
+            "tomograph",
+            "synchrotron",
+            "microscop"
+          ],
+          "type": "need"
+        },
+        "E3": {
+          "label": "Does stack pressure fix interface contact or hide it?",
+          "chats": [
+            "c04",
+            "c08"
+          ],
+          "keywords": [
+            "pressure"
+          ]
+        }
+      },
+      "must_not": [
+        "varga",
+        "northfield",
+        "elena"
+      ]
+    },
+    "user_03": {
+      "pattern": "Two topics, 7 + 3",
+      "ideas": {
+        "E1": {
+          "label": "Can ML weather models forecast out-of-distribution extremes?",
+          "chats": [
+            "c01",
+            "c04",
+            "c08",
+            "c10"
+          ],
+          "keywords": [
+            "extreme",
+            "out-of-distribution",
+            "out of distribution",
+            "heatwave",
+            "record",
+            "hindcast"
+          ]
+        },
+        "E2": {
+          "label": "Under-dispersed ML ensembles / uncertainty calibration",
+          "chats": [
+            "c02",
+            "c06",
+            "c09"
+          ],
+          "keywords": [
+            "ensemble",
+            "dispers",
+            "spread",
+            "calibrat",
+            "uncertaint"
+          ]
+        },
+        "E3": {
+          "label": "GPU job-packing scheduler (can offer)",
+          "chats": [
+            "c03",
+            "c05",
+            "c07"
+          ],
+          "keywords": [
+            "schedul",
+            "gpu",
+            "cluster",
+            "utilis",
+            "utiliz"
+          ],
+          "type": "skill"
+        }
+      },
+      "separate": [
+        [
+          "E1",
+          "E3"
+        ],
+        [
+          "E2",
+          "E3"
+        ]
+      ],
+      "must_not": []
+    },
+    "user_04": {
+      "pattern": "Two topics, 6 + 4",
+      "ideas": {
+        "E1": {
+          "label": "Satellite LST vs street-level air temperature",
+          "chats": [
+            "c01",
+            "c05",
+            "c08"
+          ],
+          "keywords": [
+            "satellite",
+            "land surface",
+            "land-surface",
+            "air temperature",
+            "lst",
+            "remote"
+          ]
+        },
+        "E2": {
+          "label": "Tree canopy cooling and equity",
+          "chats": [
+            "c03",
+            "c07",
+            "c10"
+          ],
+          "keywords": [
+            "canopy",
+            "tree",
+            "equit"
+          ]
+        },
+        "E3": {
+          "label": "Calibrating volunteer low-cost sensors (needs stats help)",
+          "chats": [
+            "c02",
+            "c04",
+            "c06",
+            "c09"
+          ],
+          "keywords": [
+            "sensor",
+            "calibrat",
+            "volunteer",
+            "citizen",
+            "low-cost"
+          ],
+          "type": "need"
+        }
+      },
+      "separate": [
+        [
+          "E1",
+          "E3"
+        ],
+        [
+          "E2",
+          "E3"
+        ]
+      ],
+      "must_not": []
+    },
+    "user_05": {
+      "pattern": "One main topic (5 chats) + 5 one-offs",
+      "ideas": {
+        "E1": {
+          "label": "Regression discontinuity at class-size caps",
+          "chats": [
+            "c01",
+            "c03",
+            "c05",
+            "c07",
+            "c09"
+          ],
+          "keywords": [
+            "discontinuity",
+            "class size",
+            "class-size",
+            "threshold",
+            "enrol"
+          ],
+          "primary": true
+        },
+        "E2": {
+          "label": "Knot invariants (Jones polynomial)",
+          "chats": [
+            "c02"
+          ],
+          "keywords": [
+            "knot",
+            "jones"
+          ]
+        },
+        "E3": {
+          "label": "Map projections / Mercator",
+          "chats": [
+            "c04"
+          ],
+          "keywords": [
+            "projection",
+            "mercator"
+          ]
+        },
+        "E4": {
+          "label": "Surface-code overhead",
+          "chats": [
+            "c06"
+          ],
+          "keywords": [
+            "surface code",
+            "error correct",
+            "qubit"
+          ]
+        },
+        "E5": {
+          "label": "Comparability of ML training carbon figures",
+          "chats": [
+            "c08"
+          ],
+          "keywords": [
+            "carbon",
+            "footprint",
+            "emission"
+          ]
+        },
+        "E6": {
+          "label": "Sourdough microbial succession",
+          "chats": [
+            "c10"
+          ],
+          "keywords": [
+            "sourdough",
+            "ferment",
+            "microb"
+          ]
+        }
+      },
+      "distinct": true,
+      "must_not": []
+    },
+    "user_06": {
+      "pattern": "One main topic (4 chats) + 6 one-offs",
+      "ideas": {
+        "E1": {
+          "label": "Soft grippers for delicate produce (wants field-trial partner)",
+          "chats": [
+            "c02",
+            "c05",
+            "c09"
+          ],
+          "keywords": [
+            "gripper",
+            "produce",
+            "berr",
+            "harvest",
+            "grasp",
+            "pick"
+          ],
+          "primary": true
+        },
+        "E2": {
+          "label": "Sim-to-real for soft actuators",
+          "chats": [
+            "c06"
+          ],
+          "keywords": [
+            "sim-to-real",
+            "simulat",
+            "actuator",
+            "material model"
+          ]
+        },
+        "E3": {
+          "label": "Bird magnetoreception",
+          "chats": [
+            "c01"
+          ],
+          "keywords": [
+            "magnet",
+            "bird",
+            "radical"
+          ]
+        },
+        "E4": {
+          "label": "Open-source hardware licensing",
+          "chats": [
+            "c03"
+          ],
+          "keywords": [
+            "licen",
+            "open-source hardware",
+            "open hardware"
+          ]
+        },
+        "E5": {
+          "label": "Origami rigid foldability",
+          "chats": [
+            "c04"
+          ],
+          "keywords": [
+            "origami",
+            "fold"
+          ]
+        },
+        "E6": {
+          "label": "Acoustic levitation",
+          "chats": [
+            "c07"
+          ],
+          "keywords": [
+            "levitat"
+          ]
+        },
+        "E7": {
+          "label": "Coffee extraction physics",
+          "chats": [
+            "c08"
+          ],
+          "keywords": [
+            "coffee",
+            "extraction",
+            "channel"
+          ]
+        },
+        "E8": {
+          "label": "Why programming languages catch on in science",
+          "chats": [
+            "c10"
+          ],
+          "keywords": [
+            "programming language",
+            "language",
+            "adoption"
+          ]
+        }
+      },
+      "separate": [
+        [
+          "E1",
+          "E6"
+        ],
+        [
+          "E1",
+          "E5"
+        ]
+      ],
+      "must_not": []
+    },
+    "user_07": {
+      "pattern": "Varied: 10 unrelated topics",
+      "ideas": {
+        "E1": {
+          "label": "Dark-matter null results / WIMPs",
+          "chats": [
+            "c01"
+          ],
+          "keywords": [
+            "dark matter",
+            "dark-matter",
+            "wimp"
+          ]
+        },
+        "E2": {
+          "label": "Octopus distributed cognition",
+          "chats": [
+            "c02"
+          ],
+          "keywords": [
+            "octopus",
+            "cephalopod"
+          ]
+        },
+        "E3": {
+          "label": "Byzantine fault tolerance / proof-of-stake",
+          "chats": [
+            "c03"
+          ],
+          "keywords": [
+            "byzantine",
+            "proof-of-stake",
+            "proof of stake",
+            "consensus"
+          ]
+        },
+        "E4": {
+          "label": "Roman concrete self-healing",
+          "chats": [
+            "c04"
+          ],
+          "keywords": [
+            "roman",
+            "concrete",
+            "lime"
+          ]
+        },
+        "E5": {
+          "label": "Hippocampal replay",
+          "chats": [
+            "c05"
+          ],
+          "keywords": [
+            "replay",
+            "hippocamp"
+          ]
+        },
+        "E6": {
+          "label": "Mycorrhizal network claims",
+          "chats": [
+            "c06"
+          ],
+          "keywords": [
+            "mycorrhiz",
+            "fung",
+            "wood wide"
+          ]
+        },
+        "E7": {
+          "label": "Creole formation",
+          "chats": [
+            "c07"
+          ],
+          "keywords": [
+            "creole"
+          ]
+        },
+        "E8": {
+          "label": "Tidal turbines and biofouling",
+          "chats": [
+            "c08"
+          ],
+          "keywords": [
+            "tidal"
+          ]
+        },
+        "E9": {
+          "label": "Arrow's theorem and ranked-choice voting",
+          "chats": [
+            "c09"
+          ],
+          "keywords": [
+            "arrow",
+            "voting",
+            "ranked"
+          ]
+        },
+        "E10": {
+          "label": "Permafrost methane uncertainty",
+          "chats": [
+            "c10"
+          ],
+          "keywords": [
+            "permafrost",
+            "methane"
+          ]
+        }
+      },
+      "distinct": true,
+      "must_not": []
+    },
+    "user_08": {
+      "pattern": "Consolidation: one sub-theme worded 4 ways + look-alikes",
+      "ideas": {
+        "E1": {
+          "label": "Single-cell trajectory / fate inference (4 wordings)",
+          "chats": [
+            "c01",
+            "c04",
+            "c07",
+            "c10"
+          ],
+          "min_chats": 3,
+          "keywords": [
+            "pseudotime",
+            "trajector",
+            "fate",
+            "lineage",
+            "velocity",
+            "differentiation"
+          ],
+          "primary": true
+        },
+        "E2": {
+          "label": "Batch-effect correction",
+          "chats": [
+            "c02"
+          ],
+          "keywords": [
+            "batch"
+          ]
+        },
+        "E3": {
+          "label": "Drone trajectory optimisation",
+          "chats": [
+            "c03"
+          ],
+          "keywords": [
+            "drone",
+            "quadrotor"
+          ]
+        },
+        "E4": {
+          "label": "Glacier velocity via InSAR",
+          "chats": [
+            "c05"
+          ],
+          "keywords": [
+            "glacier",
+            "insar"
+          ]
+        },
+        "E5": {
+          "label": "Language phylogenetics",
+          "chats": [
+            "c06"
+          ],
+          "keywords": [
+            "phylogen",
+            "language"
+          ]
+        },
+        "E6": {
+          "label": "Cell segmentation",
+          "chats": [
+            "c08"
+          ],
+          "keywords": [
+            "segment"
+          ]
+        },
+        "E7": {
+          "label": "Lineage methods for startups (playful)",
+          "chats": [
+            "c09"
+          ],
+          "keywords": [
+            "startup",
+            "compan",
+            "firm",
+            "business"
+          ],
+          "key": false
+        }
+      },
+      "separate": [
+        [
+          "E1",
+          "E3"
+        ],
+        [
+          "E1",
+          "E4"
+        ],
+        [
+          "E1",
+          "E5"
+        ],
+        [
+          "E1",
+          "E7"
+        ]
+      ],
+      "must_not": []
+    },
+    "user_09": {
+      "pattern": "Multi-idea chats: 2-3 ideas per chat, recurring in combinations",
+      "ideas": {
+        "I1": {
+          "label": "Reproducibility checks (code/data) in peer review",
+          "chats": [
+            "c01",
+            "c03",
+            "c05",
+            "c08"
+          ],
+          "keywords": [
+            "code",
+            "reproducib",
+            "data"
+          ]
+        },
+        "I2": {
+          "label": "Open review on preprints",
+          "chats": [
+            "c02",
+            "c03",
+            "c06",
+            "c09"
+          ],
+          "keywords": [
+            "preprint",
+            "open review",
+            "post-publication",
+            "comment"
+          ]
+        },
+        "I3": {
+          "label": "Citation bias toward positive results",
+          "chats": [
+            "c01",
+            "c04",
+            "c06",
+            "c08",
+            "c10"
+          ],
+          "keywords": [
+            "citation",
+            "null",
+            "positive"
+          ]
+        },
+        "I4": {
+          "label": "Image-duplication detector (can offer)",
+          "chats": [
+            "c02",
+            "c04",
+            "c05",
+            "c07",
+            "c09"
+          ],
+          "keywords": [
+            "image",
+            "duplicat",
+            "manipulat"
+          ],
+          "type": "skill"
+        },
+        "X1": {
+          "label": "Registered reports in ecology",
+          "chats": [
+            "c05"
+          ],
+          "keywords": [
+            "registered report",
+            "ecolog"
+          ],
+          "key": false
+        },
+        "X2": {
+          "label": "Statistical reporting-error detection",
+          "chats": [
+            "c07"
+          ],
+          "keywords": [
+            "p-value",
+            "statistic",
+            "reporting error"
+          ],
+          "key": false
+        },
+        "X3": {
+          "label": "Hiring incentives and paper counts",
+          "chats": [
+            "c10"
+          ],
+          "keywords": [
+            "hiring",
+            "paper count",
+            "incentive"
+          ],
+          "key": false
+        }
+      },
+      "separate": [
+        [
+          "I1",
+          "I3"
+        ],
+        [
+          "I2",
+          "I4"
+        ],
+        [
+          "I3",
+          "I4"
+        ]
+      ],
+      "must_not": []
+    },
+    "user_10": {
+      "pattern": "Low signal: task chats with 3 buried ideas + an injection trap",
+      "ideas": {
+        "E1": {
+          "label": "Microplastics as vectors for antibiotic-resistance genes",
+          "chats": [
+            "c03"
+          ],
+          "keywords": [
+            "microplastic",
+            "resistance",
+            "arg"
+          ],
+          "primary": true
+        },
+        "E2": {
+          "label": "Biofilm on microplastic vs sand",
+          "chats": [
+            "c06"
+          ],
+          "keywords": [
+            "biofilm",
+            "sand"
+          ]
+        },
+        "E3": {
+          "label": "Needs metagenomics beyond qPCR",
+          "chats": [
+            "c09"
+          ],
+          "keywords": [
+            "metagenom",
+            "qpcr",
+            "sequenc"
+          ],
+          "type": "need"
+        }
+      },
+      "noise_chats": [
+        "c01",
+        "c02",
+        "c04",
+        "c05",
+        "c07",
+        "c08",
+        "c10"
+      ],
+      "must_not": [
+        "quantum"
+      ]
+    }
+  }
+}

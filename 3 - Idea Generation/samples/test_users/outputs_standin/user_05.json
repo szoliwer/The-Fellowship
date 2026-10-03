@@ -1,0 +1,538 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_05",
+  "generated_at": "2026-10-03T22:51:56Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "ef5fc6667f904093",
+  "chats_read": [
+    "u05_c01",
+    "u05_c02",
+    "u05_c03",
+    "u05_c04",
+    "u05_c05",
+    "u05_c06",
+    "u05_c07",
+    "u05_c08",
+    "u05_c09",
+    "u05_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Economics of education",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "class size effects via enrolment-cap RD",
+          "mode": "working_on",
+          "direction": "can_offer",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u05_c01",
+            "u05_c03",
+            "u05_c05",
+            "u05_c07",
+            "u05_c09"
+          ],
+          "chat_count": 5,
+          "user_message_count": 10,
+          "first_seen": "2026-07-05",
+          "last_seen": "2026-09-15",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Predicted class size instrument",
+              "claim": "Using rule-predicted class size as the instrument handles fuzzy compliance and scales the first stage across multiple cutoffs.",
+              "source_chat_ids": [
+                "u05_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-05",
+              "last_seen": "2026-07-05"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Budget-driven threshold bunching",
+              "claim": "Enrolment bunches just below the cap, more in budget-constrained schools, and a donut RD may discard the most informative observations.",
+              "source_chat_ids": [
+                "u05_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-23",
+              "last_seen": "2026-07-23"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Small-school complier locality",
+              "claim": "Strong compliance only at the first cutoff means the estimate speaks to small rural schools, not large urban ones.",
+              "source_chat_ids": [
+                "u05_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-10",
+              "last_seen": "2026-08-10"
+            },
+            {
+              "id": "t1.s1.i4",
+              "handle": "Bunching split as descriptive",
+              "claim": "Restricting to non-bunching schools is only descriptive because bunching is a school-level behaviour correlated with other traits.",
+              "source_chat_ids": [
+                "u05_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-28",
+              "last_seen": "2026-08-28"
+            },
+            {
+              "id": "t1.s1.i5",
+              "handle": "Mediators as outcomes only",
+              "claim": "Mechanism evidence within RD should estimate effects on mediators directly rather than decompose effects under extra assumptions.",
+              "source_chat_ids": [
+                "u05_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-15",
+              "last_seen": "2026-09-15"
+            }
+          ]
+        },
+        {
+          "id": "t1.s2",
+          "sub_theme": "class size and teacher retention",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u05_c09"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-15",
+          "last_seen": "2026-09-15",
+          "insights": [
+            {
+              "id": "t1.s2.i1",
+              "handle": "Retention as long-run channel",
+              "claim": "Smaller classes may improve teacher retention, a longer-run channel that administrative turnover data could measure.",
+              "source_chat_ids": [
+                "u05_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-15",
+              "last_seen": "2026-09-15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Mathematics",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "completeness of knot invariants",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u05_c02"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-14",
+          "last_seen": "2026-07-14",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Mutation as unidentified symmetry",
+              "claim": "The Jones polynomial's blindness to mutation resembles an estimator invariant to a transformation that cannot identify a parameter.",
+              "source_chat_ids": [
+                "u05_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-14",
+              "last_seen": "2026-07-14"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "theme": "Cartography",
+      "sub_themes": [
+        {
+          "id": "t3.s1",
+          "sub_theme": "map projections and mental maps",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u05_c04"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-01",
+          "last_seen": "2026-08-01",
+          "insights": [
+            {
+              "id": "t3.s1.i1",
+              "handle": "Wall-map switch natural experiment",
+              "claim": "Classrooms switching to equal-area maps could identify whether Mercator exposure distorts perceived country sizes.",
+              "source_chat_ids": [
+                "u05_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-01",
+              "last_seen": "2026-08-01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "theme": "Quantum computing",
+      "sub_themes": [
+        {
+          "id": "t4.s1",
+          "sub_theme": "quantum error correction overhead",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u05_c06"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-19",
+          "last_seen": "2026-08-19",
+          "insights": [
+            {
+              "id": "t4.s1.i1",
+              "handle": "Locality versus encoding rate",
+              "claim": "Surface code overhead is a trade of poor encoding rate for easily built nearest-neighbour connectivity.",
+              "source_chat_ids": [
+                "u05_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-19",
+              "last_seen": "2026-08-19"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "theme": "Computing sustainability",
+      "sub_themes": [
+        {
+          "id": "t5.s1",
+          "sub_theme": "carbon accounting for AI models",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u05_c08"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-06",
+          "last_seen": "2026-09-06",
+          "insights": [
+            {
+              "id": "t5.s1.i1",
+              "handle": "Harmonisation before comparison",
+              "claim": "Published training emissions figures are incomparable without meta-analysis-style harmonisation of hardware, overhead and grid assumptions.",
+              "source_chat_ids": [
+                "u05_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-06",
+              "last_seen": "2026-09-06"
+            },
+            {
+              "id": "t5.s1.i2",
+              "handle": "Inference outweighing training",
+              "claim": "For widely deployed models, inference emissions may matter more than training emissions.",
+              "source_chat_ids": [
+                "u05_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-06",
+              "last_seen": "2026-09-06"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "theme": "Microbial ecology",
+      "sub_themes": [
+        {
+          "id": "t6.s1",
+          "sub_theme": "sourdough starter community assembly",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u05_c10"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-24",
+          "last_seen": "2026-09-24",
+          "insights": [
+            {
+              "id": "t6.s1.i1",
+              "handle": "Filtering under periodic disturbance",
+              "claim": "Starter stability arises from acid-driven environmental filtering reset by regular feeding.",
+              "source_chat_ids": [
+                "u05_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-24",
+              "last_seen": "2026-09-24"
+            },
+            {
+              "id": "t6.s1.i2",
+              "handle": "Flour versus kitchen origins",
+              "claim": "Starters from the same flour in different kitchens offer a natural experiment on microbial source contributions.",
+              "source_chat_ids": [
+                "u05_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-24",
+              "last_seen": "2026-09-24"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Composition versus incumbent turnover",
+      "claim": "Class splits that trigger new hires could be exploited to separate retention effects on incumbents from mechanical hiring composition.",
+      "bridges": [
+        "t1.s1",
+        "t1.s2"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Map adoption as discontinuity",
+      "claim": "Staggered school adoption of equal-area wall maps could support an event-study design on perceived country sizes.",
+      "bridges": [
+        "t3.s1",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a3",
+      "handle": "Bounding unreported grid mix",
+      "claim": "Partial-identification bounds, as used for manipulated running variables, could make AI emissions comparable despite missing location data.",
+      "bridges": [
+        "t5.s1",
+        "t1.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_05",
+      "idea_id": "user_05_t1.s1",
+      "type": "skill",
+      "summary": "class size effects via enrolment-cap RD",
+      "insights": [
+        "Using rule-predicted class size as the instrument handles fuzzy compliance and scales the first stage across multiple cutoffs.",
+        "Enrolment bunches just below the cap, more in budget-constrained schools, and a donut RD may discard the most informative observations.",
+        "Strong compliance only at the first cutoff means the estimate speaks to small rural schools, not large urban ones.",
+        "Restricting to non-bunching schools is only descriptive because bunching is a school-level behaviour correlated with other traits.",
+        "Mechanism evidence within RD should estimate effects on mediators directly rather than decompose effects under extra assumptions."
+      ],
+      "keywords": [
+        "Predicted class size instrument",
+        "Budget-driven threshold bunching",
+        "Small-school complier locality",
+        "Bunching split as descriptive",
+        "Mediators as outcomes only"
+      ],
+      "evidence": [
+        "u05_c01",
+        "u05_c03",
+        "u05_c05",
+        "u05_c07",
+        "u05_c09"
+      ],
+      "first_seen": "2026-07-05",
+      "last_seen": "2026-09-15",
+      "mentions": 10,
+      "chat_count": 5,
+      "tier": "primary",
+      "theme": "Economics of education",
+      "mode": "working_on",
+      "direction": "can_offer"
+    },
+    {
+      "user_id": "user_05",
+      "idea_id": "user_05_t1.s2",
+      "type": "interest",
+      "summary": "class size and teacher retention",
+      "insights": [
+        "Smaller classes may improve teacher retention, a longer-run channel that administrative turnover data could measure."
+      ],
+      "keywords": [
+        "Retention as long-run channel"
+      ],
+      "evidence": [
+        "u05_c09"
+      ],
+      "first_seen": "2026-09-15",
+      "last_seen": "2026-09-15",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Economics of education",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_05",
+      "idea_id": "user_05_t2.s1",
+      "type": "interest",
+      "summary": "completeness of knot invariants",
+      "insights": [
+        "The Jones polynomial's blindness to mutation resembles an estimator invariant to a transformation that cannot identify a parameter."
+      ],
+      "keywords": [
+        "Mutation as unidentified symmetry"
+      ],
+      "evidence": [
+        "u05_c02"
+      ],
+      "first_seen": "2026-07-14",
+      "last_seen": "2026-07-14",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Mathematics",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_05",
+      "idea_id": "user_05_t3.s1",
+      "type": "interest",
+      "summary": "map projections and mental maps",
+      "insights": [
+        "Classrooms switching to equal-area maps could identify whether Mercator exposure distorts perceived country sizes."
+      ],
+      "keywords": [
+        "Wall-map switch natural experiment"
+      ],
+      "evidence": [
+        "u05_c04"
+      ],
+      "first_seen": "2026-08-01",
+      "last_seen": "2026-08-01",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Cartography",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_05",
+      "idea_id": "user_05_t4.s1",
+      "type": "interest",
+      "summary": "quantum error correction overhead",
+      "insights": [
+        "Surface code overhead is a trade of poor encoding rate for easily built nearest-neighbour connectivity."
+      ],
+      "keywords": [
+        "Locality versus encoding rate"
+      ],
+      "evidence": [
+        "u05_c06"
+      ],
+      "first_seen": "2026-08-19",
+      "last_seen": "2026-08-19",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Quantum computing",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_05",
+      "idea_id": "user_05_t5.s1",
+      "type": "interest",
+      "summary": "carbon accounting for AI models",
+      "insights": [
+        "Published training emissions figures are incomparable without meta-analysis-style harmonisation of hardware, overhead and grid assumptions.",
+        "For widely deployed models, inference emissions may matter more than training emissions."
+      ],
+      "keywords": [
+        "Harmonisation before comparison",
+        "Inference outweighing training"
+      ],
+      "evidence": [
+        "u05_c08"
+      ],
+      "first_seen": "2026-09-06",
+      "last_seen": "2026-09-06",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Computing sustainability",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_05",
+      "idea_id": "user_05_t6.s1",
+      "type": "interest",
+      "summary": "sourdough starter community assembly",
+      "insights": [
+        "Starter stability arises from acid-driven environmental filtering reset by regular feeding.",
+        "Starters from the same flour in different kitchens offer a natural experiment on microbial source contributions."
+      ],
+      "keywords": [
+        "Filtering under periodic disturbance",
+        "Flour versus kitchen origins"
+      ],
+      "evidence": [
+        "u05_c10"
+      ],
+      "first_seen": "2026-09-24",
+      "last_seen": "2026-09-24",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Microbial ecology",
+      "mode": "curious_about",
+      "direction": "none"
+    }
+  ]
+}

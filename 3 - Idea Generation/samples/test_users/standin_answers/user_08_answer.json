@@ -1,0 +1,258 @@
+{
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Single-cell genomics",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "hematopoietic trajectory and fate inference",
+          "mode": "working_on",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Root choice fragility",
+              "claim": "Diffusion pseudotime orderings may be highly sensitive to which hand-picked root cell is chosen.",
+              "source_chat_ids": ["u08_c01"]
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Per-lineage ordering",
+              "claim": "A single linear pseudotime breaks down past myeloid divergence, so ordering should be computed per lineage.",
+              "source_chat_ids": ["u08_c01"]
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Commitment as gradual bias",
+              "claim": "Progenitor commitment may be a gradually building fate bias, making a discrete branch point somewhat artificial.",
+              "source_chat_ids": ["u08_c10"]
+            },
+            {
+              "id": "t1.s1.i4",
+              "handle": "Distrust of UMAP forks",
+              "claim": "Bifurcation points should be located with statistically grounded measures rather than visual forks in UMAP geometry.",
+              "source_chat_ids": ["u08_c10"]
+            }
+          ]
+        },
+        {
+          "id": "t1.s2",
+          "sub_theme": "single-cell dataset integration",
+          "mode": "working_on",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t1.s2.i1",
+              "handle": "Over-integration risk",
+              "claim": "Batch correction like Harmony may erase real biological differences such as age effects across datasets.",
+              "source_chat_ids": ["u08_c02"]
+            },
+            {
+              "id": "t1.s2.i2",
+              "handle": "Confounded age and lab",
+              "claim": "Modelling age as a biological covariate while correcting lab is questionable when the two are partly confounded.",
+              "source_chat_ids": ["u08_c02"]
+            }
+          ]
+        },
+        {
+          "id": "t1.s3",
+          "sub_theme": "RNA velocity directionality",
+          "mode": "working_on",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t1.s3.i1",
+              "handle": "Backward megakaryocyte arrows",
+              "claim": "Reversed velocity arrows in megakaryocyte progenitors may be method artifacts rather than real dedifferentiation.",
+              "source_chat_ids": ["u08_c04"]
+            },
+            {
+              "id": "t1.s3.i2",
+              "handle": "Principled gene exclusion",
+              "claim": "Dropping genes with anomalous kinetics risks cherry-picking unless exclusion criteria are fixed in advance.",
+              "source_chat_ids": ["u08_c04"]
+            }
+          ]
+        },
+        {
+          "id": "t1.s4",
+          "sub_theme": "lineage barcoding as fate benchmark",
+          "mode": "working_on",
+          "direction": "can_offer",
+          "insights": [
+            {
+              "id": "t1.s4.i1",
+              "handle": "Clones as ground truth",
+              "claim": "Heritable barcodes with paired scRNA-seq can serve as ground truth for scoring computational fate predictions.",
+              "source_chat_ids": ["u08_c07"]
+            },
+            {
+              "id": "t1.s4.i2",
+              "handle": "Recapture selection bias",
+              "claim": "Low barcode recapture may bias benchmarks toward large proliferative clones where fate prediction is easiest.",
+              "source_chat_ids": ["u08_c07"]
+            },
+            {
+              "id": "t1.s4.i3",
+              "handle": "Clonal check on decision region",
+              "claim": "An inferred commitment region should coincide with where clones become restricted to a single fate.",
+              "source_chat_ids": ["u08_c10"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Bioimage analysis",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "cell segmentation in dense tissue",
+          "mode": "working_on",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Watershed failure on crowding",
+              "claim": "Densely packed, overlapping cells defeat watershed, motivating deep learning tools like Cellpose or StarDist.",
+              "source_chat_ids": ["u08_c08"]
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Beyond pixel accuracy",
+              "claim": "Segmentation quality needs held-out annotated images and a metric more meaningful than pixel accuracy.",
+              "source_chat_ids": ["u08_c08"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "theme": "Robotics",
+      "sub_themes": [
+        {
+          "id": "t3.s1",
+          "sub_theme": "quadrotor trajectory optimisation",
+          "mode": "curious_about",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t3.s1.i1",
+              "handle": "Snap as motor-effort proxy",
+              "claim": "Minimising snap is justified because, via differential flatness, it proxies how hard the motors work.",
+              "source_chat_ids": ["u08_c03"]
+            },
+            {
+              "id": "t3.s1.i2",
+              "handle": "Time allocation bottleneck",
+              "claim": "For smooth waypoint flight, segment time allocation is harder than the minimum-snap optimisation itself.",
+              "source_chat_ids": ["u08_c03"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "theme": "Remote sensing",
+      "sub_themes": [
+        {
+          "id": "t4.s1",
+          "sub_theme": "InSAR glacier velocity mapping",
+          "mode": "curious_about",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t4.s1.i1",
+              "handle": "Missing line-of-sight component",
+              "claim": "Single interferograms measure only line-of-sight motion, leaving full horizontal velocity underdetermined.",
+              "source_chat_ids": ["u08_c05"]
+            },
+            {
+              "id": "t4.s1.i2",
+              "handle": "Fast versus slow ice methods",
+              "claim": "Fast outlet glaciers need offset tracking while slow interior ice suits phase methods; melt and snow cause gaps.",
+              "source_chat_ids": ["u08_c05"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "theme": "Historical linguistics",
+      "sub_themes": [
+        {
+          "id": "t5.s1",
+          "sub_theme": "Bayesian phylogenetics of languages",
+          "mode": "curious_about",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t5.s1.i1",
+              "handle": "Borrowing versus tree assumption",
+              "claim": "Lexical borrowing, like horizontal gene transfer, may undermine tree-based models of language families.",
+              "source_chat_ids": ["u08_c06"]
+            },
+            {
+              "id": "t5.s1.i2",
+              "handle": "Suspect divergence dates",
+              "claim": "Language divergence dates are doubtful because word replacement rates are surely not constant.",
+              "source_chat_ids": ["u08_c06"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "theme": "Firm dynamics",
+      "sub_themes": [
+        {
+          "id": "t6.s1",
+          "sub_theme": "trajectory inference applied to startups",
+          "mode": "curious_about",
+          "direction": "none",
+          "insights": [
+            {
+              "id": "t6.s1.i1",
+              "handle": "Longitudinal data removes need",
+              "claim": "Pseudotime tricks exist because measurement destroys cells; startups can be followed directly, resembling lineage tracing instead.",
+              "source_chat_ids": ["u08_c09"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Clonal audit of velocity",
+      "claim": "Barcoded clones could adjudicate whether reversed velocity arrows in megakaryocyte progenitors are artifacts.",
+      "bridges": ["t1.s3", "t1.s4"]
+    },
+    {
+      "id": "a2",
+      "handle": "Integration effects on fate maps",
+      "claim": "Over-correction during dataset integration may shift inferred commitment regions and fate probabilities.",
+      "bridges": ["t1.s2", "t1.s1"]
+    },
+    {
+      "id": "a3",
+      "handle": "Relaxed clocks for clonal trees",
+      "claim": "Relaxed-clock and calibration ideas from language phylogenetics could inform dating of barcode-derived cell lineage trees.",
+      "bridges": ["t5.s1", "t1.s4"]
+    },
+    {
+      "id": "a4",
+      "handle": "Spatial niches of commitment",
+      "claim": "Segmented bone marrow sections could test whether gradual fate bias correlates with spatial position of progenitors.",
+      "bridges": ["t2.s1", "t1.s1"]
+    }
+  ]
+}

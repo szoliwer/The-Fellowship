@@ -1,0 +1,665 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_06",
+  "generated_at": "2026-10-03T22:51:56Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "bfe26bf191c03b6c",
+  "chats_read": [
+    "u06_c01",
+    "u06_c02",
+    "u06_c03",
+    "u06_c04",
+    "u06_c05",
+    "u06_c06",
+    "u06_c07",
+    "u06_c08",
+    "u06_c09",
+    "u06_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Robotics",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "soft grippers for berry harvesting",
+          "mode": "working_on",
+          "direction": "looking_for",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u06_c02",
+            "u06_c05",
+            "u06_c09"
+          ],
+          "chat_count": 3,
+          "user_message_count": 6,
+          "first_seen": "2026-07-10",
+          "last_seen": "2026-09-11",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Rib contact pressure peaks",
+              "claim": "Raspberry bruising in fin-ray grippers stems mainly from pressure concentration at the internal rib contact points.",
+              "source_chat_ids": [
+                "u06_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-10",
+              "last_seen": "2026-07-10"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Soft skin slip trade-off",
+              "claim": "A silicone skin over fin-ray fingers sharply reduces bruising but increases slip on wet berries.",
+              "source_chat_ids": [
+                "u06_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-10",
+              "last_seen": "2026-07-10"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Store-bought fruit bias",
+              "claim": "Bench tests on refrigerated store-bought berries misrepresent bruising, so trials on fresh fruit at farms or packing lines are needed.",
+              "source_chat_ids": [
+                "u06_c02",
+                "u06_c09"
+              ],
+              "chat_count": 2,
+              "user_message_count": 4,
+              "first_seen": "2026-07-10",
+              "last_seen": "2026-09-11"
+            },
+            {
+              "id": "t1.s1.i4",
+              "handle": "Gentleness versus cycle time",
+              "claim": "A gentler pneumatic gripper is commercially useless if its cycle time is far slower than fin-ray designs.",
+              "source_chat_ids": [
+                "u06_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-06",
+              "last_seen": "2026-08-06"
+            },
+            {
+              "id": "t1.s1.i5",
+              "handle": "Packing line before field",
+              "claim": "A fixed packing-line station is an easier first trial than in-field picking, though labour shortages lie in the field.",
+              "source_chat_ids": [
+                "u06_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-11",
+              "last_seen": "2026-09-11"
+            }
+          ]
+        },
+        {
+          "id": "t1.s2",
+          "sub_theme": "finite-element modelling of pneumatic soft actuators",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u06_c06"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-15",
+          "last_seen": "2026-08-15",
+          "insights": [
+            {
+              "id": "t1.s2.i1",
+              "handle": "Datasheet parameters mislead",
+              "claim": "Datasheet hyperelastic parameters and casting variation explain much of the sim-to-real gap in soft finger bending.",
+              "source_chat_ids": [
+                "u06_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-15",
+              "last_seen": "2026-08-15"
+            },
+            {
+              "id": "t1.s2.i2",
+              "handle": "Calibrate or test physically",
+              "claim": "It is unclear whether per-batch model calibration beats treating simulation as rough and relying on physical testing.",
+              "source_chat_ids": [
+                "u06_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-15",
+              "last_seen": "2026-08-15"
+            }
+          ]
+        },
+        {
+          "id": "t1.s3",
+          "sub_theme": "acoustic levitation for contactless manipulation",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u06_c07"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-24",
+          "last_seen": "2026-08-24",
+          "insights": [
+            {
+              "id": "t1.s3.i1",
+              "handle": "Wavelength-bound object size",
+              "claim": "Acoustic wavelength sets the size limit for levitated objects, implying a trade-off between frequency, force and stability.",
+              "source_chat_ids": [
+                "u06_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-24",
+              "last_seen": "2026-08-24"
+            },
+            {
+              "id": "t1.s3.i2",
+              "handle": "Contactless fragile handling",
+              "claim": "The real advantage of acoustic levitation is manipulating soft or fragile objects like droplets without damage.",
+              "source_chat_ids": [
+                "u06_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-24",
+              "last_seen": "2026-08-24"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Deployable structures",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "rigid origami for deployable structures",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u06_c04"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-28",
+          "last_seen": "2026-07-28",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Single-actuator folding",
+              "claim": "Degree-four vertex patterns give one degree of freedom, letting a single actuator drive a whole deployable structure.",
+              "source_chat_ids": [
+                "u06_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-28",
+              "last_seen": "2026-07-28"
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Thickness versus ideal kinematics",
+              "claim": "Real panel thickness may break rigid foldability, requiring design adaptations for practical deployable panels.",
+              "source_chat_ids": [
+                "u06_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-28",
+              "last_seen": "2026-07-28"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "theme": "Open science",
+      "sub_themes": [
+        {
+          "id": "t3.s1",
+          "sub_theme": "open hardware licensing",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u06_c03"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-19",
+          "last_seen": "2026-07-19",
+          "insights": [
+            {
+              "id": "t3.s1.i1",
+              "handle": "Licence as social norm",
+              "claim": "Open hardware licences function more as social norms than legal shields, since physical objects are largely uncopyrightable.",
+              "source_chat_ids": [
+                "u06_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-19",
+              "last_seen": "2026-07-19"
+            },
+            {
+              "id": "t3.s1.i2",
+              "handle": "Reciprocity versus commercial uptake",
+              "claim": "Strongly reciprocal hardware licences encourage sharing farm adaptations but may deter companies that could commercialise the design.",
+              "source_chat_ids": [
+                "u06_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-19",
+              "last_seen": "2026-07-19"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "theme": "Quantum biology",
+      "sub_themes": [
+        {
+          "id": "t4.s1",
+          "sub_theme": "radical-pair avian magnetoreception",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u06_c01"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-01",
+          "last_seen": "2026-07-01",
+          "insights": [
+            {
+              "id": "t4.s1.i1",
+              "handle": "Retinal sensor array",
+              "claim": "Cryptochrome magnetoreception works like an array of orientation-dependent sensors with the brain doing signal processing.",
+              "source_chat_ids": [
+                "u06_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-01",
+              "last_seen": "2026-07-01"
+            },
+            {
+              "id": "t4.s1.i2",
+              "handle": "Coherence in warm cells",
+              "claim": "Whether spin coherence can survive long enough in a warm, wet cell is the critical weakness of the hypothesis.",
+              "source_chat_ids": [
+                "u06_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-01",
+              "last_seen": "2026-07-01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "theme": "Fluid physics",
+      "sub_themes": [
+        {
+          "id": "t5.s1",
+          "sub_theme": "channeling in espresso puck flow",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u06_c08"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-02",
+          "last_seen": "2026-09-02",
+          "insights": [
+            {
+              "id": "t5.s1.i1",
+              "handle": "Self-reinforcing flow paths",
+              "claim": "Channeling is a positive feedback where more permeable regions erode faster, like current widening a least-resistance path.",
+              "source_chat_ids": [
+                "u06_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-02",
+              "last_seen": "2026-09-02"
+            },
+            {
+              "id": "t5.s1.i2",
+              "handle": "Distribution over mean size",
+              "claim": "Particle size distribution and fines migration may matter as much as average grind size for uneven flow.",
+              "source_chat_ids": [
+                "u06_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-02",
+              "last_seen": "2026-09-02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "theme": "Research software",
+      "sub_themes": [
+        {
+          "id": "t6.s1",
+          "sub_theme": "programming language adoption in science",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u06_c10"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-20",
+          "last_seen": "2026-09-20",
+          "insights": [
+            {
+              "id": "t6.s1.i1",
+              "handle": "Switching-cost lock-in",
+              "claim": "Technically superior scientific languages struggle because switching costs are high and benefits need wide adoption, like hardware standards.",
+              "source_chat_ids": [
+                "u06_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-20",
+              "last_seen": "2026-09-20"
+            },
+            {
+              "id": "t6.s1.i2",
+              "handle": "AI-lowered migration costs",
+              "claim": "AI coding assistants could sharply lower language switching costs by making code translation cheap.",
+              "source_chat_ids": [
+                "u06_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-20",
+              "last_seen": "2026-09-20"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Origami single-actuator grippers",
+      "claim": "Rigid-foldable degree-four patterns could yield single-actuator fruit grippers that conform gently without pneumatic infrastructure.",
+      "bridges": [
+        "t2.s1",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Viscoelastic hold and bruising",
+      "claim": "Modelling silicone relaxation during holding could predict how grip force drift contributes to delayed berry bruising.",
+      "bridges": [
+        "t1.s2",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a3",
+      "handle": "Grower-driven design forks",
+      "claim": "Field trials could seed an open hardware community where growers' gripper modifications are shared back under reciprocal terms.",
+      "bridges": [
+        "t3.s1",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a4",
+      "handle": "Network effects in open hardware",
+      "claim": "Open hardware designs may face the same library-driven lock-in dynamics that govern scientific language adoption.",
+      "bridges": [
+        "t6.s1",
+        "t3.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t1.s1",
+      "type": "need",
+      "summary": "soft grippers for berry harvesting",
+      "insights": [
+        "Raspberry bruising in fin-ray grippers stems mainly from pressure concentration at the internal rib contact points.",
+        "A silicone skin over fin-ray fingers sharply reduces bruising but increases slip on wet berries.",
+        "Bench tests on refrigerated store-bought berries misrepresent bruising, so trials on fresh fruit at farms or packing lines are needed.",
+        "A gentler pneumatic gripper is commercially useless if its cycle time is far slower than fin-ray designs.",
+        "A fixed packing-line station is an easier first trial than in-field picking, though labour shortages lie in the field."
+      ],
+      "keywords": [
+        "Rib contact pressure peaks",
+        "Soft skin slip trade-off",
+        "Store-bought fruit bias",
+        "Gentleness versus cycle time",
+        "Packing line before field"
+      ],
+      "evidence": [
+        "u06_c02",
+        "u06_c05",
+        "u06_c09"
+      ],
+      "first_seen": "2026-07-10",
+      "last_seen": "2026-09-11",
+      "mentions": 6,
+      "chat_count": 3,
+      "tier": "primary",
+      "theme": "Robotics",
+      "mode": "working_on",
+      "direction": "looking_for"
+    },
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t1.s2",
+      "type": "project",
+      "summary": "finite-element modelling of pneumatic soft actuators",
+      "insights": [
+        "Datasheet hyperelastic parameters and casting variation explain much of the sim-to-real gap in soft finger bending.",
+        "It is unclear whether per-batch model calibration beats treating simulation as rough and relying on physical testing."
+      ],
+      "keywords": [
+        "Datasheet parameters mislead",
+        "Calibrate or test physically"
+      ],
+      "evidence": [
+        "u06_c06"
+      ],
+      "first_seen": "2026-08-15",
+      "last_seen": "2026-08-15",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Robotics",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t1.s3",
+      "type": "interest",
+      "summary": "acoustic levitation for contactless manipulation",
+      "insights": [
+        "Acoustic wavelength sets the size limit for levitated objects, implying a trade-off between frequency, force and stability.",
+        "The real advantage of acoustic levitation is manipulating soft or fragile objects like droplets without damage."
+      ],
+      "keywords": [
+        "Wavelength-bound object size",
+        "Contactless fragile handling"
+      ],
+      "evidence": [
+        "u06_c07"
+      ],
+      "first_seen": "2026-08-24",
+      "last_seen": "2026-08-24",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Robotics",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t2.s1",
+      "type": "interest",
+      "summary": "rigid origami for deployable structures",
+      "insights": [
+        "Degree-four vertex patterns give one degree of freedom, letting a single actuator drive a whole deployable structure.",
+        "Real panel thickness may break rigid foldability, requiring design adaptations for practical deployable panels."
+      ],
+      "keywords": [
+        "Single-actuator folding",
+        "Thickness versus ideal kinematics"
+      ],
+      "evidence": [
+        "u06_c04"
+      ],
+      "first_seen": "2026-07-28",
+      "last_seen": "2026-07-28",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Deployable structures",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t3.s1",
+      "type": "project",
+      "summary": "open hardware licensing",
+      "insights": [
+        "Open hardware licences function more as social norms than legal shields, since physical objects are largely uncopyrightable.",
+        "Strongly reciprocal hardware licences encourage sharing farm adaptations but may deter companies that could commercialise the design."
+      ],
+      "keywords": [
+        "Licence as social norm",
+        "Reciprocity versus commercial uptake"
+      ],
+      "evidence": [
+        "u06_c03"
+      ],
+      "first_seen": "2026-07-19",
+      "last_seen": "2026-07-19",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Open science",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t4.s1",
+      "type": "interest",
+      "summary": "radical-pair avian magnetoreception",
+      "insights": [
+        "Cryptochrome magnetoreception works like an array of orientation-dependent sensors with the brain doing signal processing.",
+        "Whether spin coherence can survive long enough in a warm, wet cell is the critical weakness of the hypothesis."
+      ],
+      "keywords": [
+        "Retinal sensor array",
+        "Coherence in warm cells"
+      ],
+      "evidence": [
+        "u06_c01"
+      ],
+      "first_seen": "2026-07-01",
+      "last_seen": "2026-07-01",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Quantum biology",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t5.s1",
+      "type": "interest",
+      "summary": "channeling in espresso puck flow",
+      "insights": [
+        "Channeling is a positive feedback where more permeable regions erode faster, like current widening a least-resistance path.",
+        "Particle size distribution and fines migration may matter as much as average grind size for uneven flow."
+      ],
+      "keywords": [
+        "Self-reinforcing flow paths",
+        "Distribution over mean size"
+      ],
+      "evidence": [
+        "u06_c08"
+      ],
+      "first_seen": "2026-09-02",
+      "last_seen": "2026-09-02",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Fluid physics",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_06",
+      "idea_id": "user_06_t6.s1",
+      "type": "interest",
+      "summary": "programming language adoption in science",
+      "insights": [
+        "Technically superior scientific languages struggle because switching costs are high and benefits need wide adoption, like hardware standards.",
+        "AI coding assistants could sharply lower language switching costs by making code translation cheap."
+      ],
+      "keywords": [
+        "Switching-cost lock-in",
+        "AI-lowered migration costs"
+      ],
+      "evidence": [
+        "u06_c10"
+      ],
+      "first_seen": "2026-09-20",
+      "last_seen": "2026-09-20",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Research software",
+      "mode": "curious_about",
+      "direction": "none"
+    }
+  ]
+}

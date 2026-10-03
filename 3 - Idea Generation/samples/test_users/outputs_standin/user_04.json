@@ -1,0 +1,455 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_04",
+  "generated_at": "2026-10-03T22:51:55Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "dfb918af06f2eaa6",
+  "chats_read": [
+    "u04_c01",
+    "u04_c02",
+    "u04_c03",
+    "u04_c04",
+    "u04_c05",
+    "u04_c06",
+    "u04_c07",
+    "u04_c08",
+    "u04_c09",
+    "u04_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Urban heat",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "Satellite LST versus street-level air temperature",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u04_c01",
+            "u04_c05",
+            "u04_c08"
+          ],
+          "chat_count": 3,
+          "user_message_count": 6,
+          "first_seen": "2026-07-04",
+          "last_seen": "2026-09-05",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Misflagged surface hotspots",
+              "claim": "Land-surface temperature can misflag heat hotspots, such as unoccupied industrial roofs, relative to street-level air temperature.",
+              "source_chat_ids": [
+                "u04_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-04",
+              "last_seen": "2026-07-04"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Morning overpass mismatch",
+              "claim": "Morning satellite snapshots rank blocks poorly against the afternoon air temperatures that drive health risk.",
+              "source_chat_ids": [
+                "u04_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-09",
+              "last_seen": "2026-08-09"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Hot surfaces, not risk",
+              "claim": "Satellite LST suits mapping hot surfaces but should not decide where people are at heat risk.",
+              "source_chat_ids": [
+                "u04_c05",
+                "u04_c08"
+              ],
+              "chat_count": 2,
+              "user_message_count": 4,
+              "first_seen": "2026-08-09",
+              "last_seen": "2026-09-05"
+            },
+            {
+              "id": "t1.s1.i4",
+              "handle": "Sparse-logger extrapolation",
+              "claim": "Air temperature models trained on few loggers extrapolate in unsampled land-cover types and need low-confidence flags.",
+              "source_chat_ids": [
+                "u04_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-05",
+              "last_seen": "2026-09-05"
+            },
+            {
+              "id": "t1.s1.i5",
+              "handle": "Coverage versus relevance",
+              "claim": "Satellite data cover everywhere but measure the wrong quantity, while ground data measure the right one sparsely.",
+              "source_chat_ids": [
+                "u04_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-05",
+              "last_seen": "2026-09-05"
+            }
+          ]
+        },
+        {
+          "id": "t1.s2",
+          "sub_theme": "Street-tree canopy cooling thresholds",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u04_c03",
+            "u04_c10"
+          ],
+          "chat_count": 2,
+          "user_message_count": 4,
+          "first_seen": "2026-07-22",
+          "last_seen": "2026-09-23",
+          "insights": [
+            {
+              "id": "t1.s2.i1",
+              "handle": "Inflated cooling figures",
+              "claim": "Advocacy claims of ten-degree tree cooling likely reflect surface temperature, not neighbourhood air temperature.",
+              "source_chat_ids": [
+                "u04_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-22",
+              "last_seen": "2026-07-22"
+            },
+            {
+              "id": "t1.s2.i2",
+              "handle": "Nonlinear canopy threshold",
+              "claim": "If cooling becomes meaningful only near forty percent canopy, scattered planting in low-canopy blocks achieves little.",
+              "source_chat_ids": [
+                "u04_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-22",
+              "last_seen": "2026-07-22"
+            },
+            {
+              "id": "t1.s2.i3",
+              "handle": "Small degrees still matter",
+              "claim": "One to two degrees of air cooling, though modest-sounding, may matter for heat illness on extreme days.",
+              "source_chat_ids": [
+                "u04_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-23",
+              "last_seen": "2026-09-23"
+            }
+          ]
+        },
+        {
+          "id": "t1.s3",
+          "sub_theme": "Equity in street-tree planting programs",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u04_c07",
+            "u04_c10"
+          ],
+          "chat_count": 2,
+          "user_message_count": 4,
+          "first_seen": "2026-08-27",
+          "last_seen": "2026-09-23",
+          "insights": [
+            {
+              "id": "t1.s3.i1",
+              "handle": "Request-based planting bias",
+              "claim": "Request-based planting programs channel new trees disproportionately to already-green, higher-income neighbourhoods.",
+              "source_chat_ids": [
+                "u04_c07",
+                "u04_c10"
+              ],
+              "chat_count": 2,
+              "user_message_count": 4,
+              "first_seen": "2026-08-27",
+              "last_seen": "2026-09-23"
+            },
+            {
+              "id": "t1.s3.i2",
+              "handle": "Surviving canopy over counts",
+              "claim": "Planting equity should be measured as surviving canopy gain per neighbourhood rather than counts of trees planted.",
+              "source_chat_ids": [
+                "u04_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-27",
+              "last_seen": "2026-08-27"
+            },
+            {
+              "id": "t1.s3.i3",
+              "handle": "Neighbourhood canopy targets",
+              "claim": "Canopy targets should be set per neighbourhood because a citywide average can leave the hottest areas low.",
+              "source_chat_ids": [
+                "u04_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-23",
+              "last_seen": "2026-09-23"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Environmental sensing",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "Low-cost sensor calibration and drift",
+          "mode": "working_on",
+          "direction": "looking_for",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u04_c02",
+            "u04_c04",
+            "u04_c06",
+            "u04_c09"
+          ],
+          "chat_count": 4,
+          "user_message_count": 8,
+          "first_seen": "2026-07-13",
+          "last_seen": "2026-09-14",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Offsets plus drift",
+              "claim": "Co-located low-cost sensors diverging over months indicates drift that one-off offset corrections cannot handle.",
+              "source_chat_ids": [
+                "u04_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-13",
+              "last_seen": "2026-07-13"
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Distant reference anchoring",
+              "claim": "A regulatory station several kilometres away may legitimately anchor particulate corrections for a neighbourhood sensor network.",
+              "source_chat_ids": [
+                "u04_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-31",
+              "last_seen": "2026-07-31"
+            },
+            {
+              "id": "t2.s1.i3",
+              "handle": "Drift versus local signal",
+              "claim": "Correcting sensors toward a reference risks erasing genuine local differences, so drift must be separated from signal.",
+              "source_chat_ids": [
+                "u04_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-18",
+              "last_seen": "2026-08-18"
+            },
+            {
+              "id": "t2.s1.i4",
+              "handle": "Joint measurement-error model",
+              "claim": "A multi-year community sensor network needs a joint spatial measurement-error correction built with a statistics collaborator.",
+              "source_chat_ids": [
+                "u04_c04",
+                "u04_c06",
+                "u04_c09"
+              ],
+              "chat_count": 3,
+              "user_message_count": 6,
+              "first_seen": "2026-07-31",
+              "last_seen": "2026-09-14"
+            },
+            {
+              "id": "t2.s1.i5",
+              "handle": "Raw data with flags",
+              "claim": "Community sensor data can be published raw with quality flags before a defensible calibrated tier exists.",
+              "source_chat_ids": [
+                "u04_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-14",
+              "last_seen": "2026-09-14"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Volunteer sensors as ground truth",
+      "claim": "Calibrated volunteer sensors could fill logger coverage gaps when modelling citywide air temperature from satellite data.",
+      "bridges": [
+        "t2.s1",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Survival versus cooling threshold",
+      "claim": "Lower tree survival in low-canopy blocks may prevent them from ever reaching the canopy level where cooling becomes meaningful.",
+      "bridges": [
+        "t1.s2",
+        "t1.s3"
+      ]
+    },
+    {
+      "id": "a3",
+      "handle": "Air-temperature-prioritised planting",
+      "claim": "Neighbourhood canopy targets prioritised by modelled air temperature, not LST, could redirect planting to where people experience heat.",
+      "bridges": [
+        "t1.s1",
+        "t1.s3"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_04",
+      "idea_id": "user_04_t1.s1",
+      "type": "project",
+      "summary": "Satellite LST versus street-level air temperature",
+      "insights": [
+        "Land-surface temperature can misflag heat hotspots, such as unoccupied industrial roofs, relative to street-level air temperature.",
+        "Morning satellite snapshots rank blocks poorly against the afternoon air temperatures that drive health risk.",
+        "Satellite LST suits mapping hot surfaces but should not decide where people are at heat risk.",
+        "Air temperature models trained on few loggers extrapolate in unsampled land-cover types and need low-confidence flags.",
+        "Satellite data cover everywhere but measure the wrong quantity, while ground data measure the right one sparsely."
+      ],
+      "keywords": [
+        "Misflagged surface hotspots",
+        "Morning overpass mismatch",
+        "Hot surfaces, not risk",
+        "Sparse-logger extrapolation",
+        "Coverage versus relevance"
+      ],
+      "evidence": [
+        "u04_c01",
+        "u04_c05",
+        "u04_c08"
+      ],
+      "first_seen": "2026-07-04",
+      "last_seen": "2026-09-05",
+      "mentions": 6,
+      "chat_count": 3,
+      "tier": "primary",
+      "theme": "Urban heat",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_04",
+      "idea_id": "user_04_t1.s2",
+      "type": "project",
+      "summary": "Street-tree canopy cooling thresholds",
+      "insights": [
+        "Advocacy claims of ten-degree tree cooling likely reflect surface temperature, not neighbourhood air temperature.",
+        "If cooling becomes meaningful only near forty percent canopy, scattered planting in low-canopy blocks achieves little.",
+        "One to two degrees of air cooling, though modest-sounding, may matter for heat illness on extreme days."
+      ],
+      "keywords": [
+        "Inflated cooling figures",
+        "Nonlinear canopy threshold",
+        "Small degrees still matter"
+      ],
+      "evidence": [
+        "u04_c03",
+        "u04_c10"
+      ],
+      "first_seen": "2026-07-22",
+      "last_seen": "2026-09-23",
+      "mentions": 4,
+      "chat_count": 2,
+      "tier": "primary",
+      "theme": "Urban heat",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_04",
+      "idea_id": "user_04_t1.s3",
+      "type": "project",
+      "summary": "Equity in street-tree planting programs",
+      "insights": [
+        "Request-based planting programs channel new trees disproportionately to already-green, higher-income neighbourhoods.",
+        "Planting equity should be measured as surviving canopy gain per neighbourhood rather than counts of trees planted.",
+        "Canopy targets should be set per neighbourhood because a citywide average can leave the hottest areas low."
+      ],
+      "keywords": [
+        "Request-based planting bias",
+        "Surviving canopy over counts",
+        "Neighbourhood canopy targets"
+      ],
+      "evidence": [
+        "u04_c07",
+        "u04_c10"
+      ],
+      "first_seen": "2026-08-27",
+      "last_seen": "2026-09-23",
+      "mentions": 4,
+      "chat_count": 2,
+      "tier": "primary",
+      "theme": "Urban heat",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_04",
+      "idea_id": "user_04_t2.s1",
+      "type": "need",
+      "summary": "Low-cost sensor calibration and drift",
+      "insights": [
+        "Co-located low-cost sensors diverging over months indicates drift that one-off offset corrections cannot handle.",
+        "A regulatory station several kilometres away may legitimately anchor particulate corrections for a neighbourhood sensor network.",
+        "Correcting sensors toward a reference risks erasing genuine local differences, so drift must be separated from signal.",
+        "A multi-year community sensor network needs a joint spatial measurement-error correction built with a statistics collaborator.",
+        "Community sensor data can be published raw with quality flags before a defensible calibrated tier exists."
+      ],
+      "keywords": [
+        "Offsets plus drift",
+        "Distant reference anchoring",
+        "Drift versus local signal",
+        "Joint measurement-error model",
+        "Raw data with flags"
+      ],
+      "evidence": [
+        "u04_c02",
+        "u04_c04",
+        "u04_c06",
+        "u04_c09"
+      ],
+      "first_seen": "2026-07-13",
+      "last_seen": "2026-09-14",
+      "mentions": 8,
+      "chat_count": 4,
+      "tier": "primary",
+      "theme": "Environmental sensing",
+      "mode": "working_on",
+      "direction": "looking_for"
+    }
+  ]
+}

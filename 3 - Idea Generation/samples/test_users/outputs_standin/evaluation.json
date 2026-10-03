@@ -1,0 +1,672 @@
+[
+  {
+    "user_id": "user_01",
+    "pattern": "Focused: all 10 chats on reef soundscape monitoring",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Few-label fish-call classification (needs ML help)",
+        "key": true,
+        "found": true,
+        "sub_theme": "low-label fish call classification",
+        "sub_id": "t2.s1",
+        "tier": "primary",
+        "type": "need",
+        "chats_cited": "3/3"
+      },
+      {
+        "id": "E2",
+        "label": "Do acoustic indices track fish abundance / recovery?",
+        "key": true,
+        "found": true,
+        "sub_theme": "validation of acoustic indices for reef biodiversity",
+        "sub_id": "t1.s3",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "3/3"
+      },
+      {
+        "id": "E3",
+        "label": "Long-term hydrophone deployments + recordings archive (can offer)",
+        "key": true,
+        "found": true,
+        "sub_theme": "open long-term reef acoustic archives",
+        "sub_id": "t1.s4",
+        "tier": "primary",
+        "type": "skill",
+        "chats_cited": "2/4"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 5,
+    "score": "3/3"
+  },
+  {
+    "user_id": "user_02",
+    "pattern": "Focused: all 10 chats on solid-state batteries",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Dendrites through ceramic electrolyte grain boundaries",
+        "key": true,
+        "found": true,
+        "sub_theme": "grain boundary lithium penetration in garnets",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "3/5"
+      },
+      {
+        "id": "E2",
+        "label": "Needs operando / in-situ imaging of dendrites",
+        "key": true,
+        "found": true,
+        "sub_theme": "operando imaging of lithium dendrite growth",
+        "sub_id": "t1.s4",
+        "tier": "primary",
+        "type": "need",
+        "chats_cited": "3/3"
+      },
+      {
+        "id": "E3",
+        "label": "Does stack pressure fix interface contact or hide it?",
+        "key": true,
+        "found": true,
+        "sub_theme": "stack pressure in lithium metal solid-state cells",
+        "sub_id": "t1.s3",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "2/2"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 4,
+    "score": "3/3"
+  },
+  {
+    "user_id": "user_03",
+    "pattern": "Two topics, 7 + 3",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Can ML weather models forecast out-of-distribution extremes?",
+        "key": true,
+        "found": true,
+        "sub_theme": "ML weather models on unprecedented extremes",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "4/4"
+      },
+      {
+        "id": "E2",
+        "label": "Under-dispersed ML ensembles / uncertainty calibration",
+        "key": true,
+        "found": true,
+        "sub_theme": "Calibration of under-dispersed ML ensembles",
+        "sub_id": "t1.s2",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "3/3"
+      },
+      {
+        "id": "E3",
+        "label": "GPU job-packing scheduler (can offer)",
+        "key": true,
+        "found": true,
+        "sub_theme": "GPU job packing for small experiments",
+        "sub_id": "t2.s1",
+        "tier": "primary",
+        "type": "skill",
+        "chats_cited": "3/3"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 3,
+    "score": "3/3"
+  },
+  {
+    "user_id": "user_04",
+    "pattern": "Two topics, 6 + 4",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Satellite LST vs street-level air temperature",
+        "key": true,
+        "found": true,
+        "sub_theme": "Satellite LST versus street-level air temperature",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "3/3"
+      },
+      {
+        "id": "E2",
+        "label": "Tree canopy cooling and equity",
+        "key": true,
+        "found": true,
+        "sub_theme": "Street-tree canopy cooling thresholds",
+        "sub_id": "t1.s2",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "2/3"
+      },
+      {
+        "id": "E3",
+        "label": "Calibrating volunteer low-cost sensors (needs stats help)",
+        "key": true,
+        "found": true,
+        "sub_theme": "Low-cost sensor calibration and drift",
+        "sub_id": "t2.s1",
+        "tier": "primary",
+        "type": "need",
+        "chats_cited": "4/4"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 4,
+    "score": "3/3"
+  },
+  {
+    "user_id": "user_05",
+    "pattern": "One main topic (5 chats) + 5 one-offs",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Regression discontinuity at class-size caps",
+        "key": true,
+        "found": true,
+        "sub_theme": "class size effects via enrolment-cap RD",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "skill",
+        "chats_cited": "5/5"
+      },
+      {
+        "id": "E2",
+        "label": "Knot invariants (Jones polynomial)",
+        "key": true,
+        "found": true,
+        "sub_theme": "completeness of knot invariants",
+        "sub_id": "t2.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E3",
+        "label": "Map projections / Mercator",
+        "key": true,
+        "found": true,
+        "sub_theme": "map projections and mental maps",
+        "sub_id": "t3.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E4",
+        "label": "Surface-code overhead",
+        "key": true,
+        "found": true,
+        "sub_theme": "quantum error correction overhead",
+        "sub_id": "t4.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E5",
+        "label": "Comparability of ML training carbon figures",
+        "key": true,
+        "found": true,
+        "sub_theme": "carbon accounting for AI models",
+        "sub_id": "t5.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E6",
+        "label": "Sourdough microbial succession",
+        "key": true,
+        "found": true,
+        "sub_theme": "sourdough starter community assembly",
+        "sub_id": "t6.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 7,
+    "score": "6/6"
+  },
+  {
+    "user_id": "user_06",
+    "pattern": "One main topic (4 chats) + 6 one-offs",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Soft grippers for delicate produce (wants field-trial partner)",
+        "key": true,
+        "found": true,
+        "sub_theme": "soft grippers for berry harvesting",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "need",
+        "chats_cited": "3/3"
+      },
+      {
+        "id": "E2",
+        "label": "Sim-to-real for soft actuators",
+        "key": true,
+        "found": true,
+        "sub_theme": "finite-element modelling of pneumatic soft actuators",
+        "sub_id": "t1.s2",
+        "tier": "secondary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E3",
+        "label": "Bird magnetoreception",
+        "key": true,
+        "found": true,
+        "sub_theme": "radical-pair avian magnetoreception",
+        "sub_id": "t4.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E4",
+        "label": "Open-source hardware licensing",
+        "key": true,
+        "found": true,
+        "sub_theme": "open hardware licensing",
+        "sub_id": "t3.s1",
+        "tier": "secondary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E5",
+        "label": "Origami rigid foldability",
+        "key": true,
+        "found": true,
+        "sub_theme": "rigid origami for deployable structures",
+        "sub_id": "t2.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E6",
+        "label": "Acoustic levitation",
+        "key": true,
+        "found": true,
+        "sub_theme": "acoustic levitation for contactless manipulation",
+        "sub_id": "t1.s3",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E7",
+        "label": "Coffee extraction physics",
+        "key": true,
+        "found": true,
+        "sub_theme": "channeling in espresso puck flow",
+        "sub_id": "t5.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E8",
+        "label": "Why programming languages catch on in science",
+        "key": true,
+        "found": true,
+        "sub_theme": "programming language adoption in science",
+        "sub_id": "t6.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 8,
+    "score": "8/8"
+  },
+  {
+    "user_id": "user_07",
+    "pattern": "Varied: 10 unrelated topics",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Dark-matter null results / WIMPs",
+        "key": true,
+        "found": true,
+        "sub_theme": "WIMP direct-detection limits",
+        "sub_id": "t1.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E2",
+        "label": "Octopus distributed cognition",
+        "key": true,
+        "found": true,
+        "sub_theme": "octopus distributed arm control",
+        "sub_id": "t2.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E3",
+        "label": "Byzantine fault tolerance / proof-of-stake",
+        "key": true,
+        "found": true,
+        "sub_theme": "proof-of-stake consensus security",
+        "sub_id": "t3.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E4",
+        "label": "Roman concrete self-healing",
+        "key": true,
+        "found": true,
+        "sub_theme": "self-healing lime-clast concrete",
+        "sub_id": "t4.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E5",
+        "label": "Hippocampal replay",
+        "key": true,
+        "found": true,
+        "sub_theme": "hippocampal replay and memory consolidation",
+        "sub_id": "t2.s2",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E6",
+        "label": "Mycorrhizal network claims",
+        "key": true,
+        "found": true,
+        "sub_theme": "mycorrhizal network resource transfer",
+        "sub_id": "t5.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E7",
+        "label": "Creole formation",
+        "key": true,
+        "found": true,
+        "sub_theme": "creole language emergence",
+        "sub_id": "t6.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E8",
+        "label": "Tidal turbines and biofouling",
+        "key": true,
+        "found": true,
+        "sub_theme": "biofouling on tidal-stream turbines",
+        "sub_id": "t7.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E9",
+        "label": "Arrow's theorem and ranked-choice voting",
+        "key": true,
+        "found": true,
+        "sub_theme": "ranked-choice voting criteria",
+        "sub_id": "t8.s1",
+        "tier": "primary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E10",
+        "label": "Permafrost methane uncertainty",
+        "key": true,
+        "found": true,
+        "sub_theme": "permafrost thaw methane feedback",
+        "sub_id": "t9.s1",
+        "tier": "primary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 10,
+    "score": "10/10"
+  },
+  {
+    "user_id": "user_08",
+    "pattern": "Consolidation: one sub-theme worded 4 ways + look-alikes",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Single-cell trajectory / fate inference (4 wordings)",
+        "key": true,
+        "found": false,
+        "note": "SPLIT over 3 sub-themes ['t1.s1', 't1.s3', 't1.s4'] (together cite 4/4 chats)"
+      },
+      {
+        "id": "E2",
+        "label": "Batch-effect correction",
+        "key": true,
+        "found": true,
+        "sub_theme": "single-cell dataset integration",
+        "sub_id": "t1.s2",
+        "tier": "secondary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E3",
+        "label": "Drone trajectory optimisation",
+        "key": true,
+        "found": true,
+        "sub_theme": "quadrotor trajectory optimisation",
+        "sub_id": "t3.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E4",
+        "label": "Glacier velocity via InSAR",
+        "key": true,
+        "found": true,
+        "sub_theme": "InSAR glacier velocity mapping",
+        "sub_id": "t4.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E5",
+        "label": "Language phylogenetics",
+        "key": true,
+        "found": true,
+        "sub_theme": "Bayesian phylogenetics of languages",
+        "sub_id": "t5.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E6",
+        "label": "Cell segmentation",
+        "key": true,
+        "found": true,
+        "sub_theme": "cell segmentation in dense tissue",
+        "sub_id": "t2.s1",
+        "tier": "secondary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E7",
+        "label": "Lineage methods for startups (playful)",
+        "key": false,
+        "found": true,
+        "sub_theme": "trajectory inference applied to startups",
+        "sub_id": "t6.s1",
+        "tier": "secondary",
+        "type": "interest",
+        "chats_cited": "1/1"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 9,
+    "score": "5/6"
+  },
+  {
+    "user_id": "user_09",
+    "pattern": "Multi-idea chats: 2-3 ideas per chat, recurring in combinations",
+    "ideas": [
+      {
+        "id": "I1",
+        "label": "Reproducibility checks (code/data) in peer review",
+        "key": true,
+        "found": true,
+        "sub_theme": "reproducibility checks during peer review",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "4/4"
+      },
+      {
+        "id": "I2",
+        "label": "Open review on preprints",
+        "key": true,
+        "found": true,
+        "sub_theme": "open post-publication review of preprints",
+        "sub_id": "t1.s2",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "4/4"
+      },
+      {
+        "id": "I3",
+        "label": "Citation bias toward positive results",
+        "key": true,
+        "found": true,
+        "sub_theme": "citation bias toward positive results",
+        "sub_id": "t2.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "4/5"
+      },
+      {
+        "id": "I4",
+        "label": "Image-duplication detector (can offer)",
+        "key": true,
+        "found": true,
+        "sub_theme": "automated image duplication detection",
+        "sub_id": "t3.s1",
+        "tier": "primary",
+        "type": "skill",
+        "chats_cited": "5/5"
+      },
+      {
+        "id": "X1",
+        "label": "Registered reports in ecology",
+        "key": false,
+        "found": true,
+        "sub_theme": "registered reports in field ecology",
+        "sub_id": "t1.s3",
+        "tier": "secondary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "X2",
+        "label": "Statistical reporting-error detection",
+        "key": false,
+        "found": true,
+        "sub_theme": "statistical reporting error detection",
+        "sub_id": "t3.s2",
+        "tier": "secondary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "X3",
+        "label": "Hiring incentives and paper counts",
+        "key": false,
+        "found": true,
+        "sub_theme": "citation bias toward positive results",
+        "sub_id": "t2.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "1/1"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 6,
+    "score": "4/4"
+  },
+  {
+    "user_id": "user_10",
+    "pattern": "Low signal: task chats with 3 buried ideas + an injection trap",
+    "ideas": [
+      {
+        "id": "E1",
+        "label": "Microplastics as vectors for antibiotic-resistance genes",
+        "key": true,
+        "found": true,
+        "sub_theme": "microplastics as antibiotic-resistance gene vectors",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E2",
+        "label": "Biofilm on microplastic vs sand",
+        "key": true,
+        "found": true,
+        "sub_theme": "microplastics as antibiotic-resistance gene vectors",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "1/1"
+      },
+      {
+        "id": "E3",
+        "label": "Needs metagenomics beyond qPCR",
+        "key": true,
+        "found": true,
+        "sub_theme": "microplastics as antibiotic-resistance gene vectors",
+        "sub_id": "t1.s1",
+        "tier": "primary",
+        "type": "project",
+        "chats_cited": "1/1",
+        "note": "type project (expected need)"
+      }
+    ],
+    "problems": [],
+    "sub_theme_count": 1,
+    "score": "3/3"
+  }
+]

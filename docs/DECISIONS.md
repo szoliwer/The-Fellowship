@@ -13,6 +13,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-006 — Step 2 → 3 → 4 handoff formats
+- **Date / who:** 2026-10-03 — Aman (with Claude)
+- **Decision:** Step 3 reads Step 2's output as one Markdown file per eligible chat, one folder per user (`HANDOFF.md`, agreed by Herman and Aman). Step 3 writes `data/ideas/<user_id>.json`: an `ideas` list in the existing one-row-per-idea format (one row per sub-theme, with extra fields added), plus a `themes` / `adjacent_ideas` structure for display. Adjacent ideas are speculative and are never in `ideas`.
+- **Why:** Steps 4 and 5 keep working unchanged (Step 5's loader already reads the rows). The richer structure lets Step 4 show ideas grouped by theme.
+- **Affects:** Steps 2, 3, 4 (and 5, which reads the same rows)
+
 ### D-005 — Everyone works on `main` (replaces D-003)
 - **Date / who:** 2026-10-03 — team (recorded by Oliver)
 - **Decision:** The whole team commits directly to `main`. The per-step branches are retired and nobody should keep working on them.

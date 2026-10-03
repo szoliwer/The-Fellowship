@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_10",
+  "generated_at": "2026-10-03T22:51:56Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "ad68724573182f25",
+  "chats_read": [
+    "u10_c01",
+    "u10_c02",
+    "u10_c03",
+    "u10_c04",
+    "u10_c05",
+    "u10_c06",
+    "u10_c07",
+    "u10_c08",
+    "u10_c09",
+    "u10_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Environmental microbiology",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "microplastics as antibiotic-resistance gene vectors",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u10_c03",
+            "u10_c06",
+            "u10_c09"
+          ],
+          "chat_count": 3,
+          "user_message_count": 6,
+          "first_seen": "2026-07-23",
+          "last_seen": "2026-09-15",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Plastic as resistance carrier",
+              "claim": "Microplastics in wastewater may concentrate antibiotic-resistance genes relative to the surrounding water phase.",
+              "source_chat_ids": [
+                "u10_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-23",
+              "last_seen": "2026-07-23"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Biofilm community as driver",
+              "claim": "Differences between plastic and sand biofilm communities may explain why resistance genes are enriched on plastic.",
+              "source_chat_ids": [
+                "u10_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-19",
+              "last_seen": "2026-08-19"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Beyond targeted qPCR",
+              "claim": "qPCR of a few resistance genes may not support resistome claims; metagenomics is needed, requiring a collaborator.",
+              "source_chat_ids": [
+                "u10_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-15",
+              "last_seen": "2026-09-15"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Polymer-specific enrichment",
+      "claim": "Resistance gene enrichment may vary across polymer types if surface properties shape biofilm colonization.",
+      "bridges": [
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Mobile element hitchhiking",
+      "claim": "Resistance genes on plastic biofilms may sit disproportionately on mobile elements, raising downstream horizontal transfer risk.",
+      "bridges": [
+        "t1.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_10",
+      "idea_id": "user_10_t1.s1",
+      "type": "project",
+      "summary": "microplastics as antibiotic-resistance gene vectors",
+      "insights": [
+        "Microplastics in wastewater may concentrate antibiotic-resistance genes relative to the surrounding water phase.",
+        "Differences between plastic and sand biofilm communities may explain why resistance genes are enriched on plastic.",
+        "qPCR of a few resistance genes may not support resistome claims; metagenomics is needed, requiring a collaborator."
+      ],
+      "keywords": [
+        "Plastic as resistance carrier",
+        "Biofilm community as driver",
+        "Beyond targeted qPCR"
+      ],
+      "evidence": [
+        "u10_c03",
+        "u10_c06",
+        "u10_c09"
+      ],
+      "first_seen": "2026-07-23",
+      "last_seen": "2026-09-15",
+      "mentions": 6,
+      "chat_count": 3,
+      "tier": "primary",
+      "theme": "Environmental microbiology",
+      "mode": "working_on",
+      "direction": "none"
+    }
+  ]
+}

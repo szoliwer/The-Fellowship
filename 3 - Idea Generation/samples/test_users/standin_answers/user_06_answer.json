@@ -1,0 +1,39 @@
+{"themes":[
+{"id":"t1","theme":"Robotics","sub_themes":[
+{"id":"t1.s1","sub_theme":"soft grippers for berry harvesting","mode":"working_on","direction":"looking_for","insights":[
+{"id":"t1.s1.i1","handle":"Rib contact pressure peaks","claim":"Raspberry bruising in fin-ray grippers stems mainly from pressure concentration at the internal rib contact points.","source_chat_ids":["u06_c02"]},
+{"id":"t1.s1.i2","handle":"Soft skin slip trade-off","claim":"A silicone skin over fin-ray fingers sharply reduces bruising but increases slip on wet berries.","source_chat_ids":["u06_c02"]},
+{"id":"t1.s1.i3","handle":"Store-bought fruit bias","claim":"Bench tests on refrigerated store-bought berries misrepresent bruising, so trials on fresh fruit at farms or packing lines are needed.","source_chat_ids":["u06_c02","u06_c09"]},
+{"id":"t1.s1.i4","handle":"Gentleness versus cycle time","claim":"A gentler pneumatic gripper is commercially useless if its cycle time is far slower than fin-ray designs.","source_chat_ids":["u06_c05"]},
+{"id":"t1.s1.i5","handle":"Packing line before field","claim":"A fixed packing-line station is an easier first trial than in-field picking, though labour shortages lie in the field.","source_chat_ids":["u06_c09"]}]},
+{"id":"t1.s2","sub_theme":"finite-element modelling of pneumatic soft actuators","mode":"working_on","direction":"none","insights":[
+{"id":"t1.s2.i1","handle":"Datasheet parameters mislead","claim":"Datasheet hyperelastic parameters and casting variation explain much of the sim-to-real gap in soft finger bending.","source_chat_ids":["u06_c06"]},
+{"id":"t1.s2.i2","handle":"Calibrate or test physically","claim":"It is unclear whether per-batch model calibration beats treating simulation as rough and relying on physical testing.","source_chat_ids":["u06_c06"]}]},
+{"id":"t1.s3","sub_theme":"acoustic levitation for contactless manipulation","mode":"curious_about","direction":"none","insights":[
+{"id":"t1.s3.i1","handle":"Wavelength-bound object size","claim":"Acoustic wavelength sets the size limit for levitated objects, implying a trade-off between frequency, force and stability.","source_chat_ids":["u06_c07"]},
+{"id":"t1.s3.i2","handle":"Contactless fragile handling","claim":"The real advantage of acoustic levitation is manipulating soft or fragile objects like droplets without damage.","source_chat_ids":["u06_c07"]}]}]},
+{"id":"t2","theme":"Deployable structures","sub_themes":[
+{"id":"t2.s1","sub_theme":"rigid origami for deployable structures","mode":"curious_about","direction":"none","insights":[
+{"id":"t2.s1.i1","handle":"Single-actuator folding","claim":"Degree-four vertex patterns give one degree of freedom, letting a single actuator drive a whole deployable structure.","source_chat_ids":["u06_c04"]},
+{"id":"t2.s1.i2","handle":"Thickness versus ideal kinematics","claim":"Real panel thickness may break rigid foldability, requiring design adaptations for practical deployable panels.","source_chat_ids":["u06_c04"]}]}]},
+{"id":"t3","theme":"Open science","sub_themes":[
+{"id":"t3.s1","sub_theme":"open hardware licensing","mode":"working_on","direction":"none","insights":[
+{"id":"t3.s1.i1","handle":"Licence as social norm","claim":"Open hardware licences function more as social norms than legal shields, since physical objects are largely uncopyrightable.","source_chat_ids":["u06_c03"]},
+{"id":"t3.s1.i2","handle":"Reciprocity versus commercial uptake","claim":"Strongly reciprocal hardware licences encourage sharing farm adaptations but may deter companies that could commercialise the design.","source_chat_ids":["u06_c03"]}]}]},
+{"id":"t4","theme":"Quantum biology","sub_themes":[
+{"id":"t4.s1","sub_theme":"radical-pair avian magnetoreception","mode":"curious_about","direction":"none","insights":[
+{"id":"t4.s1.i1","handle":"Retinal sensor array","claim":"Cryptochrome magnetoreception works like an array of orientation-dependent sensors with the brain doing signal processing.","source_chat_ids":["u06_c01"]},
+{"id":"t4.s1.i2","handle":"Coherence in warm cells","claim":"Whether spin coherence can survive long enough in a warm, wet cell is the critical weakness of the hypothesis.","source_chat_ids":["u06_c01"]}]}]},
+{"id":"t5","theme":"Fluid physics","sub_themes":[
+{"id":"t5.s1","sub_theme":"channeling in espresso puck flow","mode":"curious_about","direction":"none","insights":[
+{"id":"t5.s1.i1","handle":"Self-reinforcing flow paths","claim":"Channeling is a positive feedback where more permeable regions erode faster, like current widening a least-resistance path.","source_chat_ids":["u06_c08"]},
+{"id":"t5.s1.i2","handle":"Distribution over mean size","claim":"Particle size distribution and fines migration may matter as much as average grind size for uneven flow.","source_chat_ids":["u06_c08"]}]}]},
+{"id":"t6","theme":"Research software","sub_themes":[
+{"id":"t6.s1","sub_theme":"programming language adoption in science","mode":"curious_about","direction":"none","insights":[
+{"id":"t6.s1.i1","handle":"Switching-cost lock-in","claim":"Technically superior scientific languages struggle because switching costs are high and benefits need wide adoption, like hardware standards.","source_chat_ids":["u06_c10"]},
+{"id":"t6.s1.i2","handle":"AI-lowered migration costs","claim":"AI coding assistants could sharply lower language switching costs by making code translation cheap.","source_chat_ids":["u06_c10"]}]}]}],
+"adjacent_ideas":[
+{"id":"a1","handle":"Origami single-actuator grippers","claim":"Rigid-foldable degree-four patterns could yield single-actuator fruit grippers that conform gently without pneumatic infrastructure.","bridges":["t2.s1","t1.s1"]},
+{"id":"a2","handle":"Viscoelastic hold and bruising","claim":"Modelling silicone relaxation during holding could predict how grip force drift contributes to delayed berry bruising.","bridges":["t1.s2","t1.s1"]},
+{"id":"a3","handle":"Grower-driven design forks","claim":"Field trials could seed an open hardware community where growers' gripper modifications are shared back under reciprocal terms.","bridges":["t3.s1","t1.s1"]},
+{"id":"a4","handle":"Network effects in open hardware","claim":"Open hardware designs may face the same library-driven lock-in dynamics that govern scientific language adoption.","bridges":["t6.s1","t3.s1"]}]}

@@ -1,0 +1,808 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_07",
+  "generated_at": "2026-10-03T22:51:56Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "25167627d3994c54",
+  "chats_read": [
+    "u07_c01",
+    "u07_c02",
+    "u07_c03",
+    "u07_c04",
+    "u07_c05",
+    "u07_c06",
+    "u07_c07",
+    "u07_c08",
+    "u07_c09",
+    "u07_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Particle physics",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "WIMP direct-detection limits",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c01"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-02",
+          "last_seen": "2026-07-02",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Neutrino fog stopping point",
+              "claim": "The neutrino fog provides a natural stopping point that answers complaints about endlessly lowering cross-section targets.",
+              "source_chat_ids": [
+                "u07_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-02",
+              "last_seen": "2026-07-02"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Oversold WIMP paradigm",
+              "claim": "The field oversold WIMPs as the obvious dark matter answer for decades.",
+              "source_chat_ids": [
+                "u07_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-02",
+              "last_seen": "2026-07-02"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Neuroscience",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "octopus distributed arm control",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c02"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-11",
+          "last_seen": "2026-07-11",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Smart reflexes, not minds",
+              "claim": "Octopus arm autonomy is better described as sophisticated reflex control than independent thinking.",
+              "source_chat_ids": [
+                "u07_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-11",
+              "last_seen": "2026-07-11"
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Joint-level offloading analogy",
+              "claim": "Octopus hierarchical control resembles robots offloading low-level motor control to their joints.",
+              "source_chat_ids": [
+                "u07_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-11",
+              "last_seen": "2026-07-11"
+            },
+            {
+              "id": "t2.s1.i3",
+              "handle": "Untracked limb positions",
+              "claim": "If the octopus brain does not precisely track its arms, its body awareness differs fundamentally from ours.",
+              "source_chat_ids": [
+                "u07_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-11",
+              "last_seen": "2026-07-11"
+            }
+          ]
+        },
+        {
+          "id": "t2.s2",
+          "sub_theme": "hippocampal replay and memory consolidation",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c05"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-07",
+          "last_seen": "2026-08-07",
+          "insights": [
+            {
+              "id": "t2.s2.i1",
+              "handle": "Replay is causal",
+              "claim": "Hippocampal replay causally supports memory rather than being a side effect of sleep activity.",
+              "source_chat_ids": [
+                "u07_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-07",
+              "last_seen": "2026-08-07"
+            },
+            {
+              "id": "t2.s2.i2",
+              "handle": "Reverse replay as credit assignment",
+              "claim": "Backward replay may propagate reward to earlier path steps, analogous to reinforcement learning credit assignment.",
+              "source_chat_ids": [
+                "u07_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-07",
+              "last_seen": "2026-08-07"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "theme": "Distributed systems",
+      "sub_themes": [
+        {
+          "id": "t3.s1",
+          "sub_theme": "proof-of-stake consensus security",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c03"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-20",
+          "last_seen": "2026-07-20",
+          "insights": [
+            {
+              "id": "t3.s1.i1",
+              "handle": "Sybil resistance, not BFT",
+              "claim": "Proof-of-stake addresses Sybil resistance, not the Byzantine generals problem, which classic BFT protocols already solve.",
+              "source_chat_ids": [
+                "u07_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-20",
+              "last_seen": "2026-07-20"
+            },
+            {
+              "id": "t3.s1.i2",
+              "handle": "Stake concentration weak point",
+              "claim": "Stake concentrating in exchanges and pools makes the one-third-of-stake assumption the real vulnerability.",
+              "source_chat_ids": [
+                "u07_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-20",
+              "last_seen": "2026-07-20"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "theme": "Materials science",
+      "sub_themes": [
+        {
+          "id": "t4.s1",
+          "sub_theme": "self-healing lime-clast concrete",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c04"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-29",
+          "last_seen": "2026-07-29",
+          "insights": [
+            {
+              "id": "t4.s1.i1",
+              "handle": "Water exclusion over strength",
+              "claim": "Self-healing lime clasts matter for modern concrete mainly by keeping water out to protect rebar, not structural strength.",
+              "source_chat_ids": [
+                "u07_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-29",
+              "last_seen": "2026-07-29"
+            },
+            {
+              "id": "t4.s1.i2",
+              "handle": "Cost and curing barriers",
+              "claim": "Cost or curing time likely hinders commercial adoption of hot-mixed lime concrete.",
+              "source_chat_ids": [
+                "u07_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-29",
+              "last_seen": "2026-07-29"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "theme": "Ecology",
+      "sub_themes": [
+        {
+          "id": "t5.s1",
+          "sub_theme": "mycorrhizal network resource transfer",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c06"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-16",
+          "last_seen": "2026-08-16",
+          "insights": [
+            {
+              "id": "t5.s1.i1",
+              "handle": "Anthropomorphised mother trees",
+              "claim": "The mother tree framing anthropomorphises fungi that move resources according to their own interests.",
+              "source_chat_ids": [
+                "u07_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-16",
+              "last_seen": "2026-08-16"
+            },
+            {
+              "id": "t5.s1.i2",
+              "handle": "Single-link tracer test",
+              "claim": "A convincing test must confirm one fungal network links two trees and trace label through only that link.",
+              "source_chat_ids": [
+                "u07_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-16",
+              "last_seen": "2026-08-16"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "theme": "Linguistics",
+      "sub_themes": [
+        {
+          "id": "t6.s1",
+          "sub_theme": "creole language emergence",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c07"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-25",
+          "last_seen": "2026-08-25",
+          "insights": [
+            {
+              "id": "t6.s1.i1",
+              "handle": "Children regularise pidgins",
+              "claim": "Children do the heavy lifting in turning a messy pidgin into a creole with consistent grammar.",
+              "source_chat_ids": [
+                "u07_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-25",
+              "last_seen": "2026-08-25"
+            },
+            {
+              "id": "t6.s1.i2",
+              "handle": "Demographics drive innovation",
+              "claim": "Many children with little access to the colonial language should produce more child-driven grammatical innovation.",
+              "source_chat_ids": [
+                "u07_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-25",
+              "last_seen": "2026-08-25"
+            },
+            {
+              "id": "t6.s1.i3",
+              "handle": "Real-time emergence test",
+              "claim": "Observing a language emerge in real time is the cleanest test of child-driven regularisation.",
+              "source_chat_ids": [
+                "u07_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-25",
+              "last_seen": "2026-08-25"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t7",
+      "theme": "Renewable energy",
+      "sub_themes": [
+        {
+          "id": "t7.s1",
+          "sub_theme": "biofouling on tidal-stream turbines",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u07_c08"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-03",
+          "last_seen": "2026-09-03",
+          "insights": [
+            {
+              "id": "t7.s1.i1",
+              "handle": "Underrated cost driver",
+              "claim": "Biofouling on tidal turbine blades matters more to performance and cost than is commonly admitted.",
+              "source_chat_ids": [
+                "u07_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-03",
+              "last_seen": "2026-09-03"
+            },
+            {
+              "id": "t7.s1.i2",
+              "handle": "Roughness-tolerant blades",
+              "claim": "Designing roughness-tolerant blades is smarter than biocide coatings that harm marine environments and erode in high flow.",
+              "source_chat_ids": [
+                "u07_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-03",
+              "last_seen": "2026-09-03"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t8",
+      "theme": "Social choice",
+      "sub_themes": [
+        {
+          "id": "t8.s1",
+          "sub_theme": "ranked-choice voting criteria",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u07_c09"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-12",
+          "last_seen": "2026-09-12",
+          "insights": [
+            {
+              "id": "t8.s1.i1",
+              "handle": "Monotonicity failure",
+              "claim": "Instant runoff's monotonicity failure is its most troubling flaw because it is so counterintuitive to voters.",
+              "source_chat_ids": [
+                "u07_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-12",
+              "last_seen": "2026-09-12"
+            },
+            {
+              "id": "t8.s1.i2",
+              "handle": "Beyond instant runoff",
+              "claim": "If redesigning elections, Condorcet or cardinal methods may be preferable to instant runoff, which still beats plurality.",
+              "source_chat_ids": [
+                "u07_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-12",
+              "last_seen": "2026-09-12"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t9",
+      "theme": "Climate science",
+      "sub_themes": [
+        {
+          "id": "t9.s1",
+          "sub_theme": "permafrost thaw methane feedback",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u07_c10"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-21",
+          "last_seen": "2026-09-21",
+          "insights": [
+            {
+              "id": "t9.s1.i1",
+              "handle": "Neither bomb nor negligible",
+              "claim": "Permafrost methane is neither a ticking bomb nor negligible; the truth lies between these framings.",
+              "source_chat_ids": [
+                "u07_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-21",
+              "last_seen": "2026-09-21"
+            },
+            {
+              "id": "t9.s1.i2",
+              "handle": "Abrupt thaw underrepresented",
+              "claim": "Abrupt thaw processes like thermokarst lakes are poorly represented in models, making uncertainty enormous.",
+              "source_chat_ids": [
+                "u07_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-21",
+              "last_seen": "2026-09-21"
+            },
+            {
+              "id": "t9.s1.i3",
+              "handle": "Sparse Arctic measurements",
+              "claim": "Sparse Arctic flux measurements are the biggest obstacle to constraining permafrost methane emissions.",
+              "source_chat_ids": [
+                "u07_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-21",
+              "last_seen": "2026-09-21"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Validator voting pathologies",
+      "claim": "Stake-weighted validator governance may inherit social choice pathologies like monotonicity failures in coalition decisions.",
+      "bridges": [
+        "t3.s1",
+        "t8.s1"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Replay in distributed limbs",
+      "claim": "Distributed octopus arm controllers might rely on local offline replay for credit assignment without central tracking.",
+      "bridges": [
+        "t2.s1",
+        "t2.s2"
+      ]
+    },
+    {
+      "id": "a3",
+      "handle": "Self-healing marine surfaces",
+      "claim": "Self-healing mineral chemistry could inspire turbine coatings that repair erosion damage from high-flow sediment.",
+      "bridges": [
+        "t4.s1",
+        "t7.s1"
+      ]
+    },
+    {
+      "id": "a4",
+      "handle": "Detection floors and sparse sensing",
+      "claim": "Both dark matter searches and Arctic methane monitoring hit limits where background signals swamp sparse measurements.",
+      "bridges": [
+        "t1.s1",
+        "t9.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t1.s1",
+      "type": "interest",
+      "summary": "WIMP direct-detection limits",
+      "insights": [
+        "The neutrino fog provides a natural stopping point that answers complaints about endlessly lowering cross-section targets.",
+        "The field oversold WIMPs as the obvious dark matter answer for decades."
+      ],
+      "keywords": [
+        "Neutrino fog stopping point",
+        "Oversold WIMP paradigm"
+      ],
+      "evidence": [
+        "u07_c01"
+      ],
+      "first_seen": "2026-07-02",
+      "last_seen": "2026-07-02",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Particle physics",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t2.s1",
+      "type": "interest",
+      "summary": "octopus distributed arm control",
+      "insights": [
+        "Octopus arm autonomy is better described as sophisticated reflex control than independent thinking.",
+        "Octopus hierarchical control resembles robots offloading low-level motor control to their joints.",
+        "If the octopus brain does not precisely track its arms, its body awareness differs fundamentally from ours."
+      ],
+      "keywords": [
+        "Smart reflexes, not minds",
+        "Joint-level offloading analogy",
+        "Untracked limb positions"
+      ],
+      "evidence": [
+        "u07_c02"
+      ],
+      "first_seen": "2026-07-11",
+      "last_seen": "2026-07-11",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Neuroscience",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t2.s2",
+      "type": "interest",
+      "summary": "hippocampal replay and memory consolidation",
+      "insights": [
+        "Hippocampal replay causally supports memory rather than being a side effect of sleep activity.",
+        "Backward replay may propagate reward to earlier path steps, analogous to reinforcement learning credit assignment."
+      ],
+      "keywords": [
+        "Replay is causal",
+        "Reverse replay as credit assignment"
+      ],
+      "evidence": [
+        "u07_c05"
+      ],
+      "first_seen": "2026-08-07",
+      "last_seen": "2026-08-07",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Neuroscience",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t3.s1",
+      "type": "interest",
+      "summary": "proof-of-stake consensus security",
+      "insights": [
+        "Proof-of-stake addresses Sybil resistance, not the Byzantine generals problem, which classic BFT protocols already solve.",
+        "Stake concentrating in exchanges and pools makes the one-third-of-stake assumption the real vulnerability."
+      ],
+      "keywords": [
+        "Sybil resistance, not BFT",
+        "Stake concentration weak point"
+      ],
+      "evidence": [
+        "u07_c03"
+      ],
+      "first_seen": "2026-07-20",
+      "last_seen": "2026-07-20",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Distributed systems",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t4.s1",
+      "type": "interest",
+      "summary": "self-healing lime-clast concrete",
+      "insights": [
+        "Self-healing lime clasts matter for modern concrete mainly by keeping water out to protect rebar, not structural strength.",
+        "Cost or curing time likely hinders commercial adoption of hot-mixed lime concrete."
+      ],
+      "keywords": [
+        "Water exclusion over strength",
+        "Cost and curing barriers"
+      ],
+      "evidence": [
+        "u07_c04"
+      ],
+      "first_seen": "2026-07-29",
+      "last_seen": "2026-07-29",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Materials science",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t5.s1",
+      "type": "interest",
+      "summary": "mycorrhizal network resource transfer",
+      "insights": [
+        "The mother tree framing anthropomorphises fungi that move resources according to their own interests.",
+        "A convincing test must confirm one fungal network links two trees and trace label through only that link."
+      ],
+      "keywords": [
+        "Anthropomorphised mother trees",
+        "Single-link tracer test"
+      ],
+      "evidence": [
+        "u07_c06"
+      ],
+      "first_seen": "2026-08-16",
+      "last_seen": "2026-08-16",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Ecology",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t6.s1",
+      "type": "interest",
+      "summary": "creole language emergence",
+      "insights": [
+        "Children do the heavy lifting in turning a messy pidgin into a creole with consistent grammar.",
+        "Many children with little access to the colonial language should produce more child-driven grammatical innovation.",
+        "Observing a language emerge in real time is the cleanest test of child-driven regularisation."
+      ],
+      "keywords": [
+        "Children regularise pidgins",
+        "Demographics drive innovation",
+        "Real-time emergence test"
+      ],
+      "evidence": [
+        "u07_c07"
+      ],
+      "first_seen": "2026-08-25",
+      "last_seen": "2026-08-25",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Linguistics",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t7.s1",
+      "type": "interest",
+      "summary": "biofouling on tidal-stream turbines",
+      "insights": [
+        "Biofouling on tidal turbine blades matters more to performance and cost than is commonly admitted.",
+        "Designing roughness-tolerant blades is smarter than biocide coatings that harm marine environments and erode in high flow."
+      ],
+      "keywords": [
+        "Underrated cost driver",
+        "Roughness-tolerant blades"
+      ],
+      "evidence": [
+        "u07_c08"
+      ],
+      "first_seen": "2026-09-03",
+      "last_seen": "2026-09-03",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Renewable energy",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t8.s1",
+      "type": "interest",
+      "summary": "ranked-choice voting criteria",
+      "insights": [
+        "Instant runoff's monotonicity failure is its most troubling flaw because it is so counterintuitive to voters.",
+        "If redesigning elections, Condorcet or cardinal methods may be preferable to instant runoff, which still beats plurality."
+      ],
+      "keywords": [
+        "Monotonicity failure",
+        "Beyond instant runoff"
+      ],
+      "evidence": [
+        "u07_c09"
+      ],
+      "first_seen": "2026-09-12",
+      "last_seen": "2026-09-12",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "primary",
+      "theme": "Social choice",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_07",
+      "idea_id": "user_07_t9.s1",
+      "type": "interest",
+      "summary": "permafrost thaw methane feedback",
+      "insights": [
+        "Permafrost methane is neither a ticking bomb nor negligible; the truth lies between these framings.",
+        "Abrupt thaw processes like thermokarst lakes are poorly represented in models, making uncertainty enormous.",
+        "Sparse Arctic flux measurements are the biggest obstacle to constraining permafrost methane emissions."
+      ],
+      "keywords": [
+        "Neither bomb nor negligible",
+        "Abrupt thaw underrepresented",
+        "Sparse Arctic measurements"
+      ],
+      "evidence": [
+        "u07_c10"
+      ],
+      "first_seen": "2026-09-21",
+      "last_seen": "2026-09-21",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "primary",
+      "theme": "Climate science",
+      "mode": "curious_about",
+      "direction": "none"
+    }
+  ]
+}

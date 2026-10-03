@@ -1,0 +1,715 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_08",
+  "generated_at": "2026-10-03T22:51:56Z",
+  "model": "fake-response",
+  "from_cache": false,
+  "input_hash": "26517331e12b4b88",
+  "chats_read": [
+    "u08_c01",
+    "u08_c02",
+    "u08_c03",
+    "u08_c04",
+    "u08_c05",
+    "u08_c06",
+    "u08_c07",
+    "u08_c08",
+    "u08_c09",
+    "u08_c10"
+  ],
+  "themes": [
+    {
+      "id": "t1",
+      "theme": "Single-cell genomics",
+      "sub_themes": [
+        {
+          "id": "t1.s1",
+          "sub_theme": "hematopoietic trajectory and fate inference",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u08_c01",
+            "u08_c10"
+          ],
+          "chat_count": 2,
+          "user_message_count": 4,
+          "first_seen": "2026-07-03",
+          "last_seen": "2026-09-22",
+          "insights": [
+            {
+              "id": "t1.s1.i1",
+              "handle": "Root choice fragility",
+              "claim": "Diffusion pseudotime orderings may be highly sensitive to which hand-picked root cell is chosen.",
+              "source_chat_ids": [
+                "u08_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-03",
+              "last_seen": "2026-07-03"
+            },
+            {
+              "id": "t1.s1.i2",
+              "handle": "Per-lineage ordering",
+              "claim": "A single linear pseudotime breaks down past myeloid divergence, so ordering should be computed per lineage.",
+              "source_chat_ids": [
+                "u08_c01"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-03",
+              "last_seen": "2026-07-03"
+            },
+            {
+              "id": "t1.s1.i3",
+              "handle": "Commitment as gradual bias",
+              "claim": "Progenitor commitment may be a gradually building fate bias, making a discrete branch point somewhat artificial.",
+              "source_chat_ids": [
+                "u08_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-22",
+              "last_seen": "2026-09-22"
+            },
+            {
+              "id": "t1.s1.i4",
+              "handle": "Distrust of UMAP forks",
+              "claim": "Bifurcation points should be located with statistically grounded measures rather than visual forks in UMAP geometry.",
+              "source_chat_ids": [
+                "u08_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-22",
+              "last_seen": "2026-09-22"
+            }
+          ]
+        },
+        {
+          "id": "t1.s2",
+          "sub_theme": "single-cell dataset integration",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u08_c02"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-12",
+          "last_seen": "2026-07-12",
+          "insights": [
+            {
+              "id": "t1.s2.i1",
+              "handle": "Over-integration risk",
+              "claim": "Batch correction like Harmony may erase real biological differences such as age effects across datasets.",
+              "source_chat_ids": [
+                "u08_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-12",
+              "last_seen": "2026-07-12"
+            },
+            {
+              "id": "t1.s2.i2",
+              "handle": "Confounded age and lab",
+              "claim": "Modelling age as a biological covariate while correcting lab is questionable when the two are partly confounded.",
+              "source_chat_ids": [
+                "u08_c02"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-12",
+              "last_seen": "2026-07-12"
+            }
+          ]
+        },
+        {
+          "id": "t1.s3",
+          "sub_theme": "RNA velocity directionality",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u08_c04"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-30",
+          "last_seen": "2026-07-30",
+          "insights": [
+            {
+              "id": "t1.s3.i1",
+              "handle": "Backward megakaryocyte arrows",
+              "claim": "Reversed velocity arrows in megakaryocyte progenitors may be method artifacts rather than real dedifferentiation.",
+              "source_chat_ids": [
+                "u08_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-30",
+              "last_seen": "2026-07-30"
+            },
+            {
+              "id": "t1.s3.i2",
+              "handle": "Principled gene exclusion",
+              "claim": "Dropping genes with anomalous kinetics risks cherry-picking unless exclusion criteria are fixed in advance.",
+              "source_chat_ids": [
+                "u08_c04"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-30",
+              "last_seen": "2026-07-30"
+            }
+          ]
+        },
+        {
+          "id": "t1.s4",
+          "sub_theme": "lineage barcoding as fate benchmark",
+          "mode": "working_on",
+          "direction": "can_offer",
+          "tier": "primary",
+          "source_chat_ids": [
+            "u08_c07",
+            "u08_c10"
+          ],
+          "chat_count": 2,
+          "user_message_count": 4,
+          "first_seen": "2026-08-26",
+          "last_seen": "2026-09-22",
+          "insights": [
+            {
+              "id": "t1.s4.i1",
+              "handle": "Clones as ground truth",
+              "claim": "Heritable barcodes with paired scRNA-seq can serve as ground truth for scoring computational fate predictions.",
+              "source_chat_ids": [
+                "u08_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-26",
+              "last_seen": "2026-08-26"
+            },
+            {
+              "id": "t1.s4.i2",
+              "handle": "Recapture selection bias",
+              "claim": "Low barcode recapture may bias benchmarks toward large proliferative clones where fate prediction is easiest.",
+              "source_chat_ids": [
+                "u08_c07"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-26",
+              "last_seen": "2026-08-26"
+            },
+            {
+              "id": "t1.s4.i3",
+              "handle": "Clonal check on decision region",
+              "claim": "An inferred commitment region should coincide with where clones become restricted to a single fate.",
+              "source_chat_ids": [
+                "u08_c10"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-22",
+              "last_seen": "2026-09-22"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "theme": "Bioimage analysis",
+      "sub_themes": [
+        {
+          "id": "t2.s1",
+          "sub_theme": "cell segmentation in dense tissue",
+          "mode": "working_on",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u08_c08"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-04",
+          "last_seen": "2026-09-04",
+          "insights": [
+            {
+              "id": "t2.s1.i1",
+              "handle": "Watershed failure on crowding",
+              "claim": "Densely packed, overlapping cells defeat watershed, motivating deep learning tools like Cellpose or StarDist.",
+              "source_chat_ids": [
+                "u08_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-04",
+              "last_seen": "2026-09-04"
+            },
+            {
+              "id": "t2.s1.i2",
+              "handle": "Beyond pixel accuracy",
+              "claim": "Segmentation quality needs held-out annotated images and a metric more meaningful than pixel accuracy.",
+              "source_chat_ids": [
+                "u08_c08"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-04",
+              "last_seen": "2026-09-04"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "theme": "Robotics",
+      "sub_themes": [
+        {
+          "id": "t3.s1",
+          "sub_theme": "quadrotor trajectory optimisation",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u08_c03"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-07-21",
+          "last_seen": "2026-07-21",
+          "insights": [
+            {
+              "id": "t3.s1.i1",
+              "handle": "Snap as motor-effort proxy",
+              "claim": "Minimising snap is justified because, via differential flatness, it proxies how hard the motors work.",
+              "source_chat_ids": [
+                "u08_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-21",
+              "last_seen": "2026-07-21"
+            },
+            {
+              "id": "t3.s1.i2",
+              "handle": "Time allocation bottleneck",
+              "claim": "For smooth waypoint flight, segment time allocation is harder than the minimum-snap optimisation itself.",
+              "source_chat_ids": [
+                "u08_c03"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-07-21",
+              "last_seen": "2026-07-21"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "theme": "Remote sensing",
+      "sub_themes": [
+        {
+          "id": "t4.s1",
+          "sub_theme": "InSAR glacier velocity mapping",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u08_c05"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-08",
+          "last_seen": "2026-08-08",
+          "insights": [
+            {
+              "id": "t4.s1.i1",
+              "handle": "Missing line-of-sight component",
+              "claim": "Single interferograms measure only line-of-sight motion, leaving full horizontal velocity underdetermined.",
+              "source_chat_ids": [
+                "u08_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-08",
+              "last_seen": "2026-08-08"
+            },
+            {
+              "id": "t4.s1.i2",
+              "handle": "Fast versus slow ice methods",
+              "claim": "Fast outlet glaciers need offset tracking while slow interior ice suits phase methods; melt and snow cause gaps.",
+              "source_chat_ids": [
+                "u08_c05"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-08",
+              "last_seen": "2026-08-08"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "theme": "Historical linguistics",
+      "sub_themes": [
+        {
+          "id": "t5.s1",
+          "sub_theme": "Bayesian phylogenetics of languages",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u08_c06"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-08-17",
+          "last_seen": "2026-08-17",
+          "insights": [
+            {
+              "id": "t5.s1.i1",
+              "handle": "Borrowing versus tree assumption",
+              "claim": "Lexical borrowing, like horizontal gene transfer, may undermine tree-based models of language families.",
+              "source_chat_ids": [
+                "u08_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-17",
+              "last_seen": "2026-08-17"
+            },
+            {
+              "id": "t5.s1.i2",
+              "handle": "Suspect divergence dates",
+              "claim": "Language divergence dates are doubtful because word replacement rates are surely not constant.",
+              "source_chat_ids": [
+                "u08_c06"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-08-17",
+              "last_seen": "2026-08-17"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "theme": "Firm dynamics",
+      "sub_themes": [
+        {
+          "id": "t6.s1",
+          "sub_theme": "trajectory inference applied to startups",
+          "mode": "curious_about",
+          "direction": "none",
+          "tier": "secondary",
+          "source_chat_ids": [
+            "u08_c09"
+          ],
+          "chat_count": 1,
+          "user_message_count": 2,
+          "first_seen": "2026-09-13",
+          "last_seen": "2026-09-13",
+          "insights": [
+            {
+              "id": "t6.s1.i1",
+              "handle": "Longitudinal data removes need",
+              "claim": "Pseudotime tricks exist because measurement destroys cells; startups can be followed directly, resembling lineage tracing instead.",
+              "source_chat_ids": [
+                "u08_c09"
+              ],
+              "chat_count": 1,
+              "user_message_count": 2,
+              "first_seen": "2026-09-13",
+              "last_seen": "2026-09-13"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "adjacent_ideas": [
+    {
+      "id": "a1",
+      "handle": "Clonal audit of velocity",
+      "claim": "Barcoded clones could adjudicate whether reversed velocity arrows in megakaryocyte progenitors are artifacts.",
+      "bridges": [
+        "t1.s3",
+        "t1.s4"
+      ]
+    },
+    {
+      "id": "a2",
+      "handle": "Integration effects on fate maps",
+      "claim": "Over-correction during dataset integration may shift inferred commitment regions and fate probabilities.",
+      "bridges": [
+        "t1.s2",
+        "t1.s1"
+      ]
+    },
+    {
+      "id": "a3",
+      "handle": "Relaxed clocks for clonal trees",
+      "claim": "Relaxed-clock and calibration ideas from language phylogenetics could inform dating of barcode-derived cell lineage trees.",
+      "bridges": [
+        "t5.s1",
+        "t1.s4"
+      ]
+    },
+    {
+      "id": "a4",
+      "handle": "Spatial niches of commitment",
+      "claim": "Segmented bone marrow sections could test whether gradual fate bias correlates with spatial position of progenitors.",
+      "bridges": [
+        "t2.s1",
+        "t1.s1"
+      ]
+    }
+  ],
+  "ideas": [
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t1.s1",
+      "type": "project",
+      "summary": "hematopoietic trajectory and fate inference",
+      "insights": [
+        "Diffusion pseudotime orderings may be highly sensitive to which hand-picked root cell is chosen.",
+        "A single linear pseudotime breaks down past myeloid divergence, so ordering should be computed per lineage.",
+        "Progenitor commitment may be a gradually building fate bias, making a discrete branch point somewhat artificial.",
+        "Bifurcation points should be located with statistically grounded measures rather than visual forks in UMAP geometry."
+      ],
+      "keywords": [
+        "Root choice fragility",
+        "Per-lineage ordering",
+        "Commitment as gradual bias",
+        "Distrust of UMAP forks"
+      ],
+      "evidence": [
+        "u08_c01",
+        "u08_c10"
+      ],
+      "first_seen": "2026-07-03",
+      "last_seen": "2026-09-22",
+      "mentions": 4,
+      "chat_count": 2,
+      "tier": "primary",
+      "theme": "Single-cell genomics",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t1.s2",
+      "type": "project",
+      "summary": "single-cell dataset integration",
+      "insights": [
+        "Batch correction like Harmony may erase real biological differences such as age effects across datasets.",
+        "Modelling age as a biological covariate while correcting lab is questionable when the two are partly confounded."
+      ],
+      "keywords": [
+        "Over-integration risk",
+        "Confounded age and lab"
+      ],
+      "evidence": [
+        "u08_c02"
+      ],
+      "first_seen": "2026-07-12",
+      "last_seen": "2026-07-12",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Single-cell genomics",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t1.s3",
+      "type": "project",
+      "summary": "RNA velocity directionality",
+      "insights": [
+        "Reversed velocity arrows in megakaryocyte progenitors may be method artifacts rather than real dedifferentiation.",
+        "Dropping genes with anomalous kinetics risks cherry-picking unless exclusion criteria are fixed in advance."
+      ],
+      "keywords": [
+        "Backward megakaryocyte arrows",
+        "Principled gene exclusion"
+      ],
+      "evidence": [
+        "u08_c04"
+      ],
+      "first_seen": "2026-07-30",
+      "last_seen": "2026-07-30",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Single-cell genomics",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t1.s4",
+      "type": "skill",
+      "summary": "lineage barcoding as fate benchmark",
+      "insights": [
+        "Heritable barcodes with paired scRNA-seq can serve as ground truth for scoring computational fate predictions.",
+        "Low barcode recapture may bias benchmarks toward large proliferative clones where fate prediction is easiest.",
+        "An inferred commitment region should coincide with where clones become restricted to a single fate."
+      ],
+      "keywords": [
+        "Clones as ground truth",
+        "Recapture selection bias",
+        "Clonal check on decision region"
+      ],
+      "evidence": [
+        "u08_c07",
+        "u08_c10"
+      ],
+      "first_seen": "2026-08-26",
+      "last_seen": "2026-09-22",
+      "mentions": 4,
+      "chat_count": 2,
+      "tier": "primary",
+      "theme": "Single-cell genomics",
+      "mode": "working_on",
+      "direction": "can_offer"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t2.s1",
+      "type": "project",
+      "summary": "cell segmentation in dense tissue",
+      "insights": [
+        "Densely packed, overlapping cells defeat watershed, motivating deep learning tools like Cellpose or StarDist.",
+        "Segmentation quality needs held-out annotated images and a metric more meaningful than pixel accuracy."
+      ],
+      "keywords": [
+        "Watershed failure on crowding",
+        "Beyond pixel accuracy"
+      ],
+      "evidence": [
+        "u08_c08"
+      ],
+      "first_seen": "2026-09-04",
+      "last_seen": "2026-09-04",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Bioimage analysis",
+      "mode": "working_on",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t3.s1",
+      "type": "interest",
+      "summary": "quadrotor trajectory optimisation",
+      "insights": [
+        "Minimising snap is justified because, via differential flatness, it proxies how hard the motors work.",
+        "For smooth waypoint flight, segment time allocation is harder than the minimum-snap optimisation itself."
+      ],
+      "keywords": [
+        "Snap as motor-effort proxy",
+        "Time allocation bottleneck"
+      ],
+      "evidence": [
+        "u08_c03"
+      ],
+      "first_seen": "2026-07-21",
+      "last_seen": "2026-07-21",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Robotics",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t4.s1",
+      "type": "interest",
+      "summary": "InSAR glacier velocity mapping",
+      "insights": [
+        "Single interferograms measure only line-of-sight motion, leaving full horizontal velocity underdetermined.",
+        "Fast outlet glaciers need offset tracking while slow interior ice suits phase methods; melt and snow cause gaps."
+      ],
+      "keywords": [
+        "Missing line-of-sight component",
+        "Fast versus slow ice methods"
+      ],
+      "evidence": [
+        "u08_c05"
+      ],
+      "first_seen": "2026-08-08",
+      "last_seen": "2026-08-08",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Remote sensing",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t5.s1",
+      "type": "interest",
+      "summary": "Bayesian phylogenetics of languages",
+      "insights": [
+        "Lexical borrowing, like horizontal gene transfer, may undermine tree-based models of language families.",
+        "Language divergence dates are doubtful because word replacement rates are surely not constant."
+      ],
+      "keywords": [
+        "Borrowing versus tree assumption",
+        "Suspect divergence dates"
+      ],
+      "evidence": [
+        "u08_c06"
+      ],
+      "first_seen": "2026-08-17",
+      "last_seen": "2026-08-17",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Historical linguistics",
+      "mode": "curious_about",
+      "direction": "none"
+    },
+    {
+      "user_id": "user_08",
+      "idea_id": "user_08_t6.s1",
+      "type": "interest",
+      "summary": "trajectory inference applied to startups",
+      "insights": [
+        "Pseudotime tricks exist because measurement destroys cells; startups can be followed directly, resembling lineage tracing instead."
+      ],
+      "keywords": [
+        "Longitudinal data removes need"
+      ],
+      "evidence": [
+        "u08_c09"
+      ],
+      "first_seen": "2026-09-13",
+      "last_seen": "2026-09-13",
+      "mentions": 2,
+      "chat_count": 1,
+      "tier": "secondary",
+      "theme": "Firm dynamics",
+      "mode": "curious_about",
+      "direction": "none"
+    }
+  ]
+}
