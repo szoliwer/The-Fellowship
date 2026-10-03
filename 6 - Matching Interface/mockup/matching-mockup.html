@@ -10,6 +10,8 @@
   --accent:#1D6A50; --accent-ink:#FFFFFF; --accent-soft:#DCEDE5;
   --sim:#2C67A6; --sim-bg:#E2EDF8; --comp:#A35C0C; --comp-bg:#FAEBD7;
   --pass:#7E8B85; --danger:#B83A2E; --frame:#0F1513; --bubble-me:#1D6A50; --bubble-me-ink:#FFFFFF;
+  --them-bg:#F5E4F0; --them:#8A2F6E; --you-bg:#DDF0E5; --you:#1D6A50;
+  --app-bg:#E4E8FA; --app-ink:#2F3C8F; --app-line:#C3CBF0;
   --shadow:0 18px 50px -20px rgba(19,32,27,.35);
   --f-display:"Newsreader", Georgia, "Times New Roman", serif;
   --f-body:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -20,12 +22,16 @@
   --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
   --sim:#86B6E8; --sim-bg:#18283A; --comp:#E8A659; --comp-bg:#382814;
   --pass:#8C9993; --danger:#F07A6C; --frame:#000000; --bubble-me:#2E8C69; --bubble-me-ink:#FFFFFF;
+  --them-bg:#2E1A29; --them:#EA9FD3; --you-bg:#13291E; --you:#62C79E;
+  --app-bg:#1B2045; --app-ink:#B3BEF5; --app-line:#363F72;
   --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}}
 :root[data-theme="dark"]{
   --bg:#0C1110; --surface:#161F1C; --surface-2:#1C2723; --ink:#E4ECE8; --muted:#93A29B; --line:#2A3631;
   --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
   --sim:#86B6E8; --sim-bg:#18283A; --comp:#E8A659; --comp-bg:#382814;
   --pass:#8C9993; --danger:#F07A6C; --frame:#000000; --bubble-me:#2E8C69; --bubble-me-ink:#FFFFFF;
+  --them-bg:#2E1A29; --them:#EA9FD3; --you-bg:#13291E; --you:#62C79E;
+  --app-bg:#1B2045; --app-ink:#B3BEF5; --app-line:#363F72;
   --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}
 
 *{box-sizing:border-box}
@@ -84,33 +90,40 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 .card{position:absolute;inset:0 14px;background:var(--surface);border-radius:22px;border:1px solid var(--line);box-shadow:0 10px 30px -18px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden;touch-action:pan-y;user-select:none;transition:transform .28s ease, opacity .28s ease}
 .card.dragging{transition:none}
 .card.under{transform:scale(.95) translateY(10px);opacity:.6;pointer-events:none}
-.people{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+/* Split card: their side tinted one colour (left), yours another (right), top to bottom */
+.card{background:linear-gradient(90deg,var(--them-bg) 50%,var(--you-bg) 50%)}
+.people{display:grid;grid-template-columns:1fr 1fr}
 .person{padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;min-width:0}
-.person + .person{border-left:1px solid var(--line);background:var(--surface-2)}
-.person .role{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.person .role{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-bottom:4px;padding:2px 8px;border-radius:999px;color:var(--surface)}
+.person.them .role{background:var(--them)} .person.you .role{background:var(--you)}
+.person.them .av{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--them)}
+.person.you .av{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--you)}
+.person .av{margin-bottom:4px}
 .person .name{font-weight:700;font-size:15px;line-height:1.2}
 .person .handle{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
 .person .loc{display:flex;align-items:center;gap:3px;font-size:12px;color:var(--muted)}
 .person .loc svg{width:12px;height:12px}
-.cardbody{flex:1;min-height:0;overflow:auto;padding:12px 14px 10px;display:flex;flex-direction:column;gap:12px}
-.why{display:flex;justify-content:space-between;align-items:baseline}
-.why h3{font-family:var(--f-display);font-size:19px;font-weight:600;margin:0}
+.cardbody{flex:1;min-height:0;overflow:auto;padding:4px 0 0;display:flex;flex-direction:column;gap:12px}
+.why{align-self:center;display:flex;align-items:baseline;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 14px}
+.why h3{font-family:var(--f-display);font-size:17px;font-weight:600;margin:0}
 .fit{font-family:var(--f-mono);font-size:11px;color:var(--accent);font-weight:500}
-.bridges{display:flex;flex-direction:column;gap:8px}
-.bridge{border-radius:14px;padding:8px 10px 10px}
-.bridge.sim{background:var(--sim-bg)}
-.bridge.comp{background:var(--comp-bg)}
-.bridge .kind{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:6px}
-.bridge.sim .kind{color:var(--sim)} .bridge.comp .kind{color:var(--comp)}
-.bridge .row{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);gap:6px;align-items:center;font-size:12.5px;line-height:1.35}
-.bridge .row .r{text-align:right}
-.bridge .glyph{display:grid;place-items:center;font-weight:700}
+.bridges{display:flex;flex-direction:column;gap:12px}
+.bridge{display:flex;flex-direction:column;align-items:center;gap:6px}
+.bridge .kind{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:2px 9px;border-radius:999px}
+.bridge.sim .kind{color:var(--sim);background:var(--sim-bg);border:1px solid var(--sim)}
+.bridge.comp .kind{color:var(--comp);background:var(--comp-bg);border:1px solid var(--comp)}
+.bridge .row{width:100%;display:grid;grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr);align-items:center;font-size:12.5px;line-height:1.35}
+.bridge .row > span:first-child{padding:0 8px 0 14px}
+.bridge .row .r{text-align:right;padding:0 14px 0 8px}
+.bridge .glyph{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--surface);border:1.5px solid}
 .bridge.sim .glyph{color:var(--sim)} .bridge.comp .glyph{color:var(--comp)}
-.more{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.more .col{display:flex;flex-direction:column;gap:5px;min-width:0}
-.more .col.r{align-items:flex-end;text-align:right}
-.more .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.prov{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.more{display:grid;grid-template-columns:1fr 1fr;gap:0;padding-top:2px}
+.more .col{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0;padding:0 8px 0 14px}
+.more .col.r{align-items:flex-end;text-align:right;padding:0 14px 0 8px}
+.more .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.more .col .lbl{color:var(--them)} .more .col.r .lbl{color:var(--you)}
+.card .chip.plain{background:var(--surface)}
+.prov{margin-top:auto;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);background:var(--surface);border-top:1px solid var(--line);padding:8px 14px;text-align:center}
 .stamp{position:absolute;top:84px;padding:4px 12px;border:3px solid;border-radius:10px;font-family:var(--f-mono);font-weight:500;font-size:20px;letter-spacing:.1em;opacity:0;pointer-events:none;background:var(--surface)}
 .stamp.yes{left:18px;color:var(--accent);transform:rotate(-12deg)}
 .stamp.no{right:18px;color:var(--pass);transform:rotate(12deg)}
@@ -167,9 +180,16 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 .chathead .who strong{display:block}
 .chathead .who span{font-size:12px;color:var(--muted)}
 .thread{flex:1;min-height:0;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px}
-.sys{align-self:center;max-width:92%;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
-.sys .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+/* App's own voice: a third colour, distinct from both people's bubbles */
+.sys{align-self:center;width:94%;background:var(--app-bg);border:1px solid var(--app-line);border-radius:16px;padding:12px;font-size:12.5px;color:var(--app-ink);display:flex;flex-direction:column;gap:8px}
+.sys .lbl{display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.sys .lbl svg{width:14px;height:14px}
 .sys p{margin:0;color:var(--ink)}
+.sys .sub{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-top:2px}
+.starters{display:flex;flex-direction:column;gap:6px}
+.starter{text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--app-line);border-radius:12px;padding:8px 10px;font-size:12.5px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.starter svg{width:14px;height:14px;color:var(--app-ink)}
+.starter:hover{border-color:var(--app-ink)}
 .msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13.5px;position:relative}
 .msg .t{display:block;font-family:var(--f-mono);font-size:9.5px;opacity:.7;margin-top:2px;text-align:right}
 .msg.them{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:6px}
@@ -216,16 +236,16 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
     <h1>Meet people by what they're thinking about</h1>
     <p>Clickable prototype of the matching flow. Swipe the card (or use the buttons, or ← / → keys). Priya and Lena have already said yes to you, so connecting with them shows the match screen.</p>
     <div class="steps" id="steps">
-      <button class="step" data-go="discover"><span class="n">1</span><span><strong>Discover</strong><span>Them on the left, you on the right. Shared and complementary ideas sit between you. Pass or connect, and the next person appears.</span></span></button>
+      <button class="step" data-go="discover"><span class="n">1</span><span><strong>Discover</strong><span>Them on the left (pink side), you on the right (green side). First names and usernames only. Shared and complementary ideas link across the middle. Pass or connect, and the next person appears.</span></span></button>
       <button class="step" data-go="match"><span class="n">2</span><span><strong>It's a match</strong><span>Shown when both people connect. Includes the warm intro and a suggested first question.</span></span></button>
       <button class="step" data-go="matches"><span class="n">3</span><span><strong>Matches</strong><span>New matches up top, conversations below, each tagged with what you matched on.</span></span></button>
-      <button class="step" data-go="chat"><span class="n">4</span><span><strong>Chat</strong><span>Text, voice notes (tap the mic) and sharing one specific past LLM chat (tap +).</span></span></button>
+      <button class="step" data-go="chat"><span class="n">4</span><span><strong>Chat</strong><span>The app's own note (blue) explains the match and offers three conversation starters to tap. Then text, voice notes (mic) and sharing one past LLM chat (+).</span></span></button>
     </div>
     <div class="legend">
       <span class="chip sim">= Shared interest</span>
       <span class="chip comp">⇄ Complementary</span>
     </div>
-    <p class="note">Sample data only. Names, chats and locations are invented. Ideas shown are what Step 3 (Idea Generation) would extract and Step 5 (Match Generation) would pair up. Raw chat text is never shown unless a user chooses to share a specific chat.</p>
+    <p class="note">Sample data only. Names, chats and locations are invented. For privacy, users only ever see first names and usernames. Ideas shown are what Step 3 (Idea Generation) would extract and Step 5 (Match Generation) would pair up. Raw chat text is never shown unless a user chooses to share a specific chat.</p>
   </section>
 
   <div class="phone" aria-label="Phone prototype">
@@ -316,39 +336,44 @@ const I = {
   compass:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>',
   chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
   user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  spark:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.3L20.5 10l-6.3 2.2L12 18.5l-2.2-6.3L3.5 10l6.3-1.7z"/></svg>',
   trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg>'
 };
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-const ME = {name:'Sam Rivera', first:'Sam', handle:'@samrivera', loc:'Boston, MA', initials:'SR', hue:158, chats:31};
+const ME = {name:'Sam', first:'Sam', handle:'@samrivera', loc:'Boston, MA', initials:'S', hue:158, chats:31};
 
 const CANDIDATES = [
-  {id:'priya', name:'Priya Nair', first:'Priya', handle:'@priya.n', loc:'Cambridge, MA', initials:'PN', hue:12, likesYou:true, fit:.91, chats:23,
+  {id:'priya', name:'Priya', first:'Priya', handle:'@priya.n', loc:'Cambridge, MA', initials:'P', hue:12, likesYou:true, fit:.91, chats:23,
    bridges:[
      {type:'comp', them:'Needs wet-lab validation for diffusion-model binding predictions', you:'Runs SPR binding assays on small-molecule libraries'},
      {type:'sim',  them:'Generative models for drug discovery', you:'Curious how ML could prioritise which compounds to test'}],
    themMore:['Protein language models','Benchmark leakage'], youMore:['Assay automation','FAIR data in small labs'],
    intro:'Priya is using diffusion models to predict protein–ligand binding but has no lab to check the predictions. You run SPR binding assays and keep asking which compounds are worth testing first.',
-   q:'Which 20 of Priya\'s top-ranked compounds could your lab run in one week?', topic:'Diffusion models × binding assays'},
-  {id:'tomas', name:'Tomás Ortega', first:'Tomás', handle:'@tortega', loc:'Providence, RI', initials:'TO', hue:205, likesYou:false, fit:.78, chats:17,
+   q:'Which 20 of Priya\'s top-ranked compounds could your lab run in one week?', topic:'Diffusion models × binding assays',
+   starters:['Which 20 of your top-ranked compounds could my lab run in one week?','Where do your binding predictions usually go wrong?','Would a shared benchmark of 50 compounds help us both?']},
+  {id:'tomas', name:'Tomás', first:'Tomás', handle:'@tortega', loc:'Providence, RI', initials:'T', hue:205, likesYou:false, fit:.78, chats:17,
    bridges:[
      {type:'sim', them:'Making messy instrument data reusable across labs', you:'FAIR data practices for small labs'},
      {type:'comp', them:'Building a lightweight open-source lab data catalog', you:'Has two years of unstructured assay exports to test it on'}],
    themMore:['Soil carbon sensors','Metadata standards'], youMore:['SPR binding assays','Grant reporting'],
-   intro:'Tomás is building a small open-source data catalog for lab instruments. You have years of assay exports nobody can search.', q:'What would it take to load one month of your SPR exports into his catalog?', topic:'Lab data catalog × assay exports'},
-  {id:'lena', name:'Lena Hoffmann', first:'Lena', handle:'@lhoff', loc:'Berlin, DE', initials:'LH', hue:268, likesYou:true, fit:.86, chats:40,
+   intro:'Tomás is building a small open-source data catalog for lab instruments. You have years of assay exports nobody can search.', q:'What would it take to load one month of your SPR exports into his catalog?', topic:'Lab data catalog × assay exports',
+   starters:['What format does your catalog expect? I have two years of SPR exports.','Which metadata fields do people actually fill in?','Could we pilot your catalog on one month of my data?']},
+  {id:'lena', name:'Lena', first:'Lena', handle:'@lhoff', loc:'Berlin, DE', initials:'L', hue:268, likesYou:true, fit:.86, chats:40,
    bridges:[
      {type:'comp', them:'Active learning to choose the next experiment', you:'Spends weeks deciding which compounds to screen next'},
      {type:'sim', them:'Cutting wasted wet-lab runs', you:'Assay automation on a tight budget'}],
    themMore:['Bayesian optimisation','Lab robotics'], youMore:['ML for drug discovery','FAIR data'],
-   intro:'Lena designs active-learning loops that pick the most informative next experiment. You choose screening batches by hand and want a smarter way.', q:'Could one of your past screening rounds be replayed through her active-learning loop?', topic:'Active learning × screening design'},
-  {id:'amara', name:'Amara Okafor', first:'Amara', handle:'@amara.o', loc:'New Haven, CT', initials:'AO', hue:330, likesYou:false, fit:.72, chats:12,
+   intro:'Lena designs active-learning loops that pick the most informative next experiment. You choose screening batches by hand and want a smarter way.', q:'Could one of your past screening rounds be replayed through her active-learning loop?', topic:'Active learning × screening design',
+   starters:['Could one of my past screening rounds be replayed through your active-learning loop?','How many rounds does your loop need before it beats picking by hand?','What data would you need from a typical SPR screen?']},
+  {id:'amara', name:'Amara', first:'Amara', handle:'@amara.o', loc:'New Haven, CT', initials:'A', hue:330, likesYou:false, fit:.72, chats:12,
    bridges:[
      {type:'comp', them:'Writing an NIH R21 on antimicrobial peptides, needs biophysics aim', you:'Measures binding kinetics, which that aim needs'},
      {type:'sim', them:'Peptide–membrane interactions', you:'Label-free binding methods'}],
    themMore:['Science communication','Antibiotic resistance'], youMore:['Assay automation','Grant reporting'],
-   intro:'Amara is drafting a grant on antimicrobial peptides and needs a binding-kinetics aim. That is exactly what your lab measures.', q:'Could your SPR setup measure peptide binding to lipid vesicles?', topic:'Peptide grant × binding kinetics'}
+   intro:'Amara is drafting a grant on antimicrobial peptides and needs a binding-kinetics aim. That is exactly what your lab measures.', q:'Could your SPR setup measure peptide binding to lipid vesicles?', topic:'Peptide grant × binding kinetics',
+   starters:['What binding measurements does your peptide aim need?','Has anyone measured your peptides on lipid vesicles yet?','When is the grant deadline? I could help draft the biophysics aim.']}
 ];
 
 const MY_CHATS = [
@@ -359,8 +384,9 @@ const MY_CHATS = [
 
 // Existing matches (already chatting)
 const MATCHES = [
-  {id:'jonah', name:'Jonah Feld', first:'Jonah', loc:'Boston, MA', initials:'JF', hue:40, topic:'Electronic lab notebooks × FAIR data', type:'sim', isNew:false, unread:2,
+  {id:'jonah', name:'Jonah', first:'Jonah', handle:'@jfeld', loc:'Boston, MA', initials:'J', hue:40, topic:'Electronic lab notebooks × FAIR data', type:'sim', isNew:false, unread:2,
    intro:'Jonah builds electronic lab notebook tooling and is wrestling with the same FAIR-data questions you keep asking.', q:'What does a "minimum FAIR" checklist look like for a 3-person lab?',
+   starters:['Which six metadata fields would you start with for an assay lab?','Want to try your schema on one of my Biacore exports?','How do you get people to actually fill in ELN metadata?'],
    msgs:[
      {who:'me', kind:'text', text:'Hi Jonah! Saw we both keep asking about FAIR data for small labs 😄', t:'Thu 10:12'},
      {who:'them', kind:'text', text:'Ha, yes. I think I asked Claude the same question four times last month.', t:'Thu 10:20'},
@@ -368,8 +394,9 @@ const MATCHES = [
      {who:'them', kind:'voice', dur:38, t:'Thu 10:24'},
      {who:'them', kind:'text', text:'Want to try it on one of your assay exports?', t:'Thu 10:24'}
    ]},
-  {id:'mei', name:'Mei Tanaka', first:'Mei', loc:'Somerville, MA', initials:'MT', hue:95, topic:'Assay automation × lab robotics', type:'comp', isNew:false, unread:0,
+  {id:'mei', name:'Mei', first:'Mei', handle:'@mei.builds', loc:'Somerville, MA', initials:'M', hue:95, topic:'Assay automation × lab robotics', type:'comp', isNew:false, unread:0,
    intro:'Mei is building low-cost liquid-handling robots. You want to automate assay prep but cannot afford commercial systems.', q:'Which step of your assay prep takes the most hands-on time?',
+   starters:['Which plate-prep step does your robot handle best?','What would it take to adapt it for 384-well plates?','Could I come by and see it running?'],
    msgs:[
      {who:'them', kind:'text', text:'Our robot can do plate prep for about $3k in parts. Happy to show you.', t:'Mon 16:02'},
      {who:'me', kind:'text', text:'That would be amazing. Coffee at the Broad next week?', t:'Mon 16:30'}
@@ -390,8 +417,8 @@ function cardHTML(c, under){
   return `<article class="card${under?' under':''}" ${under?'aria-hidden="true"':''} data-id="${c.id}">
     <span class="stamp yes">CONNECT</span><span class="stamp no">PASS</span>
     <div class="people">
-      <div class="person"><span class="role">Them</span>${avatar(c)}<span class="name">${esc(c.name)}</span><span class="handle">${esc(c.handle)}</span><span class="loc">${I.pin}${esc(c.loc)}</span></div>
-      <div class="person"><span class="role">You</span>${avatar(ME)}<span class="name">${esc(ME.name)}</span><span class="handle">${esc(ME.handle)}</span><span class="loc">${I.pin}${esc(ME.loc)}</span></div>
+      <div class="person them"><span class="role">Them</span>${avatar(c)}<span class="name">${esc(c.first)}</span><span class="handle">${esc(c.handle)}</span><span class="loc">${I.pin}${esc(c.loc)}</span></div>
+      <div class="person you"><span class="role">You</span>${avatar(ME)}<span class="name">${esc(ME.first)}</span><span class="handle">${esc(ME.handle)}</span><span class="loc">${I.pin}${esc(ME.loc)}</span></div>
     </div>
     <div class="cardbody">
       <div class="why"><h3>Why you two</h3><span class="fit">fit ${c.fit.toFixed(2)}</span></div>
@@ -443,7 +470,7 @@ function decide(accept){
 }
 function addMatch(c){
   if (MATCHES.some(m => m.id === c.id)) return;
-  MATCHES.unshift({id:c.id, name:c.name, first:c.first, loc:c.loc, initials:c.initials, hue:c.hue, topic:c.topic, type:c.bridges[0].type, isNew:true, unread:0, intro:c.intro, q:c.q, msgs:[]});
+  MATCHES.unshift({id:c.id, name:c.name, first:c.first, handle:c.handle, loc:c.loc, initials:c.initials, hue:c.hue, topic:c.topic, type:c.bridges[0].type, isNew:true, unread:0, intro:c.intro, q:c.q, starters:c.starters.slice(), msgs:[]});
   updateBadge();
 }
 
@@ -477,7 +504,7 @@ function renderMatches(){
     const last = m.msgs[m.msgs.length-1];
     const snip = last.kind==='text' ? last.text : last.kind==='voice' ? 'Voice note' : 'Shared a chat: ' + last.chat.title;
     return `<button class="convo${m.unread?' unread':''}" data-open="${m.id}">${avatar(m)}
-      <span style="min-width:0"><span class="top"><span class="nm">${esc(m.name)}</span><span class="lc">${esc(m.loc)}</span></span>
+      <span style="min-width:0"><span class="top"><span class="nm">${esc(m.first)}</span><span class="lc">${esc(m.handle||'')} · ${esc(m.loc)}</span></span>
       <span class="snip" style="display:block">${last.who==='me'?'You: ':''}${esc(snip)}</span>
       <span class="chip ${m.type}">${m.type==='sim'?'=':'⇄'} ${esc(m.topic)}</span></span>
       <span class="meta"><span class="time">${esc(last.t.split(' ')[0])}</span>${m.unread?'<span class="dot" aria-label="unread"></span>':''}</span></button>`;
@@ -508,7 +535,9 @@ function msgHTML(m, i){
 function renderThread(){
   const m = MATCHES.find(x => x.id===chatId);
   const th = $('#thread');
-  th.innerHTML = `<div class="sys"><span class="lbl">How you matched · ${esc(m.topic)}</span><p>${esc(m.intro)}</p><span>Try asking: ${esc(m.q)}</span></div>` + m.msgs.map(msgHTML).join('');
+  const starters = (m.starters||[]).map((q,i) => `<button class="starter" data-starter="${i}"><span>${esc(q)}</span>${I.send}</button>`).join('');
+  th.innerHTML = `<div class="sys" role="note"><span class="lbl">${I.spark}The Fellowship · How you matched</span><p>${esc(m.intro)}</p><span class="mono">${esc(m.topic)}</span>${starters ? `<span class="sub">Tap to start the conversation</span><div class="starters">${starters}</div>` : ''}</div>` + m.msgs.map(msgHTML).join('');
+  th.querySelectorAll('[data-starter]').forEach(b => b.onclick = () => { const q = m.starters.splice(+b.dataset.starter, 1)[0]; push({who:'me', kind:'text', text:q, t:now()}); });
   th.querySelectorAll('[data-expand]').forEach(b => b.onclick = () => { const a = b.parentElement.querySelector('[data-ans]'); a.hidden = !a.hidden; b.textContent = a.hidden ? 'Show reply' : 'Hide reply'; });
   th.querySelectorAll('[data-voice]').forEach(b => b.onclick = () => playVoice(b, m.msgs[+b.dataset.voice].dur));
   th.scrollTop = th.scrollHeight;
@@ -525,7 +554,7 @@ function openChat(id){
   const m = MATCHES.find(x => x.id===id);
   m.unread = 0; m.isNew = false; updateBadge();
   $('#chatAv').outerHTML = avatar(m,'sm').replace('class="av sm"','class="av sm" id="chatAv"');
-  $('#chatName').textContent = m.name;
+  $('#chatName').innerHTML = esc(m.first) + ` <span class="mono" style="color:var(--muted);font-weight:400">${esc(m.handle||'')}</span>`;
   $('#chatSub').textContent = m.loc + ' · ' + m.topic;
   renderThread();
   show('chat');

@@ -68,7 +68,7 @@ People's AI chats are personal. These rules hold even for the hackathon demo:
 ## Getting started (team)
 
 1. Open **GitHub Desktop** → make sure *The-Fellowship* is the current repository → click **Fetch origin** / **Pull**.
-2. Switch to **your step's branch** (e.g. `step-3-idea-generation`). `main` is only changed through pull requests.
+2. Make sure you're on **`main`**. The whole team works there. Always pull before you start.
 3. Read [`CLAUDE.md`](./CLAUDE.md) (the ground rules) and [`docs/PROGRESS.md`](./docs/PROGRESS.md) (who's on what).
 4. Work inside the folder for your step. Log what you did in that step's `README.md`.
 5. When you're ready to save to GitHub, follow [`docs/HOW_WE_WORK.md`](./docs/HOW_WE_WORK.md).

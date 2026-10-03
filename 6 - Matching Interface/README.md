@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Owner** | _TBD_ |
-| **Branch** | `step-6-matching-interface` (work here, not on `main`) |
+| **Branch** | `main` (whole team works on main) |
 | **Status** | 🟨 In progress (UX mockup done) |
 | **Gets input from** | Step 5 |
 | **Hands output to** | — (end of pipeline) |
@@ -24,7 +24,8 @@ The screens the user sees, plus updated match status:
 
 ## To do
 - [x] Sketch the match card and warm-intro screens → `mockup/matching-mockup.html`
-- [ ] Choose the build tool (whatever the team can demo fastest)
+- [x] Choose the build tool → Python + Streamlit (team decision D-004)
+- [ ] Rebuild the four mockup screens in Streamlit, reading Step 5's `sample_matches.json`
 - [ ] Write the warm-intro prompt / template
 - [ ] Wire up the demo with 3–5 sample users
 
@@ -38,6 +39,9 @@ The screens the user sees, plus updated match status:
 ## Decisions log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — why.`_
 
+- **2026-10-03** — Oliver — **Privacy: first names and usernames only.** No last names anywhere in the app (cards, matches list, chat). Avatars show a single initial. *Why:* the app is privacy-first; people can share more themselves once they're talking.
+- **2026-10-03** — Oliver — **Two clearly different colours for the two sides of the match card.** Pink for them (left), green for you (right), running from top to bottom. The type labels (shared interest / complementary) sit on the middle line between them. *Why:* makes the "them vs. you" comparison obvious at a glance.
+- **2026-10-03** — Oliver — **The app speaks in a third colour (blue) in chat.** The "How you matched" note is visually separate from both people's messages and offers 3 tappable conversation starters, which send as your first message. *Why:* removes the "what do I say first?" friction.
 - **2026-10-03** — Oliver — **Swipe-based flow, mobile first.** Discover (swipe card) → "both said yes" match screen → Matches list → Chat. *Why:* everyone already knows the pattern from dating apps, so there's nothing to learn.
 - **2026-10-03** — Oliver — **Match card puts them on the left and you on the right.** Each "bridge" row links their idea to yours: **=** shared interest (blue), **⇄** complementary (amber). Shows both usernames and locations. *Why:* the reason for the match is visible at a glance.
 - **2026-10-03** — Oliver — **Accept or pass always moves to the next person.** A match only happens when both accept. Accepting someone who hasn't accepted yet shows a "request sent" note.
@@ -46,7 +50,9 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
-- **2026-10-03** — Oliver + Claude — Clickable UX mockup added: `mockup/matching-mockup.html` (open in any browser), plus screenshots `mockup/1-discover.png` … `4-chat.png`. Uses invented sample users. **Next:** team feedback, then pick the build tool.
+- **2026-10-03** — Oliver + Claude — Step 6 now works on `main` with the rest of the team (D-005). **Next:** build the screens in Streamlit (D-004).
+- **2026-10-03** — Oliver + Claude — Mockup v2: first names only, pink/green split card, blue app note with 3 conversation starters in chat. Screenshots refreshed.
+- **2026-10-03** — Oliver + Claude — Clickable UX mockup added: `mockup/matching-mockup.html` (open in any browser), plus screenshots `mockup/1-discover.png` … `4-chat.png`. Uses invented sample users.
 - **2026-10-03** — setup — Step folder and spec created.
 
 ## Code fixes log

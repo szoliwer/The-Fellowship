@@ -12,6 +12,14 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 ```
 
 ---
+
+### D-005 — Everyone works on `main` (replaces D-003)
+- **Date / who:** 2026-10-03 — team (recorded by Oliver)
+- **Decision:** The whole team commits directly to `main`. The per-step branches are retired and nobody should keep working on them.
+- **Why:** Everyone wants to see all committed work immediately, whatever branch it was on. Pull requests and branch-switching were slowing the hackathon down.
+- **How we stay safe:** pull before every change, stay in your own step folder, commit small and often. See `docs/HOW_WE_WORK.md`.
+- **Affects:** all steps
+
 ### D-004 — Stack Choice; `main` changes only via pull request
 - **Date / who:** 2026-10-03 — Herman
 - **Decision:** Stack for the MVP: Python + Streamlit. Each step is plain Python code in its own folder that reads input files and writes output files; one Streamlit app is the shell that runs the steps and shows the screens. Steps pass data as files (e.g. the Noise Filter → Idea Generation handoff). 

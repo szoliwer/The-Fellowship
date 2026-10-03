@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Owner** | _TBD_ |
-| **Branch** | `step-5-match-generation` (work here, not on `main`) |
+| **Branch** | `main` (whole team works on main) |
 | **Status** | 🟨 In progress (works end to end on sample data; offline mode is a placeholder; not yet run against the live Claude API) |
 | **Gets input from** | Step 4 (ranked ideas) + Step 0 (user records) |
 | **Hands output to** | Step 6 |
@@ -60,7 +60,7 @@ The file also contains `people` (`name` plus a one-line research summary per use
 4. **Assign.** The final score is 70% Claude and 30% vector math. It takes the stronger signal, plus a bonus when a pair is both. Matches of a type either person didn't ask for are dropped. Each person gets up to 5 matches, and if their top 5 are all one kind, the best match of the other kind is swapped in. A pair kept for either person is shown to both, so both can accept. Pairs from `--previous` are never suggested again.
 
 ## How to run
-1. GitHub Desktop: switch to `step-5-match-generation`, then *Fetch origin* / *Pull*.
+1. GitHub Desktop: make sure you're on `main`, then *Fetch origin* / *Pull*.
 2. Open a terminal there: **Repository** menu → *Open in Terminal* (Mac) or *Open in Command Prompt* (Windows). Then run:
    ```
    cd "5 - Match Generation"
