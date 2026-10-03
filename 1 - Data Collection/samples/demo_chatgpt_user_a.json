@@ -1,0 +1,1212 @@
+[
+  {
+    "title": "Could trafficking explain the Disease A phenotype?",
+    "create_time": 1788523200.0,
+    "update_time": 1788524040.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s01-sys"
+        ]
+      },
+      "a_s01-sys": {
+        "id": "a_s01-sys",
+        "message": {
+          "id": "a_s01-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s01-m00"
+        ]
+      },
+      "a_s01-m00": {
+        "id": "a_s01-m00",
+        "message": {
+          "id": "a_s01-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788523800.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "In fibroblasts from Disease A patients we keep seeing a membrane protein piling up near the nucleus instead of reaching the cell surface. Could altered intracellular trafficking explain the phenotype, or am I over-reading one observation?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s01-sys",
+        "children": [
+          "a_s01-m01"
+        ]
+      },
+      "a_s01-m01": {
+        "id": "a_s01-m01",
+        "message": {
+          "id": "a_s01-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788523860.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "It's a reasonable hypothesis, but the same picture could come from several causes: slower delivery from the Golgi, faster internalisation, failure to recycle from endosomes, or simply more of the protein being made. Each predicts something different about where and how fast the protein moves, so the next step is to separate them."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s01-m00",
+        "children": [
+          "a_s01-m02"
+        ]
+      },
+      "a_s01-m02": {
+        "id": "a_s01-m02",
+        "message": {
+          "id": "a_s01-m02",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788523920.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "So I should treat 'trafficking defect' as a hypothesis to test, not a conclusion. What would most cleanly separate those explanations?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s01-m01",
+        "children": [
+          "a_s01-m03"
+        ]
+      },
+      "a_s01-m03": {
+        "id": "a_s01-m03",
+        "message": {
+          "id": "a_s01-m03",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788523980.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Comparing total protein levels with the surface fraction rules expression in or out. Timing how quickly the protein reaches or leaves the surface separates delivery from recycling. Co-staining with compartment markers shows where it is stuck."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s01-m02",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s01-m03",
+    "conversation_id": "a_s01",
+    "id": "a_s01"
+  },
+  {
+    "title": "Does mislocalization mean function changed?",
+    "create_time": 1788782400.0,
+    "update_time": 1788783240.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s02-sys"
+        ]
+      },
+      "a_s02-sys": {
+        "id": "a_s02-sys",
+        "message": {
+          "id": "a_s02-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s02-old0",
+          "a_s02-m00"
+        ]
+      },
+      "a_s02-old0": {
+        "id": "a_s02-old0",
+        "message": {
+          "id": "a_s02-old0",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788782400.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "ABANDONED-BRANCH: is 60% mislocalization enough to publish?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s02-sys",
+        "children": [
+          "a_s02-old1"
+        ]
+      },
+      "a_s02-old1": {
+        "id": "a_s02-old1",
+        "message": {
+          "id": "a_s02-old1",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788782430.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "ABANDONED-BRANCH: probably not without a functional readout."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s02-old0",
+        "children": []
+      },
+      "a_s02-m00": {
+        "id": "a_s02-m00",
+        "message": {
+          "id": "a_s02-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788783000.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Our immunofluorescence shows mislocalization in about 60% of Disease A cells versus 15% of controls. Does that tell us anything about function, or only about location?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s02-sys",
+        "children": [
+          "a_s02-m01"
+        ]
+      },
+      "a_s02-m01": {
+        "id": "a_s02-m01",
+        "message": {
+          "id": "a_s02-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788783060.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "On its own it tells you about location. A protein can be in an unusual place and still work, or look normal and be impaired. To link location to the phenotype you need a functional readout: for example, a cargo-uptake measurement, a pulse-chase to follow delivery over time, or surface labelling to quantify how much arrives."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s02-m00",
+        "children": [
+          "a_s02-m02"
+        ]
+      },
+      "a_s02-m02": {
+        "id": "a_s02-m02",
+        "message": {
+          "id": "a_s02-m02",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788783120.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "We've only ever done imaging. I'm not sure which functional measurement fits our question, or how to tell a real effect from an artifact of the assay itself."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s02-m01",
+        "children": [
+          "a_s02-m03"
+        ]
+      },
+      "a_s02-m03": {
+        "id": "a_s02-m03",
+        "message": {
+          "id": "a_s02-m03",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1788783180.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "That's the key gap: picking a functional readout that matches the hypothesis, with controls that rule out artifacts. Someone who has designed trafficking assays before would help you choose."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s02-m02",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s02-m03",
+    "conversation_id": "a_s02",
+    "id": "a_s02"
+  },
+  {
+    "title": "What assay or expertise could test the hypothesis?",
+    "create_time": 1789041600.0,
+    "update_time": 1789042380.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s03-sys"
+        ]
+      },
+      "a_s03-sys": {
+        "id": "a_s03-sys",
+        "message": {
+          "id": "a_s03-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s03-m00"
+        ]
+      },
+      "a_s03-m00": {
+        "id": "a_s03-m00",
+        "message": {
+          "id": "a_s03-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789042200.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "I'm honestly uncertain here. If the trafficking idea is right, what assay would test it, and what kind of expertise would I need? Nobody in our group has run functional trafficking assays."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s03-sys",
+        "children": [
+          "a_s03-m01"
+        ]
+      },
+      "a_s03-m01": {
+        "id": "a_s03-m01",
+        "message": {
+          "id": "a_s03-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789042260.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "You'd want a measurement of movement over time rather than a snapshot, plus controls: a condition known to block the pathway, a protein that should be unaffected, and a check that the labelling itself doesn't change trafficking. A cell biologist with assay-design experience could tell you which is feasible with your cells."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s03-m00",
+        "children": [
+          "a_s03-m02"
+        ]
+      },
+      "a_s03-m02": {
+        "id": "a_s03-m02",
+        "message": {
+          "id": "a_s03-m02",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789042320.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Good. Then the open question is really: which functional measurement, with which controls, and who could help design it."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s03-m01",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s03-m02",
+    "conversation_id": "a_s03",
+    "id": "a_s03"
+  },
+  {
+    "title": "How reproducible is LLM-assisted literature extraction?",
+    "create_time": 1789300800.0,
+    "update_time": 1789301640.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s04-sys"
+        ]
+      },
+      "a_s04-sys": {
+        "id": "a_s04-sys",
+        "message": {
+          "id": "a_s04-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s04-m00"
+        ]
+      },
+      "a_s04-m00": {
+        "id": "a_s04-m00",
+        "message": {
+          "id": "a_s04-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789301400.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "We're using an LLM to pull variant-phenotype mentions out of papers for a literature review. Running the same paper twice gives slightly different lists. How worried should I be about reproducibility?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s04-sys",
+        "children": [
+          "a_s04-m01"
+        ]
+      },
+      "a_s04-m01": {
+        "id": "a_s04-m01",
+        "message": {
+          "id": "a_s04-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789301460.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Some variation is expected. It matters most if the differences change your conclusions. Measure it before deciding: run each paper several times and check how often the extracted items agree."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s04-m00",
+        "children": [
+          "a_s04-m02"
+        ]
+      },
+      "a_s04-m02": {
+        "id": "a_s04-m02",
+        "message": {
+          "id": "a_s04-m02",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789301520.0,
+          "update_time": null,
+          "content": {
+            "content_type": "multimodal_text",
+            "parts": [
+              {
+                "content_type": "image_asset_pointer",
+                "asset_pointer": "file-service://synthetic-0001"
+              },
+              "Here's a screenshot of two runs on the same paper. The second run missed two variants."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s04-m01",
+        "children": [
+          "a_s04-m03"
+        ]
+      },
+      "a_s04-m03": {
+        "id": "a_s04-m03",
+        "message": {
+          "id": "a_s04-m03",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789301580.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Missing items between runs suggests recall is the weak spot. Track agreement per item, not just per paper, so you can see which mentions are unstable."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s04-m02",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s04-m03",
+    "conversation_id": "a_s04",
+    "id": "a_s04"
+  },
+  {
+    "title": "Checking disagreements between extraction runs",
+    "create_time": 1789473600.0,
+    "update_time": 1789474380.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s05-sys"
+        ]
+      },
+      "a_s05-sys": {
+        "id": "a_s05-sys",
+        "message": {
+          "id": "a_s05-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s05-m00"
+        ]
+      },
+      "a_s05-m00": {
+        "id": "a_s05-m00",
+        "message": {
+          "id": "a_s05-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789474200.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Following up on extraction reproducibility: if I run each paper three times, how do I handle items that appear in only one or two runs?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s05-sys",
+        "children": [
+          "a_s05-m01"
+        ]
+      },
+      "a_s05-m01": {
+        "id": "a_s05-m01",
+        "message": {
+          "id": "a_s05-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789474260.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Treat agreement as a signal. Items found in all runs can be accepted with spot checks, while items that appear inconsistently go to a human reviewer. Record how often the reviewer overturns the model so you can report an error rate."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s05-m00",
+        "children": [
+          "a_s05-m02"
+        ]
+      },
+      "a_s05-m02": {
+        "id": "a_s05-m02",
+        "message": {
+          "id": "a_s05-m02",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789474320.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "So the workflow is repeated extraction, then agreement scoring, then human checking of the disagreements, with the human decisions logged."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s05-m01",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s05-m02",
+    "conversation_id": "a_s05",
+    "id": "a_s05"
+  },
+  {
+    "title": "Headaches and poor sleep",
+    "create_time": 1789646400.0,
+    "update_time": 1789647120.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s06-sys"
+        ]
+      },
+      "a_s06-sys": {
+        "id": "a_s06-sys",
+        "message": {
+          "id": "a_s06-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s06-m00"
+        ]
+      },
+      "a_s06-m00": {
+        "id": "a_s06-m00",
+        "message": {
+          "id": "a_s06-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789647000.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "I've had headaches most mornings for three weeks and I'm sleeping badly. I'm also taking a new medication. Should I be worried about my own health here?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s06-sys",
+        "children": [
+          "a_s06-m01"
+        ]
+      },
+      "a_s06-m01": {
+        "id": "a_s06-m01",
+        "message": {
+          "id": "a_s06-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789647060.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "I can't diagnose you, but headaches that persist for weeks, especially after starting a new medication, are worth raising with your doctor soon."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s06-m00",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s06-m01",
+    "conversation_id": "a_s06",
+    "id": "a_s06"
+  },
+  {
+    "title": "Budget and loan repayment",
+    "create_time": 1789819200.0,
+    "update_time": 1789819920.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s07-sys"
+        ]
+      },
+      "a_s07-sys": {
+        "id": "a_s07-sys",
+        "message": {
+          "id": "a_s07-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s07-m00"
+        ]
+      },
+      "a_s07-m00": {
+        "id": "a_s07-m00",
+        "message": {
+          "id": "a_s07-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789819800.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Help me plan repayments. Take-home pay is 3,100 a month, rent is 1,400, and the loan on account TEST-0000-4471 has 8,200 left at 6.5%."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s07-sys",
+        "children": [
+          "a_s07-m01"
+        ]
+      },
+      "a_s07-m01": {
+        "id": "a_s07-m01",
+        "message": {
+          "id": "a_s07-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789819860.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "After rent you have 1,700 a month. Paying 400 a month toward the loan would clear it in roughly two years. Want a month-by-month table?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s07-m00",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s07-m01",
+    "conversation_id": "a_s07",
+    "id": "a_s07"
+  },
+  {
+    "title": "Conference travel and meeting logistics",
+    "create_time": 1789992000.0,
+    "update_time": 1789992720.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s08-sys"
+        ]
+      },
+      "a_s08-sys": {
+        "id": "a_s08-sys",
+        "message": {
+          "id": "a_s08-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s08-m00"
+        ]
+      },
+      "a_s08-m00": {
+        "id": "a_s08-m00",
+        "message": {
+          "id": "a_s08-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789992600.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "I land at 14:20 on the 12th and the hotel check-in is 15:00. Can you draft a schedule that fits three 30-minute meetings before the 18:00 reception?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s08-sys",
+        "children": [
+          "a_s08-m01"
+        ]
+      },
+      "a_s08-m01": {
+        "id": "a_s08-m01",
+        "message": {
+          "id": "a_s08-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1789992660.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Here's one option: 15:30, 16:15 and 17:00, each with a 15-minute buffer."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s08-m00",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s08-m01",
+    "conversation_id": "a_s08",
+    "id": "a_s08"
+  },
+  {
+    "title": "Clinic case notes and the trafficking phenotype",
+    "create_time": 1790164800.0,
+    "update_time": 1790165520.0,
+    "mapping": {
+      "client-created-root": {
+        "id": "client-created-root",
+        "message": null,
+        "parent": null,
+        "children": [
+          "a_s09-sys"
+        ]
+      },
+      "a_s09-sys": {
+        "id": "a_s09-sys",
+        "message": {
+          "id": "a_s09-sys",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": null,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              ""
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 0.0,
+          "metadata": {
+            "is_visually_hidden_from_conversation": true
+          },
+          "recipient": "all"
+        },
+        "parent": "client-created-root",
+        "children": [
+          "a_s09-m00"
+        ]
+      },
+      "a_s09-m00": {
+        "id": "a_s09-m00",
+        "message": {
+          "id": "a_s09-m00",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1790165400.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "One of our clinic patients, Jordan Ellery, 34, from Millbrook, record number MRN-0000123, has the strongest mislocalization we've seen. Her family history might explain why. Does her case support the trafficking hypothesis?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s09-sys",
+        "children": [
+          "a_s09-m01"
+        ]
+      },
+      "a_s09-m01": {
+        "id": "a_s09-m01",
+        "message": {
+          "id": "a_s09-m01",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1790165460.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "A single case can motivate the hypothesis but can't confirm it. I'd avoid sharing identifying details; the useful part for your question is the phenotype pattern, which you could compare across de-identified samples."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {},
+          "recipient": "all"
+        },
+        "parent": "a_s09-m00",
+        "children": []
+      }
+    },
+    "moderation_results": [],
+    "current_node": "a_s09-m01",
+    "conversation_id": "a_s09",
+    "id": "a_s09"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "user_id": "user_a",
+    "pseudonym": "researcher_014",
+    "connection_intent": "research collaboration",
+    "is_demo_account": true,
+    "private": {"name": null, "email": null, "affiliation": null},
+    "consent": {"process_imported_chats": true, "timestamp": "2026-10-03T00:00:00Z"}
+  },
+  {
+    "user_id": "user_b",
+    "pseudonym": "cellbio_027",
+    "connection_intent": "research collaboration",
+    "is_demo_account": true,
+    "private": {"name": null, "email": null, "affiliation": null},
+    "consent": {"process_imported_chats": true, "timestamp": "2026-10-03T00:00:00Z"}
+  }
+]
