@@ -1,8 +1,9 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>[hidden]{display:none!important}body{margin:0}</style><title>Fellowship Matching Prototype</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>[hidden]{display:none!important}body{margin:0}</style><title>Fellowship Desktop Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
+
 /* Layout: annotation rail on the left, one live phone on the right; stacks at phone width. */
 :root{
   --bg:#E9EEEA; --surface:#FFFFFF; --surface-2:#F3F6F3; --ink:#13201B; --muted:#5A6862; --line:#D7E0DA;
@@ -242,61 +243,210 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 .pick .m{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);grid-column:2;grid-row:1 / span 2;align-self:center}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* ================= Desktop layout: sidebar | main view ================= */
+html,body{height:100%}
+body{padding:0;overflow:hidden}
+.app{display:grid;grid-template-columns:268px minmax(0,1fr);height:100%}
+.side{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:18px;padding:22px 14px 16px;overflow:auto;min-height:0}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px}
+.brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(90deg,var(--them) 50%,var(--you) 50%);display:grid;place-items:center;color:#fff;font-family:var(--f-display);font-weight:600;font-size:19px}
+.brand b{font-family:var(--f-display);font-weight:600;font-size:21px;line-height:1}
+.brand span{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav .tab{flex-direction:row;justify-content:flex-start;gap:12px;font-size:14px;padding:10px 12px;border-radius:10px;width:100%}
+.nav .tab:hover{background:var(--surface-2)}
+.nav .tab[aria-selected="true"]{background:var(--accent-soft);color:var(--accent)}
+.nav .tab svg{width:20px;height:20px}
+.nav .badge{position:static;margin-left:auto}
+.profile{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.profile .av{width:36px;height:36px;font-size:14px}
+.profile b{display:block;font-size:14px}
+.profile span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.profile .sound{margin-left:auto}
+.proto{margin-top:auto;border:1px dashed var(--app-line);border-radius:12px;background:var(--app-bg);padding:10px 12px;font-size:12px}
+.proto summary{cursor:pointer;font-weight:700;color:var(--app-ink);font-size:13px}
+.proto .grp{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.proto .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--app-ink)}
+.proto .row{display:flex;flex-wrap:wrap;gap:6px}
+.proto button{background:var(--surface);color:var(--app-ink);border:1px solid var(--app-line);border-radius:999px;padding:5px 10px;font-size:11.5px;font-weight:700}
+.proto .step{display:inline-flex;gap:6px;padding:5px 10px;border-radius:999px;box-shadow:none}
+.proto .step .n{padding:0;font-size:11px}
+.proto .step[aria-current="true"]{border-color:var(--app-ink);box-shadow:none;background:var(--app-ink);color:var(--app-bg)}
+.proto .step[aria-current="true"] .n{color:var(--app-bg)}
+.proto a{color:var(--app-ink);font-weight:700}
+
+.main{position:relative;min-width:0;min-height:0;overflow:hidden;background:var(--surface-2)}
+.main .screen{position:absolute;inset:0}
+.topbar{padding:24px 36px 14px}
+.topbar h2{font-size:34px}
+
+/* Discover (desktop): one LANDSCAPE card, sized to its content so nothing scrolls.
+   [ them: pink ]  [ why you two: their idea (pink) ⇄ your idea (green) ]  [ you: green ] */
+.deck{padding:0 36px;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);place-items:center;min-height:0;flex:0 1 auto;margin-top:auto}
+#s-discover .hint{margin-bottom:auto}
+#s-discover .topbar{margin-bottom:8px}
+.deck > .card,.deck > .empty{grid-area:1/1;position:relative;inset:auto;margin:0}
+.card{width:min(1120px,100%);height:auto;max-height:100%;border-radius:24px;background:var(--surface);overflow:hidden}
+.card.under{transform:scale(.97) translateY(12px)}
+.lgrid{display:grid;grid-template-columns:minmax(150px,min(20%,240px)) minmax(0,1fr) minmax(150px,min(20%,240px))}
+.lside{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 16px 18px;min-width:0}
+.lside.them{background:var(--them-bg)} .lside.you{background:var(--you-bg)}
+.lside .role{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;padding:2px 8px;border-radius:999px;color:var(--surface);margin-bottom:6px}
+.lside.them .role{background:var(--them)} .lside.you .role{background:var(--you)}
+.lside .av{width:64px;height:64px;font-size:24px;margin-bottom:6px}
+.lside.them .av{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--them)}
+.lside.you .av{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--you)}
+.lside .name{font-weight:700;font-size:20px;line-height:1.15}
+.lside .handle{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.lside .loc{display:flex;align-items:center;gap:3px;font-size:12.5px;color:var(--muted)}
+.lside .loc svg{width:12px;height:12px}
+.lside .also{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:5px;width:100%}
+.lside .also .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:2px}
+.lside.them .also .lbl{color:var(--them)} .lside.you .also .lbl{color:var(--you)}
+.lside .chip.plain{background:var(--surface);max-width:100%}
+.lmid{display:flex;flex-direction:column;gap:14px;padding:20px 22px 18px;min-width:0;justify-content:center}
+.lmid .why{align-self:center}
+.lmid .bridges{gap:14px}
+.lmid .bridge{gap:6px}
+.lmid .bridge .row{display:grid;grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr);align-items:stretch;font-size:14px;line-height:1.4}
+.lmid .bridge .row .l,.lmid .bridge .row .r{padding:10px 14px;border-radius:12px;display:flex;align-items:center}
+.lmid .bridge .row .l{background:var(--them-bg);border-left:3px solid var(--them)}
+.lmid .bridge .row .r{background:var(--you-bg);border-right:3px solid var(--you);justify-content:flex-end;text-align:right}
+.lmid .bridge .glyph{align-self:center;justify-self:center;width:30px;height:30px}
+.card .prov{margin-top:0;font-size:11px;padding:8px 14px}
+.stamp{top:24px;font-size:24px;z-index:2}
+.stamp.yes{left:24px}.stamp.no{right:24px}
+.actions{gap:40px;padding:16px 0 4px}
+.act.pass{width:62px;height:62px}
+.act.yes{width:74px;height:74px}
+.hint{font-size:12px;padding-bottom:16px}
+.hint kbd{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;background:var(--surface)}
+.empty{width:min(1120px,100%);min-height:320px}
+/* short windows (e.g. 1366×768 laptops, or the app's side panel): tighten everything */
+@media (max-height:760px){
+  .topbar{padding:14px 36px 8px}.topbar h2{font-size:28px}
+  .lside{padding:14px 12px 12px}.lside .av{width:52px;height:52px;font-size:20px}.lside .name{font-size:18px}.lside .also{margin-top:8px}
+  .lmid{padding:14px 18px 12px;gap:10px}.lmid .bridges{gap:10px}.lmid .bridge .row .l,.lmid .bridge .row .r{padding:8px 12px}
+  .actions{padding:10px 0 2px}.act.pass{width:54px;height:54px}.act.yes{width:64px;height:64px}.hint{padding-bottom:10px}
+}
+.topbar .right{gap:10px}
+
+/* Matches: list | chat, side by side */
+#s-matches{display:grid;grid-template-columns:340px minmax(0,1fr)}
+#s-matches[hidden]{display:none!important}
+.listpane{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);background:var(--surface)}
+.listpane .topbar{padding:24px 20px 12px}
+.listpane .topbar h2{font-size:28px}
+.convo:hover{background:var(--surface-2)}
+.convo.active{background:var(--accent-soft)}
+.chatcol{position:relative;display:flex;flex-direction:column;min-height:0;min-width:0}
+#s-chat{position:static;display:flex;flex-direction:column;min-height:0;height:100%}
+.chathead{padding:14px 24px;gap:12px}
+.chathead .av.sm{width:42px;height:42px;font-size:15px}
+.chathead .who strong{font-size:16px}
+#chatBack{display:none}
+.thread{padding:22px 28px;gap:10px}
+.thread > *{max-width:100%}
+.msg{max-width:min(62%,560px);font-size:14px}
+.sys{width:min(640px,94%)}
+.sys.nudge{width:min(560px,86%)}
+.composer{padding:12px 20px 16px}
+.chatempty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);text-align:center;padding:24px}
+.chatempty h3{font-family:var(--f-display);font-size:26px;color:var(--ink);margin:0}
+
+/* Match: a modal over the app */
+.match{background:rgba(6,20,14,.55);padding:24px}
+.matchbox{background:var(--accent);color:var(--accent-ink);width:min(540px,100%);border-radius:26px;padding:34px 30px 26px;display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:var(--shadow)}
+.match h2{font-size:40px}
+.match .btns{flex-direction:row}
+.match .btns .btn{flex:1}
+
+/* Share sheet: centered dialog */
+.scrim{align-items:center;justify-content:center;padding:24px}
+.sheet{width:min(480px,100%);border-radius:20px;max-height:80%}
+.grab{display:none}
+.toast{left:50%;right:auto;transform:translateX(-50%);bottom:28px;width:max-content;max-width:min(520px,calc(100% - 32px))}
+
+/* ---------- Narrow windows: sidebar becomes a top bar, one pane at a time ---------- */
+@media (max-width:900px){
+  body{overflow:auto}
+  .app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);height:100%}
+  .side{flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 16px;border-right:0;border-bottom:1px solid var(--line);overflow:visible}
+  .brand span,.profile{display:none}
+  .nav{flex-direction:row;flex:1;justify-content:flex-end}
+  .nav .tab{width:auto;padding:8px 10px;font-size:13px;gap:6px}
+  .proto{order:5;flex-basis:100%;margin-top:0}
+  .main{min-height:640px}
+  .topbar{padding:16px 16px 10px}.topbar h2{font-size:26px}
+  .deck{padding:0 16px}
+  .deck{place-items:start center}
+  .card{overflow:auto}
+  .lgrid{grid-template-columns:1fr 1fr}
+  .lmid{grid-column:1/-1;grid-row:2;padding:14px 12px}
+  .lside .also{display:none}
+  .lmid .bridge .row{font-size:13px}
+  #s-matches{grid-template-columns:minmax(0,1fr)}
+  body:not([data-chat="open"]) .chatcol{display:none}
+  body[data-chat="open"] .listpane{display:none}
+  #chatBack{display:grid}
+  .thread{padding:14px 12px}
+  .msg{max-width:80%}
+  .match h2{font-size:30px}
+  .match .btns{flex-direction:column}
+}
 </style>
 
-<div class="stage">
-  <section class="rail" aria-label="About this prototype">
-    <div class="eyebrow">Step 6 · Matching interface</div>
-    <h1>Meet people by what they're thinking about</h1>
-    <p>Clickable prototype of the matching flow. Swipe the card (or use the buttons, or ← / → keys). Priya and Lena have already said yes to you, so connecting with them shows the match screen.</p>
-    <div class="steps" id="steps">
-      <button class="step" data-go="discover"><span class="n">1</span><span><strong>Discover</strong><span>Them on the left (pink side), you on the right (green side). First names and usernames only. Shared and complementary ideas link across the middle. Pass or connect, and the next person appears.</span></span></button>
-      <button class="step" data-go="match"><span class="n">2</span><span><strong>It's a match</strong><span>Shown when both people connect. Includes the warm intro and a suggested first question.</span></span></button>
-      <button class="step" data-go="matches"><span class="n">3</span><span><strong>Matches</strong><span>New matches up top, conversations below, each tagged with what you matched on.</span></span></button>
-      <button class="step" data-go="chat"><span class="n">4</span><span><strong>Chat</strong><span>The app's welcome (blue) is identical for both people: why each of them is here, how they connect, and one open question either can answer. Then text, voice notes (mic) and sharing one past LLM chat (+).</span></span></button>
-    </div>
-    <div class="demo" aria-label="Sounds">
-      <strong>Sounds</strong>
-      <span style="font-size:12.5px;color:var(--muted)">Pass, connect, "both said yes", and every message sent or received have their own sound. Mute with the speaker on the Discover screen.</span>
-      <div class="row"><button data-hear="reject">Pass</button><button data-hear="accept">Connect</button><button data-hear="match">Both said yes</button><button data-hear="message">Message</button></div>
-    </div>
-    <div class="demo" aria-label="Try the AI nudges">
-      <strong>Try the AI nudges</strong>
-      <span style="font-size:12.5px;color:var(--muted)">The app can step into a chat. Jonah's chat shows a "gone quiet" nudge and Mei's shows a "take it further" nudge. Or trigger one in any open chat:</span>
-      <div class="row"><button id="demoQuiet">Skip ahead 5 quiet days</button><button id="demoConnect">Suggest taking it further</button></div>
-    </div>
-    <div class="legend">
-      <span class="chip sim">= Shared interest</span>
-      <span class="chip comp">⇄ Complementary</span>
-    </div>
-    <p class="note"><a href="desktop-mockup.html" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">Open the desktop browser version ↗</a></p>
-    <p class="note">Sample data only. Names, chats and locations are invented. For privacy, users only ever see first names and usernames. Ideas shown are what Step 3 (Idea Generation) would extract and Step 5 (Match Generation) would pair up. Raw chat text is never shown unless a user chooses to share a specific chat.</p>
-  </section>
+<div class="app">
+  <aside class="side" aria-label="Navigation">
+    <div class="brand"><div class="mark" aria-hidden="true">F</div><div><b>The Fellowship</b><span>Desktop prototype</span></div></div>
+    <nav class="nav" id="tabbar" role="tablist">
+      <button class="tab" data-tab="discover" role="tab"></button>
+      <button class="tab" data-tab="matches" role="tab"></button>
+      <button class="tab" data-tab="me" role="tab"></button>
+    </nav>
+    <div class="profile"><div class="av" style="background:hsl(158 45% 42%)" aria-hidden="true">S</div><div><b>Sam</b><span>@samrivera · Boston, MA</span></div><button class="sound" id="btnSound" aria-pressed="true" aria-label="Sound on"></button></div>
 
-  <div class="phone" aria-label="Phone prototype">
-    <div class="screen-wrap">
-      <div class="statusbar"><span>9:41</span><span class="icons"><i style="width:16px;height:9px"></i><i style="width:13px;height:9px"></i><i style="width:22px;height:10px;border-radius:3px"></i></span></div>
-      <div class="screens">
+    <details class="proto" open>
+      <summary>Prototype controls</summary>
+      <div class="grp"><span class="lbl">Jump to screen</span>
+        <div class="row">
+          <button class="step" data-go="discover"><span class="n">1</span>Discover</button>
+          <button class="step" data-go="match"><span class="n">2</span>Both said yes</button>
+          <button class="step" data-go="matches"><span class="n">3</span>Matches</button>
+          <button class="step" data-go="chat"><span class="n">4</span>Chat</button>
+        </div></div>
+      <div class="grp"><span class="lbl">Hear the sounds</span>
+        <div class="row"><button data-hear="reject">Pass</button><button data-hear="accept">Connect</button><button data-hear="match">Both said yes</button><button data-hear="message">Message</button></div></div>
+      <div class="grp"><span class="lbl">AI nudges</span>
+        <div class="row"><button id="demoQuiet">Skip 5 quiet days</button><button id="demoConnect">Suggest taking it further</button></div></div>
+      <div class="grp"><span class="lbl">Other version</span><a href="matching-mockup.html" target="_blank" rel="noopener">Open the phone version ↗</a></div>
+      <div class="grp" style="color:var(--muted)">Sample data only. Users only ever see first names and usernames.</div>
+    </details>
+  </aside>
 
-        <!-- 1. DISCOVER -->
-        <section class="screen" id="s-discover">
-          <div class="topbar"><h2>Discover</h2><span class="right"><span class="mono" id="queueCount"></span><button class="sound" id="btnSound" aria-pressed="true" aria-label="Sound on"></button></span></div>
-          <div class="deck" id="deck"></div>
-          <div class="actions">
-            <button class="act pass" id="btnPass" aria-label="Pass"></button>
-            <button class="act yes" id="btnYes" aria-label="Connect"></button>
-          </div>
-          <div class="hint">Swipe right to connect · left to pass</div>
-        </section>
+  <main class="main">
+    <!-- 1. DISCOVER -->
+    <section class="screen" id="s-discover">
+      <div class="topbar"><h2>Discover</h2><span class="right"><span class="mono" id="queueCount"></span></span></div>
+      <div class="deck" id="deck"></div>
+      <div class="actions">
+        <button class="act pass" id="btnPass" aria-label="Pass"></button>
+        <button class="act yes" id="btnYes" aria-label="Connect"></button>
+      </div>
+      <div class="hint">Drag the card, click the buttons, or press <kbd>←</kbd> to pass and <kbd>→</kbd> to connect</div>
+    </section>
 
-        <!-- 3. MATCHES -->
-        <section class="screen" id="s-matches" hidden>
-          <div class="topbar"><h2>Matches</h2><span class="mono" id="matchCount"></span></div>
-          <div class="list" id="matchList"></div>
-        </section>
-
-        <!-- 4. CHAT -->
-        <section class="screen" id="s-chat" hidden>
+    <!-- 3 + 4. MATCHES + CHAT side by side -->
+    <section class="screen" id="s-matches" hidden>
+      <div class="listpane">
+        <div class="topbar"><h2>Matches</h2><span class="mono" id="matchCount"></span></div>
+        <div class="list" id="matchList"></div>
+      </div>
+      <div class="chatcol">
+        <div class="chatempty" id="chatEmpty"><h3>Pick a conversation</h3><p>Your matches and chats are listed on the left.</p></div>
+        <section id="s-chat" hidden>
           <div class="chathead">
             <button class="iconbtn" id="chatBack" aria-label="Back to matches"></button>
             <div class="av sm" id="chatAv"></div>
@@ -305,48 +455,46 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
           <div class="thread" id="thread"></div>
           <form class="composer" id="composer" autocomplete="off">
             <button type="button" class="iconbtn" id="btnShare" aria-label="Share a past LLM chat"></button>
-            <input id="msgInput" placeholder="Message" aria-label="Message">
+            <input id="msgInput" placeholder="Write a message" aria-label="Message">
             <button type="button" class="iconbtn send" id="btnMic" aria-label="Record voice note"></button>
           </form>
         </section>
-
-        <!-- 2. MATCH OVERLAY -->
-        <section class="match" id="s-match" hidden aria-live="polite">
-          <div class="pair" id="matchPair"></div>
-          <h2 id="matchTitle"></h2>
-          <p class="sub" id="matchSub"></p>
-          <div class="intro">
-            <span class="lbl">Why you two should talk</span>
-            <span id="matchIntro"></span>
-            <span class="q" id="matchQ"></span>
-          </div>
-          <div class="btns">
-            <button class="btn primary" id="btnSayHi">Say hello</button>
-            <button class="btn ghost" id="btnKeep">Keep discovering</button>
-          </div>
-        </section>
-
-        <div class="scrim" id="sheet" hidden>
-          <div class="sheet" role="dialog" aria-label="Share a past LLM chat">
-            <span class="grab"></span>
-            <h3>Share a past chat</h3>
-            <p>Pick one conversation from your imported history. Only that chat is shared, read-only.</p>
-            <div id="pickList" style="display:flex;flex-direction:column;gap:8px"></div>
-            <button class="btn ghost" id="sheetCancel" style="margin-top:6px">Cancel</button>
-          </div>
-        </div>
-
-        <div class="toast" id="toast" hidden></div>
       </div>
-      <nav class="tabbar" id="tabbar" role="tablist">
-        <button class="tab" data-tab="discover" role="tab"></button>
-        <button class="tab" data-tab="matches" role="tab"></button>
-        <button class="tab" data-tab="me" role="tab"></button>
-      </nav>
+    </section>
+
+    <!-- 2. MATCH MODAL -->
+    <section class="match" id="s-match" hidden aria-live="polite">
+      <div class="matchbox" role="dialog" aria-label="It's a match">
+        <div class="pair" id="matchPair"></div>
+        <h2 id="matchTitle"></h2>
+        <p class="sub" id="matchSub"></p>
+        <div class="intro">
+          <span class="lbl">Why you two should talk</span>
+          <span id="matchIntro"></span>
+          <span class="q" id="matchQ"></span>
+        </div>
+        <div class="btns">
+          <button class="btn primary" id="btnSayHi">Say hello</button>
+          <button class="btn ghost" id="btnKeep">Keep discovering</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="scrim" id="sheet" hidden>
+      <div class="sheet" role="dialog" aria-label="Share a past LLM chat">
+        <span class="grab"></span>
+        <h3>Share a past chat</h3>
+        <p>Pick one conversation from your imported history. Only that chat is shared, read-only.</p>
+        <div id="pickList" style="display:flex;flex-direction:column;gap:8px"></div>
+        <button class="btn ghost" id="sheetCancel" style="margin-top:6px">Cancel</button>
+      </div>
     </div>
-  </div>
+
+    <div class="toast" id="toast" hidden></div>
+  </main>
 </div>
 
+<script>if (window.innerWidth < 900) document.querySelector('.proto').open = false;</script>
 <script>
 const I = {
   x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
@@ -481,24 +629,19 @@ paintSoundBtn();
 function cardHTML(c, under){
   const b = c.bridges.map(x => `
     <div class="bridge ${x.type}">
-      <div class="kind">${x.type==='sim'?'Shared interest':'Complementary'}</div>
-      <div class="row"><span>${esc(x.them)}</span><span class="glyph" aria-label="${x.type==='sim'?'similar to':'complements'}">${x.type==='sim'?'=':'⇄'}</span><span class="r">${esc(x.you)}</span></div>
+      <span class="kind">${x.type==='sim'?'= Shared interest':'⇄ Complementary'}</span>
+      <div class="row"><span class="l">${esc(x.them)}</span><span class="glyph" aria-label="${x.type==='sim'?'similar to':'complements'}">${x.type==='sim'?'=':'⇄'}</span><span class="r">${esc(x.you)}</span></div>
     </div>`).join('');
+  const side = (p, role, cls, more, lbl) => `<section class="lside ${cls}"><span class="role">${role}</span>${avatar(p)}<span class="name">${esc(p.first)}</span><span class="handle">${esc(p.handle)}</span><span class="loc">${I.pin}${esc(p.loc)}</span>
+      <div class="also"><span class="lbl">${lbl}</span>${more.map(t=>`<span class="chip plain">${esc(t)}</span>`).join('')}</div></section>`;
   return `<article class="card${under?' under':''}" ${under?'aria-hidden="true"':''} data-id="${c.id}">
     <span class="stamp yes">CONNECT</span><span class="stamp no">PASS</span>
-    <div class="people">
-      <div class="person them"><span class="role">Them</span>${avatar(c)}<span class="name">${esc(c.first)}</span><span class="handle">${esc(c.handle)}</span><span class="loc">${I.pin}${esc(c.loc)}</span></div>
-      <div class="person you"><span class="role">You</span>${avatar(ME)}<span class="name">${esc(ME.first)}</span><span class="handle">${esc(ME.handle)}</span><span class="loc">${I.pin}${esc(ME.loc)}</span></div>
+    <div class="lgrid">
+      ${side(c,'Them','them',c.themMore,'Also on their mind')}
+      <section class="lmid"><div class="why"><h3>Why you two</h3><span class="fit">fit ${c.fit.toFixed(2)}</span></div><div class="bridges">${b}</div></section>
+      ${side(ME,'You','you',c.youMore,'Also on yours')}
     </div>
-    <div class="cardbody">
-      <div class="why"><h3>Why you two</h3><span class="fit">fit ${c.fit.toFixed(2)}</span></div>
-      <div class="bridges">${b}</div>
-      <div class="more">
-        <div class="col"><span class="lbl">Also on their mind</span>${c.themMore.map(t=>`<span class="chip plain">${esc(t)}</span>`).join('')}</div>
-        <div class="col r"><span class="lbl">Also on yours</span>${c.youMore.map(t=>`<span class="chip plain">${esc(t)}</span>`).join('')}</div>
-      </div>
-      <div class="prov">Distilled from ${c.chats} of ${esc(c.first)}'s chats and ${ME.chats} of yours · Aug–Sep 2026</div>
-    </div>
+    <div class="prov">Distilled from ${c.chats} of ${esc(c.first)}'s chats and ${ME.chats} of yours · Aug–Sep 2026</div>
   </article>`;
 }
 function renderDeck(){
@@ -576,7 +719,7 @@ function renderMatches(){
     const real = m.msgs.filter(x => x.kind!=='sep');
     const last = real[real.length-1];
     const snip = last.kind==='text' ? last.text : last.kind==='voice' ? 'Voice note' : last.kind==='ai' ? 'The Fellowship: ' + (last.text || connectText(m)) : 'Shared a chat: ' + last.chat.title;
-    return `<button class="convo${m.unread?' unread':''}" data-open="${m.id}">${avatar(m)}
+    return `<button class="convo${m.unread?' unread':''}${m.id===chatId?' active':''}" data-open="${m.id}">${avatar(m)}
       <span style="min-width:0"><span class="top"><span class="nm">${esc(m.first)}</span><span class="lc">${esc(m.handle||'')} · ${esc(m.loc)}</span></span>
       <span class="snip" style="display:block">${last.who==='me'?'You: ':''}${esc(snip)}</span>
       <span class="chip ${m.type}">${m.type==='sim'?'=':'⇄'} ${esc(m.topic)}</span></span>
@@ -657,15 +800,15 @@ function openChat(id){
 function now(){ const d = new Date(); return `Now ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}` }
 const REPLIES = ["Love that question. Give me a minute, I'm pulling up my notes.", "Ha, I was literally thinking about this yesterday. Short answer: it depends on the lab.", "Good one. Can I send you something I wrote on this last month?"];
 function push(msg){
-  const m = MATCHES.find(x => x.id===chatId); m.msgs.push(msg); renderThread();
+  const m = MATCHES.find(x => x.id===chatId); m.msgs.push(msg); renderThread(); if (!$('#s-matches').hidden) renderMatches();
   if (msg.kind !== 'sep') Sound.play('message');
   // demo only: the other person answers your first message in this session, so you can hear a received message
-  if (msg.who === 'me' && !m.replied){
+  if (msg.who === 'me' && !m.replied){ /* demo auto-reply */
     m.replied = true; const id = m.id;
     setTimeout(() => { if (chatId === id) $('#chatSub').textContent = m.first + ' is typing…'; }, 900);
     setTimeout(() => {
       m.msgs.push({who:'them', kind:'text', text:REPLIES[(m.first.length) % REPLIES.length], t:now()});
-      if (chatId === id){ $('#chatSub').textContent = m.loc + ' · ' + m.topic; renderThread(); Sound.play('message'); } else { m.unread++; updateBadge(); }
+      if (chatId === id){ $('#chatSub').textContent = m.loc + ' · ' + m.topic; renderThread(); Sound.play('message'); } else { m.unread++; updateBadge(); } if (!$('#s-matches').hidden) renderMatches();
     }, 2600);
   }
 }
@@ -727,16 +870,18 @@ $('#btnShare').onclick = () => {
 };
 $('#sheetCancel').onclick = () => $('#sheet').hidden = true;
 $('#sheet').onclick = e => { if (e.target.id==='sheet') $('#sheet').hidden = true; };
-$('#chatBack').onclick = () => show('matches');
+$('#chatBack').onclick = () => { document.body.dataset.chat = 'closed'; };
 
 /* ---------- Navigation ---------- */
 function show(name){
   if (recTimer) stopRec(false);
   $('#s-match').hidden = true; $('#sheet').hidden = true;
-  ['discover','matches','chat'].forEach(s => $('#s-'+s).hidden = s!==name);
-  $('#tabbar').hidden = name==='chat';
-  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.tab===name || (name==='chat' && t.dataset.tab==='matches')));
-  if (name==='matches') renderMatches();
+  const view = name==='chat' ? 'matches' : name;
+  ['discover','matches'].forEach(s => $('#s-'+s).hidden = s!==view);
+  $('#s-chat').hidden = !chatId; $('#chatEmpty').hidden = !!chatId;
+  document.body.dataset.chat = name==='chat' ? 'open' : 'closed';
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.tab===view));
+  if (view==='matches') renderMatches();
   setRail(name);
 }
 function setRail(name){ document.querySelectorAll('.step').forEach(s => s.setAttribute('aria-current', s.dataset.go===name)); }

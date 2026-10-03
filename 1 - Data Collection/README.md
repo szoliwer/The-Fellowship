@@ -56,7 +56,7 @@ Uploaded files (several at once is fine) or pasted text:
 }
 ```
 - Field names follow the shared brief's handoff contract A (`SourceContextV1`), plus `messages` and `provenance.upload_id`. **Step 2 adds** `sensitive_flag`, `sensitive_category` and `eligible_for_idea_extraction`, and passes on only eligible records.
-- `source_type`: `chatgpt_json`, `claude_json`, `text_file`, `pasted_text` or `demo`. (`claude_json` and `text_file` are additions to the brief's list; see D-005.)
+- `source_type`: `chatgpt_json`, `claude_json`, `text_file`, `pasted_text` or `demo`. (`claude_json` and `text_file` are additions to the brief's list; see D-007.)
 - `source_id`: the demo history keeps the shared fixture IDs `a_s01` … `a_s09`. Everything else gets `src_` + 12 characters derived from the owner and conversation, so re-importing the same chat replaces it instead of duplicating it.
 - `created_at` is `null` for text files and pastes (they carry no dates).
 - Both user and assistant messages are kept, labelled by role, so later steps can tell the user's own thinking from the AI's suggestions.

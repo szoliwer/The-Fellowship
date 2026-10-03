@@ -72,7 +72,7 @@ From the repo root, see the main `README.md` → *Run the app*. Checks:
 ## Decisions log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — why.`_
 
-- **2026-10-03 18:30** — Herman (with Claude) — Consent text now says imported chats are sent to Anthropic's Claude for screening (except ones caught by local safety rules). — Step 2 uses Claude to screen (D-006); the old text implied nothing left the laptop before screening. Accounts created earlier agreed to the old wording.
+- **2026-10-03 18:30** — Herman (with Claude) — Consent text now says imported chats are sent to Anthropic's Claude for screening (except ones caught by local safety rules). — Step 2 uses Claude to screen (D-008); the old text implied nothing left the laptop before screening. Accounts created earlier agreed to the old wording.
 - **2026-10-03 17:40** — Herman (with Claude) — Real accounts: email + password log-in, salted scrypt hashes, 15-minute lock after 5 wrong tries, stored in SQLite (`data/fellowship.db`). — Users must be able to come back; SQLite and scrypt are built into Python, so no new installs.
 - **2026-10-03 17:40** — Herman (with Claude) — Log in with email, not pseudonym. — Pseudonyms are public, so using them as the log-in name would make guessing easier.
 - **2026-10-03 17:40** — Herman (with Claude) — Keep writing `data/users.json` after each sign-up. — Later steps read files (D-004); keeps the handoff unchanged.

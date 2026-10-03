@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fellowship Idea Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the same desktop shell as Step 6's desktop mockup (sidebar | main view). This page is the
+   "You" tab. The list sits in a reading column with the one button pinned under it. Below 760px the
+   same page becomes the phone layout (Step 6 phone mockup: top bar, list, button, tab bar), which is
+   the starting point for the mobile app. Tokens, type and colours are copied from Step 6. */
+:root{
+  --bg:#E9EEEA; --surface:#FFFFFF; --surface-2:#F3F6F3; --ink:#13201B; --muted:#5A6862; --line:#D7E0DA;
+  --accent:#1D6A50; --accent-ink:#FFFFFF; --accent-soft:#DCEDE5;
+  --them:#8A2F6E; --you:#1D6A50;
+  --app-bg:#E4E8FA; --app-ink:#2F3C8F; --app-line:#C3CBF0;
+  --box-line:#9DADA6; --off-ink:#8A9690; --frame:#0F1513; --scrim:rgba(6,20,14,.55);
+  --shadow:0 18px 50px -20px rgba(19,32,27,.35);
+  --f-display:"Newsreader", Georgia, "Times New Roman", serif;
+  --f-body:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C1110; --surface:#161F1C; --surface-2:#1C2723; --ink:#E4ECE8; --muted:#93A29B; --line:#2A3631;
+  --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
+  --them:#EA9FD3; --you:#62C79E;
+  --app-bg:#1B2045; --app-ink:#B3BEF5; --app-line:#363F72;
+  --box-line:#5C6C65; --off-ink:#6E7C76; --frame:#000000; --scrim:rgba(0,0,0,.6);
+  --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0C1110; --surface:#161F1C; --surface-2:#1C2723; --ink:#E4ECE8; --muted:#93A29B; --line:#2A3631;
+  --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
+  --them:#EA9FD3; --you:#62C79E;
+  --app-bg:#1B2045; --app-ink:#B3BEF5; --app-line:#363F72;
+  --box-line:#5C6C65; --off-ink:#6E7C76; --frame:#000000; --scrim:rgba(0,0,0,.6);
+  --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0}
+body{background:var(--surface-2);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.45;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible+.box,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.02em;color:var(--muted)}
+
+/* ---------- Stage: the app fills the window; "Phone width" shows it in a phone frame ---------- */
+.stage{height:100%;display:flex}
+.rail{display:none}
+.app{container:app / inline-size;flex:1;min-width:0;height:100%;position:relative;background:var(--surface-2)}
+.stage[data-view="phone"]{background:var(--bg);overflow:auto;justify-content:center;align-items:flex-start;gap:40px;padding:28px 16px}
+.stage[data-view="phone"] .rail{display:block;width:300px;flex:none}
+.stage[data-view="phone"] .app{flex:none;width:390px;max-width:100%;height:760px;border:10px solid var(--frame);border-radius:44px;overflow:hidden;box-shadow:var(--shadow)}
+
+/* ---------- Desktop shell (same as Step 6 desktop): sidebar | main ---------- */
+.shell{display:grid;grid-template-columns:268px minmax(0,1fr);height:100%}
+.side{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:18px;padding:22px 14px 16px;overflow:auto;min-height:0}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px}
+.brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(90deg,var(--them) 50%,var(--you) 50%);display:grid;place-items:center;color:#fff;font-family:var(--f-display);font-weight:600;font-size:19px}
+.brand b{font-family:var(--f-display);font-weight:600;font-size:21px;line-height:1}
+.brand span{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.tab{background:none;border:0;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:var(--muted);padding:10px 12px;border-radius:10px;width:100%}
+.tab:hover{background:var(--surface-2)}
+.tab[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+.tab svg{width:20px;height:20px;flex:none}
+.profile{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:14px;flex:none;background:hsl(158 45% 42%)}
+.profile b{display:block;font-size:14px}
+.profile span{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+/* prototype controls (not part of the product), styled like Step 6's */
+.proto{margin-top:auto;border:1px dashed var(--app-line);border-radius:12px;background:var(--app-bg);padding:10px 12px;font-size:12px}
+.proto summary{cursor:pointer;font-weight:700;color:var(--app-ink);font-size:13px}
+.proto .grp{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.proto .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--app-ink)}
+.proto .row{display:flex;flex-wrap:wrap;gap:6px}
+.proto button{background:var(--surface);color:var(--app-ink);border:1px solid var(--app-line);border-radius:999px;padding:5px 10px;font-size:11.5px;font-weight:700;display:inline-flex;gap:6px}
+.proto button .n{font-family:var(--f-mono);font-size:11px}
+.proto button[aria-pressed="true"]{border-color:var(--app-ink);background:var(--app-ink);color:var(--app-bg)}
+.proto .cap{margin:0;color:var(--ink);font-size:12.5px;line-height:1.45}
+.proto .fine{color:var(--muted)}
+.proto a{color:var(--app-ink);font-weight:700}
+
+/* ---------- Main view ---------- */
+.main{position:relative;display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--surface-2)}
+.statusbar{display:none}
+.scroll{flex:1;min-height:0;overflow:auto}
+.colw{max-width:840px;padding-inline:36px}
+.topbar{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-top:24px}
+.topbar h2{font-family:var(--f-display);font-weight:600;font-size:34px;line-height:1.1;margin:0}
+.lede{margin:6px 0 20px;color:var(--muted);font-size:14.5px;text-wrap:pretty}
+
+.list{display:flex;flex-direction:column;gap:10px;padding-bottom:28px}
+.idea{background:var(--surface);border:1px solid var(--line);border-radius:16px;transition:border-color .12s}
+.idea:hover{border-color:var(--box-line)}
+.row{display:grid;grid-template-columns:48px minmax(0,1fr) 44px;align-items:start;padding:8px 8px 8px 4px}
+
+/* checkbox: a real input, drawn as a box; the label gives a 44px click target */
+.cb{position:relative;display:grid;place-items:center;width:48px;height:44px;cursor:pointer}
+.cb input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.cb .box{pointer-events:none}  /* clicks go straight to the real checkbox underneath */
+.box{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--box-line);background:var(--surface);display:grid;place-items:center;color:var(--accent-ink);transition:background .12s,border-color .12s}
+.box svg{grid-area:1/1;width:15px;height:15px;opacity:0}
+.cb input:checked+.box,.cb input:indeterminate+.box{background:var(--accent);border-color:var(--accent)}
+.cb input:checked+.box .tick,.cb input:indeterminate+.box .dash{opacity:1}
+.cb input:indeterminate+.box .tick{opacity:0}
+.cb:hover .box{border-color:var(--accent)}
+.cb.sm{width:40px;height:38px}
+.cb.sm .box{width:19px;height:19px;border-radius:6px}
+.cb.sm .box svg{width:13px;height:13px}
+
+.head{background:none;border:0;text-align:left;padding:10px 10px 10px 4px;min-width:0;display:flex;flex-direction:column;gap:3px;border-radius:10px}
+.head:is(button):hover{background:var(--surface-2)}
+.head .t{font-weight:600;font-size:15px;line-height:1.35;text-wrap:pretty}
+.meta{display:inline-flex;align-items:center;gap:3px;font-size:12.5px;color:var(--muted);font-weight:500}
+.meta svg{width:14px;height:14px;transition:transform .15s}
+.head[aria-expanded="true"] .meta svg{transform:rotate(180deg)}
+.idea.some .meta{color:var(--accent)}
+.idea.off .t,.idea.off .meta{color:var(--off-ink)}
+
+.del{width:40px;height:40px;border:0;background:none;border-radius:10px;display:grid;place-items:center;color:var(--off-ink);margin-top:2px}
+.del:hover{color:var(--ink);background:var(--surface-2)}
+.del svg{width:18px;height:18px}
+.del.sm{width:36px;height:36px;margin:1px 0 0}
+.del.sm svg{width:16px;height:16px}
+
+.subs{list-style:none;margin:0;padding:4px 12px 10px 44px;border-top:1px solid var(--line);display:flex;flex-direction:column}
+.sub{display:grid;grid-template-columns:40px minmax(0,1fr) 36px;align-items:start;border-radius:10px}
+.sub:hover{background:var(--surface-2)}
+.sub label.txt{padding:9px 6px 9px 0;font-size:14px;line-height:1.45;cursor:pointer}
+.sub.off label.txt{color:var(--off-ink)}
+
+/* "Removed · Undo", shown in place of what was just removed */
+.removed{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1.5px dashed var(--line);border-radius:14px;padding:6px 8px 6px 16px;font-size:13px;color:var(--muted)}
+.removed span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub-removed{margin:4px 0;border-radius:10px;padding:2px 4px 2px 12px}
+.undo{border:0;background:none;color:var(--accent);font-weight:700;padding:8px 12px;border-radius:8px;flex:none}
+.undo:hover{background:var(--accent-soft)}
+
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:36px 20px;border:1.5px dashed var(--line);border-radius:18px}
+.empty h3{font-family:var(--f-display);font-size:24px;font-weight:600;margin:0}
+.empty p{margin:0;color:var(--muted)}
+
+/* ---------- The one button, pinned under the list ---------- */
+.actionbar{flex:none;background:var(--surface);border-top:1px solid var(--line)}
+.actionbar .colw{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.actionbar .note{color:var(--muted);font-size:13px}
+.btn{border:0;border-radius:999px;padding:12px 24px;font-weight:700;font-size:15px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 10px 24px -14px var(--accent);min-width:280px}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.primary:disabled{background:var(--line);color:var(--muted);box-shadow:none;cursor:default;filter:none}
+.btn.primary.withdraw{background:transparent;color:var(--ink);border:1.5px solid var(--box-line);box-shadow:none}
+.btn.ghost{background:transparent;border:1.5px solid currentColor}
+.tabbar{display:none}
+
+/* ---------- Done: a modal over the main view (same as Step 6 desktop's "Both said yes") ---------- */
+.done{position:absolute;inset:0;z-index:20;background:var(--scrim);display:flex;align-items:center;justify-content:center;padding:24px}
+.donebox{background:var(--accent);color:var(--accent-ink);width:min(560px,100%);max-height:100%;overflow:auto;border-radius:26px;padding:34px 30px 26px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;box-shadow:var(--shadow)}
+.donebox h2{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:40px;line-height:1.05;margin:0;text-wrap:balance}
+.donebox .sub-h{opacity:.9;margin:0;font-size:14.5px}
+.donebox .card{background:var(--surface);color:var(--ink);border-radius:18px;padding:14px 18px;text-align:left;display:flex;flex-direction:column;gap:8px;width:100%}
+.donebox .card .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.donebox .card ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:13.5px}
+.donebox .card ol span{color:var(--muted)}
+.donebox .btns{display:flex;gap:8px;width:100%}
+.donebox .btn{flex:1}
+.donebox .btn.primary{background:var(--accent-ink);color:var(--accent);box-shadow:none;min-width:0}
+
+.toast{position:absolute;left:50%;transform:translateX(-50%);bottom:96px;width:max-content;max-width:min(520px,calc(100% - 32px));background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:12px;font-size:13px;box-shadow:var(--shadow);z-index:30}
+
+/* ---------- Phone width (future mobile app): Step 6 phone layout ---------- */
+@container app (max-width: 760px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .side{display:none}
+  .colw{padding-inline:14px}
+  .topbar{padding-top:6px}
+  .topbar h2{font-size:26px}
+  .lede{font-size:13px;margin:4px 0 12px}
+  .list{gap:8px;padding-bottom:16px}
+  .row{grid-template-columns:44px minmax(0,1fr) 40px;padding:6px 4px 6px 2px}
+  .cb{width:44px}
+  .head .t{font-size:14.5px}
+  .subs{padding:2px 4px 8px 30px}
+  .sub{grid-template-columns:36px minmax(0,1fr) 36px}
+  .sub label.txt{font-size:13px}
+  .actionbar{border-top:0;background:transparent}
+  .actionbar .note{display:none}
+  .actionbar .colw{padding:10px 16px}
+  .btn.primary{width:100%;min-width:0}
+  .tabbar{display:grid;flex:none;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);background:var(--surface);padding:8px 8px 14px}
+  .tabbar .tab{flex-direction:column;gap:3px;font-size:11px;padding:4px;width:auto}
+  .tabbar .tab[aria-current="page"]{background:none}
+  .tabbar .tab svg{width:22px;height:22px}
+  .done{padding:0;background:var(--accent)}
+  .donebox{width:100%;height:100%;border-radius:0;box-shadow:none;justify-content:center;padding:24px 22px}
+  .donebox h2{font-size:34px}
+  .donebox .btns{flex-direction:column}
+  .toast{bottom:150px}
+}
+.stage[data-view="phone"] .statusbar{display:flex;height:40px;flex:none;justify-content:space-between;align-items:center;padding:0 26px;font-weight:700;font-size:13px}
+.statusbar .icons{display:flex;gap:5px;align-items:center}
+.statusbar .icons i{display:block;background:var(--ink);border-radius:2px}
+
+/* real narrow windows: controls on top, the app underneath */
+@media (max-width:760px){
+  body{overflow:auto}
+  .stage{flex-direction:column;height:auto}
+  .stage .rail{display:block;padding:12px 12px 0}
+  .stage[data-view="phone"] .rail{width:auto}
+  .app{height:100vh;flex:none}
+  .stage[data-view="phone"]{padding:12px 8px;align-items:center;gap:12px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage" data-view="desktop">
+  <div class="rail" id="rail"></div>
+
+  <div class="app" id="app">
+    <div class="shell">
+      <aside class="side" id="side" aria-label="Navigation">
+        <div class="brand"><div class="mark" aria-hidden="true">F</div><div><b>The Fellowship</b><span>Desktop prototype</span></div></div>
+        <nav class="nav" aria-label="Main">
+          <button class="tab" data-nav="discover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>Discover</button>
+          <button class="tab" data-nav="matches"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>Matches</button>
+          <button class="tab" data-nav="you" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>You</button>
+        </nav>
+        <div class="profile"><div class="av" aria-hidden="true">R</div><div><b>researcher_014</b><span>Demo researcher</span></div></div>
+
+        <details class="proto" id="proto" open>
+          <summary>Prototype controls</summary>
+          <div class="grp"><span class="lbl">Jump to state</span>
+            <div class="row" id="scenes">
+              <button data-scene="first"><span class="n">1</span>First look</button>
+              <button data-scene="open"><span class="n">2</span>Open an idea</button>
+              <button data-scene="remove"><span class="n">3</span>Remove + undo</button>
+              <button data-scene="done"><span class="n">4</span>Done</button>
+            </div></div>
+          <div class="grp"><span class="lbl">What it shows</span><p class="cap" id="cap"></p></div>
+          <div class="grp"><span class="lbl">Width</span>
+            <div class="row" id="views">
+              <button data-view="desktop" aria-pressed="true">Desktop</button>
+              <button data-view="phone" aria-pressed="false">Phone width</button>
+            </div></div>
+          <div class="grp fine">Sample data only: synthetic ideas for the Step 1 demo researcher. This page is the "You" tab. Discover and Matches: <a href="../../6%20-%20Matching%20Interface/mockup/desktop-mockup.html" target="_blank" rel="noopener">Step 6 desktop mockup ↗</a></div>
+        </details>
+      </aside>
+
+      <main class="main">
+        <div class="statusbar" aria-hidden="true"><span>9:41</span><span class="icons"><i style="width:16px;height:9px"></i><i style="width:13px;height:9px"></i><i style="width:22px;height:10px;border-radius:3px"></i></span></div>
+        <div class="scroll" id="scroll">
+          <div class="colw">
+            <div class="topbar"><h2>Your ideas</h2><span class="mono">most central first</span></div>
+            <p class="lede">From your chats. People you match with see only what's checked, never your chats.</p>
+            <div class="list" id="list"></div>
+          </div>
+        </div>
+        <div class="actionbar" id="actionbar"><div class="colw">
+          <span class="note">You can change this any time.</span>
+          <button class="btn primary" id="go"></button>
+        </div></div>
+        <nav class="tabbar" aria-label="Main">
+          <button class="tab" data-nav="discover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>Discover</button>
+          <button class="tab" data-nav="matches"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>Matches</button>
+          <button class="tab" data-nav="you" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>You</button>
+        </nav>
+
+        <section class="done" id="done" hidden role="dialog" aria-modal="true" aria-labelledby="doneTitle">
+          <div class="donebox">
+            <h2 id="doneTitle">You're ready to match</h2>
+            <p class="sub-h" id="doneSub"></p>
+            <div class="card"><span class="lbl">Used for matching</span><ol id="doneList"></ol></div>
+            <div class="btns">
+              <button class="btn primary" id="discover">Start discovering</button>
+              <button class="btn ghost" id="edit">Edit my ideas</button>
+            </div>
+          </div>
+        </section>
+        <div class="toast" id="toast" hidden></div>
+      </main>
+    </div>
+  </div>
+</div>
+<div class="sr" id="live" aria-live="polite"></div>
+
+<script>
+/* Synthetic sample: user_a's distilled chats from samples/sample_ranked_ideas.json, already in rank order. */
+const IDEAS = [
+ {
+  "id": "user_a_c01",
+  "title": "Altered membrane-protein trafficking as the cause of the Disease A phenotype",
+  "subs": [
+   "In Disease A patient fibroblasts a membrane protein piles up near the nucleus instead of reaching the cell surface.",
+   "Treating 'trafficking defect' as a hypothesis to test, not a conclusion.",
+   "Need to separate slower delivery, faster internalisation, failed recycling and over-expression.",
+   "Comparing total protein with the surface fraction would rule over-expression in or out."
+  ]
+ },
+ {
+  "id": "user_a_c03",
+  "title": "Finding a functional assay, and someone to design it, for the trafficking hypothesis",
+  "subs": [
+   "Nobody in the group has run a functional trafficking assay.",
+   "Needs a measurement of movement over time, not a snapshot.",
+   "Controls: a pathway block, an unaffected protein, and a check that labelling doesn't change trafficking.",
+   "Looking for a cell biologist with assay-design experience."
+  ]
+ },
+ {
+  "id": "user_a_c02",
+  "title": "Linking protein mislocalization to function in Disease A cells",
+  "subs": [
+   "Mislocalization in about 60% of Disease A cells vs. 15% of controls, from imaging only.",
+   "Location alone doesn't show whether the protein's function changed.",
+   "Candidate readouts: cargo uptake, pulse-chase, surface labelling.",
+   "Unsure how to tell a real effect from an artifact of the assay itself."
+  ]
+ },
+ {
+  "id": "user_a_c05",
+  "title": "Reviewing disagreements between repeated LLM extraction runs",
+  "subs": [
+   "Run each paper three times and score agreement per extracted item.",
+   "Accept items found in every run, with spot checks.",
+   "Send inconsistent items to a human reviewer and log the decisions.",
+   "Report how often the reviewer overturns the model as an error rate."
+  ]
+ },
+ {
+  "id": "user_a_c04",
+  "title": "Reproducibility of LLM-assisted literature extraction",
+  "subs": [
+   "Using an LLM to pull variant-phenotype mentions out of papers for a literature review.",
+   "Two runs on the same paper return slightly different lists.",
+   "Recall looks like the weak spot: later runs miss variants."
+  ]
+ }
+];
+
+const ICON = {
+  tick:'<svg class="tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  dash:'<svg class="dash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 12h12"/></svg>',
+  chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+  trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 7V4.5h4V7M6.5 7l1 13h9l1-13M10 11v5.5M14 11v5.5"/></svg>'
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const short = (s, n) => s.length <= n ? s : s.slice(0, n - 1).trimEnd() + '…';
+const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+
+const CARDS = IDEAS.map(i => ({id: i.id, title: i.title, subs: i.subs.map((text, k) => ({id: `${i.id}::${k}`, text}))}));
+const byId = id => CARDS.find(c => c.id === id);
+
+/* ---------- The rules: the same ones as review.py ---------- */
+let S, open = new Set(), saved = false;   // saved: the user pressed the button at least once
+function newState(){
+  S = {ideas:{}, subs:{}, undo:null};
+  CARDS.forEach(c => { S.ideas[c.id] = {on:true, removed:false}; c.subs.forEach(s => S.subs[s.id] = {on:true, removed:false}); });
+}
+const live = c => c.subs.filter(s => !S.subs[s.id].removed);
+function status(c){
+  if (!S.ideas[c.id].on) return 'none';
+  const l = live(c), on = l.filter(s => S.subs[s.id].on).length;
+  if (!l.length || on === l.length) return 'all';
+  return on ? 'some' : 'none';
+}
+const subOn = (c, sid) => S.ideas[c.id].on && S.subs[sid].on;
+function settle(c){
+  const l = live(c);
+  if (c.subs.length && !l.length) S.ideas[c.id].removed = true;                 // every detail removed: the idea goes too
+  else if (S.ideas[c.id].on && l.length && !l.some(s => S.subs[s.id].on)) S.ideas[c.id].on = false;  // every detail unchecked
+}
+function toggleIdea(c){
+  S.undo = null;
+  const idea = S.ideas[c.id];
+  if (idea.on) { idea.on = false; return; }            // details keep their ticks, so re-checking restores them
+  idea.on = true;
+  const l = live(c);
+  if (l.length && !l.some(s => S.subs[s.id].on)) l.forEach(s => S.subs[s.id].on = true);
+}
+function toggleSub(c, sid){
+  S.undo = null;
+  if (!S.ideas[c.id].on) {                             // checking a detail of an unchecked idea: bring it back with just this one
+    S.ideas[c.id].on = true;
+    live(c).forEach(s => S.subs[s.id].on = s.id === sid);
+    return;
+  }
+  S.subs[sid].on = !S.subs[sid].on;
+  settle(c);
+}
+const snap = () => JSON.parse(JSON.stringify({ideas:S.ideas, subs:S.subs}));
+function removeIdea(c){ const before = snap(); S.ideas[c.id].removed = true; S.undo = {kind:'idea', id:c.id, label:c.title, before}; }
+function removeSub(c, sid){
+  const before = snap();
+  S.subs[sid].removed = true;
+  settle(c);
+  S.undo = S.ideas[c.id].removed
+    ? {kind:'idea', id:c.id, label:c.title, before}    // that was its last detail: Undo brings back both
+    : {kind:'sub', id:sid, label:c.subs.find(s => s.id === sid).text, before};
+}
+function undo(){ if (S.undo) { S.ideas = S.undo.before.ideas; S.subs = S.undo.before.subs; } S.undo = null; }
+function restoreAll(){
+  CARDS.forEach(c => {
+    S.ideas[c.id].removed = false;
+    if (c.subs.length && !live(c).length) c.subs.forEach(s => S.subs[s.id].removed = false);
+    settle(c);
+  });
+  S.undo = null;
+}
+function counts(){
+  let ideas = 0, details = 0;
+  CARDS.forEach(c => { const f = S.ideas[c.id]; if (f.removed || !f.on) return; ideas++; details += live(c).filter(s => S.subs[s.id].on).length; });
+  return {ideas, details};
+}
+
+/* ---------- Drawing ---------- */
+const boxHTML = '<span class="box">' + ICON.tick + ICON.dash + '</span>';
+function render(focusKey){
+  const pending = S.undo && S.undo.id;
+  let html = '';
+  CARDS.forEach(c => {
+    if (S.ideas[c.id].removed) {
+      if (pending === c.id) html += `<div class="removed" data-k="ph-${c.id}"><span>Removed “${esc(short(c.title, 60))}”</span><button class="undo" data-act="undo" data-k="undo">Undo</button></div>`;
+      return;
+    }
+    const st = status(c), l = live(c);
+    const pendingSubHere = S.undo && S.undo.kind === 'sub' && c.subs.some(s => s.id === pending);
+    const isOpen = open.has(c.id) && (l.length > 0 || pendingSubHere);
+    const nOn = l.filter(s => subOn(c, s.id)).length;
+    const meta = !l.length ? '' : (st === 'some' ? `${nOn} of ${l.length} details` : plural(l.length, 'detail'));
+    html += `<article class="idea ${st === 'none' ? 'off' : st === 'some' ? 'some' : ''}" data-id="${c.id}">
+      <div class="row">
+        <label class="cb"><input type="checkbox" data-act="idea" data-k="cb-${c.id}" ${st !== 'none' ? 'checked' : ''} aria-label="Use for matching: ${esc(c.title)}">${boxHTML}</label>
+        ${meta ? `<button class="head" data-act="open" data-k="head-${c.id}" aria-expanded="${isOpen}" aria-controls="subs-${c.id}">` : '<div class="head">'}
+          <span class="t">${esc(c.title)}</span>
+          ${meta ? `<span class="meta">${meta}${ICON.chev}</span>` : ''}
+        ${meta ? '</button>' : '</div>'}
+        <button class="del" data-act="del" data-k="del-${c.id}" aria-label="Remove idea: ${esc(c.title)}" title="Remove idea">${ICON.trash}</button>
+      </div>`;
+    if (isOpen) {
+      html += `<ul class="subs" id="subs-${c.id}">`;
+      c.subs.forEach(s => {
+        if (S.subs[s.id].removed) {
+          if (pending === s.id) html += `<li class="removed sub-removed" data-k="ph-${s.id}"><span>Removed “${esc(short(s.text, 48))}”</span><button class="undo" data-act="undo" data-k="undo">Undo</button></li>`;
+          return;
+        }
+        const on = subOn(c, s.id), id = 'cb-' + s.id.replace(/\W/g, '_');
+        html += `<li class="sub ${on ? '' : 'off'}" data-sid="${s.id}">
+          <label class="cb sm"><input type="checkbox" id="${id}" data-act="sub" data-k="cb-${s.id}" ${on ? 'checked' : ''}>${boxHTML}</label>
+          <label class="txt" for="${id}">${esc(s.text)}</label>
+          <button class="del sm" data-act="delsub" data-k="del-${s.id}" aria-label="Remove detail: ${esc(s.text)}" title="Remove detail">${ICON.trash}</button>
+        </li>`;
+      });
+      html += '</ul>';
+    }
+    html += '</article>';
+  });
+  if (CARDS.every(c => S.ideas[c.id].removed)) {
+    html += `<div class="empty"><h3>Nothing left to share</h3><p>You removed every idea. Matching needs at least one.</p><button class="btn ghost" data-act="restore" data-k="restore" style="color:var(--accent)">Restore removed ideas</button></div>`;
+  }
+  $('#list').innerHTML = html;
+  // the dash: a real checkbox can only be "partly checked" from script
+  CARDS.forEach(c => { const el = document.querySelector(`[data-k="cb-${c.id}"]`); if (el) el.indeterminate = status(c) === 'some'; });
+
+  const n = counts(), go = $('#go');
+  go.disabled = n.ideas === 0 && !saved;
+  go.classList.toggle('withdraw', n.ideas === 0 && saved);
+  go.textContent = n.ideas ? `Use ${plural(n.ideas, 'idea')} for matching`
+    : saved ? 'Stop using my ideas for matching' : 'Check at least one idea to continue';
+  if (focusKey) { const el = document.querySelector(`[data-k="${focusKey}"]`); if (el) el.focus(); }
+}
+function say(msg){ $('#live').textContent = msg; }
+
+/* ---------- Clicks ---------- */
+$('#list').addEventListener('click', ev => {
+  const el = ev.target.closest('[data-act]');
+  if (!el || el.tagName === 'INPUT') return;           // checkboxes are handled on "change"
+  const art = el.closest('.idea'), c = art && byId(art.dataset.id);
+  const act = el.dataset.act;
+  if (act === 'open') { open.has(c.id) ? open.delete(c.id) : open.add(c.id); render(el.dataset.k); }
+  if (act === 'del') { removeIdea(c); render('undo'); say(`Removed ${c.title}. Undo available.`); }
+  if (act === 'delsub') {
+    removeSub(c, el.closest('.sub').dataset.sid);
+    render('undo');
+    say(S.undo.kind === 'idea' ? `That was the last detail, so ${c.title} was removed. Undo available.` : 'Detail removed. Undo available.');
+  }
+  if (act === 'undo') { const k = S.undo && S.undo.id; undo(); render(k ? 'del-' + k : null); say('Restored.'); }
+  if (act === 'restore') { restoreAll(); render(); }
+});
+$('#list').addEventListener('change', ev => {
+  const el = ev.target; if (!el.dataset.act) return;
+  const c = byId(el.closest('.idea').dataset.id);
+  if (el.dataset.act === 'idea') toggleIdea(c);
+  if (el.dataset.act === 'sub') toggleSub(c, el.closest('.sub').dataset.sid);
+  render(el.dataset.k);
+});
+$('#go').addEventListener('click', showDone);
+$('#edit').addEventListener('click', hideDone);
+$('#discover').addEventListener('click', () => toast('Discover is Step 6 (see its desktop mockup).'));
+document.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('click', () => {
+  if (b.dataset.nav !== 'you') toast(`${b.textContent.trim()} is Step 6 (see its desktop mockup).`);
+}));
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !$('#done').hidden) hideDone(); });
+
+function showDone(){
+  const n = counts();
+  if (!n.ideas) { saved = false; render(); toast('Done. None of your ideas are used for matching.'); return; }
+  saved = true;
+  $('#doneSub').textContent = `${plural(n.ideas, 'idea')} and ${plural(n.details, 'detail')} will be used to find people. Your chats stay private.`;
+  $('#doneList').innerHTML = CARDS.filter(c => !S.ideas[c.id].removed && S.ideas[c.id].on)
+    .map(c => { const l = live(c), k = l.filter(s => subOn(c, s.id)).length; return `<li>${esc(c.title)}${l.length && k < l.length ? ` <span>(${k} of ${l.length} details)</span>` : ''}</li>`; }).join('');
+  $('#done').hidden = false;
+  $('#edit').focus();
+}
+function hideDone(){ $('#done').hidden = true; render(); $('#go').focus(); }
+let toastTimer;
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => t.hidden = true, 2400); }
+
+/* ---------- Prototype controls: states and width ---------- */
+const SCENES = {
+  first:{cap:'Everything starts checked, most central first. One line per idea. Click a title to see its details, or its box to leave the whole idea out.',
+         run(){ newState(); open = new Set(); saved = false; }},
+  open:{cap:'Uncheck a detail and the main box shows a dash. Uncheck every detail and the idea unchecks; check one again and it comes back with just that one.',
+        run(){ newState(); saved = false; open = new Set([CARDS[0].id]); toggleSub(CARDS[0], CARDS[0].subs[0].id); toggleIdea(CARDS[1]); }},
+  remove:{cap:'The bin removes an idea or a single detail. Removing every detail removes the idea too. "Undo" stays in place until the next change.',
+          run(){ newState(); saved = false; open = new Set([CARDS[1].id]); removeIdea(CARDS[0]); }},
+  done:{cap:'One button saves only what\'s checked. Step 5 never sees the rest, or the chats. "Edit my ideas" goes back with every choice kept.',
+        run(){ SCENES.open.run(); }}
+};
+function scene(name){
+  $('#toast').hidden = true; $('#done').hidden = true;
+  SCENES[name].run();
+  render();
+  $('#cap').textContent = SCENES[name].cap;
+  document.querySelectorAll('#scenes button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.scene === name)));
+  $('#scroll').scrollTop = 0;
+  if (name === 'done') showDone();
+}
+let view = 'desktop';
+const narrowWindow = matchMedia('(max-width: 760px)');
+function placeControls(){   // the controls live in the sidebar, or beside/above the app when the sidebar isn't shown
+  const target = view === 'phone' || narrowWindow.matches ? $('#rail') : $('#side');
+  if ($('#proto').parentElement !== target) target.appendChild($('#proto'));
+}
+function setView(v){
+  view = v; $('#stage').dataset.view = v;
+  document.querySelectorAll('#views button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  placeControls();
+}
+narrowWindow.addEventListener('change', placeControls);
+$('#scenes').addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) scene(b.dataset.scene); });
+$('#views').addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) setView(b.dataset.view); });
+placeControls();
+scene('first');
+</script>
+</body>
+</html>

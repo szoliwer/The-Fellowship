@@ -3,7 +3,8 @@
 | | |
 |---|---|
 | **Owner** | Herman |
-| **Status** | 🟨 Built and checked with a fake classifier; first real run with Claude pending an API key |
+| **Branch** | `main` (whole team works on main, D-005) |
+| **Status** | ✅ Working: tested on the owner's real chats with Claude; handoff to Step 3 per `HANDOFF.md` (§7 awaiting Aman's OK) |
 | **Gets input from** | Step 1 (`data/sources/<user_id>.json`) |
 | **Hands output to** | Step 3 (`output/<user_id>/<source_id>.md`, see `HANDOFF.md`) |
 

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Owner** | _TBD_ |
-| **Branch** | `step-3-idea-generation` (work here, not on `main`) |
+| **Branch** | `main` (whole team works on main) |
 | **Status** | ⬜ Not started |
 | **Gets input from** | Step 2 |
 | **Hands output to** | Step 4 |
