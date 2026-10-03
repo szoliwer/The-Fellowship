@@ -57,7 +57,7 @@ def render(user):
                 st.error(e.message)
 
     with demo_tab:
-        if user_id == im.DEMO_FIXTURE_OWNER:
+        if user_id in im.DEMO_FIXTURES:
             st.caption("A **synthetic** research history written for this demo researcher. "
                        "It is not anyone's real chats.")
             if st.button("Load demo history", type="primary"):
@@ -66,7 +66,7 @@ def render(user):
                 except im.ImportFailed as e:
                     st.error(e.message)
         else:
-            st.caption("The synthetic demo history is only available to the demo researcher researcher_014.")
+            st.caption("Synthetic demo histories are only available to the demo researchers.")
 
     st.divider()
     sources = im.load_sources(user_id)

@@ -22,6 +22,7 @@ CLAUDE_EXPORT = [  # synthetic, in the shape of claude.ai's conversations.json
              "created_at": "2026-09-01T10:00:01Z"},
             {"uuid": "m2", "sender": "assistant", "text": "",
              "content": [{"type": "text", "text": "Use a pathway blocker and an unaffected protein."}],
+             "files": [{"file_kind": "image", "file_name": "plot.png"}],
              "created_at": "2026-09-01T10:00:05Z"},
         ],
     },
@@ -67,14 +68,21 @@ class DemoHistoryTests(unittest.TestCase):
     def test_only_the_selected_branch_is_imported(self):
         self.assertNotIn("ABANDONED-BRANCH", self.by_id["a_s02"]["raw_text"])
 
-    def test_hidden_system_messages_and_images_are_skipped(self):
+    def test_hidden_system_messages_skipped_and_images_marked(self):
         texts = [m["text"] for m in self.by_id["a_s04"]["messages"]]
-        self.assertIn("Here's a screenshot of two runs on the same paper. The second run missed two variants.", texts)
+        self.assertIn("[image omitted]\nHere's a screenshot of two runs on the same paper. "
+                      "The second run missed two variants.", texts)
         self.assertNotIn("file-service", self.by_id["a_s04"]["raw_text"])
 
-    def test_demo_history_only_for_its_demo_owner(self):
+    def test_second_demo_researcher_has_own_history(self):
+        sources, _ = im.parse_demo_history("user_b")
+        self.assertEqual([s["source_id"] for s in sources], ["b_s01", "b_s02"])
+        self.assertTrue(all(s["user_id"] == "user_b" for s in sources))
+        self.assertIn("pilot", sources[0]["raw_text"])
+
+    def test_demo_history_only_for_demo_researchers(self):
         with self.assertRaises(im.ImportFailed) as ctx:
-            im.parse_demo_history("user_b")
+            im.parse_demo_history("user_x")
         self.assertEqual(ctx.exception.code, "demo_not_available")
 
 
@@ -86,6 +94,22 @@ class ExportTests(unittest.TestCase):
         self.assertEqual(len(a), 9)
         self.assertEqual([s["source_id"] for s in a], [s["source_id"] for s in z])
         self.assertTrue(all(s["source_type"] == "chatgpt_json" and s["source_id"].startswith("src_") for s in a))
+
+    def test_only_dialogue_messages_are_imported(self):
+        conv = json.loads(FIXTURE_BYTES)[0]
+        leaf = conv["current_node"]
+        extras = [("thoughts", "HIDDEN-THOUGHTS"), ("reasoning_recap", "HIDDEN-RECAP"), ("code", "HIDDEN-CODE")]
+        for i, (ctype, text) in enumerate(extras):
+            node_id = f"extra-{i}"
+            conv["mapping"][node_id] = {"id": node_id, "parent": leaf, "children": [], "message": {
+                "id": node_id, "author": {"role": "assistant"}, "create_time": None,
+                "content": {"content_type": ctype, "parts": [text]}, "metadata": {}}}
+            conv["mapping"][leaf]["children"].append(node_id)
+            leaf = node_id
+        conv["current_node"] = leaf
+        [s], _ = im.parse_upload(json.dumps([conv]).encode(), "c.json", "user_x")
+        self.assertNotIn("HIDDEN", s["raw_text"])
+        self.assertEqual(len(s["messages"]), 4)
 
     def test_ids_are_per_owner_and_stable(self):
         a, _ = im.parse_upload(FIXTURE_BYTES, "conversations.json", "user_x")
@@ -103,7 +127,7 @@ class ExportTests(unittest.TestCase):
         self.assertEqual(s["provenance"]["title"], "Assay controls")
         self.assertEqual(s["provenance"]["created_at"], "2026-09-01T10:00:00Z")
         self.assertEqual([m["role"] for m in s["messages"]], ["user", "assistant"])
-        self.assertEqual(s["messages"][1]["text"], "Use a pathway blocker and an unaffected protein.")
+        self.assertEqual(s["messages"][1]["text"], "Use a pathway blocker and an unaffected protein.\n[image omitted]")
         self.assertEqual(skipped, [{"title": "Untitled conversation", "reason": "no user or assistant messages"}])
 
     def test_clear_errors_for_bad_input(self):
@@ -154,6 +178,33 @@ class TextTests(unittest.TestCase):
         s = self.parse("You said:\nIs this a trafficking defect?\nChatGPT said:\nPossibly.", "chat.txt")
         self.assertEqual(self.roles(s), ["user", "assistant"])
         self.assertEqual(s["provenance"]["title"], "chat")
+
+    def test_chatgpt_exporter_extension_style(self):
+        # Shape of files saved by browser "export chat" tools: '# you asked' / '# chatgpt response',
+        # a 'message time:' line per turn, and a '> From:' source link at the top.
+        text = ("> From: https://chatgpt.com/c/synthetic-0001\n\n"
+                "# you asked\n\nmessage time: 2026-03-31 11:23:00\n\nDoes AI capex look like a bubble?\n\n"
+                "---\n\n# chatgpt response\n\nmessage time: 2026-03-31 11:23:40\n\n"
+                "## My bottom line\nPartly.\n\n### Test 1: Price-share decoupling\nIt is:\nmore nuanced.\n\n"
+                "---\n\n# you asked\n\nmessage time: 2026-03-31 11:38:53\n\nWhat would falsify it?")
+        s = self.parse(text, "AI-and-Financial-Crisis.md")
+        self.assertEqual(self.roles(s), ["user", "assistant", "user"])
+        self.assertEqual(s["provenance"]["title"], "AI-and-Financial-Crisis")
+        self.assertEqual(s["provenance"]["created_at"], "2026-03-31T11:23:00Z")
+        self.assertEqual([m["created_at"] for m in s["messages"]],
+                         ["2026-03-31T11:23:00Z", "2026-03-31T11:23:40Z", "2026-03-31T11:38:53Z"])
+        self.assertTrue(s["messages"][1]["text"].startswith("## My bottom line"))
+        self.assertNotIn("message time", s["raw_text"])
+        self.assertNotIn("chatgpt.com", s["raw_text"])
+
+    def test_markdown_images_are_marked(self):
+        s = self.parse("User: See this plot ![runs](https://example.org/plot.png)\nAssistant: Noted.")
+        self.assertEqual(s["messages"][0]["text"], "See this plot [image omitted]")
+
+    def test_prompt_response_headings(self):
+        s = self.parse("## Prompt:\nWhich assay?\n\n## Response:\nA pulse-chase.\nResponse: times were short.")
+        self.assertEqual(self.roles(s), ["user", "assistant"])
+        self.assertIn("Response: times were short.", s["messages"][1]["text"])
 
     def test_front_matter_is_skipped(self):
         s = self.parse("---\ntitle: x\ndate: 2026-09-01\n---\nUser: Hello\nAssistant: Hi")

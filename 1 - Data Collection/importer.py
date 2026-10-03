@@ -30,8 +30,18 @@ from pathlib import Path, PurePosixPath
 STEP_DIR = Path(__file__).resolve().parent
 REPO_ROOT = STEP_DIR.parent
 DATA_DIR = REPO_ROOT / "data"
-DEMO_FIXTURE = STEP_DIR / "samples" / "demo_chatgpt_user_a.json"
-DEMO_FIXTURE_OWNER = "user_a"
+# Synthetic demo histories, one per demo researcher (shared brief, section 11).
+DEMO_FIXTURES = {
+    "user_a": STEP_DIR / "samples" / "demo_chatgpt_user_a.json",
+    "user_b": STEP_DIR / "samples" / "demo_chatgpt_user_b.json",
+}
+DEMO_FIXTURE = DEMO_FIXTURES["user_a"]
+
+# Images and files in chats are never imported; they are marked with these (HANDOFF.md, section 3).
+CHATGPT_DIALOGUE_TYPES = {"text", "multimodal_text"}
+IMAGE_PLACEHOLDER = "[image omitted]"
+FILE_PLACEHOLDER = "[file omitted]"
+_MARKDOWN_IMAGE = re.compile(r"!\[[^\]]*\]\([^)]*\)")
 
 SCHEMA_VERSION = "1.0"
 ROLE_LABELS = {"user": "User", "assistant": "Assistant"}
@@ -151,8 +161,23 @@ def _chatgpt_messages(conv):
             continue
         if (msg.get("metadata") or {}).get("is_visually_hidden_from_conversation"):
             continue
+        # Only real dialogue: plain text, or text with images. Hidden reasoning ("thoughts",
+        # "reasoning_recap"), code/tool calls and custom-instruction records are never imported.
+        if (msg.get("content") or {}).get("content_type") not in CHATGPT_DIALOGUE_TYPES:
+            continue
         parts = (msg.get("content") or {}).get("parts") or []
-        text = "\n".join(p.strip() for p in parts if isinstance(p, str) and p.strip())
+        pieces = []
+        for p in parts:
+            if isinstance(p, str):
+                if p.strip():
+                    pieces.append(p.strip())
+            elif isinstance(p, dict):  # an uploaded image or file: we never import its contents
+                kind = str(p.get("content_type", ""))
+                pieces.append(IMAGE_PLACEHOLDER if "image" in kind else FILE_PLACEHOLDER)
+        for a in (msg.get("metadata") or {}).get("attachments") or []:
+            if isinstance(a, dict) and not str(a.get("mime_type", "")).startswith("image/"):
+                pieces.append(FILE_PLACEHOLDER)
+        text = "\n".join(pieces)
         if not text:
             continue
         messages.append({
@@ -192,6 +217,11 @@ def _claude_messages(conv):
             text = "\n".join(b["text"].strip() for b in blocks
                              if isinstance(b, dict) and b.get("type") == "text" and isinstance(b.get("text"), str)
                              and b["text"].strip())
+        # Attached files and images: we never import their contents, only mark that they were there.
+        placeholders = [FILE_PLACEHOLDER for a in msg.get("attachments") or [] if isinstance(a, dict)]
+        placeholders += [IMAGE_PLACEHOLDER if f.get("file_kind") == "image" else FILE_PLACEHOLDER
+                         for f in msg.get("files") or [] if isinstance(f, dict)]
+        text = "\n".join([t for t in [text] if t] + placeholders)
         if not text:
             continue
         messages.append({
@@ -254,15 +284,23 @@ def _parse_export_json(file_bytes, user_id, imported_at, upload_id, demo=False):
 
 _USER_LABELS = r"user|you|me|human"
 _ASSISTANT_LABELS = r"assistant|chatgpt|gpt(?:-[\w.]+)?|claude|ai|gemini|copilot"
-_LABEL = rf"(?P<label>{_USER_LABELS}|{_ASSISTANT_LABELS})(?:\s+said)?"
+_SUFFIX = r"(?:\s+(?:said|asked|response|replied|wrote|answered))?"  # "You said", "you asked", "ChatGPT response"
+_LABEL = rf"(?P<label>{_USER_LABELS}|{_ASSISTANT_LABELS}){_SUFFIX}"
+# Only accepted as a heading or a bold line on its own, never mid-sentence ("Response: …" is often prose).
+_LABEL_STANDALONE = rf"(?P<label>{_USER_LABELS}|{_ASSISTANT_LABELS}|prompt|response){_SUFFIX}"
 _B = r"(?:\*\*|__)?"  # optional bold markers
-# "## User", "### **ChatGPT**", "#### You said:"
-_HEADING_LABEL = re.compile(rf"^\s*#{{1,6}}\s*{_B}\s*{_LABEL}\s*:?\s*{_B}\s*:?\s*$", re.IGNORECASE)
+# "## User", "### **ChatGPT**", "#### You said:", "# you asked", "# chatgpt response", "## Prompt:"
+_HEADING_LABEL = re.compile(rf"^\s*#{{1,6}}\s*{_B}\s*{_LABEL_STANDALONE}\s*:?\s*{_B}\s*:?\s*$", re.IGNORECASE)
 # "User: hi", "**You:** hi", "**Claude**: hi", "> **User:** hi", "You said:"
 _INLINE_LABEL = re.compile(rf"^\s*(?:>\s*)?{_B}\s*{_LABEL}\s*{_B}\s*:\s*{_B}\s*(?P<rest>.*)$", re.IGNORECASE)
-# "**ChatGPT**" alone on a line
-_BOLD_LABEL = re.compile(rf"^\s*(?:\*\*|__)\s*{_LABEL}\s*(?:\*\*|__)\s*$", re.IGNORECASE)
+# "**ChatGPT**" or "**Response:**" alone on a line
+_BOLD_LABEL = re.compile(rf"^\s*(?:\*\*|__)\s*{_LABEL_STANDALONE}\s*:?\s*(?:\*\*|__)\s*:?\s*$", re.IGNORECASE)
 _TITLE_HEADING = re.compile(r"^\s*#\s+(?P<title>.+?)\s*$")
+# Export-tool metadata: "message time: 2026-03-31 11:23:00" under a speaker label,
+# and a "> From: https://chatgpt.com/…" source line at the top.
+_MESSAGE_TIME = re.compile(r"^\s*(?:\*\*|_)?message time:?(?:\*\*|_)?\s*:?\s*(?P<time>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(?::\d{2})?)\s*$",
+                           re.IGNORECASE)
+_SOURCE_LINE = re.compile(r"^\s*>\s*(?:From|Source):\s*https?://\S+\s*$", re.IGNORECASE)
 
 
 def _speaker(line):
@@ -270,7 +308,7 @@ def _speaker(line):
         m = pattern.match(line)
         if m:
             label = m.group("label").lower()
-            role = "user" if re.fullmatch(_USER_LABELS, label) else "assistant"
+            role = "user" if re.fullmatch(_USER_LABELS, label) or label == "prompt" else "assistant"
             rest = m.groupdict().get("rest") or ""
             return role, rest
     return None
@@ -286,8 +324,9 @@ def _decode_text(file_bytes):
 
 
 def parse_text_conversation(text, fallback_title):
-    """Split text into turns using speaker labels. Returns (title, [(role, text), …]).
+    """Split text into turns using speaker labels. Returns (title, [(role, text, created_at), …]).
     Text without any labels counts as one user message (the person's own notes)."""
+    text = _MARKDOWN_IMAGE.sub(IMAGE_PLACEHOLDER, text)  # ![alt](link) → [image omitted]
     lines = text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
 
     # Skip Markdown front matter (--- … ---) that some export tools add.
@@ -298,27 +337,32 @@ def parse_text_conversation(text, fallback_title):
                 break
 
     title = None
-    turns = []
+    turns = []  # [role, body_lines, created_at]
     for line in lines:
         speaker = _speaker(line)
         if speaker:
             role, rest = speaker
-            turns.append([role, [rest] if rest else []])
+            turns.append([role, [rest] if rest else [], None])
         elif turns:
-            turns[-1][1].append(line)
-        elif not line.strip():
-            continue  # blank lines before any content
+            turn = turns[-1]
+            time = _MESSAGE_TIME.match(line)
+            if time and turn[2] is None and not any(l.strip() for l in turn[1]):
+                turn[2] = _iso_from_string(time.group("time"))  # time of day as written (zone unknown)
+            else:
+                turn[1].append(line)
+        elif not line.strip() or _SOURCE_LINE.match(line):
+            continue  # blank lines or an export tool's source link before any content
         elif title is None and _TITLE_HEADING.match(line):
             title = _TITLE_HEADING.match(line).group("title").strip("*_ ")
         else:
-            turns.append(["user", [line]])  # text before any label counts as the user's own
+            turns.append(["user", [line], None])  # text before any label counts as the user's own
 
     messages = []
-    for role, body_lines in turns:
+    for role, body_lines, created_at in turns:
         body = "\n".join(body_lines).strip()
         body = re.sub(r"\n\s*(?:---|\*\*\*|___)\s*$", "", body).strip()  # trailing separator lines
         if body and not re.fullmatch(r"[-*_\s]+", body):
-            messages.append((role, body))
+            messages.append((role, body, created_at))
     return (title or fallback_title), messages
 
 
@@ -328,9 +372,10 @@ def _text_source(file_bytes, original_id, fallback_title, user_id, source_type, 
     if not turns:
         return None
     base = "t_" + hashlib.sha1(f"{original_id}".encode("utf-8")).hexdigest()[:10]
-    messages = [{"message_id": f"{base}-m{i:03d}", "role": role, "text": body, "created_at": None}
-                for i, (role, body) in enumerate(turns)]
-    return _make_source(user_id, source_type, original_id, title, None, messages, imported_at, upload_id)
+    messages = [{"message_id": f"{base}-m{i:03d}", "role": role, "text": body, "created_at": created_at}
+                for i, (role, body, created_at) in enumerate(turns)]
+    return _make_source(user_id, source_type, original_id, title, messages[0]["created_at"],
+                        messages, imported_at, upload_id)
 
 
 # ---------- Uploads ----------
@@ -430,17 +475,19 @@ def parse_pasted_text(text, user_id, title=None, imported_at=None):
     if not turns:
         raise ImportFailed("empty_paste", "The pasted text has no message content.")
     title = (title or "").strip() or parsed_title or turns[0][1][:60]
-    messages = [{"message_id": f"{original_id}-m{i:03d}", "role": role, "text": body, "created_at": None}
-                for i, (role, body) in enumerate(turns)]
-    return [_make_source(user_id, "pasted_text", original_id, title, None, messages, imported_at)], []
+    messages = [{"message_id": f"{original_id}-m{i:03d}", "role": role, "text": body, "created_at": created_at}
+                for i, (role, body, created_at) in enumerate(turns)]
+    return [_make_source(user_id, "pasted_text", original_id, title, messages[0]["created_at"],
+                         messages, imported_at)], []
 
 
 def parse_demo_history(user_id, imported_at=None):
-    """The synthetic demo history. Only the demo researcher it was written for may use it."""
+    """A synthetic demo history. Only the demo researcher it was written for may load it."""
     _require_user(user_id)
-    if user_id != DEMO_FIXTURE_OWNER:
-        raise ImportFailed("demo_not_available", "The demo history belongs to the demo researcher researcher_014.")
-    return _parse_export_json(DEMO_FIXTURE.read_bytes(), user_id, imported_at or _now_utc(), None, demo=True)
+    if user_id not in DEMO_FIXTURES:
+        raise ImportFailed("demo_not_available", "Demo histories are only available to the demo researchers.")
+    return _parse_export_json(DEMO_FIXTURES[user_id].read_bytes(), user_id, imported_at or _now_utc(),
+                              None, demo=True)
 
 
 # ---------- Private storage ----------

@@ -40,6 +40,7 @@ The Fellowship/
 ├── .gitignore                 ← keeps secrets and real user data out of GitHub
 ├── app.py                     ← the shared app: joins the steps' screens (see "Run the app")
 ├── requirements.txt           ← what the shared app needs installed
+├── .env.example               ← template for .env (your Anthropic API key; .env is git-ignored)
 ├── .streamlit/config.toml     ← app settings: this laptop only, no usage statistics
 ├── data/                      ← (git-ignored, on your laptop only) accounts, uploads, pipeline files
 ├── docs/
@@ -81,7 +82,7 @@ People's AI chats are personal. These rules hold even for the hackathon demo:
 
 In Terminal, from the repo folder (GitHub Desktop: *Repository → Open in Terminal*):
 
-1. First time only: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
+1. First time only: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`. For privacy screening (Step 2), also copy `.env.example` to `.env` and paste your Anthropic API key into it.
 2. Every time: `.venv/bin/streamlit run app.py`, then open http://localhost:8501
 
 You can create an account, or pick **Try a demo account** → `researcher_014` → **Demo history** to load the synthetic chats. Everything you create is stored in `data/` on your laptop only.

@@ -42,9 +42,12 @@ CONSENT_TEXT = {
         "(name, affiliation). No other user ever sees them."
     ),
     "What the system may use": (
-        "Chats you import are first screened, and anything personal or sensitive is held back. "
-        "The remaining research conversations are analysed by an external AI model service "
-        "to suggest ideas. Suggested ideas stay private until you approve them."
+        "Chats you import are screened, and personal information is never used: personal parts "
+        "of research chats are removed, and mostly personal, sensitive or off-topic chats are held "
+        "back entirely. Chats with obvious secrets (passwords, card, ID or record numbers) are "
+        "held back on this laptop; the others are sent to an external AI service (Anthropic's "
+        "Claude) to screen them, and the research that passes is then analysed to suggest ideas. "
+        "Suggested ideas stay private until you approve them."
     ),
     "What other people can see": (
         "Only your pseudonym, and only the idea summaries you approve one by one later. "

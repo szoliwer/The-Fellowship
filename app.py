@@ -13,9 +13,10 @@ from pathlib import Path
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
-for step_folder in ["0 - User Registration", "1 - Data Collection"]:
+for step_folder in ["0 - User Registration", "1 - Data Collection", "2 - Noise Filter"]:
     sys.path.insert(0, str(ROOT / step_folder))
 
+import filter_ui  # noqa: E402  (Step 2)
 import import_ui  # noqa: E402  (Step 1)
 import signup_ui  # noqa: E402  (Step 0)
 
@@ -26,12 +27,15 @@ if user is None:
     signup_ui.render()
     st.stop()
 
+PAGES = {"1. Import chats": import_ui.render, "2. Privacy screening": filter_ui.render}
+
 with st.sidebar:
     st.markdown(f"Logged in as **{user['pseudonym']}**")
     if user["is_demo_account"]:
         st.caption("Synthetic demo account")
+    page = st.radio("Go to", list(PAGES), label_visibility="collapsed")
     if st.button("Log out"):
         signup_ui.log_out()
         st.rerun()
 
-import_ui.render(user)
+PAGES[page](user)

@@ -20,9 +20,9 @@ Uploaded files (several at once is fine) or pasted text:
 | **`.md` / `.txt` file** | The file is one source (`text_file`) |
 | **`.zip` of `.md` / `.txt` files** | Each file is one source; other files are skipped and listed |
 | **Pasted text** | One source (`pasted_text`) |
-| **Demo history** (only for `researcher_014`) | The 9 synthetic conversations (`demo`) |
+| **Demo history** (only for the demo researchers) | `researcher_014`: 9 synthetic conversations; `cellbio_027`: 2 (`demo`) |
 
-**Who said what** in text, Markdown and pasted chats: a new turn starts at lines like `User:`, `You:`, `Assistant:`, `ChatGPT:`, `Claude:`, `AI:`, `**You:**`, `> **User:**`, `## ChatGPT`, `### **Claude**`, or ChatGPT's copy-paste labels `You said:` / `ChatGPT said:`. Text with no labels counts as one message from the user (their own notes). A first-line `# Heading` becomes the title; front matter (`--- … ---`) is skipped.
+**Who said what** in text, Markdown and pasted chats: a new turn starts at lines like `User:`, `You:`, `Assistant:`, `ChatGPT:`, `Claude:`, `AI:`, `**You:**`, `> **User:**`, `## ChatGPT`, `### **Claude**`, ChatGPT's copy-paste labels `You said:` / `ChatGPT said:`, browser-extension exports (`# you asked` / `# chatgpt response`, with `message time: …` lines used as message times and a `> From: <link>` line skipped), or headings `## Prompt:` / `## Response:` (headings only, so prose like "Response: …" isn't split). Text with no labels counts as one message from the user (their own notes). A first-line `# Heading` becomes the title; front matter (`--- … ---`) is skipped.
 
 **Limits:** 200 MB per upload; inside zips: `conversations.json` up to 500 MB, at most 500 text files of up to 5 MB each (100 MB total). Hidden files and `__MACOSX` are ignored.
 
@@ -70,12 +70,13 @@ Errors are `{code, message, retryable}` and never include chat text (e.g. `malfo
 > If you change this output format, update the README of the next step too and log it in `docs/DECISIONS.md` (see `CLAUDE.md`, Rule 4).
 
 ## How exports are read
-- **ChatGPT:** a conversation is a tree (edits and regenerations leave side branches). We import only the **branch the user last viewed** (`current_node`). System, tool and hidden messages are skipped; images are skipped but text next to them is kept.
+- **ChatGPT:** a conversation is a tree (edits and regenerations leave side branches). We import only the **branch the user last viewed** (`current_node`). Only real dialogue is imported (`text` and `multimodal_text` messages): system, tool and hidden messages, hidden reasoning (`thoughts`, `reasoning_recap`) and code/tool calls are skipped; images are skipped but text next to them is kept.
 - **Claude:** `chat_messages` in order; `human` → `user`. Text comes from `text`, or from the `content` text blocks if that's empty.
+- **Images and files are never imported**: they appear as `[image omitted]` / `[file omitted]` (ChatGPT image/file parts and attachments, Claude attachments and files, Markdown `![…](…)` images).
 - Conversations with no messages are skipped and listed on screen with a reason.
 
 ## Demo history (synthetic)
-`samples/build_demo_fixture.py` writes `samples/demo_chatgpt_user_a.json`: nine fictional conversations for `user_a`, matching section 11 of the shared brief. Expected after Step 2: `a_s01`–`a_s05` eligible (two ideas: trafficking hypothesis `a_s01`–`a_s03`, LLM-extraction reproducibility `a_s04`–`a_s05`); `a_s06` health, `a_s07` finances, `a_s08` admin, `a_s09` research mixed with patient details: all held back. All people, patients, accounts and results in it are invented.
+`samples/build_demo_fixture.py` writes `samples/demo_chatgpt_user_a.json`: nine fictional conversations for `user_a`, matching section 11 of the shared brief, and `samples/demo_chatgpt_user_b.json`: two for `user_b` (`b_s01`, `b_s02`: functional readouts and controls for a trafficking question in fictional Disease B, with a *pilot*, unvalidated assay, the brief's idea B1). Expected after Step 2: `a_s01`–`a_s05` eligible (two ideas: trafficking hypothesis `a_s01`–`a_s03`, LLM-extraction reproducibility `a_s04`–`a_s05`); `a_s06` health, `a_s07` finances, `a_s08` admin, `a_s09` research mixed with patient details: all held back. All people, patients, accounts and results in it are invented.
 
 ## How to run
 From the repo root, see the main `README.md` → *Run the app*. Checks:
@@ -87,7 +88,7 @@ From the repo root, see the main `README.md` → *Run the app*. Checks:
 | `importer.py` | Reads every upload type; stores sources, original files and upload history |
 | `import_ui.py` | Import screen (used by `app.py` at the repo root) |
 | `samples/build_demo_fixture.py` | Generates the synthetic demo history |
-| `samples/demo_chatgpt_user_a.json` | The synthetic demo history (generated) |
+| `samples/demo_chatgpt_user_a.json`, `demo_chatgpt_user_b.json` | The synthetic demo histories (generated) |
 | `test_importer.py` | Automatic checks (24) |
 
 ## To do
@@ -114,6 +115,7 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03 20:15** — Herman (with Claude) — Images/files now marked `[image omitted]` / `[file omitted]` (agreed Step 2 → 3 handoff); added the synthetic history for demo researcher `user_b` (`b_s01`, `b_s02`). `user_a`'s history is byte-for-byte unchanged.
 - **2026-10-03 17:40** — Herman (with Claude) — Importer now takes ChatGPT/Claude zips and JSON, .md/.txt, zips of text files and paste; stores originals + history per user; screen moved into the shared `app.py` behind log-in. 24 automatic checks pass; in the browser: uploaded a .md file, logged out and back in, chat still there. Next: Step 2 noise filter reads `data/sources/<user_id>.json`.
 - **2026-10-03 16:45** — Herman (with Claude) — Built importer, import screen and synthetic demo history (9 conversations).
 - **2026-10-03** — setup — Step folder and spec created.
@@ -121,4 +123,4 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done 
 ## Code fixes log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — **Problem:** … **Cause:** … **Fix:** … (files: …)`_
 
-- _No fixes yet._
+- **2026-10-03 18:55** — Herman (with Claude) — **Problem:** a real 256 KB ChatGPT chat saved as .md imported as "1 message" (everything attributed to the user). **Cause:** it used a browser-extension format (`# you asked` / `# chatgpt response`, `message time:` lines) the label list didn't know. **Fix:** recognise `asked`/`response`/`replied`/`wrote` after a speaker name, `## Prompt` / `## Response` headings, use `message time:` lines as timestamps, skip a leading `> From: <link>` line. Now 65 messages (33 user / 32 assistant). Re-uploading the same file replaces the old copy. (files: `importer.py`, `test_importer.py`)
