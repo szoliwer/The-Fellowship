@@ -8,9 +8,9 @@
 :root{
   --bg:#E9EEEA; --surface:#FFFFFF; --surface-2:#F3F6F3; --ink:#13201B; --muted:#5A6862; --line:#D7E0DA;
   --accent:#1D6A50; --accent-ink:#FFFFFF; --accent-soft:#DCEDE5;
-  --sim:#2C67A6; --sim-bg:#E2EDF8; --comp:#A35C0C; --comp-bg:#FAEBD7;
+  --sim:#6A4BB8; --sim-bg:#EEE8FA; --comp:#A35C0C; --comp-bg:#FAEBD7;
   --pass:#7E8B85; --danger:#B83A2E; --frame:#0F1513; --bubble-me:#1D6A50; --bubble-me-ink:#FFFFFF;
-  --them-bg:#F5E4F0; --them:#8A2F6E; --you-bg:#DDF0E5; --you:#1D6A50;
+  --them-bg:#E1F1FB; --them:#2478B5; --you-bg:#DDF0E5; --you:#1D6A50;
   --app-bg:#E4E8FA; --app-ink:#2F3C8F; --app-line:#C3CBF0;
   --shadow:0 18px 50px -20px rgba(19,32,27,.35);
   --f-display:"Newsreader", Georgia, "Times New Roman", serif;
@@ -20,17 +20,17 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0C1110; --surface:#161F1C; --surface-2:#1C2723; --ink:#E4ECE8; --muted:#93A29B; --line:#2A3631;
   --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
-  --sim:#86B6E8; --sim-bg:#18283A; --comp:#E8A659; --comp-bg:#382814;
+  --sim:#BCA6F2; --sim-bg:#272040; --comp:#E8A659; --comp-bg:#382814;
   --pass:#8C9993; --danger:#F07A6C; --frame:#000000; --bubble-me:#2E8C69; --bubble-me-ink:#FFFFFF;
-  --them-bg:#2E1A29; --them:#EA9FD3; --you-bg:#13291E; --you:#62C79E;
+  --them-bg:#122A3B; --them:#7CC6F2; --you-bg:#13291E; --you:#62C79E;
   --app-bg:#1B2045; --app-ink:#B3BEF5; --app-line:#363F72;
   --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}}
 :root[data-theme="dark"]{
   --bg:#0C1110; --surface:#161F1C; --surface-2:#1C2723; --ink:#E4ECE8; --muted:#93A29B; --line:#2A3631;
   --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
-  --sim:#86B6E8; --sim-bg:#18283A; --comp:#E8A659; --comp-bg:#382814;
+  --sim:#BCA6F2; --sim-bg:#272040; --comp:#E8A659; --comp-bg:#382814;
   --pass:#8C9993; --danger:#F07A6C; --frame:#000000; --bubble-me:#2E8C69; --bubble-me-ink:#FFFFFF;
-  --them-bg:#2E1A29; --them:#EA9FD3; --you-bg:#13291E; --you:#62C79E;
+  --them-bg:#122A3B; --them:#7CC6F2; --you-bg:#13291E; --you:#62C79E;
   --app-bg:#1B2045; --app-ink:#B3BEF5; --app-line:#363F72;
   --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}
 
@@ -242,6 +242,28 @@ button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px so
 .pick .ttl{font-weight:700;grid-column:1}
 .pick .m{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);grid-column:2;grid-row:1 / span 2;align-self:center}
 
+/* ---------- Match animation: one shared motion template, content filled in per match ----------
+   Rules: light blue (them) enters from the left, green (you) from the right, they meet in the middle,
+   at most 3 elements, 2 seconds, plays once and holds the final frame. */
+.animwrap{position:relative;width:min(300px,100%);aspect-ratio:320/140;background:var(--surface);border-radius:18px;box-shadow:0 10px 30px -14px rgba(0,0,0,.45);flex:none}
+#matchAnim,#matchAnim svg{width:100%;height:100%;display:block}
+.replay{position:absolute;right:8px;bottom:6px;background:none;border:0;color:var(--muted);font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;padding:2px 4px}
+.replay:hover{color:var(--ink)}
+.c-them{fill:var(--them)} .c-you{fill:var(--you)} .c-hole{fill:var(--surface)}
+.s-them{stroke:var(--them);fill:none} .s-ink{stroke:var(--ink);fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.a-l,.a-r,.a-pop,.a-spin{transform-box:fill-box}
+.a-l{animation:a-in-l 2s cubic-bezier(.2,.8,.2,1) both}
+.a-r{animation:a-in-r 2s cubic-bezier(.2,.8,.2,1) both}
+.a-spin{transform-origin:center;animation:a-spin 2s cubic-bezier(.2,.8,.2,1) both}
+.a-pop{transform-origin:center;animation:a-pop 2s ease-out both}
+.a-draw{stroke-dasharray:1;stroke-dashoffset:0;animation:a-draw 2s ease-out both}
+@keyframes a-in-l{0%{transform:translateX(-150px);opacity:0}12%{opacity:1}58%{transform:translateX(0)}64%{transform:translateX(-5px)}70%,100%{transform:translateX(0);opacity:1}}
+@keyframes a-in-r{0%{transform:translateX(150px);opacity:0}12%{opacity:1}58%{transform:translateX(0)}64%{transform:translateX(5px)}70%,100%{transform:translateX(0);opacity:1}}
+@keyframes a-spin{0%{transform:rotate(-300deg)}58%,100%{transform:rotate(0)}}
+@keyframes a-pop{0%,62%{transform:scale(0);opacity:0}82%{transform:scale(1.18);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes a-draw{0%,60%{stroke-dashoffset:1}100%{stroke-dashoffset:0}}
+.match .pair .av.lg{width:60px;height:60px;font-size:22px;border-width:3px}
+.match{overflow:auto}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 
@@ -283,7 +305,7 @@ body{padding:0;overflow:hidden}
 .topbar h2{font-size:34px}
 
 /* Discover (desktop): one LANDSCAPE card, sized to its content so nothing scrolls.
-   [ them: pink ]  [ why you two: their idea (pink) ⇄ your idea (green) ]  [ you: green ] */
+   [ them: light blue ]  [ why you two: their idea (light blue) ⇄ your idea (green) ]  [ you: green ] */
 .deck{padding:0 36px;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);place-items:center;min-height:0;flex:0 1 auto;margin-top:auto}
 #s-discover .hint{margin-bottom:auto}
 #s-discover .topbar{margin-bottom:8px}
@@ -359,7 +381,9 @@ body{padding:0;overflow:hidden}
 /* Match: a modal over the app */
 .match{background:rgba(6,20,14,.55);padding:24px}
 .matchbox{background:var(--accent);color:var(--accent-ink);width:min(540px,100%);border-radius:26px;padding:34px 30px 26px;display:flex;flex-direction:column;align-items:center;gap:16px;box-shadow:var(--shadow)}
-.match h2{font-size:40px}
+.match h2{font-size:38px}
+.matchbox .animwrap{width:min(380px,100%)}
+.match .pair .av.lg{width:68px;height:68px;font-size:24px}
 .match .btns{flex-direction:row}
 .match .btns .btn{flex:1}
 
@@ -466,6 +490,7 @@ body{padding:0;overflow:hidden}
     <section class="match" id="s-match" hidden aria-live="polite">
       <div class="matchbox" role="dialog" aria-label="It's a match">
         <div class="pair" id="matchPair"></div>
+        <div class="animwrap"><div id="matchAnim" role="img"></div><button class="replay" id="btnReplay" aria-label="Replay animation">↻ replay</button></div>
         <h2 id="matchTitle"></h2>
         <p class="sub" id="matchSub"></p>
         <div class="intro">
@@ -522,7 +547,9 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const ME = {name:'Sam', first:'Sam', handle:'@samrivera', loc:'Boston, MA', initials:'S', hue:158, chats:31};
 
 const CANDIDATES = [
-  {id:'priya', name:'Priya', first:'Priya', handle:'@priya.n', loc:'Cambridge, MA', initials:'P', hue:12, likesYou:true, fit:.91, chats:23,
+  {id:'priya', name:'Priya', first:'Priya', handle:'@priya.n', loc:'Cambridge, MA', initials:'P', hue:195, likesYou:true, fit:.91, chats:23,
+   animAlt:'Protein (light blue) meets a small molecule (green) that docks into its pocket; a binding curve draws itself.',
+   anim:`<svg viewBox="0 0 320 140" aria-hidden="true"><g class="a-l"><path class="c-them" d="M74,36 C100,18 142,22 160,38 L160,54 L146,58 L146,82 L160,86 L160,102 C140,120 96,122 74,106 C52,92 50,52 74,36 Z"/></g><g class="a-r"><rect class="c-you" x="146" y="60" width="20" height="20" rx="3"/><polygon class="c-you" points="164,70 172,55 189,55 197,70 189,85 172,85"/></g><path class="a-draw s-ink" pathLength="1" d="M214,108 C232,108 236,76 252,70 C266,65 278,64 292,64"/></svg>`,
    welcome:'Priya and Sam, welcome. You\'re working on two halves of the same problem. Priya uses diffusion models to predict which compounds bind a protein, but has no lab to check the predictions. Sam runs SPR binding assays and keeps wondering which compounds are worth testing first. Priya\'s models could tell Sam what to test, and Sam\'s assays could tell Priya whether the models are right.',
    ask:'If you could run one experiment together this month, what would you want it to answer?',
    bridges:[
@@ -532,6 +559,8 @@ const CANDIDATES = [
    intro:'Priya is using diffusion models to predict protein–ligand binding but has no lab to check the predictions. You run SPR binding assays and keep asking which compounds are worth testing first.',
    q:'Which 20 of Priya\'s top-ranked compounds could your lab run in one week?', topic:'Diffusion models × binding assays'},
   {id:'tomas', name:'Tomás', first:'Tomás', handle:'@tortega', loc:'Providence, RI', initials:'T', hue:205, likesYou:false, fit:.78, chats:17,
+   animAlt:'A data catalog drawer (light blue) meets an assay file (green) that drops in; a search lens appears.',
+   anim:`<svg viewBox="0 0 320 140" aria-hidden="true"><g class="a-l"><rect class="c-them" x="62" y="62" width="98" height="52" rx="8"/><rect class="c-hole" x="96" y="82" width="30" height="7" rx="3.5"/></g><g class="a-r"><path class="c-you" d="M164,30 L192,30 L204,42 L204,80 L164,80 Z"/><rect class="c-hole" x="171" y="50" width="26" height="4" rx="2"/><rect class="c-hole" x="171" y="60" width="26" height="4" rx="2"/><rect class="c-hole" x="171" y="70" width="18" height="4" rx="2"/></g><g class="a-pop"><circle class="s-ink" cx="244" cy="58" r="14"/><path class="s-ink" d="M254,68 L266,80"/></g></svg>`,
    welcome:'Tomás and Sam, welcome. You both keep coming back to the same frustration: lab data that is hard to find and harder to reuse. Tomás is building an open-source data catalog for lab instruments. Sam has two years of SPR exports that would make a real-world test for it.',
    ask:'What is the most painful part of finding an old result in your lab today?',
    bridges:[
@@ -540,6 +569,8 @@ const CANDIDATES = [
    themMore:['Soil carbon sensors','Metadata standards'], youMore:['SPR binding assays','Grant reporting'],
    intro:'Tomás is building a small open-source data catalog for lab instruments. You have years of assay exports nobody can search.', q:'What would it take to load one month of your SPR exports into his catalog?', topic:'Lab data catalog × assay exports'},
   {id:'lena', name:'Lena', first:'Lena', handle:'@lhoff', loc:'Berlin, DE', initials:'L', hue:268, likesYou:true, fit:.86, chats:40,
+   animAlt:'A learning loop (light blue) spins in and meets a well plate (green); the loop picks one well to test next.',
+   anim:`<svg viewBox="0 0 320 140" aria-hidden="true"><g class="a-l"><g class="a-spin"><path class="s-them" stroke-width="9" stroke-linecap="round" d="M128,42 A28,28 0 1 1 104,56"/><polygon class="c-them" points="94,62 112,60 101,45"/></g></g><g class="a-r"><rect class="c-you" x="162" y="38" width="98" height="64" rx="10"/><circle class="c-hole" cx="186" cy="58" r="8"/><circle class="c-hole" cx="211" cy="58" r="8"/><circle class="c-hole" cx="236" cy="58" r="8"/><circle class="c-hole" cx="186" cy="82" r="8"/><circle class="c-hole" cx="211" cy="82" r="8"/><circle class="c-hole" cx="236" cy="82" r="8"/></g><circle class="a-pop c-them" cx="211" cy="82" r="8"/></svg>`,
    welcome:'Lena and Sam, welcome. One of you has the method the other is missing. Lena builds active-learning loops that pick the most informative next experiment. Sam chooses which compounds to screen by hand and spends weeks on it. Lena\'s loops need real screening data, and Sam\'s lab produces it every week.',
    ask:'How do you each decide that an experiment wasn\'t worth running?',
    bridges:[
@@ -547,7 +578,9 @@ const CANDIDATES = [
      {type:'sim', them:'Cutting wasted wet-lab runs', you:'Assay automation on a tight budget'}],
    themMore:['Bayesian optimisation','Lab robotics'], youMore:['ML for drug discovery','FAIR data'],
    intro:'Lena designs active-learning loops that pick the most informative next experiment. You choose screening batches by hand and want a smarter way.', q:'Could one of your past screening rounds be replayed through her active-learning loop?', topic:'Active learning × screening design'},
-  {id:'amara', name:'Amara', first:'Amara', handle:'@amara.o', loc:'New Haven, CT', initials:'A', hue:330, likesYou:false, fit:.72, chats:12,
+  {id:'amara', name:'Amara', first:'Amara', handle:'@amara.o', loc:'New Haven, CT', initials:'A', hue:38, likesYou:false, fit:.72, chats:12,
+   animAlt:'A grant page (light blue) with an empty slot meets a binding-kinetics tile (green) that fills it; an approval tick pops.',
+   anim:`<svg viewBox="0 0 320 140" aria-hidden="true"><g class="a-l"><path class="c-them" d="M70,24 L156,24 L156,116 L70,116 Z"/><rect class="c-hole" x="82" y="38" width="56" height="6" rx="3"/><rect class="c-hole" x="82" y="52" width="44" height="6" rx="3"/><rect class="c-hole" x="82" y="66" width="56" height="6" rx="3"/></g><g class="a-r"><rect class="c-you" x="160" y="58" width="58" height="58" rx="8"/><path class="c-hole" d="M168,106 C180,106 182,78 194,74 C202,71 206,70 212,70 L212,76 C206,76 203,77 197,79 C188,84 186,110 168,110 Z"/></g><g class="a-pop"><circle class="c-you" cx="246" cy="52" r="18"/><path class="s-ink" stroke="var(--surface)" style="stroke:var(--surface)" d="M237,52 L244,59 L256,45"/></g></svg>`,
    welcome:'Amara and Sam, welcome. Amara\'s grant needs exactly what Sam\'s lab does. Amara is drafting a proposal on antimicrobial peptides and needs a binding-kinetics aim. Sam measures binding kinetics with SPR every week.',
    ask:'What would a collaboration need to look like for both of you to get something publishable out of it?',
    bridges:[
@@ -689,6 +722,15 @@ function addMatch(c){
 }
 
 /* ---------- Match overlay ---------- */
+const DEFAULT_ANIM = `<svg viewBox="0 0 320 140" aria-hidden="true"><g class="a-l"><circle class="c-them" cx="132" cy="70" r="30"/></g><g class="a-r"><circle class="c-you" cx="188" cy="70" r="30"/></g><circle class="a-pop c-hole" cx="160" cy="70" r="9"/></svg>`;
+function playMatchAnim(c){
+  const box = $('#matchAnim');
+  box.innerHTML = '';                 // re-inserting restarts the 2-second animation
+  void box.offsetWidth;
+  box.innerHTML = c.anim || DEFAULT_ANIM;
+  box.setAttribute('aria-label', c.animAlt || 'Two shapes meet in the middle');
+}
+$('#btnReplay').onclick = () => lastMatch && playMatchAnim(lastMatch);
 function showMatch(c){
   lastMatch = c;
   $('#matchPair').innerHTML = avatar(c,'lg') + avatar(ME,'lg');
@@ -696,6 +738,7 @@ function showMatch(c){
   $('#matchSub').textContent = c.topic;
   $('#matchIntro').textContent = c.intro;
   $('#matchQ').textContent = 'Start with: ' + c.q;
+  playMatchAnim(c);
   $('#s-match').hidden = false;
   Sound.play('match');
   $('#btnSayHi').focus();

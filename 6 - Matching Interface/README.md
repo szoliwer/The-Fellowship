@@ -29,6 +29,25 @@ The screens the user sees, plus updated match status:
 - [ ] Write the warm-intro prompt / template
 - [ ] Wire up the demo with 3–5 sample users
 
+## Match animation spec
+Shown on the "both said yes" screen (phone and desktop). Same template every time, so it always looks like one product.
+
+| Rule | Value |
+|---|---|
+| Size | `viewBox="0 0 320 140"`, shown on a white rounded panel |
+| Colours | Their shape **light blue** (`c-them`), your shape **green** (`c-you`), holes/details `c-hole`, lines `s-ink`. No other colours. |
+| Elements | **Max 3**: (1) their shape, (2) your shape, (3) the "result" that appears when they meet |
+| Motion | (1) slides in from the left (`a-l`), (2) from the right (`a-r`), they meet in the middle at about 1.2 s with a small bump, (3) pops (`a-pop`) or draws itself (`a-draw`) from 1.2–2 s. Optional `a-spin` inside (1) or (2). |
+| Length | **2 seconds**, plays once, holds the final frame. "↻ replay" button. |
+| Accessibility | Every animation has a one-sentence `animAlt`. With "reduce motion" switched on, the final frame shows straight away. |
+
+**Examples in the mockup:** Priya (a protein meets a molecule that docks into its pocket, then a binding curve draws), Lena (a learning loop meets a well plate and picks one well), Tomás (a data drawer meets a file, then a search lens appears), Amara (a grant page meets a kinetics tile, then a tick appears). Frames: `mockup/match-animations-frames.png`.
+
+**Prompt for Step 5 (one call per new match, store the result with the match):**
+> You draw tiny animated icons for a matching app. Topic of this match: *{their idea}* (person A) and *{your idea}* (person B), linked because *{match reason}*. Return JSON: `{"anim": "<svg ...>", "animAlt": "..."}`. Rules: `viewBox="0 0 320 140"`; at most 3 elements: a `<g class="a-l">` for A's idea drawn with class `c-them`, ending left of x=160; a `<g class="a-r">` for B's idea drawn with class `c-you`, starting right of x=160 so the two meet in the middle; one result element with class `a-pop` or a `<path class="a-draw s-ink" pathLength="1">`. Only use the classes `c-them c-you c-hole s-them s-ink a-l a-r a-pop a-draw a-spin`. No text, no colours, no `<style>` or `<script>`. Simple flat shapes a 10-year-old would recognise.
+
+The app must **check the SVG before showing it**: only allowed tags and classes, no scripts or links. If the check fails, show the default (two circles meeting).
+
 ## AI nudge rules (draft, for the build)
 | Nudge | When it fires | What it says / offers |
 |---|---|---|
@@ -49,6 +68,8 @@ The nudge text should be written by the LLM from the conversation and the match 
 ## Decisions log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — why.`_
 
+- **2026-10-03** — Oliver — **Colour change: the other person is now light blue instead of pink** (phone and desktop, light and dark mode, including match animations). "Shared interest" moved from blue to violet so it doesn't clash. Profile pictures that looked reddish were recoloured. Colour key now: light blue = them, green = you, violet = shared interest, amber = complementary, indigo = the app's own messages. *Why:* pink/red read as "wrong" or "error".
+- **2026-10-03** — Oliver — **A 2-second animation about the match topic plays on the "both said yes" screen.** Claude writes each one as a small animated SVG (no video tool), following one shared style template (see *Match animation spec* below). *Why:* it's instant to show, costs cents, always looks on-brand, and is easy to fix if one comes out wrong. AI video was ruled out: minutes per clip, higher cost, inconsistent style.
 - **2026-10-03** — Oliver — **Two versions of the interface: phone app and desktop browser.** Same flow, data, nudges and sounds. On desktop: a sidebar for navigation, one large match card in the middle (drag, click or use ← / → keys), the "both said yes" screen as a pop-up, and the matches list and chat side by side. *Why:* researchers spend their workday at a computer, so the desktop browser needs to be first class, not a stretched phone screen.
 - **2026-10-03** — Oliver — **App sounds use the team's files in `sounds/`:** `rejection.wav` when you pass, `accept.wav` when you connect, `connection-success.mp3` on the "both said yes" screen, and `text-message.ogg` for every message sent or received (including the app's own messages). If a connect turns into a match, the long accept sound fades out as the success sound starts. Mute with the speaker button on Discover. *Why:* a sting discourages passing, a reward encourages connecting, and sound makes the chat feel live.
 - **2026-10-03** — Oliver — **Privacy: first names and usernames only.** No last names anywhere in the app (cards, matches list, chat). Avatars show a single initial. *Why:* the app is privacy-first; people can share more themselves once they're talking.
@@ -64,6 +85,8 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03** — Oliver + Claude — Palette update: pink → light blue for the other person, violet for shared interest. Screenshots refreshed (`1-discover`, `2-match`, `desktop-1-discover`, `desktop-2-match`, `match-animations-frames`).
+- **2026-10-03** — Oliver + Claude — Match animations added to both mockups (phone and desktop) on the "both said yes" screen, with 4 example animations and a replay button. Spec and Step 5 prompt documented above. Screenshots refreshed: `mockup/2-match.png`, `mockup/desktop-2-match.png`, plus `mockup/match-animations-frames.png`. **Next:** agree with the Step 5 owner on adding `anim` + `animAlt` to the match output.
 - **2026-10-03** — Oliver + Claude — Desktop browser mockup added: `mockup/desktop-mockup.html`, plus screenshots `mockup/desktop-1-discover.png`, `desktop-2-match.png`, `desktop-3-matches-chat.png`. The phone mockup (`mockup/matching-mockup.html`) is unchanged apart from a link to the desktop version. In narrow windows the desktop version switches to a top bar and shows one pane at a time.
 - **2026-10-03** — Oliver + Claude — Mockup v5: the mockup now plays the four sound files from `sounds/` (it loads them from `../sounds/`, so keep the folders where they are). For the demo, the other person sends one reply after your first message in a chat, so you can hear a received message. **For the Streamlit build:** browsers only play sound after a tap or click, and Streamlit will need a small HTML/JS component to play these files.
 - **2026-10-03** — Oliver + Claude — Mockup v3: one shared AI welcome message addressed to both people, ending in an open question (replaces the conversation starters). AI nudges added ("gone quiet" and "take it further", with mutual opt-in for swapping emails or LinkedIn). New screenshots: `mockup/5-nudge-quiet.png`, `mockup/6-nudge-connect.png`.
