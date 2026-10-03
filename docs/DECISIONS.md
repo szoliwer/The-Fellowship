@@ -13,6 +13,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-006 — Only user-approved ideas reach matching
+- **Date / who:** 2026-10-03 — Cog (with Claude)
+- **Decision:** Step 4's review page writes `data/ideas.json`, which holds only the ideas and details each user kept (same row format as its input, `raw_text` removed). Step 5 reads that file. Nothing is written until the user presses the button.
+- **Why:** "AI can nominate. Only the user can publish." Everything starts checked, so the user's press is the consent. Using the path in Step 5's README means Step 5 needs no change.
+- **Affects:** Steps 4 and 5
+
 ### D-005 — Everyone works on `main` (replaces D-003)
 - **Date / who:** 2026-10-03 — team (recorded by Oliver)
 - **Decision:** The whole team commits directly to `main`. The per-step branches are retired and nobody should keep working on them.

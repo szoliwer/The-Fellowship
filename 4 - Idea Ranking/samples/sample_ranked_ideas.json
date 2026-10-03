@@ -1,0 +1,123 @@
+{
+  "_note": "SYNTHETIC demo data shaped like ranked Step 3/4 output: one distilled chat per row (main idea + sub-ideas). Not real people or real chats. user_a's rows come from the Step 1 demo history (a_s01-a_s05).",
+  "ideas": [
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c01",
+      "evidence": ["a_s01"],
+      "rank_score": 0.92,
+      "main_idea": "Altered membrane-protein trafficking as the cause of the Disease A phenotype",
+      "insights": [
+        "In Disease A patient fibroblasts a membrane protein piles up near the nucleus instead of reaching the cell surface.",
+        "Treating 'trafficking defect' as a hypothesis to test, not a conclusion.",
+        "Need to separate slower delivery, faster internalisation, failed recycling and over-expression.",
+        "Comparing total protein with the surface fraction would rule over-expression in or out."
+      ],
+      "raw_text": "(synthetic) Could altered intracellular trafficking explain the Disease A phenotype?"
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c03",
+      "evidence": ["a_s03"],
+      "rank_score": 0.88,
+      "main_idea": "Finding a functional assay, and someone to design it, for the trafficking hypothesis",
+      "insights": [
+        "Nobody in the group has run a functional trafficking assay.",
+        "Needs a measurement of movement over time, not a snapshot.",
+        "Controls: a pathway block, an unaffected protein, and a check that labelling doesn't change trafficking.",
+        "Looking for a cell biologist with assay-design experience."
+      ],
+      "raw_text": "(synthetic) What assay or expertise could test the hypothesis?"
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c02",
+      "evidence": ["a_s02"],
+      "rank_score": 0.81,
+      "main_idea": "Linking protein mislocalization to function in Disease A cells",
+      "insights": [
+        "Mislocalization in about 60% of Disease A cells vs. 15% of controls, from imaging only.",
+        "Location alone doesn't show whether the protein's function changed.",
+        "Candidate readouts: cargo uptake, pulse-chase, surface labelling.",
+        "Unsure how to tell a real effect from an artifact of the assay itself."
+      ],
+      "raw_text": "(synthetic) Does mislocalization mean function changed?"
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c05",
+      "evidence": ["a_s05"],
+      "rank_score": 0.74,
+      "main_idea": "Reviewing disagreements between repeated LLM extraction runs",
+      "insights": [
+        "Run each paper three times and score agreement per extracted item.",
+        "Accept items found in every run, with spot checks.",
+        "Send inconsistent items to a human reviewer and log the decisions.",
+        "Report how often the reviewer overturns the model as an error rate."
+      ],
+      "raw_text": "(synthetic) Checking disagreements between extraction runs"
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c04",
+      "evidence": ["a_s04"],
+      "rank_score": 0.69,
+      "main_idea": "Reproducibility of LLM-assisted literature extraction",
+      "insights": [
+        "Using an LLM to pull variant-phenotype mentions out of papers for a literature review.",
+        "Two runs on the same paper return slightly different lists.",
+        "Recall looks like the weak spot: later runs miss variants."
+      ],
+      "raw_text": "(synthetic) How reproducible is LLM-assisted literature extraction?"
+    },
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c01",
+      "evidence": ["b_s01"],
+      "rank_score": 0.9,
+      "main_idea": "Live-cell assays for membrane-protein recycling",
+      "insights": [
+        "Runs pulse-chase and surface-biotinylation assays in patient-derived fibroblasts.",
+        "Built a pH-sensitive reporter that times when a protein reaches the cell surface.",
+        "Standard control set: endocytosis block, Golgi-exit block, unaffected cargo."
+      ],
+      "raw_text": "(synthetic) How do I time surface arrival without fixing the cells?"
+    },
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c02",
+      "evidence": ["b_s02"],
+      "rank_score": 0.8,
+      "main_idea": "Telling real trafficking defects from imaging artifacts",
+      "insights": [
+        "Fixation and antibody access can fake perinuclear accumulation.",
+        "Compare live and fixed imaging before trusting a phenotype."
+      ],
+      "raw_text": "(synthetic) Can fixation create a perinuclear pattern?"
+    },
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c03",
+      "evidence": ["b_s03"],
+      "rank_score": 0.7,
+      "main_idea": "Finding disease cohorts to test the recycling assays on",
+      "insights": [
+        "The assays are validated only in standard cell lines so far.",
+        "Needs patient-derived cells with a clear mislocalization phenotype."
+      ],
+      "raw_text": "(synthetic) Where could I get patient cells with a trafficking phenotype?"
+    },
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c04",
+      "evidence": ["b_s04"],
+      "rank_score": 0.5,
+      "main_idea": "Automating image analysis of endosome counts",
+      "insights": [
+        "Counting endosomes by hand is the slowest step in the lab.",
+        "Interested in segmentation models trained on a few labelled images."
+      ],
+      "raw_text": "(synthetic) Is there a segmentation model that works with 20 labelled images?"
+    }
+  ]
+}
