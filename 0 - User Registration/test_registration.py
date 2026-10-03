@@ -54,6 +54,21 @@ class AccountTests(unittest.TestCase):
         self.assertEqual([u["pseudonym"] for u in exported], ["researcher_014", "cellbio_027", "neuro_lab_17"])
         self.assertNotIn("scrypt", json.dumps(exported))
 
+    def test_users_export_has_the_fields_step_5_reads(self):
+        self.create(name="Ada Lovelace")
+        exported = {u["pseudonym"]: u for u in json.loads((self.db.parent / "users.json").read_text())}
+        u = exported["neuro_lab_17"]
+        self.assertEqual(u["name"], "neuro_lab_17")            # intros use the pseudonym, never the real name
+        self.assertEqual(u["private"]["name"], "Ada Lovelace")  # the real name stays under private only
+        self.assertIs(u["consent"]["analyse_chats"], True)
+        self.assertEqual(u["match_types"], ["similar", "complementary"])
+        self.assertEqual(u["looking_for"], ["collaborator"])
+
+    def test_declined_consent_is_passed_on_to_matching(self):
+        user = reg.get_user("user_a", self.db)
+        user["consent"]["process_imported_chats"] = False
+        self.assertIs(reg.for_matching(user)["consent"]["analyse_chats"], False)
+
     def test_log_in_with_right_password_case_insensitive_email(self):
         user = self.create()
         self.assertEqual(reg.log_in("  ADA@example.com ", PASSWORD, db_file=self.db), user)

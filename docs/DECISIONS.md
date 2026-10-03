@@ -13,6 +13,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-011 — Step 0's user file also speaks Step 5's format (pseudonyms, consent)
+- **Date / who:** 2026-10-03 — Herman
+- **Decision:** Every record in `data/users.json` also carries the fields Step 5 reads: `name` = the user's **pseudonym**, `consent.analyse_chats` = Step 0's `consent.process_imported_chats`, `match_types` = `["similar", "complementary"]`, `looking_for` = `["collaborator"]`. Real names stay under `private.name`, which Step 5 doesn't read.
+- **Why:** Step 5 checked a consent field Step 0 didn't write (users who declined weren't excluded) and used `name` in warm intros (the brief requires pseudonymous intros). Adding the fields on Step 0's side fixes both without changing Step 5.
+- **Affects:** Step 0, Step 5 (Oliver + Colin: no code change needed; your README's Step 0 example still shows the old format).
+
 ### D-010 — Step 2 → Step 3 handoff: one Markdown file per chat (HANDOFF.md)
 - **Date / who:** 2026-10-03 — Herman and Aman (format); Herman (implementation)
 - **Decision:** Step 3 reads `2 - Noise Filter/output/<user_id>/<source_id>.md`: a header between `---` lines and `**User:**` / `**Assistant:**` turns, as specified in `2 - Noise Filter/HANDOFF.md` (the source of truth). This replaces `data/eligible/<user_id>.json` from D-008. `output/` is git-ignored; synthetic examples live in `2 - Noise Filter/samples/output/`. HANDOFF.md §7 proposes extra source types, cleaned copies and masking, pending Aman's OK.

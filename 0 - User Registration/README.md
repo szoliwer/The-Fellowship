@@ -32,7 +32,10 @@ A **user record** (never contains password data):
 
 **Where it lives**
 - `data/fellowship.db` (repo root, git-ignored): SQLite database with two tables: `users` and `credentials` (password hash, failed attempts, lock time).
-- `data/users.json`: all user records, rewritten after every sign-up, for steps that read files (D-004). No password data.
+- `data/users.json`: all user records, rewritten after every sign-up and at every app start, for steps that read files (D-004). No password data. Each record also carries the fields Step 5 (Match Generation) reads, so Step 5 works unchanged (D-011):
+  - `name` = the **pseudonym** (warm intros never show a real name; the real name stays under `private.name`)
+  - `consent.analyse_chats` = `consent.process_imported_chats` (anyone who said no is left out of matching)
+  - `match_types` = `["similar", "complementary"]`, `looking_for` = `["collaborator"]` (scientist-first MVP defaults)
 - `samples/users.json`: the two synthetic demo researchers (committed); loaded into the database automatically.
 
 > If you change this output format, update the README of the next step too and log it in `docs/DECISIONS.md` (see `CLAUDE.md`, Rule 4).
@@ -62,16 +65,16 @@ From the repo root, see the main `README.md` → *Run the app*. Checks:
 - [x] Demo users (`user_a` / `researcher_014`, `user_b` / `cellbio_027`)
 - [ ] Stay logged in across page refreshes (needs a cookie add-on; ask the team first)
 - [ ] Delete my account and data (for the brief's "withdraw" principle)
-- [ ] Agree one user format with Step 5 (it still expects the old `name` / `looking_for` / `match_types` fields)
+- [x] Make `data/users.json` work with Step 5 (pseudonym as `name`, consent passed on, default match types)
 
 ## Open questions
-- Step 5 currently uses real `name` in warm intros; the brief says intros stay pseudonymous. Team decision.
 
 ---
 
 ## Decisions log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — why.`_
 
+- **2026-10-03 22:40** — Herman (with Claude) — `data/users.json` now also carries Step 5's fields: `name` = pseudonym, `consent.analyse_chats` = the processing consent, default `match_types` / `looking_for`; refreshed at every app start. — Step 5 read `consent.analyse_chats` (missing → users who declined weren't excluded) and put `name` in intros (real names would break pseudonymity). Fixed on Step 0's side so Step 5 needs no change; checked with Step 5's own loader.
 - **2026-10-03 18:30** — Herman (with Claude) — Consent text now says imported chats are sent to Anthropic's Claude for screening (except ones caught by local safety rules). — Step 2 uses Claude to screen (D-008); the old text implied nothing left the laptop before screening. Accounts created earlier agreed to the old wording.
 - **2026-10-03 17:40** — Herman (with Claude) — Real accounts: email + password log-in, salted scrypt hashes, 15-minute lock after 5 wrong tries, stored in SQLite (`data/fellowship.db`). — Users must be able to come back; SQLite and scrypt are built into Python, so no new installs.
 - **2026-10-03 17:40** — Herman (with Claude) — Log in with email, not pseudonym. — Pseudonyms are public, so using them as the log-in name would make guessing easier.

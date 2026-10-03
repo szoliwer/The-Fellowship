@@ -22,6 +22,15 @@ import signup_ui  # noqa: E402  (Step 0)
 
 st.set_page_config(page_title="The Fellowship", page_icon="🔬")
 
+
+@st.cache_resource
+def _refresh_users_file():
+    """Once per app start: rewrite data/users.json (read by later steps) in the current format."""
+    signup_ui.reg.export_users()
+
+
+_refresh_users_file()
+
 user = signup_ui.current_user()
 if user is None:
     signup_ui.render()
