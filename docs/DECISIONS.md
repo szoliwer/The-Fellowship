@@ -13,11 +13,17 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
-### D-011 — Step 3 → 4 output format
+### D-012 — Step 3 → 4 output format
 - **Date / who:** 2026-10-03 — Aman (with Claude)
 - **Decision:** Step 3 reads Step 2's Markdown files (format: D-010 / `HANDOFF.md`). It writes `data/ideas/<user_id>.json`: an `ideas` list in the existing one-row-per-idea format (one row per sub-theme, with extra fields added), plus a `themes` / `adjacent_ideas` structure for display. Adjacent ideas are speculative and are never in `ideas`.
 - **Why:** Steps 4 and 5 keep working unchanged (Step 5's loader already reads the rows). The richer structure lets Step 4 show ideas grouped by theme.
 - **Affects:** Steps 3, 4 (and 5, which reads the same rows)
+
+### D-011 — Step 0's user file also speaks Step 5's format (pseudonyms, consent)
+- **Date / who:** 2026-10-03 — Herman
+- **Decision:** Every record in `data/users.json` also carries the fields Step 5 reads: `name` = the user's **pseudonym**, `consent.analyse_chats` = Step 0's `consent.process_imported_chats`, `match_types` = `["similar", "complementary"]`, `looking_for` = `["collaborator"]`. Real names stay under `private.name`, which Step 5 doesn't read.
+- **Why:** Step 5 checked a consent field Step 0 didn't write (users who declined weren't excluded) and used `name` in warm intros (the brief requires pseudonymous intros). Adding the fields on Step 0's side fixes both without changing Step 5.
+- **Affects:** Step 0, Step 5 (Oliver + Colin: no code change needed; your README's Step 0 example still shows the old format).
 
 ### D-010 — Step 2 → Step 3 handoff: one Markdown file per chat (HANDOFF.md)
 - **Date / who:** 2026-10-03 — Herman and Aman (format); Herman (implementation)

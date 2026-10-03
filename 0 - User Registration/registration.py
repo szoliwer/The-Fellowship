@@ -154,13 +154,36 @@ def demo_users(db_file=DB_FILE):
     return [u for u in load_users(db_file) if u["is_demo_account"]]
 
 
+# Step 5 (Match Generation) reads a few fields under other names. The export adds them so
+# Step 5 works unchanged and stays private:
+#   name                  = the pseudonym: warm intros never show a real name
+#   consent.analyse_chats = consent.process_imported_chats: anyone who said no is left out
+#   match_types, looking_for: everyone is open to similar and complementary research matches
+DEFAULT_MATCH_TYPES = ["similar", "complementary"]
+DEFAULT_LOOKING_FOR = ["collaborator"]
+
+
+def for_matching(user):
+    """A user record plus the fields Step 5 reads (see above). Never adds private details."""
+    consent = dict(user["consent"])
+    consent["analyse_chats"] = bool(user["consent"]["process_imported_chats"])
+    return {
+        **user,
+        "name": user["pseudonym"],
+        "consent": consent,
+        "match_types": list(DEFAULT_MATCH_TYPES),
+        "looking_for": list(DEFAULT_LOOKING_FOR),
+    }
+
+
 def export_users(db_file=DB_FILE, out_file=USERS_EXPORT_FILE):
-    """Write all user records (no password data) to data/users.json for later steps."""
+    """Write all user records (no password data) to data/users.json for later steps,
+    with the extra fields Step 5 reads (see for_matching)."""
     out_file = Path(out_file)
     out_file.parent.mkdir(parents=True, exist_ok=True)
     tmp = out_file.with_suffix(".tmp")
     with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(load_users(db_file), f, indent=2, ensure_ascii=False)
+        json.dump([for_matching(u) for u in load_users(db_file)], f, indent=2, ensure_ascii=False)
     tmp.replace(out_file)
 
 

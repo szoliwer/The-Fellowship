@@ -24,7 +24,7 @@ _Everyone works on `main`. Update your own row when your step's status changes._
 
 ## Timeline
 - **2026-10-03** — Step 4 review page ("Your ideas") built: users uncheck or remove ideas before matching; only approved ideas go to Step 5 (D-006).
-- **2026-10-03** — Step 3 first version: extraction code + prompt, tested offline (D-011).
+- **2026-10-03** — Step 3 first version: extraction code + prompt, tested offline (D-012).
 - **2026-10-03** — Switched back to everyone working on `main` (D-005).
 - **2026-10-03** — Step 6 clickable UX mockup (v2) added.
 - **2026-10-03** — Switched to one branch per step. `main` only changes via pull request.
