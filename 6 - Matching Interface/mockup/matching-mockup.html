@@ -1,0 +1,601 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><style>[hidden]{display:none!important}body{margin:0}</style>
+<title>Fellowship Matching Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: annotation rail on the left, one live phone on the right; stacks at phone width. */
+:root{
+  --bg:#E9EEEA; --surface:#FFFFFF; --surface-2:#F3F6F3; --ink:#13201B; --muted:#5A6862; --line:#D7E0DA;
+  --accent:#1D6A50; --accent-ink:#FFFFFF; --accent-soft:#DCEDE5;
+  --sim:#2C67A6; --sim-bg:#E2EDF8; --comp:#A35C0C; --comp-bg:#FAEBD7;
+  --pass:#7E8B85; --danger:#B83A2E; --frame:#0F1513; --bubble-me:#1D6A50; --bubble-me-ink:#FFFFFF;
+  --shadow:0 18px 50px -20px rgba(19,32,27,.35);
+  --f-display:"Newsreader", Georgia, "Times New Roman", serif;
+  --f-body:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C1110; --surface:#161F1C; --surface-2:#1C2723; --ink:#E4ECE8; --muted:#93A29B; --line:#2A3631;
+  --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
+  --sim:#86B6E8; --sim-bg:#18283A; --comp:#E8A659; --comp-bg:#382814;
+  --pass:#8C9993; --danger:#F07A6C; --frame:#000000; --bubble-me:#2E8C69; --bubble-me-ink:#FFFFFF;
+  --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0C1110; --surface:#161F1C; --surface-2:#1C2723; --ink:#E4ECE8; --muted:#93A29B; --line:#2A3631;
+  --accent:#4DB28B; --accent-ink:#06120D; --accent-soft:#183329;
+  --sim:#86B6E8; --sim-bg:#18283A; --comp:#E8A659; --comp-bg:#382814;
+  --pass:#8C9993; --danger:#F07A6C; --frame:#000000; --bubble-me:#2E8C69; --bubble-me-ink:#FFFFFF;
+  --shadow:0 18px 50px -20px rgba(0,0,0,.7); color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.45;padding-inline:16px;padding-block:32px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.02em}
+.stage{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:start}
+@media (max-width:860px){.stage{grid-template-columns:minmax(0,1fr);justify-items:center;gap:28px}}
+
+/* ---------- Annotation rail ---------- */
+.rail{max-width:460px;min-width:0}
+.rail .eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.rail h1{font-family:var(--f-display);font-weight:600;font-size:40px;line-height:1.05;margin:8px 0 12px;text-wrap:balance}
+.rail p{margin:0 0 14px;color:var(--muted);max-width:60ch}
+.steps{display:flex;flex-direction:column;gap:8px;margin:22px 0}
+.step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+.step[aria-current="true"]{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.step .n{font-family:var(--f-mono);font-size:12px;color:var(--accent);padding-top:2px}
+.step strong{display:block;font-size:14px}
+.step span{display:block;color:var(--muted);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
+
+/* ---------- Phone ---------- */
+.phone{width:390px;max-width:100%;height:800px;border-radius:44px;background:var(--frame);padding:10px;box-shadow:var(--shadow);position:relative}
+.screen-wrap{position:relative;height:100%;border-radius:34px;overflow:hidden;background:var(--surface-2);display:flex;flex-direction:column}
+@media (max-width:460px){.phone{height:760px;border-radius:34px;padding:6px}.screen-wrap{border-radius:28px}}
+.statusbar{height:40px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 26px;font-weight:700;font-size:13px}
+.statusbar .icons{display:flex;gap:5px;align-items:center}
+.statusbar .icons i{display:block;background:var(--ink);border-radius:2px}
+.screens{position:relative;flex:1;min-height:0}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;min-height:0}
+.topbar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:4px 20px 10px}
+.topbar h2{font-family:var(--f-display);font-weight:600;font-size:26px;margin:0}
+.topbar .mono{color:var(--muted)}
+.tabbar{flex:none;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);background:var(--surface);padding:8px 8px 14px}
+.tab{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--muted);position:relative;padding:4px}
+.tab[aria-selected="true"]{color:var(--accent)}
+.tab svg{width:22px;height:22px}
+.badge{position:absolute;top:0;left:calc(50% + 6px);min-width:17px;height:17px;border-radius:9px;background:var(--danger);color:#fff;font-size:10px;display:grid;place-items:center;padding:0 4px}
+
+/* avatar */
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;flex:none;letter-spacing:.02em}
+.av.lg{width:84px;height:84px;font-size:28px;border:4px solid var(--accent)}
+.av.sm{width:36px;height:36px;font-size:13px}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;white-space:nowrap}
+.chip.sim{background:var(--sim-bg);color:var(--sim)}
+.chip.comp{background:var(--comp-bg);color:var(--comp)}
+.chip.plain{background:var(--surface-2);color:var(--muted);border:1px solid var(--line);font-weight:500;white-space:normal}
+
+/* ---------- Discover ---------- */
+.deck{flex:1;min-height:0;position:relative;padding:0 14px}
+.card{position:absolute;inset:0 14px;background:var(--surface);border-radius:22px;border:1px solid var(--line);box-shadow:0 10px 30px -18px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden;touch-action:pan-y;user-select:none;transition:transform .28s ease, opacity .28s ease}
+.card.dragging{transition:none}
+.card.under{transform:scale(.95) translateY(10px);opacity:.6;pointer-events:none}
+.people{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.person{padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;min-width:0}
+.person + .person{border-left:1px solid var(--line);background:var(--surface-2)}
+.person .role{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.person .name{font-weight:700;font-size:15px;line-height:1.2}
+.person .handle{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.person .loc{display:flex;align-items:center;gap:3px;font-size:12px;color:var(--muted)}
+.person .loc svg{width:12px;height:12px}
+.cardbody{flex:1;min-height:0;overflow:auto;padding:12px 14px 10px;display:flex;flex-direction:column;gap:12px}
+.why{display:flex;justify-content:space-between;align-items:baseline}
+.why h3{font-family:var(--f-display);font-size:19px;font-weight:600;margin:0}
+.fit{font-family:var(--f-mono);font-size:11px;color:var(--accent);font-weight:500}
+.bridges{display:flex;flex-direction:column;gap:8px}
+.bridge{border-radius:14px;padding:8px 10px 10px}
+.bridge.sim{background:var(--sim-bg)}
+.bridge.comp{background:var(--comp-bg)}
+.bridge .kind{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.bridge.sim .kind{color:var(--sim)} .bridge.comp .kind{color:var(--comp)}
+.bridge .row{display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);gap:6px;align-items:center;font-size:12.5px;line-height:1.35}
+.bridge .row .r{text-align:right}
+.bridge .glyph{display:grid;place-items:center;font-weight:700}
+.bridge.sim .glyph{color:var(--sim)} .bridge.comp .glyph{color:var(--comp)}
+.more{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.more .col{display:flex;flex-direction:column;gap:5px;min-width:0}
+.more .col.r{align-items:flex-end;text-align:right}
+.more .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.prov{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+.stamp{position:absolute;top:84px;padding:4px 12px;border:3px solid;border-radius:10px;font-family:var(--f-mono);font-weight:500;font-size:20px;letter-spacing:.1em;opacity:0;pointer-events:none;background:var(--surface)}
+.stamp.yes{left:18px;color:var(--accent);transform:rotate(-12deg)}
+.stamp.no{right:18px;color:var(--pass);transform:rotate(12deg)}
+.actions{flex:none;display:flex;justify-content:center;align-items:center;gap:28px;padding:14px 0 6px}
+.act{border-radius:50%;display:grid;place-items:center;border:0;transition:transform .15s}
+.act:active{transform:scale(.92)}
+.act.pass{width:58px;height:58px;background:var(--surface);border:1px solid var(--line);color:var(--pass)}
+.act.yes{width:70px;height:70px;background:var(--accent);color:var(--accent-ink);box-shadow:0 10px 24px -10px var(--accent)}
+.act svg{width:26px;height:26px}
+.hint{flex:none;text-align:center;font-size:11px;color:var(--muted);padding-bottom:8px}
+.empty{position:absolute;inset:0 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px;border:1.5px dashed var(--line);border-radius:22px}
+.empty h3{font-family:var(--f-display);font-size:24px;margin:0}
+.empty p{color:var(--muted);margin:0}
+.btn{border:0;border-radius:999px;padding:11px 20px;font-weight:700;font-size:14px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;border:1.5px solid currentColor}
+.toast{position:absolute;left:16px;right:16px;bottom:92px;background:var(--ink);color:var(--surface);padding:10px 14px;border-radius:12px;font-size:13px;box-shadow:var(--shadow);z-index:30}
+
+/* ---------- It's a match ---------- */
+.match{position:absolute;inset:0;z-index:20;background:var(--accent);color:var(--accent-ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px 22px;text-align:center}
+.match .pair{display:flex;align-items:center}
+.match .pair .av.lg{border-color:var(--accent)}
+.match .pair .av.lg + .av.lg{margin-left:-18px}
+.match h2{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:34px;line-height:1.05;margin:0;text-wrap:balance}
+.match .sub{opacity:.85;margin:0}
+.intro{background:var(--surface);color:var(--ink);border-radius:18px;padding:14px 16px;text-align:left;font-size:13px;display:flex;flex-direction:column;gap:8px}
+.intro .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.intro .q{border-left:3px solid var(--accent);padding-left:10px;font-style:italic}
+.match .btns{display:flex;flex-direction:column;gap:8px;width:100%}
+.match .btn.primary{background:var(--accent-ink);color:var(--accent)}
+
+/* ---------- Matches list ---------- */
+.list{flex:1;min-height:0;overflow:auto;padding:0 0 12px}
+.sect{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:6px 20px 8px}
+.newrow{display:flex;gap:14px;overflow-x:auto;padding:0 20px 14px}
+.newmatch{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:0}
+.newmatch .av{width:58px;height:58px;font-size:18px;box-shadow:0 0 0 2px var(--surface-2),0 0 0 4px var(--accent)}
+.convo{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;background:none;border:0;border-top:1px solid var(--line);padding:12px 20px;text-align:left}
+.convo .top{display:flex;gap:6px;align-items:baseline}
+.convo .nm{font-weight:700}
+.convo .lc{font-size:12px;color:var(--muted)}
+.convo .snip{color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.convo.unread .snip{color:var(--ink);font-weight:600}
+.convo .meta{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.convo .time{font-family:var(--f-mono);font-size:10.5px;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.convo .chip{margin-top:4px}
+
+/* ---------- Chat ---------- */
+.chathead{flex:none;display:flex;align-items:center;gap:10px;padding:2px 14px 10px;border-bottom:1px solid var(--line);background:var(--surface)}
+.iconbtn{background:none;border:0;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none}
+.iconbtn svg{width:22px;height:22px}
+.chathead .who{min-width:0;flex:1}
+.chathead .who strong{display:block}
+.chathead .who span{font-size:12px;color:var(--muted)}
+.thread{flex:1;min-height:0;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px}
+.sys{align-self:center;max-width:92%;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.sys .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.sys p{margin:0;color:var(--ink)}
+.msg{max-width:78%;padding:8px 12px;border-radius:18px;font-size:13.5px;position:relative}
+.msg .t{display:block;font-family:var(--f-mono);font-size:9.5px;opacity:.7;margin-top:2px;text-align:right}
+.msg.them{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:6px}
+.msg.me{align-self:flex-end;background:var(--bubble-me);color:var(--bubble-me-ink);border-bottom-right-radius:6px}
+.voice{display:flex;align-items:center;gap:8px;min-width:190px}
+.voice .play{width:32px;height:32px;border-radius:50%;border:0;display:grid;place-items:center;flex:none}
+.msg.me .voice .play{background:var(--bubble-me-ink);color:var(--bubble-me)}
+.msg.them .voice .play{background:var(--accent);color:var(--accent-ink)}
+.voice .play svg{width:14px;height:14px}
+.wave{display:flex;align-items:center;gap:2px;height:26px;flex:1}
+.wave i{display:block;width:3px;border-radius:2px;background:currentColor;opacity:.35}
+.wave i.on{opacity:1}
+.voice .dur{font-family:var(--f-mono);font-size:10.5px}
+.llm{display:flex;flex-direction:column;gap:6px;min-width:220px}
+.llm .src{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.llm .ttl{font-weight:700}
+.llm .ex{font-size:12.5px;border-radius:10px;padding:8px 10px;background:var(--surface-2);color:var(--ink)}
+.llm .ex b{display:block;font-family:var(--f-mono);font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.llm .open{align-self:flex-start;background:none;border:0;padding:0;font-weight:700;font-size:12px;text-decoration:underline;text-underline-offset:2px}
+.composer{flex:none;display:flex;align-items:center;gap:6px;padding:8px 10px 14px;border-top:1px solid var(--line);background:var(--surface)}
+.composer input{flex:1;min-width:0;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:999px;padding:10px 14px;font:inherit}
+.composer .send{background:var(--accent);color:var(--accent-ink)}
+.rec{flex:1;display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;color:var(--danger)}
+.rec .pulse{width:10px;height:10px;border-radius:50%;background:var(--danger);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.25}}
+
+/* share sheet */
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:25;display:flex;align-items:flex-end}
+.sheet{background:var(--surface);width:100%;border-radius:22px 22px 0 0;padding:10px 16px 18px;max-height:78%;overflow:auto;display:flex;flex-direction:column;gap:6px}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line);align-self:center;margin-bottom:6px}
+.sheet h3{font-family:var(--f-display);font-size:21px;margin:0}
+.sheet p{margin:0 0 6px;color:var(--muted);font-size:12.5px}
+.pick{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.pick .src{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.pick .ttl{font-weight:700;grid-column:1}
+.pick .m{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);grid-column:2;grid-row:1 / span 2;align-self:center}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="stage">
+  <section class="rail" aria-label="About this prototype">
+    <div class="eyebrow">Step 6 · Matching interface</div>
+    <h1>Meet people by what they're thinking about</h1>
+    <p>Clickable prototype of the matching flow. Swipe the card (or use the buttons, or ← / → keys). Priya and Lena have already said yes to you, so connecting with them shows the match screen.</p>
+    <div class="steps" id="steps">
+      <button class="step" data-go="discover"><span class="n">1</span><span><strong>Discover</strong><span>Them on the left, you on the right. Shared and complementary ideas sit between you. Pass or connect, and the next person appears.</span></span></button>
+      <button class="step" data-go="match"><span class="n">2</span><span><strong>It's a match</strong><span>Shown when both people connect. Includes the warm intro and a suggested first question.</span></span></button>
+      <button class="step" data-go="matches"><span class="n">3</span><span><strong>Matches</strong><span>New matches up top, conversations below, each tagged with what you matched on.</span></span></button>
+      <button class="step" data-go="chat"><span class="n">4</span><span><strong>Chat</strong><span>Text, voice notes (tap the mic) and sharing one specific past LLM chat (tap +).</span></span></button>
+    </div>
+    <div class="legend">
+      <span class="chip sim">= Shared interest</span>
+      <span class="chip comp">⇄ Complementary</span>
+    </div>
+    <p class="note">Sample data only. Names, chats and locations are invented. Ideas shown are what Step 3 (Idea Generation) would extract and Step 5 (Match Generation) would pair up. Raw chat text is never shown unless a user chooses to share a specific chat.</p>
+  </section>
+
+  <div class="phone" aria-label="Phone prototype">
+    <div class="screen-wrap">
+      <div class="statusbar"><span>9:41</span><span class="icons"><i style="width:16px;height:9px"></i><i style="width:13px;height:9px"></i><i style="width:22px;height:10px;border-radius:3px"></i></span></div>
+      <div class="screens">
+
+        <!-- 1. DISCOVER -->
+        <section class="screen" id="s-discover">
+          <div class="topbar"><h2>Discover</h2><span class="mono" id="queueCount"></span></div>
+          <div class="deck" id="deck"></div>
+          <div class="actions">
+            <button class="act pass" id="btnPass" aria-label="Pass"></button>
+            <button class="act yes" id="btnYes" aria-label="Connect"></button>
+          </div>
+          <div class="hint">Swipe right to connect · left to pass</div>
+        </section>
+
+        <!-- 3. MATCHES -->
+        <section class="screen" id="s-matches" hidden>
+          <div class="topbar"><h2>Matches</h2><span class="mono" id="matchCount"></span></div>
+          <div class="list" id="matchList"></div>
+        </section>
+
+        <!-- 4. CHAT -->
+        <section class="screen" id="s-chat" hidden>
+          <div class="chathead">
+            <button class="iconbtn" id="chatBack" aria-label="Back to matches"></button>
+            <div class="av sm" id="chatAv"></div>
+            <div class="who"><strong id="chatName"></strong><span id="chatSub"></span></div>
+          </div>
+          <div class="thread" id="thread"></div>
+          <form class="composer" id="composer" autocomplete="off">
+            <button type="button" class="iconbtn" id="btnShare" aria-label="Share a past LLM chat"></button>
+            <input id="msgInput" placeholder="Message" aria-label="Message">
+            <button type="button" class="iconbtn send" id="btnMic" aria-label="Record voice note"></button>
+          </form>
+        </section>
+
+        <!-- 2. MATCH OVERLAY -->
+        <section class="match" id="s-match" hidden aria-live="polite">
+          <div class="pair" id="matchPair"></div>
+          <h2 id="matchTitle"></h2>
+          <p class="sub" id="matchSub"></p>
+          <div class="intro">
+            <span class="lbl">Why you two should talk</span>
+            <span id="matchIntro"></span>
+            <span class="q" id="matchQ"></span>
+          </div>
+          <div class="btns">
+            <button class="btn primary" id="btnSayHi">Say hello</button>
+            <button class="btn ghost" id="btnKeep">Keep discovering</button>
+          </div>
+        </section>
+
+        <div class="scrim" id="sheet" hidden>
+          <div class="sheet" role="dialog" aria-label="Share a past LLM chat">
+            <span class="grab"></span>
+            <h3>Share a past chat</h3>
+            <p>Pick one conversation from your imported history. Only that chat is shared, read-only.</p>
+            <div id="pickList" style="display:flex;flex-direction:column;gap:8px"></div>
+            <button class="btn ghost" id="sheetCancel" style="margin-top:6px">Cancel</button>
+          </div>
+        </div>
+
+        <div class="toast" id="toast" hidden></div>
+      </div>
+      <nav class="tabbar" id="tabbar" role="tablist">
+        <button class="tab" data-tab="discover" role="tab"></button>
+        <button class="tab" data-tab="matches" role="tab"></button>
+        <button class="tab" data-tab="me" role="tab"></button>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+const I = {
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>',
+  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>',
+  send:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 20.4l17.4-7.5a1 1 0 0 0 0-1.8L3.4 3.6a.9.9 0 0 0-1.3 1L4 11l9 1-9 1-1.9 6.4a.9.9 0 0 0 1.3 1z"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>',
+  pause:'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>',
+  compass:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z" fill="currentColor"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+  user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg>'
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const ME = {name:'Sam Rivera', first:'Sam', handle:'@samrivera', loc:'Boston, MA', initials:'SR', hue:158, chats:31};
+
+const CANDIDATES = [
+  {id:'priya', name:'Priya Nair', first:'Priya', handle:'@priya.n', loc:'Cambridge, MA', initials:'PN', hue:12, likesYou:true, fit:.91, chats:23,
+   bridges:[
+     {type:'comp', them:'Needs wet-lab validation for diffusion-model binding predictions', you:'Runs SPR binding assays on small-molecule libraries'},
+     {type:'sim',  them:'Generative models for drug discovery', you:'Curious how ML could prioritise which compounds to test'}],
+   themMore:['Protein language models','Benchmark leakage'], youMore:['Assay automation','FAIR data in small labs'],
+   intro:'Priya is using diffusion models to predict protein–ligand binding but has no lab to check the predictions. You run SPR binding assays and keep asking which compounds are worth testing first.',
+   q:'Which 20 of Priya\'s top-ranked compounds could your lab run in one week?', topic:'Diffusion models × binding assays'},
+  {id:'tomas', name:'Tomás Ortega', first:'Tomás', handle:'@tortega', loc:'Providence, RI', initials:'TO', hue:205, likesYou:false, fit:.78, chats:17,
+   bridges:[
+     {type:'sim', them:'Making messy instrument data reusable across labs', you:'FAIR data practices for small labs'},
+     {type:'comp', them:'Building a lightweight open-source lab data catalog', you:'Has two years of unstructured assay exports to test it on'}],
+   themMore:['Soil carbon sensors','Metadata standards'], youMore:['SPR binding assays','Grant reporting'],
+   intro:'Tomás is building a small open-source data catalog for lab instruments. You have years of assay exports nobody can search.', q:'What would it take to load one month of your SPR exports into his catalog?', topic:'Lab data catalog × assay exports'},
+  {id:'lena', name:'Lena Hoffmann', first:'Lena', handle:'@lhoff', loc:'Berlin, DE', initials:'LH', hue:268, likesYou:true, fit:.86, chats:40,
+   bridges:[
+     {type:'comp', them:'Active learning to choose the next experiment', you:'Spends weeks deciding which compounds to screen next'},
+     {type:'sim', them:'Cutting wasted wet-lab runs', you:'Assay automation on a tight budget'}],
+   themMore:['Bayesian optimisation','Lab robotics'], youMore:['ML for drug discovery','FAIR data'],
+   intro:'Lena designs active-learning loops that pick the most informative next experiment. You choose screening batches by hand and want a smarter way.', q:'Could one of your past screening rounds be replayed through her active-learning loop?', topic:'Active learning × screening design'},
+  {id:'amara', name:'Amara Okafor', first:'Amara', handle:'@amara.o', loc:'New Haven, CT', initials:'AO', hue:330, likesYou:false, fit:.72, chats:12,
+   bridges:[
+     {type:'comp', them:'Writing an NIH R21 on antimicrobial peptides, needs biophysics aim', you:'Measures binding kinetics, which that aim needs'},
+     {type:'sim', them:'Peptide–membrane interactions', you:'Label-free binding methods'}],
+   themMore:['Science communication','Antibiotic resistance'], youMore:['Assay automation','Grant reporting'],
+   intro:'Amara is drafting a grant on antimicrobial peptides and needs a binding-kinetics aim. That is exactly what your lab measures.', q:'Could your SPR setup measure peptide binding to lipid vesicles?', topic:'Peptide grant × binding kinetics'}
+];
+
+const MY_CHATS = [
+  {src:'Claude', title:'Ranking compounds for the next SPR screen', when:'Sep 28', n:14, ask:'I have 400 compounds and budget for 40 SPR runs. How should I choose?', ans:'Start with a diversity filter, then rank by predicted affinity and uncertainty, so each run teaches you something…'},
+  {src:'ChatGPT', title:'Cleaning up Biacore export files', when:'Sep 19', n:22, ask:'Every export has a different column layout. Can we normalise them?', ans:'Yes. Map each layout to one schema with these columns: sample_id, ka, kd, KD, chi2…'},
+  {src:'Gemini', title:'What makes a dataset FAIR?', when:'Aug 30', n:9, ask:'What is the minimum a small lab needs to make assay data FAIR?', ans:'Persistent IDs, a metadata schema, an open format and a clear licence cover most of it…'}
+];
+
+// Existing matches (already chatting)
+const MATCHES = [
+  {id:'jonah', name:'Jonah Feld', first:'Jonah', loc:'Boston, MA', initials:'JF', hue:40, topic:'Electronic lab notebooks × FAIR data', type:'sim', isNew:false, unread:2,
+   intro:'Jonah builds electronic lab notebook tooling and is wrestling with the same FAIR-data questions you keep asking.', q:'What does a "minimum FAIR" checklist look like for a 3-person lab?',
+   msgs:[
+     {who:'me', kind:'text', text:'Hi Jonah! Saw we both keep asking about FAIR data for small labs 😄', t:'Thu 10:12'},
+     {who:'them', kind:'text', text:'Ha, yes. I think I asked Claude the same question four times last month.', t:'Thu 10:20'},
+     {who:'them', kind:'llm', chat:{src:'Claude', title:'Minimal metadata schema for ELN entries', n:18, ask:'What is the smallest metadata schema that still makes ELN entries findable?', ans:'Six fields cover most of it: who, when, instrument, sample ID, protocol version, and licence…'}, t:'Thu 10:21'},
+     {who:'them', kind:'voice', dur:38, t:'Thu 10:24'},
+     {who:'them', kind:'text', text:'Want to try it on one of your assay exports?', t:'Thu 10:24'}
+   ]},
+  {id:'mei', name:'Mei Tanaka', first:'Mei', loc:'Somerville, MA', initials:'MT', hue:95, topic:'Assay automation × lab robotics', type:'comp', isNew:false, unread:0,
+   intro:'Mei is building low-cost liquid-handling robots. You want to automate assay prep but cannot afford commercial systems.', q:'Which step of your assay prep takes the most hands-on time?',
+   msgs:[
+     {who:'them', kind:'text', text:'Our robot can do plate prep for about $3k in parts. Happy to show you.', t:'Mon 16:02'},
+     {who:'me', kind:'text', text:'That would be amazing. Coffee at the Broad next week?', t:'Mon 16:30'}
+   ]}
+];
+
+let idx = 0, current = null, lastMatch = null, recTimer = null, recStart = 0;
+
+function avatar(p, cls=''){return `<div class="av ${cls}" style="background:hsl(${p.hue} 45% 42%)" aria-hidden="true">${esc(p.initials)}</div>`}
+
+/* ---------- Discover ---------- */
+function cardHTML(c, under){
+  const b = c.bridges.map(x => `
+    <div class="bridge ${x.type}">
+      <div class="kind">${x.type==='sim'?'Shared interest':'Complementary'}</div>
+      <div class="row"><span>${esc(x.them)}</span><span class="glyph" aria-label="${x.type==='sim'?'similar to':'complements'}">${x.type==='sim'?'=':'⇄'}</span><span class="r">${esc(x.you)}</span></div>
+    </div>`).join('');
+  return `<article class="card${under?' under':''}" ${under?'aria-hidden="true"':''} data-id="${c.id}">
+    <span class="stamp yes">CONNECT</span><span class="stamp no">PASS</span>
+    <div class="people">
+      <div class="person"><span class="role">Them</span>${avatar(c)}<span class="name">${esc(c.name)}</span><span class="handle">${esc(c.handle)}</span><span class="loc">${I.pin}${esc(c.loc)}</span></div>
+      <div class="person"><span class="role">You</span>${avatar(ME)}<span class="name">${esc(ME.name)}</span><span class="handle">${esc(ME.handle)}</span><span class="loc">${I.pin}${esc(ME.loc)}</span></div>
+    </div>
+    <div class="cardbody">
+      <div class="why"><h3>Why you two</h3><span class="fit">fit ${c.fit.toFixed(2)}</span></div>
+      <div class="bridges">${b}</div>
+      <div class="more">
+        <div class="col"><span class="lbl">Also on their mind</span>${c.themMore.map(t=>`<span class="chip plain">${esc(t)}</span>`).join('')}</div>
+        <div class="col r"><span class="lbl">Also on yours</span>${c.youMore.map(t=>`<span class="chip plain">${esc(t)}</span>`).join('')}</div>
+      </div>
+      <div class="prov">Distilled from ${c.chats} of ${esc(c.first)}'s chats and ${ME.chats} of yours · Aug–Sep 2026</div>
+    </div>
+  </article>`;
+}
+function renderDeck(){
+  const deck = $('#deck');
+  const left = CANDIDATES.length - idx;
+  $('#queueCount').textContent = left > 0 ? `${left} new today` : 'all caught up';
+  if (left <= 0){
+    deck.innerHTML = `<div class="empty"><h3>You're all caught up</h3><p>New people appear as you and others import more chats.</p><button class="btn primary" id="btnRestart">Start over (demo)</button></div>`;
+    $('#btnRestart').onclick = () => { idx = 0; renderDeck(); };
+    $('#btnPass').disabled = $('#btnYes').disabled = true;
+    current = null; return;
+  }
+  $('#btnPass').disabled = $('#btnYes').disabled = false;
+  const next = CANDIDATES[idx+1];
+  deck.innerHTML = (next ? cardHTML(next, true) : '') + cardHTML(CANDIDATES[idx], false);
+  current = deck.querySelector('.card:not(.under)');
+  bindDrag(current);
+}
+function bindDrag(card){
+  let sx=0, dx=0, active=false;
+  const yes = card.querySelector('.stamp.yes'), no = card.querySelector('.stamp.no');
+  card.addEventListener('pointerdown', e => { if (e.button) return; active=true; sx=e.clientX; dx=0; card.classList.add('dragging'); card.setPointerCapture(e.pointerId); });
+  card.addEventListener('pointermove', e => { if(!active) return; dx=e.clientX-sx; card.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`; yes.style.opacity=Math.max(0,Math.min(1,dx/90)); no.style.opacity=Math.max(0,Math.min(1,-dx/90)); });
+  const end = () => { if(!active) return; active=false; card.classList.remove('dragging');
+    if (Math.abs(dx) > 100) decide(dx > 0); else { card.style.transform=''; yes.style.opacity=no.style.opacity=0; } };
+  card.addEventListener('pointerup', end); card.addEventListener('pointercancel', end);
+}
+function decide(accept){
+  if(!current) return;
+  const c = CANDIDATES[idx], card = current; current = null;
+  card.querySelector(accept?'.stamp.yes':'.stamp.no').style.opacity = 1;
+  card.style.transform = `translateX(${accept?520:-520}px) rotate(${accept?24:-24}deg)`;
+  card.style.opacity = 0;
+  setTimeout(() => {
+    idx++;
+    if (accept && c.likesYou){ addMatch(c); renderDeck(); showMatch(c); }
+    else { renderDeck(); if (accept) toast(`Request sent. We'll let you know if ${c.first} connects too.`); }
+  }, 260);
+}
+function addMatch(c){
+  if (MATCHES.some(m => m.id === c.id)) return;
+  MATCHES.unshift({id:c.id, name:c.name, first:c.first, loc:c.loc, initials:c.initials, hue:c.hue, topic:c.topic, type:c.bridges[0].type, isNew:true, unread:0, intro:c.intro, q:c.q, msgs:[]});
+  updateBadge();
+}
+
+/* ---------- Match overlay ---------- */
+function showMatch(c){
+  lastMatch = c;
+  $('#matchPair').innerHTML = avatar(c,'lg') + avatar(ME,'lg');
+  $('#matchTitle').textContent = `You and ${c.first} both said yes`;
+  $('#matchSub').textContent = c.topic;
+  $('#matchIntro').textContent = c.intro;
+  $('#matchQ').textContent = 'Start with: ' + c.q;
+  $('#s-match').hidden = false;
+  $('#btnSayHi').focus();
+  setRail('match');
+}
+$('#btnKeep').onclick = () => { $('#s-match').hidden = true; setRail('discover'); };
+$('#btnSayHi').onclick = () => { $('#s-match').hidden = true; openChat(lastMatch.id); };
+
+/* ---------- Matches list ---------- */
+function renderMatches(){
+  const fresh = MATCHES.filter(m => m.isNew && !m.msgs.length);
+  const convos = MATCHES.filter(m => m.msgs.length);
+  $('#matchCount').textContent = `${MATCHES.length} connections`;
+  let h = '';
+  if (fresh.length){
+    h += `<div class="sect">New matches · say hello</div><div class="newrow">` +
+      fresh.map(m => `<button class="newmatch" data-open="${m.id}">${avatar(m)}<span>${esc(m.first)}</span></button>`).join('') + `</div>`;
+  }
+  h += `<div class="sect">Conversations</div>`;
+  h += convos.map(m => {
+    const last = m.msgs[m.msgs.length-1];
+    const snip = last.kind==='text' ? last.text : last.kind==='voice' ? 'Voice note' : 'Shared a chat: ' + last.chat.title;
+    return `<button class="convo${m.unread?' unread':''}" data-open="${m.id}">${avatar(m)}
+      <span style="min-width:0"><span class="top"><span class="nm">${esc(m.name)}</span><span class="lc">${esc(m.loc)}</span></span>
+      <span class="snip" style="display:block">${last.who==='me'?'You: ':''}${esc(snip)}</span>
+      <span class="chip ${m.type}">${m.type==='sim'?'=':'⇄'} ${esc(m.topic)}</span></span>
+      <span class="meta"><span class="time">${esc(last.t.split(' ')[0])}</span>${m.unread?'<span class="dot" aria-label="unread"></span>':''}</span></button>`;
+  }).join('') || `<p style="padding:0 20px;color:var(--muted)">No conversations yet.</p>`;
+  $('#matchList').innerHTML = h;
+  $('#matchList').querySelectorAll('[data-open]').forEach(b => b.onclick = () => openChat(b.dataset.open));
+}
+function updateBadge(){
+  const n = MATCHES.filter(m => m.unread || (m.isNew && !m.msgs.length)).length;
+  const tab = document.querySelector('[data-tab="matches"]');
+  tab.querySelector('.badge')?.remove();
+  if (n) tab.insertAdjacentHTML('beforeend', `<span class="badge">${n}</span>`);
+}
+
+/* ---------- Chat ---------- */
+let chatId = null;
+function wave(seed){ let s = seed, out=''; for(let i=0;i<28;i++){ s = (s*9301+49297)%233280; out += `<i style="height:${6+Math.round(s/233280*18)}px"></i>`; } return out; }
+function fmt(sec){ return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}` }
+function msgHTML(m, i){
+  let inner = '';
+  if (m.kind==='text') inner = esc(m.text);
+  if (m.kind==='voice') inner = `<div class="voice"><button class="play" data-voice="${i}" aria-label="Play voice note">${I.play}</button><div class="wave">${wave(i*7+m.dur)}</div><span class="dur">${fmt(m.dur)}</span></div>`;
+  if (m.kind==='llm') inner = `<div class="llm"><span class="src">Shared ${esc(m.chat.src)} chat · ${m.chat.n} messages</span><span class="ttl">${esc(m.chat.title)}</span>
+      <div class="ex"><b>Prompt</b>${esc(m.chat.ask)}</div><div class="ex" hidden data-ans><b>${esc(m.chat.src)}</b>${esc(m.chat.ans)}</div>
+      <button class="open" data-expand>Show reply</button></div>`;
+  return `<div class="msg ${m.who}">${inner}<span class="t">${esc(m.t)}</span></div>`;
+}
+function renderThread(){
+  const m = MATCHES.find(x => x.id===chatId);
+  const th = $('#thread');
+  th.innerHTML = `<div class="sys"><span class="lbl">How you matched · ${esc(m.topic)}</span><p>${esc(m.intro)}</p><span>Try asking: ${esc(m.q)}</span></div>` + m.msgs.map(msgHTML).join('');
+  th.querySelectorAll('[data-expand]').forEach(b => b.onclick = () => { const a = b.parentElement.querySelector('[data-ans]'); a.hidden = !a.hidden; b.textContent = a.hidden ? 'Show reply' : 'Hide reply'; });
+  th.querySelectorAll('[data-voice]').forEach(b => b.onclick = () => playVoice(b, m.msgs[+b.dataset.voice].dur));
+  th.scrollTop = th.scrollHeight;
+}
+function playVoice(btn, dur){
+  const bars = [...btn.parentElement.querySelectorAll('.wave i')];
+  if (btn.dataset.playing){ clearInterval(+btn.dataset.playing); delete btn.dataset.playing; btn.innerHTML = I.play; bars.forEach(b=>b.classList.remove('on')); return; }
+  btn.innerHTML = I.pause; let k = 0;
+  const id = setInterval(() => { if (k < bars.length) bars[k++].classList.add('on'); else { clearInterval(id); delete btn.dataset.playing; btn.innerHTML = I.play; bars.forEach(b=>b.classList.remove('on')); } }, 110);
+  btn.dataset.playing = id;
+}
+function openChat(id){
+  chatId = id;
+  const m = MATCHES.find(x => x.id===id);
+  m.unread = 0; m.isNew = false; updateBadge();
+  $('#chatAv').outerHTML = avatar(m,'sm').replace('class="av sm"','class="av sm" id="chatAv"');
+  $('#chatName').textContent = m.name;
+  $('#chatSub').textContent = m.loc + ' · ' + m.topic;
+  renderThread();
+  show('chat');
+}
+function now(){ const d = new Date(); return `Now ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}` }
+function push(msg){ MATCHES.find(x => x.id===chatId).msgs.push(msg); renderThread(); }
+
+const input = $('#msgInput'), mic = $('#btnMic');
+function setMicMode(){ const typing = input.value.trim().length > 0; mic.innerHTML = typing ? I.send : I.mic; mic.setAttribute('aria-label', typing ? 'Send message' : 'Record voice note'); }
+input.addEventListener('input', setMicMode);
+$('#composer').addEventListener('submit', e => { e.preventDefault(); sendText(); });
+function sendText(){ const v = input.value.trim(); if(!v) return; push({who:'me', kind:'text', text:v, t:now()}); input.value=''; setMicMode(); }
+mic.onclick = () => {
+  if (input.value.trim()) return sendText();
+  if (recTimer) return stopRec(true);
+  recStart = Date.now();
+  input.hidden = true; $('#btnShare').innerHTML = I.trash; $('#btnShare').setAttribute('aria-label','Discard recording');
+  input.insertAdjacentHTML('afterend', `<div class="rec" id="rec"><span class="pulse"></span><span id="recT">Recording 0:00</span></div>`);
+  mic.innerHTML = I.send; mic.setAttribute('aria-label','Send voice note');
+  recTimer = setInterval(() => { $('#recT').textContent = 'Recording ' + fmt(Math.floor((Date.now()-recStart)/1000)); }, 250);
+};
+function stopRec(send){
+  clearInterval(recTimer); recTimer = null;
+  const dur = Math.max(1, Math.floor((Date.now()-recStart)/1000));
+  $('#rec')?.remove(); input.hidden = false; $('#btnShare').innerHTML = I.plus; $('#btnShare').setAttribute('aria-label','Share a past LLM chat'); setMicMode();
+  if (send) push({who:'me', kind:'voice', dur, t:now()});
+}
+$('#btnShare').onclick = () => {
+  if (recTimer) return stopRec(false);
+  $('#pickList').innerHTML = MY_CHATS.map((c,i) => `<button class="pick" data-pick="${i}"><span class="src">${esc(c.src)} · ${esc(c.when)}</span><span class="m">${c.n} msgs</span><span class="ttl">${esc(c.title)}</span></button>`).join('');
+  $('#pickList').querySelectorAll('[data-pick]').forEach(b => b.onclick = () => { push({who:'me', kind:'llm', chat:MY_CHATS[+b.dataset.pick], t:now()}); $('#sheet').hidden = true; });
+  $('#sheet').hidden = false;
+};
+$('#sheetCancel').onclick = () => $('#sheet').hidden = true;
+$('#sheet').onclick = e => { if (e.target.id==='sheet') $('#sheet').hidden = true; };
+$('#chatBack').onclick = () => show('matches');
+
+/* ---------- Navigation ---------- */
+function show(name){
+  if (recTimer) stopRec(false);
+  $('#s-match').hidden = true; $('#sheet').hidden = true;
+  ['discover','matches','chat'].forEach(s => $('#s-'+s).hidden = s!==name);
+  $('#tabbar').hidden = name==='chat';
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.tab===name || (name==='chat' && t.dataset.tab==='matches')));
+  if (name==='matches') renderMatches();
+  setRail(name);
+}
+function setRail(name){ document.querySelectorAll('.step').forEach(s => s.setAttribute('aria-current', s.dataset.go===name)); }
+let toastT;
+function toast(t){ const el=$('#toast'); el.textContent=t; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true, 2600); }
+
+document.querySelectorAll('.tab').forEach(t => {
+  const map = {discover:[I.compass,'Discover'], matches:[I.chat,'Matches'], me:[I.user,'You']};
+  t.innerHTML = map[t.dataset.tab][0] + `<span>${map[t.dataset.tab][1]}</span>`;
+  t.onclick = () => t.dataset.tab==='me' ? toast('Your profile and extracted ideas would live here (Steps 0 and 3).') : show(t.dataset.tab);
+});
+document.querySelectorAll('.step').forEach(s => s.onclick = () => {
+  const g = s.dataset.go;
+  if (g==='match'){ show('discover'); const c = CANDIDATES[0]; addMatch(c); showMatch(c); }
+  else if (g==='chat'){ openChat('jonah'); }
+  else show(g);
+});
+$('#btnPass').innerHTML = I.x; $('#btnYes').innerHTML = I.check;
+$('#btnPass').onclick = () => decide(false);
+$('#btnYes').onclick = () => decide(true);
+$('#chatBack').innerHTML = I.back; $('#btnShare').innerHTML = I.plus; setMicMode();
+document.addEventListener('keydown', e => {
+  if ($('#s-discover').hidden || !$('#s-match').hidden || e.target.tagName==='INPUT') return;
+  if (e.key==='ArrowRight') decide(true); if (e.key==='ArrowLeft') decide(false);
+});
+renderDeck(); updateBadge(); show('discover');
+</script>
+</html>
