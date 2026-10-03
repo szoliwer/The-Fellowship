@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Owner** | _TBD_ |
+| **Branch** | `step-1-data-collection` (work here, not on `main`) |
 | **Status** | ⬜ Not started |
 | **Gets input from** | Step 0 |
 | **Hands output to** | Step 2 |

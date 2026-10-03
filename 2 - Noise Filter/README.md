@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Owner** | _TBD_ |
+| **Branch** | `step-2-noise-filter` (work here, not on `main`) |
 | **Status** | ⬜ Not started |
 | **Gets input from** | Step 1 |
 | **Hands output to** | Step 3 |

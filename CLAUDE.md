@@ -16,7 +16,7 @@ This file is the **base harness** for any AI assistant (Claude, Claude Code, Cow
 - Everyone uses **GitHub Desktop**, not the command line. Give instructions in terms of GitHub Desktop buttons.
 
 ### Repository
-- GitHub: `https://github.com/szoliwer/The-Fellowship` (branch: `main`)
+- GitHub: `https://github.com/szoliwer/The-Fellowship`. `main` is the stable version, with one working branch per step (see Rule 0).
 - Each step of the pipeline lives in its own folder (`0 - User Registration` … `6 - Matching Interface`).
 - Project-wide docs live in `docs/`.
 
@@ -37,6 +37,24 @@ Details, inputs/outputs and open questions for each step are in that step's `REA
 
 ## 2. Rules
 
+### Rule 0 — Work on your step's branch, never directly on `main`
+- Each step has its own branch. **`main` is the "known good" version** and only changes through a reviewed pull request.
+
+  | Step | Branch |
+  |------|--------|
+  | 0 User Registration | `step-0-user-registration` |
+  | 1 Data Collection | `step-1-data-collection` |
+  | 2 Noise Filter | `step-2-noise-filter` |
+  | 3 Idea Generation | `step-3-idea-generation` |
+  | 4 Idea Ranking | `step-4-idea-ranking` |
+  | 5 Match Generation | `step-5-match-generation` |
+  | 6 Matching Interface | `step-6-matching-interface` |
+
+- **Before changing anything, check which branch is checked out** (GitHub Desktop shows it at the top, under *Current branch*). If it's `main`, or it doesn't match the step being worked on, stop and ask the user to switch.
+- On a step branch, only change files inside **that step's folder**. Shared files (`README.md`, `CLAUDE.md`, `docs/*`) are updated on `main` when a step is merged, so seven branches don't conflict over them.
+- Getting work into `main`: open a **pull request** on GitHub from the step branch into `main`. A teammate reviews it before merging. Never merge without the user's go-ahead.
+- To pick up teammates' merged work, merge `main` into the step branch (GitHub Desktop: *Branch → Update from main*).
+
 ### Rule 1 — Never commit or push without asking
 - **Do not `git commit`, `git push`, merge, or create a pull request until the user has said yes** in the current conversation.
 - Before asking, show: (a) a plain-language list of the files you changed and why, and (b) the commit message you plan to use.
@@ -52,7 +70,7 @@ Every meaningful change gets logged **in the same session it was made**, in the 
 | Work finished or started on a step | That step's `README.md` → **Progress log** |
 | A bug found and fixed | That step's `README.md` → **Code fixes log** |
 | A decision affecting several steps or the whole project (stack, data format, privacy) | `docs/DECISIONS.md` |
-| Overall status change (step started, blocked, done) | `docs/PROGRESS.md` |
+| Overall status change (step started, blocked, done) | `docs/PROGRESS.md` (updated on `main` when the step is merged; see Rule 0) |
 
 Log entries use this format, newest at the top:
 ```
@@ -89,7 +107,8 @@ For a code fix, also include: what broke, the cause, and the fix.
 
 At the **start** of a session:
 1. Read this file, `docs/PROGRESS.md`, and the `README.md` of the step you're working on.
-2. Ask the user to **Pull** in GitHub Desktop if they haven't recently, so you're working on the latest version.
+2. Confirm the right step branch is checked out (Rule 0).
+3. Ask the user to **Pull** in GitHub Desktop if they haven't recently, so you're working on the latest version.
 
 At the **end** of a session or after a chunk of work:
 1. Update the step's Decisions / Progress / Code fixes logs.

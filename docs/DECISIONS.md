@@ -13,6 +13,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-003 — One branch per step; `main` changes only via pull request
+- **Date / who:** 2026-10-03 — Oliver
+- **Decision:** Seven working branches (`step-0-user-registration` … `step-6-matching-interface`). Each branch only changes its own step folder. Work reaches `main` through a pull request reviewed by a teammate. Shared docs (`README.md`, `CLAUDE.md`, `docs/*`) are edited on `main`.
+- **Why:** Keeps `main` demo-able at all times, and keeps four people's work-in-progress from breaking each other. Limiting each branch to its own folder avoids merge conflicts.
+- **Affects:** all steps
+
 ### D-002 — Privacy baseline
 - **Date / who:** 2026-10-03 — team
 - **Decision:** Uploads are opt-in. Raw chat text never leaves the pipeline. Other users see only extracted ideas and the warm intro. Contact details are shared only on a mutual accept. No real user data or API keys in GitHub (`data/` and `.env` are git-ignored).

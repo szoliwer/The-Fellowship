@@ -3,6 +3,7 @@
 | | |
 |---|---|
 | **Owner** | _TBD_ |
+| **Branch** | `step-0-user-registration` (work here, not on `main`) |
 | **Status** | ⬜ Not started |
 | **Gets input from** | — |
 | **Hands output to** | Step 1 |
