@@ -12,6 +12,11 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 ```
 
 ---
+### D-004 — Stack Choice; `main` changes only via pull request
+- **Date / who:** 2026-10-03 — Herman
+- **Decision:** Stack for the MVP: Python + Streamlit. Each step is plain Python code in its own folder that reads input files and writes output files; one Streamlit app is the shell that runs the steps and shows the screens. Steps pass data as files (e.g. the Noise Filter → Idea Generation handoff). 
+- **Why:** one language for a mostly non-technical team, fast to build at a hackathon, and keeping steps separate from the screens means the UI could be replaced later without touching the pipeline. Demo runs locally on one laptop; the Claude API key lives in a git-ignored .env file.
+- **Affects:** all steps
 
 ### D-003 — One branch per step; `main` changes only via pull request
 - **Date / who:** 2026-10-03 — Oliver
