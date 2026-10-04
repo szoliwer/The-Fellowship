@@ -19,8 +19,7 @@ FOOTNOTES = {
 def render(user):
     user_id = user["user_id"]
     st.title("People you should know")
-    brand.lead("Each match explains why the two of you should talk. A connection opens only when you "
-               "both say yes; until then you are known only by your username.")
+    brand.lead("A connection opens only when you both say yes.")
 
     mine = mt.my_matches(user_id)
     if not mt.MATCHES_FILE.exists():
@@ -42,16 +41,12 @@ def render(user):
 
         if m["state"] == "connected":
             st.success(f"**Warm introduction:** {m['intro']}", icon=":material/celebration:")
-            st.caption("Pseudonymous: neither of you sees the other's name or contact details unless "
-                       "you choose to share them.")
             if st.button(f"Message {m['other_name']}", key=f"message_{m['other_id']}", type="primary",
                          icon=":material/chat:"):
                 st.session_state["msg_with"] = m["other_id"]
                 st.switch_page(brand.page("messages"))
         if m["they_can_offer"]:
             st.markdown(f"**What they've explored that may help you:** {m['they_can_offer']}")
-            st.caption("Based on what each of you approved; absence from your chats doesn't mean you "
-                       "haven't thought about it.")
         if m["you_can_offer"]:
             st.markdown(f"**What you might add for them:** {m['you_can_offer']}")
         for mine_idea, their_idea in m["linked"][1:]:

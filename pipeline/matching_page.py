@@ -40,8 +40,7 @@ def _run():
 def render(user):
     user_id = user["user_id"]
     st.title("Find your matches")
-    brand.lead("Matching compares <b>only the ideas people approved</b>, never their chats. People see each "
-               "other by username, and anyone who declined consent is left out.")
+    brand.lead("Matching compares only the ideas people approved, never their chats.")
     people = _approved_people()
     me = people.get(user_id, 0)
     if not me:
@@ -61,6 +60,6 @@ def render(user):
     if len(people) < 2:
         st.caption("Matching can run once at least two researchers have approved ideas.")
         return
-    st.caption("Runs for everyone at once and takes about a minute.")
+    st.caption("Runs for everyone and takes about a minute.")
     if st.button("Find matches", type="primary"):
         _run()

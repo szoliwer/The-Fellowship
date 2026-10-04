@@ -81,8 +81,6 @@ def render(user):
     brand.wide_page()
     brand.eyebrow("After you both say yes")
     st.title("Messages")
-    brand.lead("Talk with the people you matched with. Only people where you <b>both said yes</b> appear "
-               "here, and you know each other by username only.")
 
     convos = msg.conversations(me)
     if not convos:

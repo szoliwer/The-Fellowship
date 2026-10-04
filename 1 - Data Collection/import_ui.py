@@ -67,9 +67,7 @@ def render(user, on_removed=None):
     """on_removed(user_id) is called after chats are removed, so later steps can forget them."""
     user_id = user["user_id"]
     st.title("Import your research chats")
-    brand.lead("Bring in the conversations you want to be matched on. <b>Importing is private:</b> files stay "
-               "on this laptop, personal chats are held back in the next step, and nothing is shared until "
-               "you approve specific ideas.")
+    brand.lead("Bring in the conversations you want to be matched on. Files stay private on this laptop.")
 
     is_demo = user_id in im.DEMO_FIXTURES
     tabs = st.tabs(["Upload files", "Paste a chat"] + (["Demo history"] if is_demo else []))
@@ -81,8 +79,6 @@ def render(user, on_removed=None):
             "- **Claude export:** Settings → Privacy → Export data. Upload the .zip from the email.\n"
             "- **Notes or saved chats:** .md or .txt files, or a .zip of them."
         )
-        st.caption("Tip: lines starting `User:` / `Assistant:` (also `You said:`, `ChatGPT:`, `## Claude`, …) "
-                   "keep track of who said what.")
         files = st.file_uploader("Choose files", type=im.ACCEPTED_EXTENSIONS, accept_multiple_files=True)
         if files and st.button("Import files", type="primary"):
             for f in files:
@@ -116,7 +112,6 @@ def render(user, on_removed=None):
     st.divider()
     sources = im.load_sources(user_id)
     st.subheader(f"Your chats ({len(sources)})")
-    st.caption("Only you can see these. Open one to read it or remove it.")
     _removal_message()
     _confirm_removal(user_id, sources, on_removed)
     if not sources:

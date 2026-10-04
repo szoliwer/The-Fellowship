@@ -68,7 +68,7 @@ def create_account_form():
 
 def demo_picker():
     """Sign in as one of the synthetic demo researchers (no password)."""
-    st.caption("These researchers and their histories are synthetic, for the demo. No password needed.")
+    st.caption("Synthetic researchers for the demo. No password needed.")
     demos = reg.demo_users()
     choice = st.selectbox("Demo researcher", demos, format_func=lambda u: u["pseudonym"])
     if st.button("Continue as this demo researcher", type="primary", use_container_width=True):

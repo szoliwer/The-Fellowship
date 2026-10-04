@@ -9,12 +9,10 @@ import screening as sc
 from pipeline import brand  # shared look (intro text, cards, plurals)
 
 POINTS = [
-    ("Held back whole", "Mostly personal, admin or off-topic chats, and any chat with obvious secrets "
-                        "(passwords, card, ID or record numbers)."),
-    ("Cleaned", "Research chats with some personal parts: personal phrases are blanked out, wholly personal "
-                "messages removed, and the cleaned copy is checked again before it's used."),
-    ("Who reads them", "Chats with obvious secrets never leave this laptop. Everything else is screened by an "
-                       "external AI service, Anthropic's Claude."),
+    ("Held back", "Mostly personal or off-topic chats, and any with passwords, card or ID numbers."),
+    ("Cleaned", "Research chats with personal parts: those parts are blanked out and checked again."),
+    ("Who reads them", "Chats with obvious secrets never leave this laptop. The rest are screened by "
+                       "Anthropic's Claude."),
 ]
 
 
@@ -38,8 +36,7 @@ def _run_screening(user_id, total, retry_held_back=False):
 def render(user):
     user_id = user["user_id"]
     st.title("Privacy check")
-    brand.lead("Before anything is used, every chat is checked for personal information. You can see, "
-               "and overrule, every decision below.")
+    brand.lead("Every chat is checked for personal information before anything is used.")
     brand.points(POINTS)
     with st.expander("What counts as personal"):
         st.markdown("Your name, record or applications; your health, money or private life; other people's "
@@ -79,8 +76,7 @@ def render(user):
                  "They are held back until screening succeeds.")
 
     st.subheader(f"Used for ideas ({len(used)})")
-    st.caption("Only these are passed on to idea extraction. Contact details in them are masked. "
-               "Nothing is shown to other people until you approve specific ideas later.")
+    st.caption("Only these are read in the next step.")
     for s, e in used:
         cleaned = e["decision"] == "cleaned"
         blanked, removed = sc.cleaning_counts(e) if cleaned else (0, 0)
@@ -90,13 +86,8 @@ def render(user):
                       f"{removed} of {brand.plural(e['total_messages'], 'message')} removed")
         with st.expander(label):
             if cleaned:
-                checks = len(e["recheck"]) + 1
-                last = (e["recheck"] or [{}])[-1]
-                how = ("the last check's redactions were applied" if last.get("applied_without_another_check")
-                       else "the last check found nothing personal")
-                st.markdown(f"**{sc.cleaning_summary(e)}.** Only the cleaned copy is used. It was checked "
-                            f"{checks} times, each check reading the copy cleaned by the one before; {how}. "
-                            "The original stays held back. Please look over the cleaned copy below.")
+                st.markdown(f"**{sc.cleaning_summary(e)}.** Only the cleaned copy is used "
+                            f"(checked {len(e['recheck']) + 1} times). Please look it over below.")
             st.caption(e["explanation"])
             if cleaned and st.toggle("Show the cleaned copy (only you can see this)", key=f"show_{e['source_id']}"):
                 st.text(sc.used_version(s, e)["raw_text"])
@@ -105,12 +96,11 @@ def render(user):
                 st.rerun()
 
     st.subheader(f"Held back ({len(held)})")
-    st.caption("Kept privately on this laptop. Never used for ideas or shown to anyone.")
+    st.caption("Never used or shown to anyone.")
     retry = sc.retry_candidates(user_id)
     if retry and not pending and sc.api_key_available():
         est = sc.estimate_cost(retry)
-        st.caption(f"Results vary a little between runs. Chats that passed are never screened again, "
-                   f"but you can give held-back chats another try (about ${est['dollars']:.2f}).")
+        st.caption(f"You can give held-back chats another try (about ${est['dollars']:.2f}).")
         if st.button(f"Try {brand.plural(len(retry), 'held-back chat')} again"):
             _run_screening(user_id, len(retry), retry_held_back=True)
     for s, e in held:

@@ -119,6 +119,7 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03 21:59** — Herman (with Claude) — Less text: one-line intro, removed the format tip and the caption under "Your chats".
 - **2026-10-03 21:46** — Herman (with Claude) — Look only: short intro instead of the blue box, proper plurals ("1 message"), the Demo history tab only for demo researchers, and "Your chats" heading. No logic changed.
 - **2026-10-03 20:15** — Herman (with Claude) — Images/files now marked `[image omitted]` / `[file omitted]` (agreed Step 2 → 3 handoff); added the synthetic history for demo researcher `user_b` (`b_s01`, `b_s02`). `user_a`'s history is byte-for-byte unchanged.
 - **2026-10-03 17:40** — Herman (with Claude) — Importer now takes ChatGPT/Claude zips and JSON, .md/.txt, zips of text files and paste; stores originals + history per user; screen moved into the shared `app.py` behind log-in. 24 automatic checks pass; in the browser: uploaded a .md file, logged out and back in, chat still there. Next: Step 2 noise filter reads `data/sources/<user_id>.json`.

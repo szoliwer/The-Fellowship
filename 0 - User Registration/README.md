@@ -87,6 +87,7 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03 21:59** — Herman (with Claude) — Less text: removed the "Username, email and password" line under the landing buttons and the extra line in the sign-up pop-up (the form labels already say what's public).
 - **2026-10-03 21:46** — Herman (with Claude) — Look only: the account page shows username and email side by side, with the privacy details; the landing page has a header with Log in / Create account (D-016). No logic changed.
 - **2026-10-03 17:40** — Herman (with Claude) — Replaced the no-password sign-up with real accounts (SQLite + hashed passwords + lockout); screens now part of the shared `app.py`. 12 automatic checks pass; in the browser: created an account, wrong password rejected, logged back in and saw the earlier upload. Next: agree the user format with Step 5.
 - **2026-10-03 16:45** — Herman (with Claude) — Built registration logic, sign-up screen and the two demo users.

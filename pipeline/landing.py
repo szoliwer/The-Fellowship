@@ -12,7 +12,6 @@ from pipeline import brand
 def _create_account():
     brand.eyebrow("Join The Fellowship")
     st.html('<div class="fs-section"><h2 style="font-size:2.1rem;margin:0">Start with the essentials.</h2></div>')
-    st.caption("Your username is public. Your email and password stay private.")
     signup_ui.create_account_form()
 
 
@@ -49,7 +48,6 @@ def render():
                 _create_account()
             if st.button("Try a demo", key="hero_demo"):
                 _try_demo()
-        st.caption("Username, email and password. No biography required.")
     with right:
         st.html(brand.example_card_html())
 

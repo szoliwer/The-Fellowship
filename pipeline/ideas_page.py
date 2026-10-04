@@ -40,9 +40,8 @@ def _run(user_id):
 def render(user):
     user_id = user["user_id"]
     st.title("Find your ideas")
-    brand.lead("Claude reads <b>only the chats that passed the privacy check</b> and lists the ideas, open "
-               "questions, skills and needs they show. Only what you wrote counts as yours. Nothing is "
-               "shared yet: you choose what to use in the next step.")
+    brand.lead("Claude reads the chats that passed the privacy check and lists your ideas, questions, "
+               "skills and needs. Nothing is shared yet.")
 
     chats = _screened_chats(user_id)
     result = _saved_result(user_id)
@@ -59,7 +58,7 @@ def render(user):
                    icon=":material/key:")
     else:
         label = "Find my ideas" if result is None else "Find my ideas again"
-        st.caption("Takes a minute or two. Running it again on unchanged chats is instant.")
+        st.caption("Takes a minute or two.")
         if st.button(label, type="primary" if result is None or stale else "secondary"):
             _run(user_id)
 
@@ -80,5 +79,3 @@ def render(user):
         with st.expander(f"Suggestions that connect your ideas ({len(adjacent)}): speculative, not yours"):
             for a in adjacent:
                 st.markdown(f"- **{a.get('handle', '')}**: {a.get('claim', '')}")
-    if ideas:
-        st.caption("Next, choose which of these may be used for matching.")
