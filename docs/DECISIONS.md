@@ -13,6 +13,24 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-016 — The app looks like the Lovable website (replaces D-014's dark look)
+- **Date / who:** 2026-10-04 — Herman
+- **Decision:** The Streamlit app recreates the design of the Lovable website in `0 - User Registration/lovable codebase/`: its light sage palette (converted from its oklch tokens) in `.streamlit/config.toml`, Newsreader / Manrope / IBM Plex Mono fonts, small uppercase labels, and its landing page (hero, example match card, how it works, privacy, call to action, footer; `pipeline/landing.py`), with sign-up, log-in and demo in pop-up windows. Discover shows matches as the Lovable match card. Navigation: the top menu plus one floating green **Next** button per step (no second set of step links). Logic and data flow are unchanged: the forms are Step 0's own, with our fields (username, email, password, consent), not the Lovable form's (first name, location). The example card uses usernames and no "fit" score (the brief rules out compatibility percentages).
+- **Why:** the team's Lovable site is the agreed look; reusing it in the working app gives one consistent, professional product without a second codebase.
+- **Affects:** every page (look only). Step owners: pages get the look automatically; reuse `pipeline/brand.py` (labels, match card) for custom elements.
+
+### D-015 — Matching compares meaning, not just words (local embedding model)
+- **Date / who:** 2026-10-04 — Herman
+- **Decision:** `sentence-transformers` is part of the shared install. Step 5 then uses its local model (`all-MiniLM-L6-v2`) for the first-pass comparison instead of keyword overlap; no code change in Step 5 (it picks the model up automatically). Claude still judges every shortlisted pair, and its "no match" still decides.
+- **Why:** a real test missed robo67 ↔ szoliwer (both about real-world data for robot learning): keyword overlap scored it 0.12, under the 0.20 shortlist bar, so Claude never saw it. Step 5 also ignores "data / real / world / model" as generic words. With the model, the pair scores 0.34 and is shortlisted; on the 4 real accounts, every pair shortlisted before still is, and 2 more are added. Runs locally, so ideas aren't sent anywhere for this part.
+- **Affects:** Step 5 (Oliver + Colin: no code change; first matching run after start takes a bit longer while the model loads). Install size ~1 GB.
+
+### D-014 — One look for the whole app (from the Step 6 mockup)
+- **Date / who:** 2026-10-04 — Herman
+- **Decision:** The app uses the Step 6 mockup's colours (dark green-black, green accent) and fonts (Newsreader headings, Manrope text), set once in `.streamlit/config.toml`, so every step's page matches automatically. Top navigation bar with logo instead of a numbered sidebar; Streamlit's developer menu and "Deploy" button hidden; one floating green **Next** button on every step page (`pipeline/brand.py`; the top menu is the only other navigation); a welcome page before sign-in; an account page. User-facing text avoids technical details (IDs, model names, file paths, page numbers).
+- **Why:** the demo should look like a product, not a developer tool; the brief asks for a calm, serious look. Note: fonts load from Google Fonts in the browser.
+- **Affects:** every page (look only). Step owners: link to other pages by their menu names (Import, Privacy, Ideas, Review, Matches, Discover).
+
 ### D-013 — One app runs Steps 0–6; glue and placeholders live in `pipeline/`
 - **Date / who:** 2026-10-03 — Herman (integration)
 - **Decision:** `app.py` shows one sidebar page per step (Streamlit navigation), always for the logged-in user. Steps 0–2 and Step 4 use their own screens (Step 4's `app.py` runs as a page as is). New glue in `pipeline/`: page 3 runs Step 3's `run_user`; a **placeholder ranking** copies Step 3's `data/ideas/<user>.json` to Step 4's `data/ranked_ideas/<user>.json` with a simple score (chats, own messages, recency); page 5 runs Step 5's `run` on `data/ideas.json` + `data/users.json` → `data/matches.json`; page 6 is a **placeholder Discover** screen until Step 6's own page exists. Accept/Pass decisions go to `data/match_status.json`, keyed by the pair of users so they survive re-running Step 5. Step 4's demo user picker is hidden when you came through the shared login (a 7-line change in Step 4's `app.py`).

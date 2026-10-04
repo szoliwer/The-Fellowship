@@ -58,8 +58,8 @@ def _removal_message():
     for name in result["files_kept"]:
         st.info(f"The original file **{name}** is still stored, because other chats from it are still "
                 "imported. Remove those too to delete the file.")
-    st.caption("If you already found ideas from these chats (page 3), find them again so the removed chats "
-               "aren't used, and review them on page 4.")
+    st.caption("If you already found ideas from these chats, find them again on the Ideas page so the removed "
+               "chats aren't used, and review them on the Review page.")
 
 
 def render(user, on_removed=None):
@@ -70,7 +70,7 @@ def render(user, on_removed=None):
         "Importing is **private**. Your files are stored only on this laptop and nobody else sees "
         "them. Next, personal or sensitive conversations are held back, and nothing is shared "
         "until you approve specific ideas later.",
-        icon="🔒",
+        icon=":material/lock:",
     )
 
     upload_tab, paste_tab, demo_tab = st.tabs(["Upload files", "Paste a chat", "Demo history"])
@@ -125,7 +125,6 @@ def render(user, on_removed=None):
         p = s["provenance"]
         date = (p["created_at"] or p["imported_at"] or "")[:10]
         with st.expander(f"{p['title']} · {len(s['messages'])} messages · {date}"):
-            st.caption(f"Source `{s['source_id']}` · {s['source_type']}")
             st.button("Remove this chat", key=f"remove_{s['source_id']}", icon=":material/delete:",
                       on_click=_ask_removal, args=([s["source_id"]],))
             st.text(s["raw_text"])

@@ -10,3 +10,37 @@ maxUploadSize = 200
 [browser]
 # Don't send usage statistics to Streamlit.
 gatherUsageStats = false
+
+[client]
+# Hide Streamlit's developer menu and "Deploy" button: users see a website, not a dev tool.
+toolbarMode = "minimal"
+
+# Look and feel: the Lovable website design (0 - User Registration/lovable codebase/…/src/styles.css),
+# converted from its oklch colour tokens. Light sage background, white cards, deep green accent;
+# "them" is blue, "you" is green, "complementary" is amber. Fonts load from Google Fonts in the browser.
+[theme]
+base = "light"
+primaryColor = "#166845"
+backgroundColor = "#EAF3EC"
+secondaryBackgroundColor = "#FCFEFC"
+textColor = "#101E16"
+borderColor = "#C1CFC5"
+linkColor = "#166845"
+greenColor = "#166845"
+greenBackgroundColor = "#CDEED9"
+greenTextColor = "#166845"
+blueColor = "#1C90CB"
+blueBackgroundColor = "#CCEEFF"
+blueTextColor = "#005B91"
+orangeColor = "#8B4B00"
+orangeBackgroundColor = "#FFE3B3"
+orangeTextColor = "#8B4B00"
+redColor = "#B3261E"
+grayColor = "#55655B"
+font = "Manrope:https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap, sans-serif"
+headingFont = "Newsreader:https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap, serif"
+codeFont = "IBM Plex Mono:https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap, monospace"
+headingFontWeights = 600
+baseRadius = "0.45rem"
+buttonRadius = "0.45rem"
+showWidgetBorder = true

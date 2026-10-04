@@ -39,28 +39,29 @@ def _run(user_id):
 
 def render(user):
     user_id = user["user_id"]
-    st.title("Find my ideas")
+    st.title("Your ideas, found in your chats")
     st.info(
-        "Claude reads **only your screened chats** (page 2) and lists the ideas, open questions, "
+        "Claude reads **only your screened chats** (Privacy page) and lists the ideas, open questions, "
         "skills and needs they show. Only what *you* wrote counts as yours. Nothing is shared: "
         "you choose what to use on the next page.",
-        icon="💡",
+        icon=":material/lightbulb:",
     )
 
     chats = _screened_chats(user_id)
     result = _saved_result(user_id)
     if not chats:
-        st.warning("No screened chats yet. Import chats (page 1) and screen them (page 2) first.")
+        st.warning("No screened chats yet. Import chats, then run the privacy check, first.")
         return
 
     stale = result is not None and sorted(result.get("chats_read", [])) != chats
     st.markdown(f"**{len(chats)} screened chat(s)** ready."
                 + (" Your screened chats changed since your ideas were found." if stale else ""))
     if not sc.api_key_available():
-        st.warning("No AI key set up yet: see `.env.example` at the repo root.", icon="🔑")
+        st.warning("Finding ideas isn't set up on this computer yet (it needs an Anthropic API key).",
+                   icon=":material/key:")
     else:
         label = "Find my ideas" if result is None else "Find my ideas again"
-        st.caption(f"Uses {ig.MODEL} (about $0.10–0.40 per run; re-running on unchanged chats is free).")
+        st.caption("Takes a minute or two. Running it again on unchanged chats is instant.")
         if st.button(label, type="primary" if result is None or stale else "secondary"):
             _run(user_id)
 
@@ -80,4 +81,4 @@ def render(user):
         with st.expander(f"Suggestions that connect your ideas ({len(adjacent)}): speculative, not yours"):
             for a in adjacent:
                 st.markdown(f"- **{a.get('handle', '')}**: {a.get('claim', '')}")
-    st.success("Next: **4. Review ideas**: choose which ideas may be used for matching.")
+    st.success("Next: **Review**: choose which ideas may be used for matching.")

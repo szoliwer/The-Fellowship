@@ -5,3 +5,5 @@ streamlit>=1.65
 anthropic>=1.11   # Claude API (Steps 2, 3, 5). Paid service: needs a key in .env
 numpy             # Step 5 (matching): vector maths
 scikit-learn      # Step 5 (matching): keyword vectors when no local embedding model is installed
+sentence-transformers  # Step 5 (matching): meaning-based comparison, runs locally (large: ~1 GB incl. PyTorch;
+                       # downloads a ~90 MB model once). Without it, Step 5 falls back to keyword overlap.

@@ -27,7 +27,7 @@ def _run_screening(user_id, total, retry_held_back=False):
 
 def render(user):
     user_id = user["user_id"]
-    st.title("Privacy screening")
+    st.title("Privacy check")
     st.info(
         "Before anything is used, each imported chat is checked for personal information: your "
         "name, record or applications, your health, money or private life, other people's "
@@ -36,8 +36,8 @@ def render(user):
         "phrases are blanked out and wholly personal messages removed, and the cleaned copy is "
         "checked again before it's used. Chats with obvious secrets (passwords, card, ID or record numbers) are held back "
         "on this laptop without being sent anywhere. Everything else is screened by an external "
-        f"AI service (Anthropic's Claude, model `{sc.MODEL}`).",
-        icon="🛡️",
+        "AI service (Anthropic's Claude).",
+        icon=":material/shield:",
     )
 
     sources = sc.load_sources(user_id)
@@ -57,7 +57,7 @@ def render(user):
             st.warning(
                 "No AI key set up yet. Copy `.env.example` (repo root) to `.env` and paste your "
                 "Anthropic API key after `ANTHROPIC_API_KEY=`, then restart the app.",
-                icon="🔑",
+                icon=":material/key:",
             )
         elif st.button(f"Screen {len(pending)} chat(s)", type="primary"):
             _run_screening(user_id, len(pending))
@@ -85,7 +85,7 @@ def render(user):
     for s, e in used:
         cleaned = e["decision"] == "cleaned"
         blanked, removed = sc.cleaning_counts(e) if cleaned else (0, 0)
-        with st.expander(f"{'🧹' if cleaned else '✅'} {e['title']}"
+        with st.expander(f"{':material/cleaning_services:' if cleaned else ':material/check_circle:'} {e['title']}"
                          + (f" · {blanked} details blanked, {removed} of {e['total_messages']} messages removed"
                             if cleaned else "")):
             if cleaned:
@@ -113,7 +113,7 @@ def render(user):
         if st.button(f"Try {len(retry)} held-back chat(s) again"):
             _run_screening(user_id, len(retry), retry_held_back=True)
     for s, e in held:
-        with st.expander(f"⛔ {e['title']} · {sc.display_reason(e)}"):
+        with st.expander(f":material/block: {e['title']} · {sc.display_reason(e)}"):
             st.caption(e["explanation"])
             rechecks = e.get("recheck") if isinstance(e.get("recheck"), list) else []
             for n, r in enumerate(rechecks, start=1):

@@ -38,30 +38,28 @@ def _run():
 
 def render(user):
     user_id = user["user_id"]
-    st.title("Find matches")
+    st.title("Find your matches")
     st.info(
-        "Matching compares **only ideas people approved** on page 4, never chats. People are shown "
+        "Matching compares **only ideas people approved** on the Review page, never chats. People are shown "
         "to each other by pseudonym, and anyone who declined consent is left out.",
-        icon="🤝",
+        icon=":material/hub:",
     )
     people = _approved_people()
     me = people.get(user_id, 0)
     st.markdown(f"**{len(people)} researcher(s)** have approved ideas for matching"
-                + (f", including you ({me} idea(s))." if me else ". You haven't approved any yet (page 4)."))
+                + (f", including you ({me} idea(s))." if me else ". You haven't approved any yet (Review page)."))
 
     if mt.MATCHES_FILE.exists():
         data = json.loads(mt.MATCHES_FILE.read_text(encoding="utf-8"))
         when = datetime.fromisoformat(data["generated_at"]).strftime("%d %b %H:%M UTC")
         mine = len(mt.my_matches(user_id))
-        st.caption(f"Last run: {when} ({data.get('mode', '?')} mode) · {len(data.get('matches', []))} match(es) "
-                   f"in total · {mine} for you.")
+        st.caption(f"Last run {when} · {mine} match(es) for you.")
 
     if len(people) < 2:
         st.warning("At least two researchers need approved ideas before matching can run.")
         return
-    st.caption("Runs for everyone at once. With an AI key it uses Claude (a few cents); without one, "
-               "a simpler offline comparison.")
+    st.caption("Runs for everyone at once and takes about a minute.")
     if st.button("Find matches", type="primary"):
         _run()
     if mt.MATCHES_FILE.exists():
-        st.success("Next: **6. Discover**: see your matches and say yes or pass.")
+        st.success("Next: **Discover**: see your matches and say yes or pass.")

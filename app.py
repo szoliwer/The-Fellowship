@@ -23,9 +23,10 @@ import filter_ui  # noqa: E402  (Step 2)
 import import_ui  # noqa: E402  (Step 1)
 import screening  # noqa: E402  (Step 2: forgets chats removed in Step 1)
 import signup_ui  # noqa: E402  (Step 0)
-from pipeline import discover_page, ideas_page, matching_page  # noqa: E402  (Steps 3, 5, 6)
+from pipeline import brand, discover_page, ideas_page, landing, matching_page  # noqa: E402  (look; Steps 3, 5, 6)
 
-st.set_page_config(page_title="The Fellowship", page_icon="🔬")
+st.set_page_config(page_title=brand.NAME, page_icon=str(brand.ICON))
+st.logo(str(brand.LOGO), icon_image=str(brand.ICON), size="large")
 
 
 @st.cache_resource
@@ -39,7 +40,7 @@ _refresh_users_file()
 user = signup_ui.current_user()
 if user is None:
     st.session_state.pop("fellowship_logged_in_user", None)
-    signup_ui.render()
+    landing.render()
     st.stop()
 
 # Tells Step 4's page (its own file) who is logged in, so it never offers to switch user.
@@ -66,24 +67,25 @@ def discover():
     discover_page.render(user)
 
 
+def account():
+    signup_ui.render_account(user)
+
+
 pages = [
-    st.Page(import_chats, title="1. Import chats", url_path="import", default=True),
-    st.Page(privacy_screening, title="2. Privacy screening", url_path="screening"),
-    st.Page(find_ideas, title="3. Find my ideas", url_path="ideas"),
-    st.Page(ROOT / "4 - Idea Ranking" / "app.py", title="4. Review ideas", url_path="review"),
-    st.Page(find_matches, title="5. Find matches", url_path="matching"),
-    st.Page(discover, title="6. Discover", url_path="discover"),
+    st.Page(import_chats, title="Import", icon=":material/upload_file:", url_path="import", default=True),
+    st.Page(privacy_screening, title="Privacy", icon=":material/shield:", url_path="screening"),
+    st.Page(find_ideas, title="Ideas", icon=":material/lightbulb:", url_path="ideas"),
+    st.Page(ROOT / "4 - Idea Ranking" / "app.py", title="Review", icon=":material/fact_check:", url_path="review"),
+    st.Page(find_matches, title="Matches", icon=":material/hub:", url_path="matching"),
+    st.Page(discover, title="Discover", icon=":material/handshake:", url_path="discover"),
+    st.Page(account, title=user["pseudonym"], icon=":material/account_circle:", url_path="account"),
 ]
-nav = st.navigation(pages)
-
-with st.sidebar:
-    st.markdown(f"Logged in as **{user['pseudonym']}**")
-    if user["is_demo_account"]:
-        st.caption("Synthetic demo account")
-    if st.button("Log out"):
-        signup_ui.log_out()
-        for key in ("fellowship_logged_in_user", "review"):
-            st.session_state.pop(key, None)
-        st.rerun()
-
+nav = st.navigation(pages, position="top")
+brand.page_style()
+if st.session_state.get("just_signed_in"):  # first few redraws after signing in: start at the top
+    st.session_state["just_signed_in"] = st.session_state.get("_scroll_runs", 0) < 2
+    st.session_state["_scroll_runs"] = st.session_state.get("_scroll_runs", 0) + 1
+    brand.scroll_to_top()
+brand.step_eyebrow(nav.title)
 nav.run()
+brand.next_step_button(nav.title, {page.title: page for page in pages})
