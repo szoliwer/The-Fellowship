@@ -65,6 +65,8 @@ Uploaded files (several at once is fine) or pasted text:
 - `data/uploads/<user_id>/files/<upload_id>__<filename>`: the original file, exactly as uploaded. Only kept if it imported; a wrong file (e.g. a PDF) is never stored.
 - `data/uploads/<user_id>/uploads.json`: upload history: what, when, size, SHA-256 fingerprint, result, skipped items, or the error.
 
+**Removing chats:** on the import page, every chat has **Remove this chat**, and there is **Remove all my chats**; both ask for confirmation first. `remove_sources()` deletes the chats from `data/sources/<user_id>.json` and deletes an original uploaded file once no chat from it remains (a file can hold many chats; the page says when a file is still kept for that reason). The shared app then calls Step 2's `sync_with_sources()`, which deletes the removed chats' screening results and their Step 3 handoff files. Ideas already found (Step 3) or approved (Step 4) are not changed automatically: the page reminds the owner to find ideas again.
+
 Errors are `{code, message, retryable}` and never include chat text (e.g. `malformed_json`, `unsupported_file_type`, `bad_zip`, `not_text`, `too_large`).
 
 > If you change this output format, update the README of the next step too and log it in `docs/DECISIONS.md` (see `CLAUDE.md`, Rule 4).
@@ -96,7 +98,7 @@ From the repo root, see the main `README.md` → *Run the app*. Checks:
 - [x] Store original uploads + upload history per user
 - [x] Tied to the logged-in user (no more typing a user ID)
 - [ ] Try one real ChatGPT and one real Claude export from a teammate (on a laptop, never committed) to confirm the formats still match
-- [ ] Let users delete an import (and its stored file)
+- [x] Let users remove imported chats (and the stored file once no chat from it remains)
 
 ## Open questions
 - Claude exports occasionally change shape; if a real one fails, send the error code (never the file) and we'll adjust.
@@ -105,6 +107,8 @@ From the repo root, see the main `README.md` → *Run the app*. Checks:
 
 ## Decisions log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — why.`_
+
+- **2026-10-03 23:50** — Herman (with Claude) — Owners can remove imported chats (one, or all), with a confirmation step. The original uploaded file is deleted once none of its chats remain; Step 2 forgets removed chats right away; ideas already found/approved are left to the owner to refresh (they belong to Steps 3–4). — Users must be able to take back what they imported; removing derived Step 2 files immediately stops Step 3 from reading a removed chat.
 
 - **2026-10-03 17:40** — Herman (with Claude) — Keep the original uploaded file and an upload history per user under `data/uploads/`; only keep files that imported successfully. — Provenance (brief: "original imported chats/files"), and a wrong upload (e.g. an ID scan) shouldn't linger.
 - **2026-10-03 17:40** — Herman (with Claude) — Accept ChatGPT + Claude exports, .md/.txt (alone or zipped) and paste; new `source_type`s `claude_json` and `text_file`. — Researchers use both assistants and often save chats as Markdown.

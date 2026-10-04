@@ -17,7 +17,53 @@ def _show_result(name, result):
                 st.markdown(f"- **{s['title']}**: {s['reason']}")
 
 
-def render(user):
+def _ask_removal(source_ids):
+    st.session_state["pending_removal"] = list(source_ids)
+
+
+def _confirm_removal(user_id, sources, on_removed):
+    """Ask once before deleting; nothing is removed until the owner confirms."""
+    pending = st.session_state.get("pending_removal")
+    titles = {s["source_id"]: s["provenance"]["title"] for s in sources}
+    ids = [i for i in pending or [] if i in titles]
+    if not ids:
+        st.session_state.pop("pending_removal", None)
+        return
+    what = f"“{titles[ids[0]]}”" if len(ids) == 1 else f"all {len(ids)} imported chats"
+    with st.container(border=True):
+        st.warning(f"Remove {what}? It is deleted from this laptop, together with its screening result. "
+                   "This can't be undone.", icon=":material/delete:")
+        yes, no = st.columns(2)
+        if yes.button("Yes, remove", type="primary", use_container_width=True):
+            result = im.remove_sources(user_id, ids)
+            if on_removed:
+                on_removed(user_id)
+            st.session_state.pop("pending_removal", None)
+            st.session_state["removal_result"] = result
+            st.rerun()
+        if no.button("Cancel", use_container_width=True):
+            st.session_state.pop("pending_removal", None)
+            st.rerun()
+
+
+def _removal_message():
+    result = st.session_state.pop("removal_result", None)
+    if not result:
+        return
+    n = result["removed"]
+    text = f"Removed {n} chat{'s' if n != 1 else ''}."
+    if result["files_deleted"]:
+        text += f" Deleted {result['files_deleted']} original uploaded file(s) that held no other chats."
+    st.success(text)
+    for name in result["files_kept"]:
+        st.info(f"The original file **{name}** is still stored, because other chats from it are still "
+                "imported. Remove those too to delete the file.")
+    st.caption("If you already found ideas from these chats (page 3), find them again so the removed chats "
+               "aren't used, and review them on page 4.")
+
+
+def render(user, on_removed=None):
+    """on_removed(user_id) is called after chats are removed, so later steps can forget them."""
     user_id = user["user_id"]
     st.title("Import your research chats")
     st.info(
@@ -71,6 +117,8 @@ def render(user):
     st.divider()
     sources = im.load_sources(user_id)
     st.subheader(f"Your imported chats ({len(sources)}), only you can see these")
+    _removal_message()
+    _confirm_removal(user_id, sources, on_removed)
     if not sources:
         st.caption("Nothing imported yet.")
     for s in reversed(sources):
@@ -78,7 +126,12 @@ def render(user):
         date = (p["created_at"] or p["imported_at"] or "")[:10]
         with st.expander(f"{p['title']} · {len(s['messages'])} messages · {date}"):
             st.caption(f"Source `{s['source_id']}` · {s['source_type']}")
+            st.button("Remove this chat", key=f"remove_{s['source_id']}", icon=":material/delete:",
+                      on_click=_ask_removal, args=([s["source_id"]],))
             st.text(s["raw_text"])
+    if len(sources) > 1:
+        st.button("Remove all my chats", icon=":material/delete_sweep:",
+                  on_click=_ask_removal, args=([s["source_id"] for s in sources],))
 
     log = im.load_upload_log(user_id)
     if log:

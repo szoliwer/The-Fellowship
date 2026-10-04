@@ -425,6 +425,16 @@ class ScreeningTests(unittest.TestCase):
         report = self.screen(FakeClassifier())
         self.assertTrue(report["a_s02"]["owner_excluded"])
 
+    def test_chats_removed_in_step_1_are_forgotten(self):
+        self.screen(FakeClassifier())
+        self.assertIn("a_s01", self.ids())
+        im.remove_sources("user_a", ["a_s01", "a_s06"], data_dir=self.dir)
+        report = sc.sync_with_sources("user_a", self.dir, self.out)
+        self.assertNotIn("a_s01", self.ids())                      # Step 3 can no longer read it
+        self.assertEqual(self.ids(), ["a_s02", "a_s03", "a_s04", "a_s05"])
+        self.assertFalse({"a_s01", "a_s06"} & set(report))
+        self.assertFalse({"a_s01", "a_s06"} & set(sc.load_report("user_a", self.dir)))
+
     def test_cost_estimate_skips_rule_hits(self):
         est = sc.estimate_cost(sc.pending_sources("user_a", self.dir))
         self.assertEqual(est["chats_to_send"], 8)

@@ -529,6 +529,46 @@ def save_sources(user_id, new_sources, data_dir=DATA_DIR):
     return sources
 
 
+def remove_sources(user_id, source_ids, data_dir=DATA_DIR):
+    """The owner removes imported chats. They are deleted from data/sources/<user_id>.json, and
+    each original uploaded file is deleted once no chat from it remains (a file can hold many
+    chats, so it stays while others from it are still imported).
+
+    Returns {"removed": n, "files_deleted": n, "files_kept": [filenames still holding other chats]}.
+    Later steps clean up after themselves (Step 2: screening.sync_with_sources)."""
+    wanted = set(source_ids)
+    sources = load_sources(user_id, data_dir)
+    removed = [s for s in sources if s["source_id"] in wanted]
+    kept = [s for s in sources if s["source_id"] not in wanted]
+    if not removed:
+        return {"removed": 0, "files_deleted": 0, "files_kept": []}
+    path = _user_dir("sources", user_id, data_dir).with_suffix(".json")
+    _write_json(path, {"schema_version": SCHEMA_VERSION, "user_id": user_id, "sources": kept})
+
+    still_used = {s["provenance"].get("upload_id") for s in kept}
+    touched = {s["provenance"].get("upload_id") for s in removed} - {None}
+    log = load_upload_log(user_id, data_dir)
+    files_deleted, files_kept = 0, set()
+    for entry in log:
+        if entry.get("upload_id") not in touched:
+            continue
+        if entry["upload_id"] in still_used:
+            if entry.get("stored_file"):
+                files_kept.add(entry["filename"])
+            continue
+        stored = entry.get("stored_file")
+        if stored:
+            file = Path(data_dir) / stored
+            if file.exists():
+                file.unlink()
+                files_deleted += 1
+            entry["stored_file"] = None
+        entry["removed_at"] = _now_utc()
+    if touched:
+        _write_json(_user_dir("uploads", user_id, data_dir) / "uploads.json", log)
+    return {"removed": len(removed), "files_deleted": files_deleted, "files_kept": sorted(files_kept)}
+
+
 def load_upload_log(user_id, data_dir=DATA_DIR):
     path = _user_dir("uploads", user_id, data_dir) / "uploads.json"
     if not path.exists():

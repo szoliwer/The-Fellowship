@@ -284,6 +284,35 @@ class StorageTests(unittest.TestCase):
         with self.assertRaises(im.ImportFailed):
             im.load_sources("../users", self.dir)
 
+    def test_removing_one_chat_keeps_the_file_while_others_from_it_remain(self):
+        result = im.import_file("user_x", FIXTURE_BYTES, "conversations.json", data_dir=self.dir)
+        stored = self.dir / result["upload"]["stored_file"]
+        ids = [s["source_id"] for s in im.load_sources("user_x", self.dir)]
+        r = im.remove_sources("user_x", ids[:1], data_dir=self.dir)
+        self.assertEqual(r, {"removed": 1, "files_deleted": 0, "files_kept": ["conversations.json"]})
+        self.assertEqual([s["source_id"] for s in im.load_sources("user_x", self.dir)], ids[1:])
+        self.assertTrue(stored.exists())
+
+    def test_removing_the_last_chats_of_an_upload_deletes_its_file(self):
+        result = im.import_file("user_x", FIXTURE_BYTES, "conversations.json", data_dir=self.dir)
+        stored = self.dir / result["upload"]["stored_file"]
+        ids = [s["source_id"] for s in im.load_sources("user_x", self.dir)]
+        r = im.remove_sources("user_x", ids, data_dir=self.dir)
+        self.assertEqual(r, {"removed": 9, "files_deleted": 1, "files_kept": []})
+        self.assertEqual(im.load_sources("user_x", self.dir), [])
+        self.assertFalse(stored.exists())
+        [entry] = im.load_upload_log("user_x", self.dir)
+        self.assertIsNone(entry["stored_file"])
+        self.assertTrue(entry["removed_at"])
+
+    def test_removal_only_touches_the_owners_chats(self):
+        im.import_paste("user_x", "User: mine\nAssistant: ok", data_dir=self.dir)
+        im.import_paste("user_y", "User: theirs\nAssistant: ok", data_dir=self.dir)
+        theirs = im.load_sources("user_y", self.dir)[0]["source_id"]
+        self.assertEqual(im.remove_sources("user_x", [theirs, "not-a-chat"], data_dir=self.dir)["removed"], 0)
+        self.assertEqual(len(im.load_sources("user_y", self.dir)), 1)
+        self.assertEqual(len(im.load_sources("user_x", self.dir)), 1)
+
     def test_stored_filename_is_made_safe(self):
         result = im.import_file("user_x", b"User: hi", "../../etc/evil notes.md", data_dir=self.dir)
         stored = (self.dir / result["upload"]["stored_file"]).resolve()

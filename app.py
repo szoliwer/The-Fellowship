@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT))
 
 import filter_ui  # noqa: E402  (Step 2)
 import import_ui  # noqa: E402  (Step 1)
+import screening  # noqa: E402  (Step 2: forgets chats removed in Step 1)
 import signup_ui  # noqa: E402  (Step 0)
 from pipeline import discover_page, ideas_page, matching_page  # noqa: E402  (Steps 3, 5, 6)
 
@@ -46,7 +47,7 @@ st.session_state["fellowship_logged_in_user"] = user["user_id"]
 
 
 def import_chats():
-    import_ui.render(user)
+    import_ui.render(user, on_removed=screening.sync_with_sources)
 
 
 def privacy_screening():

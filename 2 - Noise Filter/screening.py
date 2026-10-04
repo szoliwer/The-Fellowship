@@ -808,9 +808,15 @@ def screen_user(user_id, classify=None, data_dir=DATA_DIR, on_progress=None, max
         for fut in as_completed(futures):
             record(fut.result())
 
-    # Drop entries for chats that no longer exist.
+    _save_report(user_id, report, data_dir)
+    return sync_with_sources(user_id, data_dir, output_dir)
+
+
+def sync_with_sources(user_id, data_dir=DATA_DIR, output_dir=OUTPUT_DIR):
+    """Forget chats the owner removed in Step 1: drop their report entries and rewrite the
+    Step 3 handoff files (which deletes the removed chats' files). Returns the report."""
     current = {s["source_id"] for s in load_sources(user_id, data_dir)}
-    report = {k: v for k, v in report.items() if k in current}
+    report = {k: v for k, v in load_report(user_id, data_dir).items() if k in current}
     _save_report(user_id, report, data_dir)
     write_handoff(user_id, data_dir, output_dir)
     return report

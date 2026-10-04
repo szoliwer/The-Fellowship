@@ -137,6 +137,8 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03 23:50** — Herman (with Claude) — New `sync_with_sources(user_id)`: forgets chats the owner removed in Step 1 (drops their report entries and Step 3 handoff files). Called by the shared app right after a removal, and at the end of every screening run.
+
 - **2026-10-03 20:15** — Herman (with Claude) — Handoff to Step 3 now matches `HANDOFF.md`: Markdown files per chat, stale files removed on every change, `output/` git-ignored, samples for `user_a` (5 files) and `user_b` (2 files) generated with the real pipeline. Waiting for Aman's OK on §7.
 - **2026-10-03 18:30** — Herman (with Claude) — Built screening (rules + Claude), report, eligible handoff, owner hold-back and the screening page in the shared app. 14 automatic checks pass with a fake classifier (demo history → 5 used / 4 held back). In the browser: page shows 9 waiting, 8 to send, ~$0.10, and asks for a key. Next: add a key, run on the demo history and a real chat.
 - **2026-10-03** — setup — Step folder and spec created.
