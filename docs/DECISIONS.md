@@ -13,6 +13,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-019 — Plan: move from the Claude API to the OpenAI API
+- **Date / who:** 2026-10-03 — Herman
+- **Decision:** Going forward, the team plans to use the **OpenAI API**. The hackathon build still uses Anthropic's Claude (Steps 2, 3 and 5), and the sign-up privacy text names Claude because that is what reads imported chats today.
+- **Why:** the team's direction after the hackathon.
+- **Affects:** when the switch happens: Step 2 (`screening.py`), Step 3 (`idea_generation.py`), Step 5 (`match_generation.py`), the API key setup (`.env.example`, hosting secrets), and the privacy text people agree to (Step 0 `CONSENT_TEXT`, Privacy page), which must name the new provider before any chat is sent to it.
+
 ### D-018 — Hosted demo on Streamlit Community Cloud, with a public showcase of our data
 - **Date / who:** 2026-10-03 — Herman
 - **Decision:** The judges get a live URL on Streamlit Community Cloud (free, deploys from `main`). An empty app loads `pipeline/showcase/` at start (`pipeline/showcase.py`; rebuilt with `pipeline/build_showcase.py`): the two synthetic demo researchers imported and screened, with Step 4's sample ideas approved, matched with each other, connected, and with a short synthetic conversation; plus, for our team's accounts, **username + approved ideas + matches only** (no chats, emails, names, passwords; idea rows checked against an allow-list; automatic checks scan the bundle for email addresses). Team profiles are accounts without a password, so nobody can log in as them. The server address moved from `.streamlit/config.toml` to the local run command (`--server.address localhost`); PyTorch comes from its CPU-only index so it fits free hosting; on-screen text no longer says "this laptop".

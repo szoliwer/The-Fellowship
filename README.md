@@ -6,6 +6,8 @@ Most networking tools match people on job titles, schools, and self-written bios
 
 Users choose to import their LLM chat histories (ChatGPT, Claude, Gemini, and so on). We filter out the noise, pull out the ideas and interests underneath, and rank them. Then we match users whose ideas are **similar** (working on the same problem) or **complementary** (one person has what the other needs). Each match comes with a short warm intro explaining *why* the two people should talk, so the first conversation starts in the right place.
 
+**AI provider:** the app runs on Anthropic's Claude API today (privacy screening, idea finding, matching). Going forward, the plan is to move to the **OpenAI API** (D-019).
+
 > Built live at a hackathon by a team of four.
 
 ---
