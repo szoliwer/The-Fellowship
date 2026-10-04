@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Owner** | _TBD_ |
-| **Branch** | `main` (whole team works on main) |
+| **Branch** | `main` (the whole team works on `main`) |
 | **Status** | 🟨 In progress (works end to end on sample data; offline mode is a placeholder; not yet run against the live Claude API) |
 | **Gets input from** | Step 4 (ranked ideas) + Step 0 (user records) |
 | **Hands output to** | Step 6 |
@@ -22,7 +22,7 @@ Rows can be a plain list or wrapped as `{"ideas": [...]}`. Rows of `type` **skil
 
 **Also accepted:** per-chat packages (`main_idea`, `insights`, `rank_score`, `raw_text`). `raw_text` is **never read** by this step.
 
-**User records from Step 0** (`--users users.json`). Used fields: `name` (for intros), `match_types` (only suggest kinds of match the person asked for), `looking_for` (shapes the intro), and `consent.analyse_chats` (anyone with `false` is left out entirely).
+**User records from Step 0** (`--users users.json`). Used fields: `pseudonym` (the username; it's how people are named in every reason and intro. Older files that only have `name` still work, and the `private` block is never read), `match_types` (only suggest kinds of match the person asked for), `looking_for` (shapes the intro), and `consent.analyse_chats` (anyone with `false` is left out entirely).
 
 ## Output
 A ranked list of **suggested matches**. The fields in the original spec are all kept. Additions are marked ➕:
@@ -43,7 +43,9 @@ A ranked list of **suggested matches**. The fields in the original spec are all 
   "debug": { }                                   // ➕ internal; never show to users
 }
 ```
-The file also contains `people` (`name` plus a one-line research summary per user) and `by_user` (each user's `match_id`s, best first).
+The file also contains `people` (`name`, which holds the username, plus a one-line research summary per user) and `by_user` (each user's `match_id`s, best first).
+
+The `a`/`b` in field names only say which side a field belongs to. The text inside (`reason`, intros, offers) always names people by their username, never "A" or "B".
 
 > If you change this output format, update the README of the next step too and log it in `docs/DECISIONS.md` (see `CLAUDE.md`, Rule 4). **Pending:** Step 6 needs to know about `"both"` and the ➕ fields. See *Open questions*.
 
@@ -56,11 +58,11 @@ The file also contains `people` (`name` plus a one-line research summary per use
    * **Similarity** is the average closeness of their 3 closest research topics.
    * **Complementarity** measures how well one person's offers cover the other's needs, counted in both directions. The strongest direction counts 70% and the other 30%, so two-way exchanges score higher.
    * Ideas with a lower Step 4 `score` count up to 25% less.
-3. **Judge.** Each person's 5 best partners by similarity plus 5 best by complementarity go to Claude. Claude scores both signals 0–10 on a strict rubric, answers `no_match` for vague or forced links, and writes the reason and intros.
+3. **Judge.** Each person's 5 best partners by similarity plus 5 best by complementarity go to Claude. Claude scores both signals 0–10 on a strict rubric, answers `no_match` for vague or forced links, and writes the reason and intros, naming each person by their username.
 4. **Assign.** The final score is 70% Claude and 30% vector math. It takes the stronger signal, plus a bonus when a pair is both. Matches of a type either person didn't ask for are dropped. Each person gets up to 5 matches, and if their top 5 are all one kind, the best match of the other kind is swapped in. A pair kept for either person is shown to both, so both can accept. Pairs from `--previous` are never suggested again.
 
 ## How to run
-1. GitHub Desktop: make sure you're on `main`, then *Fetch origin* / *Pull*.
+1. GitHub Desktop: check that *Current branch* is `main`, then *Fetch origin* / *Pull origin*.
 2. Open a terminal there: **Repository** menu → *Open in Terminal* (Mac) or *Open in Command Prompt* (Windows). Then run:
    ```
    cd "5 - Match Generation"
@@ -92,6 +94,7 @@ Claude's answers are cached in `data/llm_cache.json`, so re-running on the same 
 - [x] Combine into one score, weighted by each idea's rank from Step 4
 - [x] Generate the plain-language `reason` (plus a warm intro for each side)
 - [x] Don't suggest the same pair twice (`--previous`), and respect `match_types` / `looking_for` preferences
+- [x] Name people by their username in reasons and intros (not "A"/"B")
 - [ ] Run in full mode with a real API key and the free embedding model; tune `lo`/`hi`
 - [ ] Run on real Step 4 output once available
 
@@ -108,6 +111,7 @@ Claude's answers are cached in `data/llm_cache.json`, so re-running on the same 
 ## Decisions log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — why.`_
 
+- **2026-10-03 20:14** — Claude (for Step 5 owner) — Reasons and warm intros name people by their Step 0 username (`pseudonym`), never "A"/"B" and never by real name. The `a`/`b` field names stay as they are. — In the mockup, users couldn't tell who "A" and "B" were. Step 0 makes the username the only name other users see, and keeping the field names means Step 6 needs no change.
 - **2026-10-03 16:13** — Claude (for Step 5 owner) — Read the repo's Step 3/4 spec as primary input: `skill` rows = offers, `need` rows = needs, keywords included; `need` rows don't count as research topics. — Matches the agreed handoff, and it skips the per-person Claude profile call whenever Step 3 already lists skills and needs.
 - **2026-10-03 16:13** — Claude (for Step 5 owner) — Output keeps every spec field and adds `"both"` plus extras (scores, intros). — Step 6 gets ready-made intros; nothing in the spec was removed.
 - **2026-10-03 16:13** — Claude (for Step 5 owner) — A match is suggested only if its type is acceptable to *both* people (`match_types`); users with `consent.analyse_chats: false` are excluded. — Both sides see every match, and consent comes first (D-002).
@@ -120,6 +124,7 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03 20:14** — Claude (for Step 5 owner) — Warm intros and reasons now use usernames. Checked: the offline sample run gives the same 5 matches as before; a test with Step 0-style records and a stand-in Claude that deliberately wrote "Researcher A/B" came out with usernames only. Also updated this README's branch notes to `main`. **Next:** one full-mode run with a real API key to see the new intros.
 - **2026-10-03 16:13** — Claude (for Step 5 owner) — Aligned with the repo spec: loader reads Step 3/4 rows and Step 0 user records; output adds `shared_or_linked_ideas` and `status`; added `match_types`/`looking_for`/consent handling and `--previous`. New samples in Step 4 and Step 0 formats. Tests pass offline and with a stand-in API. **Next:** one run with a real API key, then tune.
 - **2026-10-03 15:40** — Claude (for Step 5 owner) — First version of `match_generation.py` (4-stage engine) with synthetic samples. Offline mode marked as a **placeholder**.
 - **2026-10-03** — setup — Step folder and spec created.
@@ -127,6 +132,7 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done 
 ## Code fixes log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — **Problem:** … **Cause:** … **Fix:** … (files: …)`_
 
+- **2026-10-03 20:14** — Claude — **Problem:** warm intros and reasons called people "A" and "B", so users couldn't tell who was meant. **Cause:** the judge prompt labelled the two people "RESEARCHER A" / "RESEARCHER B" and its hints said "A needs … B offers", so Claude copied the letters. Also, names were read from `name`, which Step 0 records don't have (they use `pseudonym`), so people fell back to IDs like `user_a`. **Fix:** the prompt now shows usernames only, with a short key saying which username each `a`/`b` field belongs to and an instruction never to write the letters; names come from `pseudonym` (then `name`, then the ID); a safety net replaces any leftover "Researcher A/B" with the username. (files: `match_generation.py`)
 - **2026-10-03 16:13** — Claude — **Problem:** on spec-format data the loader read almost nothing. **Cause:** it only knew `main_idea`/`insights`, not `summary`/`keywords`/`type`. **Fix:** accept the spec fields; map `skill`/`need` rows to offers/needs. (files: `match_generation.py`)
 - **2026-10-03 16:13** — Claude — **Problem:** offline mode matched Dev ↔ Tomás ("contrastive" ≈ "contracts") and Priya ↔ Maya ("field trials" ≈ "field audio"). **Cause:** word stems cut to 6 letters; generic words counted. **Fix:** 7-letter stems; ignore generic research words such as "field" and "large". (files: `match_generation.py`)
 - **2026-10-03 15:40** — Claude — **Problem:** offline mode missed offers phrased "Our …". **Cause:** missing cue word. **Fix:** added "our " to the offer cues. (files: `match_generation.py`)

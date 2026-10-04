@@ -30,6 +30,9 @@ Accepts both input shapes: the Step 3/4 spec in the repo (one idea per row with
 "summary", "type", "keywords", "score") and per-chat packages ("main_idea",
 "insights", "raw_text", "rank_score").
 
+People are always called by their username (Step 0 "pseudonym") in reasons and
+intros, never "A"/"B" and never by their private real name.
+
 Privacy: the raw chat text in each idea package is never read by this step,
 never sent to Claude and never written to the output.
 """
@@ -96,7 +99,7 @@ class Phrase:
 @dataclass
 class Person:
     user_id: str
-    name: str
+    name: str                                          # username shown to others (Step 0 "pseudonym")
     ideas: list
     topics: list = field(default_factory=list)         # Phrase: main ideas + insights
     offers: list = field(default_factory=list)         # Phrase: what they can give
@@ -135,13 +138,20 @@ def _as_user_dict(users):
     return {str(k): v for k, v in (users or {}).items()}
 
 
+def display_name(rec, uid):
+    """The name other users see in reasons and intros: the Step 0 username ("pseudonym").
+    Older sample files call it "name". Falls back to the user ID.
+    Never reads rec["private"] (real name, email, affiliation): that stays private (D-002)."""
+    return str(rec.get("pseudonym") or rec.get("name") or uid).strip()
+
+
 def load_people(path, s: Settings, users_path=None) -> list:
     data = json.loads(Path(path).read_text(encoding="utf-8"))
     users, packages = {}, data
     if isinstance(data, dict):
         users = _as_user_dict(data.get("users"))
         packages = data.get("ideas", [])
-    if users_path:                                      # Step 0 user records (names, preferences, consent)
+    if users_path:                                      # Step 0 user records (usernames, preferences, consent)
         users.update(_as_user_dict(json.loads(Path(users_path).read_text(encoding="utf-8"))))
 
     by_user = {}
@@ -179,7 +189,7 @@ def load_people(path, s: Settings, users_path=None) -> list:
         for i in ideas:                                 # put ranks on a 0-1 scale
             i.rank = float(np.clip(i.rank / top if top > 1 else i.rank, 0, 1))
         ideas = sorted(ideas, key=lambda i: i.rank, reverse=True)[: s.top_ideas_per_user]
-        person = Person(uid, str(rec.get("name") or uid), ideas)
+        person = Person(uid, display_name(rec, uid), ideas)
         person.looking_for = [str(x) for x in (rec.get("looking_for") or [])]
         wanted = {str(t).lower() for t in (rec.get("match_types") or [])} & {"similar", "complementary"}
         if wanted:
@@ -478,8 +488,13 @@ VERDICT - "both" if both scores >= 6; "similar" if only similarity >= 6; "comple
   otherwise "no_match". Different AND not complementary is always "no_match". When unsure, choose "no_match":
   a bad introduction costs more than a missed one.
 
+Names: each researcher has a username. In every text you write (reason, intros, offers, topics), refer to a
+researcher only by their username, spelled exactly as given. Never write "A", "B", "Researcher A", "Researcher B",
+"the first researcher" or "the second researcher". The letters a and b appear only in the JSON field names;
+the FIELD KEY in the message says which username each letter stands for.
+
 Writing rules: use only the information given; never invent facts; never quote chat text; no personal details beyond research topics.
-Intros: 1-2 warm, specific sentences addressed to the reader as "you", naming the other person, ending with a concrete first topic to discuss.
+Intros: 1-2 warm, specific sentences addressed to the reader as "you", naming the other person by their username, ending with a concrete first topic to discuss.
 If a researcher lists what they are looking for (collaborator, co-founder, mentor, peer), frame their intro around that. It does not change the scores.
 
 Return JSON only, no other text:
@@ -488,20 +503,35 @@ Return JSON only, no other text:
  "reason": "one neutral sentence", "intro_for_a": "", "intro_for_b": ""}"""
 
 
-def describe(p: Person, label: str) -> str:
-    lines = [f"RESEARCHER {label}: {p.name}"]
+def describe(p: Person) -> str:
+    lines = [f"RESEARCHER {p.name}"]
     if p.summary:
         lines.append(f"Summary: {p.summary}")
     lines.append("Research ideas (most central first):")
     for i in p.ideas[:8]:
         details = "; ".join(i.insights[:4])
-        label = f"[{i.kind}] " if i.kind else ""
-        lines.append(f"- {label}{i.main_idea}" + (f" | details: {details}" if details else ""))
+        tag = f"[{i.kind}] " if i.kind else ""
+        lines.append(f"- {tag}{i.main_idea}" + (f" | details: {details}" if details else ""))
     lines.append("Can offer: " + ("; ".join(x.text for x in p.offers) or "(none listed)"))
     lines.append("Needs: " + ("; ".join(x.text for x in p.needs) or "(none listed)"))
     if p.looking_for:
         lines.append("Looking for: " + ", ".join(p.looking_for))
     return "\n".join(lines)
+
+
+def field_key(a: Person, b: Person) -> str:
+    """Tells Claude which username each JSON field letter stands for, so the letters never reach the text."""
+    return (f'FIELD KEY (for the JSON field names only; never write these letters in your text):\n'
+            f'- a = {a.name}, b = {b.name}\n'
+            f'- a_can_offer_b: what {a.name} can offer {b.name}; b_can_offer_a: what {b.name} can offer {a.name}\n'
+            f'- intro_for_a is read by {a.name} (so it names {b.name}); '
+            f'intro_for_b is read by {b.name} (so it names {a.name})')
+
+
+def use_usernames(text: str, a: Person, b: Person) -> str:
+    """Safety net: if Claude still wrote "Researcher A" / "user B" etc., put the username back in."""
+    names = {"A": a.name, "B": b.name}
+    return re.sub(r"\b(?i:researcher|person|user)\s+([AB])\b", lambda m: names[m.group(1)], text)
 
 
 def verdict_from(sim, comp, t):
@@ -518,12 +548,13 @@ def judge_with_claude(a, b, pre, llm: Claude, s: Settings):
     hints = []
     if pre["topic_pair"]:
         x, y = pre["topic_pair"]
-        hints.append(f'Closest topics: A "{x.text}" <-> B "{y.text}"')
-    for key, (needer, giver) in (("b_helps_a", ("A", "B")), ("a_helps_b", ("B", "A"))):
+        hints.append(f'Closest topics: {a.name} "{x.text}" <-> {b.name} "{y.text}"')
+    for key, (needer, giver) in (("b_helps_a", (a, b)), ("a_helps_b", (b, a))):
         if pre["links"].get(key):
             need, offer = pre["links"][key]
-            hints.append(f'Possible need/offer link: {needer} needs "{need.text}" <-> {giver} offers "{offer.text}"')
-    prompt = (describe(a, "A") + "\n\n" + describe(b, "B") +
+            hints.append(f'Possible need/offer link: {needer.name} needs "{need.text}" '
+                         f'<-> {giver.name} offers "{offer.text}"')
+    prompt = (describe(a) + "\n\n" + describe(b) + "\n\n" + field_key(a, b) +
               "\n\nHints from our vector search (may be wrong, judge for yourself):\n" +
               ("\n".join(f"- {h}" for h in hints) or "- none"))
     d = llm.ask_json(s.judge_model, JUDGE_SYSTEM, prompt)
@@ -541,8 +572,8 @@ def judge_with_claude(a, b, pre, llm: Claude, s: Settings):
     if str(d.get("verdict", "")).lower() == "no_match":
         verdict = "no_match"                            # if Claude says no, it's no
     return {"judged_by": "claude", "sim": sim, "comp": comp, "verdict": verdict,
-            "shared_topics": [str(t) for t in (d.get("shared_topics") or [])][:3],
-            **{k: str(d.get(k, "")).strip() for k in
+            "shared_topics": [use_usernames(str(t), a, b) for t in (d.get("shared_topics") or [])][:3],
+            **{k: use_usernames(str(d.get(k, "")).strip(), a, b) for k in
                ("a_can_offer_b", "b_can_offer_a", "reason", "intro_for_a", "intro_for_b")}}
 
 
@@ -777,7 +808,7 @@ def main():
     ap = argparse.ArgumentParser(description="Step 5: match researchers on similarity + complementarity")
     ap.add_argument("input", help="Step 4 output (JSON)")
     ap.add_argument("output", help="where to write the matches (JSON)")
-    ap.add_argument("--users", help="Step 0 user records (JSON): names, match preferences, consent")
+    ap.add_argument("--users", help="Step 0 user records (JSON): usernames, match preferences, consent")
     ap.add_argument("--previous", help="an earlier matches file: pairs in it are never suggested again")
     ap.add_argument("--offline", action="store_true", help="no API calls or model downloads (demo/testing)")
     ap.add_argument("--k", type=int, help="max matches per person (default 5)")
