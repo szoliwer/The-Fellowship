@@ -7,7 +7,7 @@ import streamlit as st
 
 import idea_generation as ig      # Step 3
 import screening as sc            # Step 2 (where the screened chats are, and the API key check)
-from pipeline import ranking
+from pipeline import brand, ranking
 
 TYPE_LABELS = {"project": "Working on", "interest": "Curious about", "skill": "Can offer", "need": "Looking for"}
 
@@ -39,23 +39,21 @@ def _run(user_id):
 
 def render(user):
     user_id = user["user_id"]
-    st.title("Your ideas, found in your chats")
-    st.info(
-        "Claude reads **only your screened chats** (Privacy page) and lists the ideas, open questions, "
-        "skills and needs they show. Only what *you* wrote counts as yours. Nothing is shared: "
-        "you choose what to use on the next page.",
-        icon=":material/lightbulb:",
-    )
+    st.title("Find your ideas")
+    brand.lead("Claude reads <b>only the chats that passed the privacy check</b> and lists the ideas, open "
+               "questions, skills and needs they show. Only what you wrote counts as yours. Nothing is "
+               "shared yet: you choose what to use in the next step.")
 
     chats = _screened_chats(user_id)
     result = _saved_result(user_id)
     if not chats:
-        st.warning("No screened chats yet. Import chats, then run the privacy check, first.")
+        brand.empty_state("No checked chats yet", "Import some chats and run the privacy check first. "
+                          "Only chats that pass it are read here.", go_to="Privacy", go_label="Go to Privacy check")
         return
 
     stale = result is not None and sorted(result.get("chats_read", [])) != chats
-    st.markdown(f"**{len(chats)} screened chat(s)** ready."
-                + (" Your screened chats changed since your ideas were found." if stale else ""))
+    st.markdown(f"**{brand.plural(len(chats), 'checked chat')}** ready."
+                + (" Some have changed since your ideas were found, so find them again." if stale else ""))
     if not sc.api_key_available():
         st.warning("Finding ideas isn't set up on this computer yet (it needs an Anthropic API key).",
                    icon=":material/key:")
@@ -75,10 +73,12 @@ def render(user):
         with st.expander(f"{TYPE_LABELS.get(row.get('type'), 'Idea')}: {row.get('summary', '')}"):
             for insight in row.get("insights") or []:
                 st.markdown(f"- {insight}")
-            st.caption(f"From {row.get('chat_count', 0)} chat(s), last {row.get('last_seen', 'unknown')}")
+            st.caption(f"From {brand.plural(row.get('chat_count', 0), 'chat')}, "
+                       f"last seen {row.get('last_seen', 'unknown')}")
     adjacent = result.get("adjacent_ideas") or []
     if adjacent:
         with st.expander(f"Suggestions that connect your ideas ({len(adjacent)}): speculative, not yours"):
             for a in adjacent:
                 st.markdown(f"- **{a.get('handle', '')}**: {a.get('claim', '')}")
-    st.success("Next: **Review**: choose which ideas may be used for matching.")
+    if ideas:
+        st.caption("Next, choose which of these may be used for matching.")

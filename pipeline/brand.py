@@ -13,9 +13,10 @@ ASSETS = Path(__file__).resolve().parent / "assets"
 LOGO, ICON = ASSETS / "logo.svg", ASSETS / "icon.svg"
 NAME = "The Fellowship"
 
-# (menu title, what the step is called), in order.
+# (menu title, what the step is called), in order. Each name starts with or contains the menu
+# title, so the Next button and the top menu always use the same words.
 STEPS = [("Import", "Import chats"), ("Privacy", "Privacy check"), ("Ideas", "Find ideas"),
-         ("Review", "Review ideas"), ("Matches", "Find matches"), ("Discover", "Connect")]
+         ("Review", "Review ideas"), ("Matches", "Find matches"), ("Discover", "Discover people")]
 
 # Colour tokens from the Lovable design (converted from oklch).
 C = {"bg": "#EAF3EC", "fg": "#101E16", "card": "#FCFEFC", "primary": "#166845", "primary_fg": "#F9FDFA",
@@ -28,10 +29,31 @@ _CSS = f"""
 [data-testid="stMainBlockContainer"]{{padding-top:5rem;padding-bottom:6rem}}
 .st-key-fs_next{{position:fixed;right:2rem;bottom:1.75rem;z-index:1000;width:auto}}
 .st-key-fs_next button{{box-shadow:0 24px 70px -32px rgba(16,30,22,.45);padding:.65rem 1.4rem}}
-/* Small uppercase label above headings ("eyebrow"). */
+/* Top menu: the account (username) sits at the far right, like a website header. */
+header .rc-overflow{{flex:1 1 auto}}
+header .rc-overflow-item:has(a[href$="/account"]){{margin-left:auto}}
+/* Floating or invisible helpers take no space, so every page title starts at the same height. */
+[data-testid="stLayoutWrapper"]:has(> .st-key-fs_next),[data-testid="stLayoutWrapper"]:has(> .st-key-fs_scroll),
+[data-testid="stLayoutWrapper"]:has(> .st-key-fs_topbar){{position:absolute}}
+.st-key-fs_scroll{{height:0;overflow:hidden}}
+/* Small uppercase label above headings ("eyebrow"), and the short intro under a page title. */
 .fs-eyebrow{{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.75rem;font-weight:500;
   letter-spacing:.18em;text-transform:uppercase;color:{C['primary']};margin:0 0 .25rem}}
 .fs-muted{{color:{C['muted_fg']}}}
+.fs-page-lead{{font-size:1.1rem;line-height:1.65;color:{C['muted_fg']};max-width:42rem;margin:-.5rem 0 .75rem}}
+.fs-page-lead b{{color:{C['fg']};font-weight:600}}
+/* Three short points side by side (e.g. what the privacy check does). */
+.fs-points{{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.75rem}}
+.fs-points article{{background:{C['card']};border:1px solid {C['border']};border-radius:.45rem;padding:1rem 1.1rem}}
+.fs-points h4{{font-family:Manrope,sans-serif;font-size:.95rem;font-weight:700;margin:0;padding:0;color:{C['fg']}}}
+.fs-points p{{margin:.35rem 0 0;font-size:.875rem;line-height:1.55;color:{C['muted_fg']}}}
+/* "Nothing here yet" card with a link to the step that comes first. */
+.st-key-fs_empty{{background:{C['card']};border:1px dashed {C['border']};border-radius:.45rem;padding:1.5rem 1.6rem}}
+.st-key-fs_empty h4{{font-family:Newsreader,Georgia,serif;font-size:1.35rem;font-weight:600;margin:0;padding:0}}
+.st-key-fs_empty p{{color:{C['muted_fg']};margin:.25rem 0 0}}
+/* Landing page header buttons (top right, over the logo bar). */
+.st-key-fs_topbar{{position:fixed;top:.6rem;right:1.5rem;z-index:999991;width:auto}}
+@media (max-width:640px){{.st-key-fs_topbar .st-key-top_join{{display:none}}}}
 /* Match card (Discover, and the example on the landing page). */
 .fs-card{{border:1px solid {C['border']};background:{C['card']};border-radius:.45rem;overflow:hidden;
   box-shadow:0 24px 70px -32px rgba(16,30,22,.45)}}
@@ -57,8 +79,8 @@ _CSS = f"""
 .fs-avatars span+span{{margin-left:-.5rem}}
 .fs-cta-link{{font-size:.9rem;font-weight:600;color:{C['primary']}}}
 /* Landing page sections. */
-.fs-hero h1{{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:clamp(3rem,6vw,5.5rem);
-  line-height:.96;margin:.5rem 0 0;color:{C['fg']};padding:0}}
+.fs-hero h1{{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:clamp(2.75rem,4.7vw,4.6rem);
+  line-height:1;margin:.5rem 0 0;color:{C['fg']};padding:0}}
 .fs-hero .fs-lead{{margin-top:1.6rem;font-size:1.2rem;line-height:1.65;color:{C['muted_fg']};max-width:36rem}}
 .fs-section h2{{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:clamp(2.2rem,4vw,3.6rem);
   line-height:1.05;margin:.75rem 0 0;color:{C['fg']};padding:0}}
@@ -93,15 +115,51 @@ def scroll_to_top():
     """Start at the top of the page (e.g. right after signing in from far down the landing page).
     Retries for a moment, because the page is still being drawn when this runs."""
     import streamlit.components.v1 as components
-    components.html(
-        "<script>let n = 0; const t = setInterval(() => {"
-        " const m = window.parent.document.querySelector('[data-testid=\"stMain\"]');"
-        " if (m) m.scrollTo(0, 0); if (++n > 10) clearInterval(t); }, 100);</script>",
-        height=0)
+    with st.container(key="fs_scroll"):  # takes no space, so page headings don't shift
+        components.html(
+            "<script>let n = 0; const t = setInterval(() => {"
+            " const m = window.parent.document.querySelector('[data-testid=\"stMain\"]');"
+            " if (m) m.scrollTo(0, 0); if (++n > 10) clearInterval(t); }, 100);</script>",
+            height=0)
+
+
+def plural(n, word, many=None):
+    """'1 chat', '2 chats' (instead of '2 chat(s)')."""
+    return f"{n} {word if n == 1 else many or word + 's'}"
 
 
 def eyebrow(text):
     st.html(f'<p class="fs-eyebrow">{html.escape(text)}</p>')
+
+
+def lead(text_html):
+    """The short intro under a page title. Takes HTML written in the code (may use <b>), never user text."""
+    st.html(f'<p class="fs-page-lead">{text_html}</p>')
+
+
+def points(items):
+    """Three short (title, text) points side by side."""
+    cards = "".join(f"<article><h4>{html.escape(t)}</h4><p>{html.escape(c)}</p></article>" for t, c in items)
+    st.html(f'<div class="fs-points">{cards}</div>')
+
+
+# ---------- Moving between pages (without signing out) ----------
+# The page objects belong to this browser session, so they are kept in session_state.
+
+def register_pages(pages):
+    st.session_state["fs_pages"] = {page.title: page for page in pages}
+
+
+def _page(title):
+    return st.session_state.get("fs_pages", {}).get(title)
+
+
+def empty_state(title, text, go_to=None, go_label=None):
+    """A calm 'nothing here yet' card, with a link to the step that comes first (go_to = menu title)."""
+    with st.container(key="fs_empty"):
+        st.html(f"<h4>{html.escape(title)}</h4><p>{html.escape(text)}</p>")
+        if go_to and _page(go_to):
+            st.page_link(_page(go_to), label=go_label or f"Go to {go_to}", icon=":material/arrow_forward:")
 
 
 def step_eyebrow(current_title):
@@ -112,16 +170,18 @@ def step_eyebrow(current_title):
         eyebrow(f"Step {i + 1} of {len(STEPS)} · {STEPS[i][1]}")
 
 
-def next_step_button(current_title, pages):
-    """One green "Next: …" button on every step page except the last. It keeps you signed in
-    (st.switch_page; a plain web link would reload the page and sign you out)."""
+def next_step_button(current_title):
+    """One green "Next: …" button on every step page except the last. Drawn before the page itself,
+    so it changes the moment you switch pages (drawn last, the old page's button stayed on screen
+    while a page was busy). It keeps you signed in (st.switch_page; a plain web link would reload
+    the page and sign you out)."""
     titles = [title for title, _ in STEPS]
     if current_title not in titles or current_title == titles[-1]:
         return
     title, label = STEPS[titles.index(current_title) + 1]
     with st.container(key="fs_next"):
         if st.button(f"Next: {label}", icon=":material/arrow_forward:", icon_position="right", type="primary"):
-            st.switch_page(pages[title])
+            st.switch_page(_page(title))
 
 
 # ---------- Match card (Lovable "A promising connection" panel) ----------

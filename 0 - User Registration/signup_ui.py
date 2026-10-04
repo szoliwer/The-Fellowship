@@ -99,14 +99,19 @@ def render_account(user):
     """The account page: who you are, what other people can see, and log out."""
     st.title("Your account")
     with st.container(border=True):
-        st.markdown(f"**Username:** {user['pseudonym']}")
+        name, details = st.columns(2)
+        name.caption("Username (public)")
+        name.markdown(f"**{user['pseudonym']}**")
         if user["is_demo_account"]:
-            st.caption("Synthetic demo account")
+            details.caption("Account")
+            details.markdown("Synthetic demo account")
         elif user["private"]["email"]:
-            st.caption(f"Signed in with {user['private']['email']} (private)")
-    st.markdown("**What other people can see about you**")
+            details.caption("Email (private, used to log in)")
+            details.markdown(user["private"]["email"].replace("_", r"\_").replace("*", r"\*"))
+    st.subheader("What other people can see")
     st.markdown(f"Your username, **{user['pseudonym']}**, and only the ideas you approve on the Review page. "
                 "Never your chats, your email or your name.")
+    privacy_details()
     if st.button("Log out", icon=":material/logout:"):
         log_out()
         st.rerun()

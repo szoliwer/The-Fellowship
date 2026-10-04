@@ -14,7 +14,7 @@ import streamlit as st
 
 import review as rv
 
-st.set_page_config(page_title="Your ideas", page_icon="🔬", initial_sidebar_state="collapsed")
+st.set_page_config(initial_sidebar_state="collapsed")  # the shared app sets the tab title and icon
 
 
 # ---------- Small helpers ----------
@@ -127,7 +127,7 @@ e = entry()
 state, cards = e["state"], e["cards"]
 pending = (state.get("undo") or {}).get("id")
 
-st.title("Your ideas")
+st.title("Choose what you share")
 st.caption("From your chats, most central first. People you match with see only what's checked, never your chats.")
 
 

@@ -139,6 +139,7 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03 21:46** — Herman (with Claude) — Look only: the long explanation became a short intro, three cards (held back / cleaned / who reads them) and a "What counts as personal" toggle; the cost estimate is a small note; plurals fixed; duplicate counts removed. Nothing about what is checked changed.
 - **2026-10-03 23:50** — Herman (with Claude) — New `sync_with_sources(user_id)`: forgets chats the owner removed in Step 1 (drops their report entries and Step 3 handoff files). Called by the shared app right after a removal, and at the end of every screening run.
 
 - **2026-10-03 20:15** — Herman (with Claude) — Handoff to Step 3 now matches `HANDOFF.md`: Markdown files per chat, stale files removed on every change, `output/` git-ignored, samples for `user_a` (5 files) and `user_b` (2 files) generated with the real pipeline. Waiting for Aman's OK on §7.

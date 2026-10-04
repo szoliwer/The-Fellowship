@@ -102,7 +102,7 @@ The menu along the top takes you through the whole flow, one page per step, and 
 **Test the whole flow** with the two demo researchers, in two browser windows (one normal, one private):
 `researcher_014` and `cellbio_027` each go through Import → Privacy → Ideas → Review (Demo history → Screen → Find my ideas → Use for matching), then either one runs **Matches**, and both open **Discover** and press **Connect**. Steps 2, 3 and 5 call Claude: one full run costs well under $1 (repeat runs on unchanged chats are cached).
 
-Placeholders, clearly labelled in the app: the ranking between Steps 3 and 4 (`pipeline/ranking.py`) and the Discover page (`pipeline/discover_page.py`, until Step 6's own page exists). Everything you create is stored in `data/` on your laptop only.
+Placeholders (marked in the code and docs, not on screen, so the demo looks finished): the ranking between Steps 3 and 4 (`pipeline/ranking.py`) and the Discover page (`pipeline/discover_page.py`, until Step 6's own page exists). Everything you create is stored in `data/` on your laptop only.
 
 ## Team
 

@@ -6,6 +6,16 @@ Used by the shared app (app.py at the repo root) after the user has logged in.
 import streamlit as st
 
 import screening as sc
+from pipeline import brand  # shared look (intro text, cards, plurals)
+
+POINTS = [
+    ("Held back whole", "Mostly personal, admin or off-topic chats, and any chat with obvious secrets "
+                        "(passwords, card, ID or record numbers)."),
+    ("Cleaned", "Research chats with some personal parts: personal phrases are blanked out, wholly personal "
+                "messages removed, and the cleaned copy is checked again before it's used."),
+    ("Who reads them", "Chats with obvious secrets never leave this laptop. Everything else is screened by an "
+                       "external AI service, Anthropic's Claude."),
+]
 
 
 def _run_screening(user_id, total, retry_held_back=False):
@@ -28,38 +38,31 @@ def _run_screening(user_id, total, retry_held_back=False):
 def render(user):
     user_id = user["user_id"]
     st.title("Privacy check")
-    st.info(
-        "Before anything is used, each imported chat is checked for personal information: your "
-        "name, record or applications, your health, money or private life, other people's "
-        "details, email drafts, ID numbers. **Mostly personal**, admin or off-topic chats are "
-        "held back whole. **Research chats with some personal parts are cleaned**: personal "
-        "phrases are blanked out and wholly personal messages removed, and the cleaned copy is "
-        "checked again before it's used. Chats with obvious secrets (passwords, card, ID or record numbers) are held back "
-        "on this laptop without being sent anywhere. Everything else is screened by an external "
-        "AI service (Anthropic's Claude).",
-        icon=":material/shield:",
-    )
+    brand.lead("Before anything is used, every chat is checked for personal information. You can see, "
+               "and overrule, every decision below.")
+    brand.points(POINTS)
+    with st.expander("What counts as personal"):
+        st.markdown("Your name, record or applications; your health, money or private life; other people's "
+                    "details; email drafts; ID numbers.")
 
     sources = sc.load_sources(user_id)
     if not sources:
-        st.caption("Nothing to screen yet. Import some chats first.")
+        brand.empty_state("Nothing to check yet", "Import some chats first, then come back here.",
+                          go_to="Import", go_label="Go to Import")
         return
 
     pending = sc.pending_sources(user_id)
     if pending:
         est = sc.estimate_cost(pending)
-        st.markdown(
-            f"**{len(pending)} chat(s) waiting to be screened.** "
-            f"{est['chats_to_send']} would be sent to the AI service "
-            f"(estimated cost about ${est['dollars']:.2f})."
-        )
+        st.markdown(f"**{brand.plural(len(pending), 'chat')} waiting to be screened.**")
+        st.caption(f"{est['chats_to_send']} will be sent to Claude · estimated cost about ${est['dollars']:.2f}")
         if not sc.api_key_available():
             st.warning(
                 "No AI key set up yet. Copy `.env.example` (repo root) to `.env` and paste your "
                 "Anthropic API key after `ANTHROPIC_API_KEY=`, then restart the app.",
                 icon=":material/key:",
             )
-        elif st.button(f"Screen {len(pending)} chat(s)", type="primary"):
+        elif st.button(f"Screen {brand.plural(len(pending), 'chat')}", type="primary"):
             _run_screening(user_id, len(pending))
 
     report = sc.load_report(user_id)
@@ -72,12 +75,8 @@ def render(user):
     held = [(s, e) for s, e in screened if not sc.is_eligible(e)]
     failed = [e for _, e in held if e["status"] == "failed"]
     if failed:
-        st.error(f"{len(failed)} chat(s) couldn't be screened: {failed[0]['explanation']} "
+        st.error(f"{brand.plural(len(failed), 'chat')} couldn't be screened: {failed[0]['explanation']} "
                  "They are held back until screening succeeds.")
-
-    col1, col2 = st.columns(2)
-    col1.metric("Used for ideas", len(used))
-    col2.metric("Held back", len(held))
 
     st.subheader(f"Used for ideas ({len(used)})")
     st.caption("Only these are passed on to idea extraction. Contact details in them are masked. "
@@ -85,9 +84,11 @@ def render(user):
     for s, e in used:
         cleaned = e["decision"] == "cleaned"
         blanked, removed = sc.cleaning_counts(e) if cleaned else (0, 0)
-        with st.expander(f"{':material/cleaning_services:' if cleaned else ':material/check_circle:'} {e['title']}"
-                         + (f" · {blanked} details blanked, {removed} of {e['total_messages']} messages removed"
-                            if cleaned else "")):
+        label = f"{':material/cleaning_services:' if cleaned else ':material/check_circle:'} {e['title']}"
+        if cleaned:
+            label += (f" · {brand.plural(blanked, 'detail')} blanked, "
+                      f"{removed} of {brand.plural(e['total_messages'], 'message')} removed")
+        with st.expander(label):
             if cleaned:
                 checks = len(e["recheck"]) + 1
                 last = (e["recheck"] or [{}])[-1]
@@ -110,7 +111,7 @@ def render(user):
         est = sc.estimate_cost(retry)
         st.caption(f"Results vary a little between runs. Chats that passed are never screened again, "
                    f"but you can give held-back chats another try (about ${est['dollars']:.2f}).")
-        if st.button(f"Try {len(retry)} held-back chat(s) again"):
+        if st.button(f"Try {brand.plural(len(retry), 'held-back chat')} again"):
             _run_screening(user_id, len(retry), retry_held_back=True)
     for s, e in held:
         with st.expander(f":material/block: {e['title']} · {sc.display_reason(e)}"):

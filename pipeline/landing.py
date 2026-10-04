@@ -33,6 +33,13 @@ def _gap(rem=4):
 def render():
     brand.page_style(wide=True)
 
+    # Header, top right (the logo sits top left): as on the Lovable site.
+    with st.container(key="fs_topbar", horizontal=True, gap="small", vertical_alignment="center"):
+        if st.button("Log in", key="top_login", type="tertiary"):
+            _log_in()
+        if st.button("Create account", key="top_join", type="primary"):
+            _create_account()
+
     left, right = st.columns([1.05, 0.95], gap="large", vertical_alignment="center")
     with left:
         st.html(brand.hero_html())
@@ -40,9 +47,7 @@ def render():
             if st.button("Create your account", key="hero_join", type="primary",
                          icon=":material/arrow_forward:", icon_position="right"):
                 _create_account()
-            if st.button("Log in", key="hero_login"):
-                _log_in()
-            if st.button("Try a demo", key="hero_demo", type="tertiary"):
+            if st.button("Try a demo", key="hero_demo"):
                 _try_demo()
         st.caption("Username, email and password. No biography required.")
     with right:

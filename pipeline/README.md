@@ -1,6 +1,6 @@
 # pipeline/ — glue between the steps
 
-The shared app (`app.py` at the repo root) shows one page per step for the logged-in user, in a top menu (Import · Privacy · Ideas · Review · Matches · Discover). `brand.py` holds the shared look (recreated from the Lovable website, D-016): logo (`assets/`), labels, the match card and the floating Next button; `landing.py` is the page shown before sign-in; colours and fonts are in `.streamlit/config.toml`. Each step keeps its own code in its own folder; this folder holds only what sits **between** steps, plus clearly labelled **placeholders** for parts that aren't built yet (D-013).
+The shared app (`app.py` at the repo root) shows one page per step for the logged-in user, in a top menu (Import · Privacy · Ideas · Review · Matches · Discover). `brand.py` holds the shared look (recreated from the Lovable website, D-016): logo (`assets/`), labels, page intros, "nothing here yet" cards with a link to the right step, the match card and the floating Next button (drawn before each page, so its label is never out of date); `landing.py` is the page shown before sign-in; colours and fonts are in `.streamlit/config.toml`. Each step keeps its own code in its own folder; this folder holds only what sits **between** steps, plus **placeholders** for parts that aren't built yet, marked in the code and below, not on screen (D-013).
 
 ## How data flows (all under `data/` at the repo root, git-ignored)
 

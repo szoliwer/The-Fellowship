@@ -1,5 +1,6 @@
 """Page 6 "Discover": PLACEHOLDER for Step 6 (Oliver + Colin) so the whole flow can be tested.
 Replace with Step 6's own render(user) when it exists (see the mockups in 6 - Matching Interface/).
+Marked as a placeholder here and in the docs, not on screen, so the demo looks finished.
 Each match is shown as the Lovable website's match card; the logic lives in pipeline/matches.py."""
 
 import streamlit as st
@@ -18,15 +19,18 @@ FOOTNOTES = {
 def render(user):
     user_id = user["user_id"]
     st.title("People you should know")
-    st.caption("Placeholder screen until Step 6's own page is built. Uses the real matches and decisions.")
+    brand.lead("Each match explains why the two of you should talk. A connection opens only when you "
+               "both say yes; until then you are known only by your username.")
 
     mine = mt.my_matches(user_id)
     if not mt.MATCHES_FILE.exists():
-        st.info("No matches yet. Run matching on the **Matches** page first.")
+        brand.empty_state("No matches yet", "Matching hasn't been run yet.", go_to="Matches",
+                          go_label="Go to Find matches")
         return
     if not mine:
-        st.info("No matches for you in the latest run. That's better than a weak match: "
-                "add more chats or approve more ideas, then run matching again.")
+        brand.empty_state("No matches for you this time",
+                          "That's better than a weak match. Add more chats or approve more ideas, then run "
+                          "matching again.", go_to="Matches", go_label="Go to Find matches")
         return
 
     order = {"connected": 0, "new": 1, "waiting": 2, "passed": 3}

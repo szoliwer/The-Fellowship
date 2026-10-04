@@ -1,3 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" role="img" aria-label="The Fellowship">
-  <text x="0" y="28" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="25" font-weight="600" fill="#101E16">The Fellowship</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232 40" role="img" aria-label="The Fellowship">
+  <circle cx="12" cy="20" r="10" fill="#1C90CB" fill-opacity="0.85"/>
+  <circle cx="23" cy="20" r="10" fill="#166845" fill-opacity="0.85"/>
+  <text x="44" y="28" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="24" font-weight="600" fill="#101E16">The Fellowship</text>
 </svg>

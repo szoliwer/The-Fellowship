@@ -14,10 +14,11 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 ---
 
 ### D-016 — The app looks like the Lovable website (replaces D-014's dark look)
-- **Date / who:** 2026-10-04 — Herman
+- **Date / who:** 2026-10-03 — Herman
 - **Decision:** The Streamlit app recreates the design of the Lovable website in `0 - User Registration/lovable codebase/`: its light sage palette (converted from its oklch tokens) in `.streamlit/config.toml`, Newsreader / Manrope / IBM Plex Mono fonts, small uppercase labels, and its landing page (hero, example match card, how it works, privacy, call to action, footer; `pipeline/landing.py`), with sign-up, log-in and demo in pop-up windows. Discover shows matches as the Lovable match card. Navigation: the top menu plus one floating green **Next** button per step (no second set of step links). Logic and data flow are unchanged: the forms are Step 0's own, with our fields (username, email, password, consent), not the Lovable form's (first name, location). The example card uses usernames and no "fit" score (the brief rules out compatibility percentages).
 - **Why:** the team's Lovable site is the agreed look; reusing it in the working app gives one consistent, professional product without a second codebase.
 - **Affects:** every page (look only). Step owners: pages get the look automatically; reuse `pipeline/brand.py` (labels, match card) for custom elements.
+- **Update 2026-10-03 21:46 (design pass):** every page now opens the same way (step label, title, one short intro line, no big coloured box); the Next button uses the menu's words ("Next: Discover people", not "Connect"); empty pages show a card linking to the step that comes first; placeholders are marked in the code and docs but no longer on screen, so the demo looks finished.
 
 ### D-015 — Matching compares meaning, not just words (local embedding model)
 - **Date / who:** 2026-10-04 — Herman

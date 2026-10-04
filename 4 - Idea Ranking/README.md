@@ -100,6 +100,7 @@ _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — decision — w
 ## Progress log
 _Newest at the top. Format: `- **YYYY-MM-DD HH:MM** — [who] — what was done / what's next.`_
 
+- **2026-10-03 21:46** — Herman (integration, with Claude, approved by Herman) — Two look-only lines in `app.py`: the page title is now "Choose what you share" (the Ideas page was also called "Your ideas"), and the page no longer sets its own browser-tab title and 🔬 icon, so the shared app's name and logo stay. Run on its own, the page works as before.
 - **2026-10-03 23:30** — Herman (integration, with Claude) — This page now runs inside the shared app (`app.py` at the repo root, page "4. Review ideas"). One change in `app.py`: the "Signed-in user" picker is hidden when the user came in through the shared login (`st.session_state["fellowship_logged_in_user"]`), so nobody can open someone else's ideas; run on its own, the picker works as before. Its input `data/ranked_ideas/<user_id>.json` is now written by a **placeholder ranking** (`pipeline/ranking.py`) from Step 3's output, until this step's real ranking exists (D-013).
 
 - **2026-10-03 18:46** — Cog (with Claude) — Mockup redesigned as a web page in Step 6's desktop layout ("You" tab), with a "Phone width" preview; new rule: removing the last detail removes the idea. 30 automatic checks, 33 browser checks, 40 stand-in checks on `app.py`; the Step 5 end-to-end run still passes. `app.py` needed no change (it follows `review.py`).

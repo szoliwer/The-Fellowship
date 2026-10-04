@@ -26,7 +26,7 @@ import signup_ui  # noqa: E402  (Step 0)
 from pipeline import brand, discover_page, ideas_page, landing, matching_page  # noqa: E402  (look; Steps 3, 5, 6)
 
 st.set_page_config(page_title=brand.NAME, page_icon=str(brand.ICON))
-st.logo(str(brand.LOGO), icon_image=str(brand.ICON), size="large")
+st.logo(str(brand.LOGO), size="large")
 
 
 @st.cache_resource
@@ -68,6 +68,7 @@ def discover():
 
 
 def account():
+    brand.eyebrow("Account")
     signup_ui.render_account(user)
 
 
@@ -81,11 +82,12 @@ pages = [
     st.Page(account, title=user["pseudonym"], icon=":material/account_circle:", url_path="account"),
 ]
 nav = st.navigation(pages, position="top")
+brand.register_pages(pages)
 brand.page_style()
 if st.session_state.get("just_signed_in"):  # first few redraws after signing in: start at the top
     st.session_state["just_signed_in"] = st.session_state.get("_scroll_runs", 0) < 2
     st.session_state["_scroll_runs"] = st.session_state.get("_scroll_runs", 0) + 1
     brand.scroll_to_top()
+brand.next_step_button(nav.title)  # before the page, so it never shows the previous page's label
 brand.step_eyebrow(nav.title)
 nav.run()
-brand.next_step_button(nav.title, {page.title: page for page in pages})

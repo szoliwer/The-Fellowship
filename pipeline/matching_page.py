@@ -8,6 +8,7 @@ from datetime import datetime
 import streamlit as st
 
 import registration as reg        # Step 0 (refreshes data/users.json)
+from pipeline import brand
 from pipeline import matches as mt
 
 USERS_FILE = reg.USERS_EXPORT_FILE
@@ -39,27 +40,27 @@ def _run():
 def render(user):
     user_id = user["user_id"]
     st.title("Find your matches")
-    st.info(
-        "Matching compares **only ideas people approved** on the Review page, never chats. People are shown "
-        "to each other by pseudonym, and anyone who declined consent is left out.",
-        icon=":material/hub:",
-    )
+    brand.lead("Matching compares <b>only the ideas people approved</b>, never their chats. People see each "
+               "other by username, and anyone who declined consent is left out.")
     people = _approved_people()
     me = people.get(user_id, 0)
-    st.markdown(f"**{len(people)} researcher(s)** have approved ideas for matching"
-                + (f", including you ({me} idea(s))." if me else ". You haven't approved any yet (Review page)."))
+    if not me:
+        brand.empty_state("You haven't approved any ideas yet",
+                          "Choose which of your ideas may be used for matching first. Until then, nobody "
+                          "can be matched with you.", go_to="Review", go_label="Go to Review")
+    st.markdown(f"**{brand.plural(len(people), 'researcher')}** "
+                f"{'has' if len(people) == 1 else 'have'} approved ideas for matching"
+                + (f", including you ({brand.plural(me, 'idea')})." if me else "."))
 
     if mt.MATCHES_FILE.exists():
         data = json.loads(mt.MATCHES_FILE.read_text(encoding="utf-8"))
-        when = datetime.fromisoformat(data["generated_at"]).strftime("%d %b %H:%M UTC")
+        when = datetime.fromisoformat(data["generated_at"]).astimezone().strftime("%-d %b at %H:%M")
         mine = len(mt.my_matches(user_id))
-        st.caption(f"Last run {when} · {mine} match(es) for you.")
+        st.caption(f"Last run {when} · {brand.plural(mine, 'match', 'matches')} for you.")
 
     if len(people) < 2:
-        st.warning("At least two researchers need approved ideas before matching can run.")
+        st.caption("Matching can run once at least two researchers have approved ideas.")
         return
     st.caption("Runs for everyone at once and takes about a minute.")
     if st.button("Find matches", type="primary"):
         _run()
-    if mt.MATCHES_FILE.exists():
-        st.success("Next: **Discover**: see your matches and say yes or pass.")
