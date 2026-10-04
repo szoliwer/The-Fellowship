@@ -39,6 +39,7 @@ The Fellowship/
 ├── CLAUDE.md                  ← the "harness": context + rules for any AI assistant working in this repo
 ├── .gitignore                 ← keeps secrets and real user data out of GitHub
 ├── app.py                     ← the shared app: joins the steps' screens (see "Run the app")
+├── pipeline/                  ← glue between steps + labelled placeholders (see pipeline/README.md)
 ├── requirements.txt           ← what the shared app needs installed
 ├── .env.example               ← template for .env (your Anthropic API key; .env is git-ignored)
 ├── .streamlit/config.toml     ← app settings: this laptop only, no usage statistics
@@ -85,7 +86,22 @@ In Terminal, from the repo folder (GitHub Desktop: *Repository → Open in Termi
 1. First time only: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`. For privacy screening (Step 2), also copy `.env.example` to `.env` and paste your Anthropic API key into it.
 2. Every time: `.venv/bin/streamlit run app.py`, then open http://localhost:8501
 
-You can create an account, or pick **Try a demo account** → `researcher_014` → **Demo history** to load the synthetic chats. Everything you create is stored in `data/` on your laptop only.
+The sidebar takes you through the whole flow, one page per step:
+
+| Page | Step | What you do |
+|---|---|---|
+| (sign in) | 0 | create an account or **Try a demo account** |
+| 1. Import chats | 1 | upload a ChatGPT/Claude export, .md/.txt, or load the **Demo history** |
+| 2. Privacy screening | 2 | **Screen** your chats: personal parts removed or chats held back |
+| 3. Find my ideas | 3 | **Find my ideas** from your screened chats |
+| 4. Review ideas | 4 | untick anything you don't want used, then **Use … for matching** |
+| 5. Find matches | 5 | **Find matches** for everyone who approved ideas |
+| 6. Discover | 6 | **Connect** or **Pass**; when both say yes, both see a warm introduction |
+
+**Test the whole flow** with the two demo researchers, in two browser windows (one normal, one private):
+`researcher_014` and `cellbio_027` each go through pages 1 → 4 (Demo history → Screen → Find my ideas → Use for matching), then either one runs page 5, and both open page 6 and press **Connect**. Steps 2, 3 and 5 call Claude: one full run costs well under $1 (repeat runs on unchanged chats are cached).
+
+Placeholders, clearly labelled in the app: the ranking between Steps 3 and 4 (`pipeline/ranking.py`) and the Discover page (`pipeline/discover_page.py`, until Step 6's own page exists). Everything you create is stored in `data/` on your laptop only.
 
 ## Team
 

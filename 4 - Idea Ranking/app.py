@@ -44,13 +44,16 @@ def wkey(kind, item_id):
     return f"{entry()['user_id']}:{kind}:{item_id}"
 
 
-# ---------- Who is signed in (placeholder until the steps are joined) ----------
+# ---------- Who is signed in ----------
+# Inside the shared app (app.py at the repo root) the user has logged in, and this page must
+# never offer to switch to someone else's ideas. Run on its own, the demo picker stays.
 
+logged_in = st.session_state.get("fellowship_logged_in_user")
 users = rv.available_users()
-current = st.session_state.get("user_id") or (users[0] if users else "user_a")
+current = logged_in or st.session_state.get("user_id") or (users[0] if users else "user_a")
 with st.sidebar:
-    st.caption("Demo controls")
-    if users:
+    if users and not logged_in:
+        st.caption("Demo controls")
         current = st.selectbox(
             "Signed-in user",
             users,

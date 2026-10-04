@@ -2,4 +2,6 @@
 #   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 # Steps with extra needs list them in their own folder's requirements.txt.
 streamlit>=1.65
-anthropic>=1.11   # Claude API (Step 2 privacy screening). Paid service: needs a key in .env
+anthropic>=1.11   # Claude API (Steps 2, 3, 5). Paid service: needs a key in .env
+numpy             # Step 5 (matching): vector maths
+scikit-learn      # Step 5 (matching): keyword vectors when no local embedding model is installed

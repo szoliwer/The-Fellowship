@@ -13,6 +13,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-013 — One app runs Steps 0–6; glue and placeholders live in `pipeline/`
+- **Date / who:** 2026-10-03 — Herman (integration)
+- **Decision:** `app.py` shows one sidebar page per step (Streamlit navigation), always for the logged-in user. Steps 0–2 and Step 4 use their own screens (Step 4's `app.py` runs as a page as is). New glue in `pipeline/`: page 3 runs Step 3's `run_user`; a **placeholder ranking** copies Step 3's `data/ideas/<user>.json` to Step 4's `data/ranked_ideas/<user>.json` with a simple score (chats, own messages, recency); page 5 runs Step 5's `run` on `data/ideas.json` + `data/users.json` → `data/matches.json`; page 6 is a **placeholder Discover** screen until Step 6's own page exists. Accept/Pass decisions go to `data/match_status.json`, keyed by the pair of users so they survive re-running Step 5. Step 4's demo user picker is hidden when you came through the shared login (a 7-line change in Step 4's `app.py`).
+- **Why:** the team asked for one flow to test end to end; keeping glue out of the step folders leaves each owner's code as is. A user picker next to a real login would let anyone open anyone's ideas.
+- **Affects:** all steps. Step 4: replace the placeholder ranking when real ranking exists. Step 6: provide `render(user)` to replace the Discover placeholder (match view helpers in `pipeline/matches.py`).
+
 ### D-012 — Step 3 → 4 output format
 - **Date / who:** 2026-10-03 — Aman (with Claude)
 - **Decision:** Step 3 reads Step 2's Markdown files (format: D-010 / `HANDOFF.md`). It writes `data/ideas/<user_id>.json`: an `ideas` list in the existing one-row-per-idea format (one row per sub-theme, with extra fields added), plus a `themes` / `adjacent_ideas` structure for display. Adjacent ideas are speculative and are never in `ideas`.
