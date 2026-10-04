@@ -15,6 +15,7 @@ for folder in ["3 - Idea Generation", "4 - Idea Ranking", "5 - Match Generation"
 
 import review as rv  # noqa: E402  (Step 4)
 from pipeline import matches as mt  # noqa: E402
+from pipeline import messages as msg  # noqa: E402
 from pipeline import ranking  # noqa: E402
 
 STEP3_SAMPLE = ROOT / "3 - Idea Generation" / "samples" / "output" / "user_a.json"
@@ -52,7 +53,9 @@ class RankingTests(unittest.TestCase):
         self.assertFalse(adjacent & {c["title"] for c in cards})            # speculative ideas never copied
 
 
-class MatchViewTests(unittest.TestCase):
+class TwoPersonMatch(unittest.TestCase):
+    """One synthetic match between user_a and user_b, in temporary files (no checks of its own)."""
+
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         d = Path(self.tmp.name)
@@ -75,6 +78,8 @@ class MatchViewTests(unittest.TestCase):
         [m] = mt.my_matches(uid, self.matches, self.ideas, self.status)
         return m
 
+
+class MatchViewTests(TwoPersonMatch):
     def test_each_person_sees_their_own_side(self):
         a, b = self.view("user_a"), self.view("user_b")
         self.assertEqual((a["other_name"], a["they_can_offer"], a["linked"]), ("cellbio_027", "B offers", [("Idea A", "Idea B")]))
@@ -98,6 +103,61 @@ class MatchViewTests(unittest.TestCase):
         self.assertIsNone(self.view("user_a")["intro"])
         with self.assertRaises(ValueError):
             mt.decide("user_a", "user_b", "maybe", self.status)
+
+
+class MessageTests(TwoPersonMatch):
+    """Messages between a connected pair."""
+
+    def setUp(self):
+        super().setUp()
+        d = Path(self.tmp.name)
+        self.messages, self.users = d / "messages.json", d / "users.json"
+        self.users.write_text(json.dumps([{"user_id": "user_a", "pseudonym": "researcher_014"},
+                                          {"user_id": "user_b", "pseudonym": "cellbio_027"}]))
+
+    def files(self):
+        return dict(status_file=self.status, messages_file=self.messages, users_file=self.users,
+                    matches_file=self.matches, ideas_file=self.ideas)
+
+    def send(self, frm, to, text):
+        msg.send(frm, to, text, status_file=self.status, messages_file=self.messages)
+
+    def connect_both(self):
+        mt.decide("user_a", "user_b", "connect", self.status)
+        mt.decide("user_b", "user_a", "connect", self.status)
+
+    def test_no_messages_until_both_say_yes(self):
+        mt.decide("user_a", "user_b", "connect", self.status)
+        with self.assertRaises(msg.MessageError):
+            self.send("user_a", "user_b", "hello")
+        self.assertEqual(msg.conversations("user_a", **self.files()), [])
+        self.assertFalse(self.messages.exists())
+
+    def test_connected_pair_can_talk_and_unread_is_counted(self):
+        self.connect_both()
+        self.send("user_a", "user_b", "Hi! Want to compare assays?")
+        self.send("user_a", "user_b", "Line one\nline two")
+        [a] = msg.conversations("user_a", **self.files())
+        [b] = msg.conversations("user_b", **self.files())
+        self.assertEqual((a["other_name"], a["unread"], a["intro"]), ("cellbio_027", 0, "intro for A"))
+        self.assertEqual((b["other_name"], b["unread"], b["intro"]), ("researcher_014", 2, "intro for B"))
+        self.assertEqual([m["from"] for m in b["messages"]], ["user_a", "user_a"])
+        msg.mark_read("user_b", "user_a", messages_file=self.messages)
+        self.assertEqual(msg.unread_total("user_b", **self.files()), 0)
+
+    def test_empty_or_too_long_messages_are_refused(self):
+        self.connect_both()
+        for text in ("", "   ", "x" * (msg.MAX_LENGTH + 1)):
+            with self.assertRaises(msg.MessageError):
+                self.send("user_a", "user_b", text)
+
+    def test_a_later_pass_closes_the_conversation(self):
+        self.connect_both()
+        self.send("user_b", "user_a", "Hello")
+        mt.decide("user_b", "user_a", "pass", self.status)
+        self.assertEqual(msg.conversations("user_a", **self.files()), [])
+        with self.assertRaises(msg.MessageError):
+            self.send("user_a", "user_b", "Are you there?")
 
 
 class OfflineFlowTests(unittest.TestCase):

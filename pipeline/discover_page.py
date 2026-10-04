@@ -11,7 +11,7 @@ from pipeline import matches as mt
 FOOTNOTES = {
     "new": "A conversation worth starting →",
     "waiting": "You said yes. Waiting for them",
-    "connected": "You both said yes",
+    "connected": "You both said yes: send a message",
     "passed": "You passed on this match",
 }
 
@@ -44,6 +44,10 @@ def render(user):
             st.success(f"**Warm introduction:** {m['intro']}", icon=":material/celebration:")
             st.caption("Pseudonymous: neither of you sees the other's name or contact details unless "
                        "you choose to share them.")
+            if st.button(f"Message {m['other_name']}", key=f"message_{m['other_id']}", type="primary",
+                         icon=":material/chat:"):
+                st.session_state["msg_with"] = m["other_id"]
+                st.switch_page(brand.page("messages"))
         if m["they_can_offer"]:
             st.markdown(f"**What they've explored that may help you:** {m['they_can_offer']}")
             st.caption("Based on what each of you approved; absence from your chats doesn't mean you "

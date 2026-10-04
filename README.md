@@ -97,12 +97,13 @@ The menu along the top takes you through the whole flow, one page per step, and 
 | Review | 4 | untick anything you don't want used, then **Use … for matching** |
 | Matches | 5 | **Find matches** for everyone who approved ideas |
 | Discover | 6 | **Connect** or **Pass**; when both say yes, both see a warm introduction |
+| Messages | 6 | chat with people where you both said yes (the warm intro is pinned at the top) |
 | (your username) | 0 | your account: what others see, log out |
 
 **Test the whole flow** with the two demo researchers, in two browser windows (one normal, one private):
-`researcher_014` and `cellbio_027` each go through Import → Privacy → Ideas → Review (Demo history → Screen → Find my ideas → Use for matching), then either one runs **Matches**, and both open **Discover** and press **Connect**. Steps 2, 3 and 5 call Claude: one full run costs well under $1 (repeat runs on unchanged chats are cached).
+`researcher_014` and `cellbio_027` each go through Import → Privacy → Ideas → Review (Demo history → Screen → Find my ideas → Use for matching), then either one runs **Matches**, and both open **Discover** and press **Connect**, then **Message** each other (two browser windows, one per researcher). Steps 2, 3 and 5 call Claude: one full run costs well under $1 (repeat runs on unchanged chats are cached).
 
-Placeholders (marked in the code and docs, not on screen, so the demo looks finished): the ranking between Steps 3 and 4 (`pipeline/ranking.py`) and the Discover page (`pipeline/discover_page.py`, until Step 6's own page exists). Everything you create is stored in `data/` on your laptop only.
+Placeholders (marked in the code and docs, not on screen, so the demo looks finished): the ranking between Steps 3 and 4 (`pipeline/ranking.py`) and the Discover and Messages pages (`pipeline/discover_page.py`, `pipeline/messages_page.py`, until Step 6's own pages exist). Everything you create is stored in `data/` on your laptop only.
 
 ## Team
 

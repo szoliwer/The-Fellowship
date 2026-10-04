@@ -13,6 +13,12 @@ Decisions that affect more than one step, or the project as a whole. Decisions a
 
 ---
 
+### D-017 — Matched people can message each other in the app (Step 6 placeholder)
+- **Date / who:** 2026-10-03 — Herman
+- **Decision:** After **both** people say yes on Discover, they can chat on a new **Messages** page (top menu; "Messages (2)" shows unread messages). Layout follows Oliver's Step 6 desktop mockup: connections on the left, the conversation on the right, the warm intro pinned at the top ("both of you see this"), your messages green on the right, theirs blue on the left. Open pages check for new messages every 3 seconds, so two browser windows can chat live. Only a connected pair can write; if either later passes, the chat closes. Messages are stored in `data/messages.json` on the laptop (git-ignored), keyed by the pair like match decisions. Text only for now: voice notes, sharing a past AI chat, the AI's nudges and sounds from the mockup are not built yet (shortcut).
+- **Why:** the brief ends with "they start a productive conversation"; a working chat makes the demo end to end.
+- **Affects:** Step 6 (Oliver + Colin): built in `pipeline/` as a placeholder next to Discover (`messages.py` for the rules, `messages_page.py` for the screen), to be replaced by or merged into Step 6's own chat.
+
 ### D-016 — The app looks like the Lovable website (replaces D-014's dark look)
 - **Date / who:** 2026-10-03 — Herman
 - **Decision:** The Streamlit app recreates the design of the Lovable website in `0 - User Registration/lovable codebase/`: its light sage palette (converted from its oklch tokens) in `.streamlit/config.toml`, Newsreader / Manrope / IBM Plex Mono fonts, small uppercase labels, and its landing page (hero, example match card, how it works, privacy, call to action, footer; `pipeline/landing.py`), with sign-up, log-in and demo in pop-up windows. Discover shows matches as the Lovable match card. Navigation: the top menu plus one floating green **Next** button per step (no second set of step links). Logic and data flow are unchanged: the forms are Step 0's own, with our fields (username, email, password, consent), not the Lovable form's (first name, location). The example card uses usernames and no "fit" score (the brief rules out compatibility percentages).

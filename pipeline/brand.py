@@ -21,7 +21,8 @@ STEPS = [("Import", "Import chats"), ("Privacy", "Privacy check"), ("Ideas", "Fi
 # Colour tokens from the Lovable design (converted from oklch).
 C = {"bg": "#EAF3EC", "fg": "#101E16", "card": "#FCFEFC", "primary": "#166845", "primary_fg": "#F9FDFA",
      "muted_fg": "#55655B", "border": "#C1CFC5", "surface": "#F7FBF8", "peer": "#CCEEFF", "peer_fg": "#005B91",
-     "peer_strong": "#1C90CB", "self": "#CDEED9", "complement": "#FFE3B3", "complement_fg": "#8B4B00"}
+     "peer_strong": "#1C90CB", "self": "#CDEED9", "complement": "#FFE3B3", "complement_fg": "#8B4B00",
+     "app": "#E6E9FB", "app_fg": "#2F3B8F"}  # app: the app's own voice in chat (indigo, as in Step 6's mockup)
 
 _CSS = f"""
 <style>
@@ -100,15 +101,35 @@ header .rc-overflow-item:has(a[href$="/account"]){{margin-left:auto}}
 .fs-footer{{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;padding:2rem 0 0;
   border-top:1px solid {C['border']};color:{C['muted_fg']};font-size:.9rem}}
 .fs-footer b{{font-family:Newsreader,Georgia,serif;font-size:1.1rem;color:{C['fg']}}}
+/* Messages: you in green on the right, them in blue on the left, the app's intro in indigo. */
+.fs-chat-head{{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-bottom:.5rem;
+  border-bottom:1px solid {C['border']}}}
+.fs-chat-head b{{font-family:Newsreader,Georgia,serif;font-size:1.45rem;font-weight:600;color:{C['fg']}}}
+.fs-chat-head span{{font-size:.8rem}}
+.fs-intro{{background:{C['app']};border-radius:.45rem;padding:.9rem 1.1rem;margin:0 0 1rem}}
+.fs-intro .fs-tag{{color:{C['app_fg']}}}
+.fs-intro p{{margin:.4rem 0 0;font-size:.95rem;line-height:1.6;color:{C['fg']}}}
+.fs-msg{{width:fit-content;max-width:78%;padding:.55rem .85rem;border-radius:.9rem;margin:.4rem 0;font-size:.95rem;
+  line-height:1.5;color:{C['fg']};overflow-wrap:anywhere}}
+.fs-msg.me{{margin-left:auto;background:{C['self']};border-bottom-right-radius:.2rem}}
+.fs-msg.them{{background:{C['peer']};border-bottom-left-radius:.2rem}}
+.fs-msg span{{display:block;margin-top:.15rem;font-size:.7rem;color:{C['muted_fg']};text-align:right}}
 </style>
 """
 
 
+_WIDE_CSS = ("<style>[data-testid='stMainBlockContainer']{max-width:1180px;"
+             "padding-left:clamp(1.25rem,4vw,2.5rem);padding-right:clamp(1.25rem,4vw,2.5rem)}</style>")
+
+
 def page_style(wide=False):
     """Shared styles; wide=True for the landing page (the Lovable site is wider than an app page)."""
-    wide_css = ("<style>[data-testid='stMainBlockContainer']{max-width:1180px;"
-                "padding-left:clamp(1.25rem,4vw,2.5rem);padding-right:clamp(1.25rem,4vw,2.5rem)}</style>")
-    st.html(_CSS + (wide_css if wide else ""))
+    st.html(_CSS + (_WIDE_CSS if wide else ""))
+
+
+def wide_page():
+    """Use the wider layout on this page only (e.g. Messages: the list and the conversation side by side)."""
+    st.html(_WIDE_CSS)
 
 
 def scroll_to_top():
@@ -147,19 +168,20 @@ def points(items):
 # The page objects belong to this browser session, so they are kept in session_state.
 
 def register_pages(pages):
-    st.session_state["fs_pages"] = {page.title: page for page in pages}
+    """Pages can be looked up by menu title or by web address (url_path, e.g. "messages")."""
+    st.session_state["fs_pages"] = {**{p.title: p for p in pages}, **{p.url_path: p for p in pages}}
 
 
-def _page(title):
-    return st.session_state.get("fs_pages", {}).get(title)
+def page(name):
+    return st.session_state.get("fs_pages", {}).get(name)
 
 
 def empty_state(title, text, go_to=None, go_label=None):
     """A calm 'nothing here yet' card, with a link to the step that comes first (go_to = menu title)."""
     with st.container(key="fs_empty"):
         st.html(f"<h4>{html.escape(title)}</h4><p>{html.escape(text)}</p>")
-        if go_to and _page(go_to):
-            st.page_link(_page(go_to), label=go_label or f"Go to {go_to}", icon=":material/arrow_forward:")
+        if go_to and page(go_to):
+            st.page_link(page(go_to), label=go_label or f"Go to {go_to}", icon=":material/arrow_forward:")
 
 
 def step_eyebrow(current_title):
@@ -181,7 +203,7 @@ def next_step_button(current_title):
     title, label = STEPS[titles.index(current_title) + 1]
     with st.container(key="fs_next"):
         if st.button(f"Next: {label}", icon=":material/arrow_forward:", icon_position="right", type="primary"):
-            st.switch_page(_page(title))
+            st.switch_page(page(title))
 
 
 # ---------- Match card (Lovable "A promising connection" panel) ----------

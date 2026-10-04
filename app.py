@@ -23,7 +23,7 @@ import filter_ui  # noqa: E402  (Step 2)
 import import_ui  # noqa: E402  (Step 1)
 import screening  # noqa: E402  (Step 2: forgets chats removed in Step 1)
 import signup_ui  # noqa: E402  (Step 0)
-from pipeline import brand, discover_page, ideas_page, landing, matching_page  # noqa: E402  (look; Steps 3, 5, 6)
+from pipeline import brand, discover_page, ideas_page, landing, matching_page, messages, messages_page  # noqa: E402  (look; Steps 3, 5, 6)
 
 st.set_page_config(page_title=brand.NAME, page_icon=str(brand.ICON))
 st.logo(str(brand.LOGO), size="large")
@@ -67,11 +67,16 @@ def discover():
     discover_page.render(user)
 
 
+def chat():
+    messages_page.render(user)
+
+
 def account():
     brand.eyebrow("Account")
     signup_ui.render_account(user)
 
 
+unread = messages.unread_total(user["user_id"])  # shown in the menu: "Messages (2)"
 pages = [
     st.Page(import_chats, title="Import", icon=":material/upload_file:", url_path="import", default=True),
     st.Page(privacy_screening, title="Privacy", icon=":material/shield:", url_path="screening"),
@@ -79,6 +84,8 @@ pages = [
     st.Page(ROOT / "4 - Idea Ranking" / "app.py", title="Review", icon=":material/fact_check:", url_path="review"),
     st.Page(find_matches, title="Matches", icon=":material/hub:", url_path="matching"),
     st.Page(discover, title="Discover", icon=":material/handshake:", url_path="discover"),
+    st.Page(chat, title=f"Messages ({unread})" if unread else "Messages", icon=":material/chat:",
+            url_path="messages"),
     st.Page(account, title=user["pseudonym"], icon=":material/account_circle:", url_path="account"),
 ]
 nav = st.navigation(pages, position="top")
