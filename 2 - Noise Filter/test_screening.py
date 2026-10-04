@@ -104,7 +104,8 @@ class RuleTests(unittest.TestCase):
         for phrase in ["even a single passing mention", "Drafts of emails", "family members (always",
                        "academic record", "admissions", "degree program", "career and recruiting plans",
                        "own company and project names", "EXACT text to blank out", "[title]",
-                       "flipped a meaning", "never turn a personal matter into a research interest",
+                       "never exclude a cleaned copy", "a removed \"not\"",
+                       "never turn a personal matter into a research interest",
                        "what decides is whether real research", "woven through it is \"clean\""]:
             self.assertIn(phrase, sc.SYSTEM_PROMPT)
 
@@ -310,12 +311,69 @@ class ScreeningTests(unittest.TestCase):
         self.assertEqual(entry["exclusion_reason"], "recheck_failed")
         self.assertEqual(self.ids("user_m"), [])
 
-    def test_gives_up_when_rechecks_keep_finding_more(self):
+    def test_the_last_checks_redactions_are_applied_not_thrown_away(self):
         source = self.import_mixed()
-        fake = FakeClassifier({"Assistant]": ans("clean", cats=["own_identity"], remove=[0])})
+        fake = FakeClassifier({
+            "Draft an email": ans("clean", cats=["own_identity"], redact=[(0, "for my thesis at Example U")],
+                                  remove=[2, 3]),
+            "Jane Testperson": ans("clean", cats=["own_identity"], redact=[(2, "Jane Testperson")]),
+            # Check 3 reads the copy cleaned by checks 1 and 2, and still finds one more thing.
+            "capability-threshold": ans("clean", cats=["own_identity"], redact=[(3, "capability-threshold")]),
+        })
         entry = self.screen(fake, "user_m")[source["source_id"]]
-        self.assertFalse(sc.is_eligible(entry))
-        self.assertLessEqual(len(fake.calls), 1 + sc.MAX_RECHECKS)
+        self.assertEqual(len(fake.calls), 1 + sc.MAX_RECHECKS)          # no extra paid call
+        self.assertEqual(entry["decision"], "cleaned")
+        self.assertTrue(entry["recheck"][-1]["applied_without_another_check"])
+        self.assertNotIn("Jane Testperson", fake.calls[2])               # check 3 saw check 2's redactions
+        text = sc.cleaned_source(source, entry)["raw_text"]
+        for gone in ["Example U", "Jane Testperson", "capability-threshold"]:
+            self.assertNotIn(gone, text)
+        self.assertIn("price-share test", text)
+
+    def test_a_recheck_that_says_exclude_still_holds_back(self):
+        source = self.import_mixed()
+        fake = FakeClassifier({"Draft an email": CLEAN_MIXED,
+                               "price-share test": ans("exclude", "ambiguous")})
+        entry = self.screen(fake, "user_m")[source["source_id"]]
+        self.assertEqual((entry["decision"], entry["exclusion_reason"]), ("exclude", "recheck_failed"))
+
+    def test_passed_chats_are_never_rescreened_held_back_ones_are_when_rules_change(self):
+        source = self.import_mixed()
+        e = {"status": "screened", "content_hash": sc._content_hash(source["raw_text"]), "rule_hits": [],
+             "owner_excluded": False, "recheck": []}
+        old = f"v{sc._version_number(sc.PROMPT_VERSION) - 1}"
+        for decision in ("eligible", "cleaned"):                                      # passed
+            self.assertFalse(sc.needs_screening(source, {**e, "decision": decision, "prompt_version": old}))
+        self.assertTrue(sc.needs_screening(source, {**e, "decision": "eligible", "prompt_version": "v5"}))  # before v6
+        self.assertTrue(sc.needs_screening(source, {**e, "decision": "exclude", "prompt_version": old}))    # held back
+        self.assertFalse(sc.needs_screening(source, {**e, "decision": "exclude",
+                                                     "prompt_version": sc.PROMPT_VERSION}))
+        changed = {**e, "decision": "eligible", "prompt_version": sc.PROMPT_VERSION, "content_hash": "different"}
+        self.assertTrue(sc.needs_screening(source, changed))                          # text changed: a new chat
+
+    def test_passed_chats_cost_nothing_on_the_next_run(self):
+        self.screen(FakeClassifier())
+        report = sc.load_report("user_a", self.dir)
+        for e in report.values():
+            e["prompt_version"] = "v7"  # pretend the rules changed since
+        sc._save_report("user_a", report, self.dir)
+        fake = FakeClassifier()
+        self.screen(fake)
+        sent = {c.split("\n")[1] for c in fake.calls}  # the title line of each chat sent
+        self.assertEqual(len(fake.calls), 3)            # only the 3 held back by the AI (a_s06-a_s08)
+        self.assertFalse(any("trafficking" in s for s in sent))
+
+    def test_owner_can_give_held_back_chats_another_try(self):
+        self.screen(FakeClassifier())
+        retry = {s["source_id"] for s in sc.retry_candidates("user_a", self.dir)}
+        self.assertEqual(retry, {"a_s06", "a_s07", "a_s08"})   # not a_s09 (local rule), not passed chats
+        sc.set_owner_excluded("user_a", "a_s07", True, self.dir, output_dir=self.out)
+        self.assertNotIn("a_s07", {s["source_id"] for s in sc.retry_candidates("user_a", self.dir)})
+        fake = FakeClassifier({"I land at 14:20": ans("eligible")})  # this time the admin chat passes
+        sc.screen_user("user_a", classify=fake, data_dir=self.dir, max_workers=1, output_dir=self.out,
+                       retry_held_back=True)
+        self.assertEqual(len(fake.calls), 2)                       # a_s06 and a_s08 only
+        self.assertIn("a_s08", self.ids())
 
     def test_removing_most_of_a_chat_is_fine_if_the_recheck_passes(self):
         source = self.import_mixed()  # no "more than half" limit any more: the re-check decides

@@ -8,14 +8,14 @@ import streamlit as st
 import screening as sc
 
 
-def _run_screening(user_id, total):
+def _run_screening(user_id, total, retry_held_back=False):
     bar = st.progress(0.0, text=f"Screening 0 of {total}…")
 
     def progress(done, n):
         bar.progress(done / n, text=f"Screening {done} of {n}…")
 
     try:
-        sc.screen_user(user_id, on_progress=progress)
+        sc.screen_user(user_id, on_progress=progress, retry_held_back=retry_held_back)
     except sc.ScreeningError as e:
         st.error(e.message)
         return
@@ -90,8 +90,12 @@ def render(user):
                             if cleaned else "")):
             if cleaned:
                 checks = len(e["recheck"]) + 1
-                st.markdown(f"**{sc.cleaning_summary(e)}.** Only the cleaned copy is used; it was checked "
-                            f"{checks} times until a check found nothing personal. The original stays held back.")
+                last = (e["recheck"] or [{}])[-1]
+                how = ("the last check's redactions were applied" if last.get("applied_without_another_check")
+                       else "the last check found nothing personal")
+                st.markdown(f"**{sc.cleaning_summary(e)}.** Only the cleaned copy is used. It was checked "
+                            f"{checks} times, each check reading the copy cleaned by the one before; {how}. "
+                            "The original stays held back. Please look over the cleaned copy below.")
             st.caption(e["explanation"])
             if cleaned and st.toggle("Show the cleaned copy (only you can see this)", key=f"show_{e['source_id']}"):
                 st.text(sc.used_version(s, e)["raw_text"])
@@ -101,6 +105,13 @@ def render(user):
 
     st.subheader(f"Held back ({len(held)})")
     st.caption("Kept privately on this laptop. Never used for ideas or shown to anyone.")
+    retry = sc.retry_candidates(user_id)
+    if retry and not pending and sc.api_key_available():
+        est = sc.estimate_cost(retry)
+        st.caption(f"Results vary a little between runs. Chats that passed are never screened again, "
+                   f"but you can give held-back chats another try (about ${est['dollars']:.2f}).")
+        if st.button(f"Try {len(retry)} held-back chat(s) again"):
+            _run_screening(user_id, len(retry), retry_held_back=True)
     for s, e in held:
         with st.expander(f"⛔ {e['title']} · {sc.display_reason(e)}"):
             st.caption(e["explanation"])
