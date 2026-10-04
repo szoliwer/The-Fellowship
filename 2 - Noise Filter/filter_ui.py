@@ -11,7 +11,7 @@ from pipeline import brand  # shared look (intro text, cards, plurals)
 POINTS = [
     ("Held back", "Mostly personal or off-topic chats, and any with passwords, card or ID numbers."),
     ("Cleaned", "Research chats with personal parts: those parts are blanked out and checked again."),
-    ("Who reads them", "Chats with obvious secrets never leave this laptop. The rest are screened by "
+    ("Who reads them", "Chats with obvious secrets are never sent anywhere. The rest are screened by "
                        "Anthropic's Claude."),
 ]
 

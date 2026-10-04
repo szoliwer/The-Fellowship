@@ -84,7 +84,7 @@ People's AI chats are personal. These rules hold even for the hackathon demo:
 In Terminal, from the repo folder (GitHub Desktop: *Repository → Open in Terminal*):
 
 1. First time only: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`. For privacy screening (Step 2), also copy `.env.example` to `.env` and paste your Anthropic API key into it.
-2. Every time: `.venv/bin/streamlit run app.py`, then open http://localhost:8501
+2. Every time: `.venv/bin/streamlit run app.py --server.address localhost`, then open http://localhost:8501 (`--server.address localhost` keeps others on the Wi-Fi out)
 
 The menu along the top takes you through the whole flow, one page per step, and a green **Next** button in the bottom-right corner of each page takes you to the next step:
 
@@ -104,6 +104,22 @@ The menu along the top takes you through the whole flow, one page per step, and 
 `researcher_014` and `cellbio_027` each go through Import → Privacy → Ideas → Review (Demo history → Screen → Find my ideas → Use for matching), then either one runs **Matches**, and both open **Discover** and press **Connect**, then **Message** each other (two browser windows, one per researcher). Steps 2, 3 and 5 call Claude: one full run costs well under $1 (repeat runs on unchanged chats are cached).
 
 Placeholders (marked in the code and docs, not on screen, so the demo looks finished): the ranking between Steps 3 and 4 (`pipeline/ranking.py`) and the Discover and Messages pages (`pipeline/discover_page.py`, `pipeline/messages_page.py`, until Step 6's own pages exist). Everything you create is stored in `data/` on your laptop only.
+
+## Hosted demo (for the judges)
+
+The live project URL runs on **Streamlit Community Cloud** (free), straight from `main`: every push updates it.
+When it starts with no data (first start, and after every restart, since free hosting forgets files), it loads
+`pipeline/showcase/`: the two synthetic demo researchers, ready to walk through (their match with each other is
+connected and they have a short conversation), plus our team's **usernames, approved ideas and matches**. No chats,
+emails, names or passwords are in it (D-018). Judges: **Try a demo** → `researcher_014` → follow the green **Next** button.
+
+Set it up (one person, in the browser):
+1. share.streamlit.io → sign in with GitHub → **Create app** → repo `szoliwer/The-Fellowship`, branch `main`, file `app.py`.
+2. **Advanced settings**: Python 3.12; under **Secrets** paste `ANTHROPIC_API_KEY = "…"` (yourself; never commit a key).
+3. **Deploy**, then share the URL. Set a monthly spending limit on the key at console.anthropic.com.
+
+Rebuild the showcase after the team's approved ideas change: `.venv/bin/python -m pipeline.build_showcase`
+(well under $1), check `pipeline/showcase/README.md`, then commit.
 
 ## Team
 

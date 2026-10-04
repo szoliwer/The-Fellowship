@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_a90457b1",
+  "approved_at": "2026-10-04T00:46:09Z",
+  "ideas": [
+    {
+      "user_id": "user_a90457b1",
+      "idea_id": "user_a90457b1_t1.s1",
+      "type": "interest",
+      "evidence": [
+        "src_208af78cb137"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 1,
+      "rank_score": 0.8,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "simulation-based robot design optimization",
+      "insights": [
+        "An AI optimizer iterating parametric CAD through physics simulation can refine robot structures before physical manufacturing.",
+        "AI-generated smooth, organic robot geometries may be impractical to produce with standard 3D printing or CNC machining."
+      ]
+    },
+    {
+      "user_id": "user_a90457b1",
+      "idea_id": "user_a90457b1_t1.s2",
+      "type": "interest",
+      "evidence": [
+        "src_208af78cb137"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 1,
+      "rank_score": 0.8,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "sim-to-real calibration via system identification",
+      "insights": [
+        "Fitting friction, backlash, latency and contact parameters to real sensor logs can close the sim-to-real gap.",
+        "Hybrid analytical-plus-neural models better capture soft-material contact than traditional physics equations alone.",
+        "Calibrating simulators to physical data risks overfitting to one specific environment, undermining generalization."
+      ]
+    },
+    {
+      "user_id": "user_a90457b1",
+      "idea_id": "user_a90457b1_t1.s3",
+      "type": "interest",
+      "evidence": [
+        "src_208af78cb137"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 1,
+      "rank_score": 0.4,
+      "score_parts": {
+        "primary": 0.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "cross-embodiment pretraining from vehicle data",
+      "insights": [
+        "Autonomous vehicle sensor logs could pretrain foundation world models later fine-tuned for robot grasping and arm motion.",
+        "Low-DOF, rolling-contact, long-range vehicle data transfers poorly to contact-rich, high-DOF, short-range manipulation."
+      ]
+    },
+    {
+      "user_id": "user_a90457b1",
+      "idea_id": "user_a90457b1_t1.s4",
+      "type": "interest",
+      "evidence": [
+        "src_208af78cb137"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 1,
+      "rank_score": 0.4,
+      "score_parts": {
+        "primary": 0.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "wearable human mocap for humanoid locomotion",
+      "insights": [
+        "Smart insoles, IMUs and EMG worn in real environments can supply kinetic and kinematic data for bipedal robot training.",
+        "Human gait retargeted via inverse kinematics can serve as RL reference rewards, then adjusted for robot torque limits.",
+        "Muscle activation signals reveal when energy is expended versus when momentum does the work in gait."
+      ]
+    }
+  ],
+  "review": {
+    "ideas_off": [],
+    "ideas_removed": [],
+    "details_off": [],
+    "details_removed": [],
+    "approved": {
+      "user_a90457b1_t1.s1": [
+        "user_a90457b1_t1.s1::7a5fc0b2",
+        "user_a90457b1_t1.s1::e3ea39c1"
+      ],
+      "user_a90457b1_t1.s2": [
+        "user_a90457b1_t1.s2::072f8677",
+        "user_a90457b1_t1.s2::9b7e3577",
+        "user_a90457b1_t1.s2::6f446d15"
+      ],
+      "user_a90457b1_t1.s3": [
+        "user_a90457b1_t1.s3::1b806b8e",
+        "user_a90457b1_t1.s3::1905a552"
+      ],
+      "user_a90457b1_t1.s4": [
+        "user_a90457b1_t1.s4::76f31a33",
+        "user_a90457b1_t1.s4::44649a6e",
+        "user_a90457b1_t1.s4::f61a3648"
+      ]
+    }
+  }
+}

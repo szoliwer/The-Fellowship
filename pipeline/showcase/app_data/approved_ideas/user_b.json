@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_b",
+  "approved_at": "2026-10-04T02:39:35Z",
+  "ideas": [
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c01",
+      "evidence": [
+        "b_s01"
+      ],
+      "rank_score": 0.9,
+      "main_idea": "Live-cell assays for membrane-protein recycling",
+      "insights": [
+        "Runs pulse-chase and surface-biotinylation assays in patient-derived fibroblasts.",
+        "Built a pH-sensitive reporter that times when a protein reaches the cell surface.",
+        "Standard control set: endocytosis block, Golgi-exit block, unaffected cargo."
+      ]
+    },
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c02",
+      "evidence": [
+        "b_s02"
+      ],
+      "rank_score": 0.8,
+      "main_idea": "Telling real trafficking defects from imaging artifacts",
+      "insights": [
+        "Fixation and antibody access can fake perinuclear accumulation.",
+        "Compare live and fixed imaging before trusting a phenotype."
+      ]
+    },
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c03",
+      "evidence": [
+        "b_s03"
+      ],
+      "rank_score": 0.7,
+      "main_idea": "Finding disease cohorts to test the recycling assays on",
+      "insights": [
+        "The assays are validated only in standard cell lines so far.",
+        "Needs patient-derived cells with a clear mislocalization phenotype."
+      ]
+    },
+    {
+      "user_id": "user_b",
+      "idea_id": "user_b_c04",
+      "evidence": [
+        "b_s04"
+      ],
+      "rank_score": 0.5,
+      "main_idea": "Automating image analysis of endosome counts",
+      "insights": [
+        "Counting endosomes by hand is the slowest step in the lab.",
+        "Interested in segmentation models trained on a few labelled images."
+      ]
+    }
+  ],
+  "review": {
+    "ideas_off": [],
+    "ideas_removed": [],
+    "details_off": [],
+    "details_removed": [],
+    "approved": {
+      "user_b_c01": [
+        "user_b_c01::bb47d0f1",
+        "user_b_c01::f209dc50",
+        "user_b_c01::f307213e"
+      ],
+      "user_b_c02": [
+        "user_b_c02::a6fc3a1d",
+        "user_b_c02::0deb9b47"
+      ],
+      "user_b_c03": [
+        "user_b_c03::4097d4be",
+        "user_b_c03::dbe17e64"
+      ],
+      "user_b_c04": [
+        "user_b_c04::eaae4ad9",
+        "user_b_c04::419e293d"
+      ]
+    }
+  }
+}

@@ -1,0 +1,215 @@
+{
+ "08b8440c500e906225e14037be9e7d5cc89b771b55f34bee6d31ad9e453cd102": {
+  "themes": [
+   {
+    "id": "t1",
+    "theme": "Cell biology",
+    "sub_themes": [
+     {
+      "id": "t1.s1",
+      "sub_theme": "Membrane protein trafficking in patient fibroblasts",
+      "mode": "working_on",
+      "direction": "looking_for",
+      "insights": [
+       {
+        "id": "t1.s1.i1",
+        "handle": "Hypothesis, not conclusion",
+        "claim": "Perinuclear accumulation of a membrane protein in patient fibroblasts may reflect altered trafficking, but alternatives remain untested.",
+        "source_chat_ids": [
+         "a_s01"
+        ]
+       },
+       {
+        "id": "t1.s1.i2",
+        "handle": "Location versus function",
+        "claim": "Imaging-based mislocalization rates show where a protein sits, not whether its trafficking function is impaired.",
+        "source_chat_ids": [
+         "a_s02"
+        ]
+       },
+       {
+        "id": "t1.s1.i3",
+        "handle": "Controlled functional readout",
+        "claim": "Testing a trafficking defect needs a functional assay, with controls separating real effects from assay artifacts; design expertise is required.",
+        "source_chat_ids": [
+         "a_s02",
+         "a_s03"
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "t2",
+    "theme": "Biomedical text mining",
+    "sub_themes": [
+     {
+      "id": "t2.s1",
+      "sub_theme": "Reproducibility of LLM literature extraction",
+      "mode": "working_on",
+      "direction": "can_offer",
+      "insights": [
+       {
+        "id": "t2.s1.i1",
+        "handle": "Run-to-run recall instability",
+        "claim": "Repeated LLM extraction of variant-phenotype mentions from one paper yields differing lists, with recall the unstable component.",
+        "source_chat_ids": [
+         "a_s04"
+        ]
+       },
+       {
+        "id": "t2.s1.i2",
+        "handle": "Agreement-triaged human review",
+        "claim": "Cross-run agreement can triage LLM extractions: consistent items accepted, inconsistent ones sent to logged human review.",
+        "source_chat_ids": [
+         "a_s05"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "adjacent_ideas": [
+   {
+    "id": "a1",
+    "handle": "Mining prior trafficking evidence",
+    "claim": "An agreement-scored LLM extraction pipeline could compile reported localization and trafficking phenotypes for the protein across related diseases.",
+    "bridges": [
+     "t1.s1",
+     "t2.s1"
+    ]
+   },
+   {
+    "id": "a2",
+    "handle": "Repeat-scoring imaging calls",
+    "claim": "The same agreement-and-review logic could quantify reliability of mislocalization calls across repeated or independent image scoring.",
+    "bridges": [
+     "t1.s1",
+     "t2.s1"
+    ]
+   },
+   {
+    "id": "a3",
+    "handle": "Literature-sourced assay controls",
+    "claim": "Systematically extracting published trafficking assay designs could shortlist feasible readouts and controls for patient fibroblasts.",
+    "bridges": [
+     "t2.s1",
+     "t1.s1"
+    ]
+   }
+  ]
+ },
+ "2ee5f1f36ab220b442b9b7dba70048e5339ac6b9b9c303e35e2721584b97baa8": {
+  "themes": [
+   {
+    "id": "t1",
+    "theme": "Cell biology",
+    "sub_themes": [
+     {
+      "id": "t1.s1",
+      "sub_theme": "functional readouts for transporter mislocalization",
+      "mode": "working_on",
+      "direction": "none",
+      "insights": [
+       {
+        "id": "t1.s1.i1",
+        "handle": "Localization isn't function",
+        "claim": "Mislocalized transporter signal by imaging does not by itself establish that transport function has changed.",
+        "source_chat_ids": [
+         "b_s01"
+        ]
+       },
+       {
+        "id": "t1.s1.i2",
+        "handle": "Paired readouts, same cells",
+        "claim": "Substrate uptake, surface labelling and pulse-chase should be compared with localization in the same cells rather than imaging alone.",
+        "source_chat_ids": [
+         "b_s01"
+        ]
+       }
+      ]
+     },
+     {
+      "id": "t1.s2",
+      "sub_theme": "synchronized-release surface arrival assay",
+      "mode": "working_on",
+      "direction": "looking_for",
+      "insights": [
+       {
+        "id": "t1.s2.i1",
+        "handle": "Timed ER release kinetics",
+        "claim": "Holding a transporter in the ER then releasing it synchronously can time delivery to the plasma membrane in disease versus control cells.",
+        "source_chat_ids": [
+         "b_s01",
+         "b_s02"
+        ]
+       },
+       {
+        "id": "t1.s2.i2",
+        "handle": "Delay before replication",
+        "claim": "Apparently slower surface arrival stays preliminary until it reproduces across cell lines and conditions.",
+        "source_chat_ids": [
+         "b_s01"
+        ]
+       },
+       {
+        "id": "t1.s2.i3",
+        "handle": "Tag as confound",
+        "claim": "A reporter tag may itself slow transport, so a second independent tag or untagged construct is needed.",
+        "source_chat_ids": [
+         "b_s02"
+        ]
+       },
+       {
+        "id": "t1.s2.i4",
+        "handle": "Expression matching gap",
+        "claim": "Arrival-rate comparisons require matched expression between disease and control cells, via sorting or inducible promoters.",
+        "source_chat_ids": [
+         "b_s02"
+        ]
+       },
+       {
+        "id": "t1.s2.i5",
+        "handle": "Specificity by cargo choice",
+        "claim": "A pathway-blocking condition plus an unaffected control cargo distinguishes a real trafficking defect from assay artifact.",
+        "source_chat_ids": [
+         "b_s02"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "adjacent_ideas": [
+   {
+    "id": "a1",
+    "handle": "Kinetics to flux conversion",
+    "claim": "Whether measured surface-arrival delays predict quantitative loss of substrate uptake, or are compensated by residual steady-state surface pool.",
+    "bridges": [
+     "t1.s1",
+     "t1.s2"
+    ]
+   },
+   {
+    "id": "a2",
+    "handle": "Tag-free arrival timing",
+    "claim": "Surface biotinylation or antibody-accessibility time courses could time delivery without relying on a potentially rate-altering fluorescent tag.",
+    "bridges": [
+     "t1.s2",
+     "t1.s1"
+    ]
+   },
+   {
+    "id": "a3",
+    "handle": "Degradation versus delivery",
+    "claim": "Slower arrival could reflect ER retention and turnover rather than slowed transit, separable by blocking degradation pathways.",
+    "bridges": [
+     "t1.s2"
+    ]
+   }
+  ]
+ }
+}

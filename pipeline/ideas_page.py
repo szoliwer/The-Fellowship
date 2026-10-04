@@ -54,7 +54,7 @@ def render(user):
     st.markdown(f"**{brand.plural(len(chats), 'checked chat')}** ready."
                 + (" Some have changed since your ideas were found, so find them again." if stale else ""))
     if not sc.api_key_available():
-        st.warning("Finding ideas isn't set up on this computer yet (it needs an Anthropic API key).",
+        st.warning("Finding ideas isn't set up yet (it needs an Anthropic API key).",
                    icon=":material/key:")
     else:
         label = "Find my ideas" if result is None else "Find my ideas again"

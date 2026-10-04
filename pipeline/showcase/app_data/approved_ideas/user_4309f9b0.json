@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_4309f9b0",
+  "approved_at": "2026-10-04T02:15:09Z",
+  "ideas": [
+    {
+      "user_id": "user_4309f9b0",
+      "idea_id": "user_4309f9b0_t1.s1",
+      "type": "skill",
+      "evidence": [
+        "src_c8210fc1756a"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 6,
+      "rank_score": 0.8,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "pesticide and wildfire retardant ecosystem impacts",
+      "insights": [
+        "High-resolution US pesticide and fire retardant usage data can be correlated with local ecological decline.",
+        "Wildfire retardants and pesticides together may drive local ecological decline, warranting testable interaction hypotheses."
+      ]
+    },
+    {
+      "user_id": "user_4309f9b0",
+      "idea_id": "user_4309f9b0_t1.s2",
+      "type": "interest",
+      "evidence": [
+        "src_c8210fc1756a"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 6,
+      "rank_score": 0.8,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "pesticide-linked cancer in wildlife",
+      "insights": [
+        "Pesticide-associated cancer increases seen in humans may also occur in animals within exposed local ecosystems."
+      ]
+    },
+    {
+      "user_id": "user_4309f9b0",
+      "idea_id": "user_4309f9b0_t2.s1",
+      "type": "interest",
+      "evidence": [
+        "src_c8210fc1756a"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 6,
+      "rank_score": 0.4,
+      "score_parts": {
+        "primary": 0.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "human disease from agrochemical exposure",
+      "insights": [
+        "Ecosystem-level toxicity from pesticides and fire retardants may also raise rates of specific human diseases."
+      ]
+    }
+  ],
+  "review": {
+    "ideas_off": [],
+    "ideas_removed": [],
+    "details_off": [],
+    "details_removed": [],
+    "approved": {
+      "user_4309f9b0_t1.s1": [
+        "user_4309f9b0_t1.s1::7d232553",
+        "user_4309f9b0_t1.s1::f0f928be"
+      ],
+      "user_4309f9b0_t1.s2": [
+        "user_4309f9b0_t1.s2::178aef73"
+      ],
+      "user_4309f9b0_t2.s1": [
+        "user_4309f9b0_t2.s1::fe4fef47"
+      ]
+    }
+  }
+}

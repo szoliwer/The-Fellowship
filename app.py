@@ -24,6 +24,7 @@ import import_ui  # noqa: E402  (Step 1)
 import screening  # noqa: E402  (Step 2: forgets chats removed in Step 1)
 import signup_ui  # noqa: E402  (Step 0)
 from pipeline import brand, discover_page, ideas_page, landing, matching_page, messages, messages_page  # noqa: E402  (look; Steps 3, 5, 6)
+from pipeline import showcase  # noqa: E402  (fills an empty hosted app with the demo data)
 
 st.set_page_config(page_title=brand.NAME, page_icon=str(brand.ICON))
 st.logo(str(brand.LOGO), size="large")
@@ -31,7 +32,9 @@ st.logo(str(brand.LOGO), size="large")
 
 @st.cache_resource
 def _refresh_users_file():
-    """Once per app start: rewrite data/users.json (read by later steps) in the current format."""
+    """Once per app start: fill an empty app with the showcase (the hosted demo), then rewrite
+    data/users.json (read by later steps) in the current format."""
+    showcase.load_if_empty()
     signup_ui.reg.export_users()
 
 

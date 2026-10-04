@@ -45,7 +45,7 @@ CONSENT_TEXT = {
         "Chats you import are screened, and personal information is never used: personal parts "
         "of research chats are removed, and mostly personal, sensitive or off-topic chats are held "
         "back entirely. Chats with obvious secrets (passwords, card, ID or record numbers) are "
-        "held back on this laptop; the others are sent to an external AI service (Anthropic's "
+        "held back without being sent anywhere; the others are sent to an external AI service (Anthropic's "
         "Claude) to screen them, and the research that passes is then analysed to suggest ideas. "
         "Suggested ideas stay private until you approve them."
     ),
@@ -152,6 +152,17 @@ def get_user(user_id, db_file=DB_FILE):
 
 def demo_users(db_file=DB_FILE):
     return [u for u in load_users(db_file) if u["is_demo_account"]]
+
+
+def add_showcase_users(people, db_file=DB_FILE):
+    """Profiles for the hosted demo (pipeline/showcase/): username only, no email, name or password,
+    so nobody can log in as them and they aren't offered as demo accounts. They exist so their
+    approved ideas can be matched and shown under their username. people: [{user_id, pseudonym}]."""
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    with closing(_connect(db_file)) as conn, conn:
+        for p in people:
+            conn.execute("INSERT OR IGNORE INTO users VALUES (?,?,?,?,?,?,?,?,?,?)",
+                         (p["user_id"], p["pseudonym"], None, None, None, CONNECTION_INTENT, 0, 1, now, now))
 
 
 # Step 5 (Match Generation) reads a few fields under other names. The export adds them so

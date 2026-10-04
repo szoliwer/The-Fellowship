@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_ec428e5e",
+  "approved_at": "2026-10-04T02:11:56Z",
+  "ideas": [
+    {
+      "user_id": "user_ec428e5e",
+      "idea_id": "user_ec428e5e_t1.s1",
+      "type": "interest",
+      "evidence": [
+        "src_9cbf6cced0f7"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 6,
+      "rank_score": 0.8,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "Environmental etiology of rare glioblastoma",
+      "insights": [
+        "Environmental contaminants or carcinogens may drive onset of rare glioblastoma variants such as epithelioid glioblastoma.",
+        "Regions with heavy pesticide use may show elevated incidence of rare glioblastoma variants.",
+        "Heavy fire-retardant use in wildfire-prone areas may correlate with higher glioblastoma rates, particularly among firefighters."
+      ]
+    },
+    {
+      "user_id": "user_ec428e5e",
+      "idea_id": "user_ec428e5e_t2.s1",
+      "type": "interest",
+      "evidence": [
+        "src_9cbf6cced0f7"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 6,
+      "rank_score": 0.8,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "Mutational signatures of carcinogen exposure",
+      "insights": [
+        "Haloalkane exposure may be detectable in glioma DNA through characteristic mutational signatures attributable to the chemical."
+      ]
+    }
+  ],
+  "review": {
+    "ideas_off": [],
+    "ideas_removed": [],
+    "details_off": [],
+    "details_removed": [],
+    "approved": {
+      "user_ec428e5e_t1.s1": [
+        "user_ec428e5e_t1.s1::5fcf788b",
+        "user_ec428e5e_t1.s1::e4a731ce",
+        "user_ec428e5e_t1.s1::1a74ce24"
+      ],
+      "user_ec428e5e_t2.s1": [
+        "user_ec428e5e_t2.s1::cebf6afd"
+      ]
+    }
+  }
+}

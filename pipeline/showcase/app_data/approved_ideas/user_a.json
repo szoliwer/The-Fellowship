@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_a",
+  "approved_at": "2026-10-04T02:39:35Z",
+  "ideas": [
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c01",
+      "evidence": [
+        "a_s01"
+      ],
+      "rank_score": 0.92,
+      "main_idea": "Altered membrane-protein trafficking as the cause of the Disease A phenotype",
+      "insights": [
+        "In Disease A patient fibroblasts a membrane protein piles up near the nucleus instead of reaching the cell surface.",
+        "Treating 'trafficking defect' as a hypothesis to test, not a conclusion.",
+        "Need to separate slower delivery, faster internalisation, failed recycling and over-expression.",
+        "Comparing total protein with the surface fraction would rule over-expression in or out."
+      ]
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c03",
+      "evidence": [
+        "a_s03"
+      ],
+      "rank_score": 0.88,
+      "main_idea": "Finding a functional assay, and someone to design it, for the trafficking hypothesis",
+      "insights": [
+        "Nobody in the group has run a functional trafficking assay.",
+        "Needs a measurement of movement over time, not a snapshot.",
+        "Controls: a pathway block, an unaffected protein, and a check that labelling doesn't change trafficking.",
+        "Looking for a cell biologist with assay-design experience."
+      ]
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c02",
+      "evidence": [
+        "a_s02"
+      ],
+      "rank_score": 0.81,
+      "main_idea": "Linking protein mislocalization to function in Disease A cells",
+      "insights": [
+        "Mislocalization in about 60% of Disease A cells vs. 15% of controls, from imaging only.",
+        "Location alone doesn't show whether the protein's function changed.",
+        "Candidate readouts: cargo uptake, pulse-chase, surface labelling.",
+        "Unsure how to tell a real effect from an artifact of the assay itself."
+      ]
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c05",
+      "evidence": [
+        "a_s05"
+      ],
+      "rank_score": 0.74,
+      "main_idea": "Reviewing disagreements between repeated LLM extraction runs",
+      "insights": [
+        "Run each paper three times and score agreement per extracted item.",
+        "Accept items found in every run, with spot checks.",
+        "Send inconsistent items to a human reviewer and log the decisions.",
+        "Report how often the reviewer overturns the model as an error rate."
+      ]
+    },
+    {
+      "user_id": "user_a",
+      "idea_id": "user_a_c04",
+      "evidence": [
+        "a_s04"
+      ],
+      "rank_score": 0.69,
+      "main_idea": "Reproducibility of LLM-assisted literature extraction",
+      "insights": [
+        "Using an LLM to pull variant-phenotype mentions out of papers for a literature review.",
+        "Two runs on the same paper return slightly different lists.",
+        "Recall looks like the weak spot: later runs miss variants."
+      ]
+    }
+  ],
+  "review": {
+    "ideas_off": [],
+    "ideas_removed": [],
+    "details_off": [],
+    "details_removed": [],
+    "approved": {
+      "user_a_c01": [
+        "user_a_c01::c6cf4641",
+        "user_a_c01::b19ddc0b",
+        "user_a_c01::74480e00",
+        "user_a_c01::9e71da0e"
+      ],
+      "user_a_c03": [
+        "user_a_c03::9343cebc",
+        "user_a_c03::86a424d2",
+        "user_a_c03::c7e8d535",
+        "user_a_c03::79b4dd3a"
+      ],
+      "user_a_c02": [
+        "user_a_c02::063bca08",
+        "user_a_c02::fdb33375",
+        "user_a_c02::a4c50004",
+        "user_a_c02::7cb3233f"
+      ],
+      "user_a_c05": [
+        "user_a_c05::b645ad32",
+        "user_a_c05::4a4d44bc",
+        "user_a_c05::c1e67f87",
+        "user_a_c05::81829923"
+      ],
+      "user_a_c04": [
+        "user_a_c04::908216ab",
+        "user_a_c04::4c8ee60b",
+        "user_a_c04::93206571"
+      ]
+    }
+  }
+}

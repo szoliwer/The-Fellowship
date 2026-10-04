@@ -76,4 +76,4 @@ def render():
 
     _gap(3)
     st.html(brand.footer_html())
-    st.caption("Prototype: accounts are stored on this computer only, and refreshing the page signs you out.")
+    st.caption("Prototype: refreshing the page signs you out.")

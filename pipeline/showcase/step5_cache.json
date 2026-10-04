@@ -1,0 +1,349 @@
+{
+ "c449493f2cd00c7656ebc41cd01f2defdb346dcc085408d73cc3aae0aef7bf93": {
+  "summary": "This researcher explores data collection and monetization strategies for robotics and skilled trades, with interest in space economy applications.",
+  "offers": [
+   {
+    "idea_id": "user_a60879a2_t1.s1",
+    "text": "Business model framework for egocentric video monetization in skilled trades"
+   },
+   {
+    "idea_id": "user_a60879a2_t1.s2",
+    "text": "Perspective on real-world data collection workflows for robot learning applications"
+   }
+  ],
+  "needs": [
+   {
+    "idea_id": "user_a60879a2_t1.s2",
+    "text": "Methods for processing and labeling egocentric physical interaction data at scale"
+   },
+   {
+    "idea_id": "user_a60879a2_t1.s1",
+    "text": "Access to skilled trades companies or technician data for validation of monetization models"
+   }
+  ]
+ },
+ "554751e1308a51b450a149e0b30da08c8b405605bb874996fa686ea3eda67cb1": {
+  "summary": "This researcher develops quantitative methods to analyze political communication patterns, rhetoric, and their electoral or economic effects across time and platforms.",
+  "offers": [
+   {
+    "idea_id": "user_a77d19a8_t1.s2",
+    "text": "Quantitative analysis of rhetorical patterns in large-scale parliamentary speech corpora"
+   },
+   {
+    "idea_id": "user_a77d19a8_t1.s1",
+    "text": "Detection of coordinated posting behavior and timing synchronization in public social media data"
+   }
+  ],
+  "needs": [
+   {
+    "idea_id": "user_a77d19a8_t1.s2",
+    "text": "Validated predictive models linking rhetorical patterns to subsequent electoral outcomes"
+   },
+   {
+    "idea_id": "user_a77d19a8_t2.s1",
+    "text": "Comparative data on economic and political effects of sporting success across different governance structures"
+   },
+   {
+    "idea_id": "user_a77d19a8_t1.s1",
+    "text": "Methodology for distinguishing coordinated influencer campaigns from organic correlated behavior"
+   }
+  ]
+ },
+ "dd2aa916717aed83dd18cbe20d357594708b05655578f33061f0cdfcc675f369": {
+  "summary": "This researcher examines business strategy in capital-intensive industries, cloud infrastructure performance, and machine learning approaches to robotics and data systems.",
+  "offers": [
+   {
+    "idea_id": "user_0eb7c844_t4.s1",
+    "text": "Five forces and strategic frontier analysis framework for capital-intensive industries"
+   },
+   {
+    "idea_id": "user_0eb7c844_t4.s1",
+    "text": "Operational cost benchmarking and decomposition methodology across competing firms"
+   },
+   {
+    "idea_id": "user_0eb7c844_t1.s1",
+    "text": "Analysis of transfer learning effectiveness from general pretraining to domain-specific robotics tasks"
+   }
+  ],
+  "needs": [
+   {
+    "idea_id": "user_0eb7c844_t2.s1",
+    "text": "GPU virtualization overhead measurement and benchmarking data under realistic cloud workloads"
+   },
+   {
+    "idea_id": "user_0eb7c844_t1.s1",
+    "text": "Engineering solutions for arm stability and grasp control in vision-language-action models"
+   },
+   {
+    "idea_id": "user_0eb7c844_t1.s2",
+    "text": "Methods for automatically deriving action labels from human video for robot learning"
+   }
+  ]
+ },
+ "7bc99f436320f50e135e7cd605677247762167485860fa452ee2db11daa77dc0": {
+  "summary": "This researcher develops methods for simulation-based robot design optimization and sim-to-real transfer, with interests in foundation models for manipulation and human-inspired locomotion control.",
+  "offers": [
+   {
+    "idea_id": "user_a90457b1_t1.s1",
+    "text": "AI-driven parametric CAD optimization through physics simulation for robot structure refinement"
+   },
+   {
+    "idea_id": "user_a90457b1_t1.s2",
+    "text": "Hybrid analytical-plus-neural system identification models for soft-material contact dynamics"
+   },
+   {
+    "idea_id": "user_a90457b1_t1.s4",
+    "text": "Kinematic and kinetic gait data from wearable sensors (insoles, IMUs, EMG) in real environments"
+   }
+  ],
+  "needs": [
+   {
+    "idea_id": "user_a90457b1_t1.s1",
+    "text": "Practical manufacturing methods or design constraints for AI-generated organic robot geometries compatible with 3D printing or CNC machining"
+   },
+   {
+    "idea_id": "user_a90457b1_t1.s2",
+    "text": "Generalization strategies for simulator calibration across multiple physical environments and conditions"
+   },
+   {
+    "idea_id": "user_a90457b1_t1.s3",
+    "text": "Methods to bridge domain gap between low-DOF rolling-contact vehicle dynamics and high-DOF contact-rich manipulation tasks"
+   }
+  ]
+ },
+ "faa7b8606199be3625441b1932286a6f0cbcb16dc0027ed68f09431f7274adad": {
+  "summary": "This researcher investigates environmental carcinogen exposure as a driver of rare glioblastoma variants, focusing on mutational signatures and regional exposure patterns.",
+  "offers": [
+   {
+    "idea_id": "user_ec428e5e_t2.s1",
+    "text": "Mutational signature analysis linking specific chemical exposures to glioma DNA damage patterns"
+   }
+  ],
+  "needs": [
+   {
+    "idea_id": "user_ec428e5e_t1.s1",
+    "text": "Geolocated incidence data for rare glioblastoma variants stratified by occupational or regional exposure context"
+   },
+   {
+    "idea_id": "user_ec428e5e_t1.s1",
+    "text": "High-resolution environmental contaminant mapping for pesticide and fire-retardant use across study regions"
+   },
+   {
+    "idea_id": "user_ec428e5e_t2.s1",
+    "text": "Haloalkane exposure assessment data from occupational or environmental cohorts with biological samples"
+   }
+  ]
+ },
+ "93adad2cac017dfd731359f0080eef667aa0f1d93a61147f5076b9642b5e1f44": {
+  "similarity": 1,
+  "complementarity": 2,
+  "verdict": "no_match",
+  "shared_topics": [],
+  "a_can_offer_b": "Strategy frameworks and cost benchmarking for capital-intensive industries, which do not address any stated need of researcher_1.",
+  "b_can_offer_a": "Text analysis and coordination-detection methods for public data, which do not address any stated need of amanjalan1997.",
+  "reason": "amanjalan1997 works on industrial strategy, cloud GPU performance and robotics learning, while researcher_1 works on quantitative political communication, so neither the problems nor the needs line up.",
+  "intro_for_a": "",
+  "intro_for_b": ""
+ },
+ "48adcb697010cf23d35ed1e8d1468cb9564e03829e22ff93f86ecf4ea74bd4f6": {
+  "similarity": 5,
+  "complementarity": 5,
+  "verdict": "no_match",
+  "shared_topics": [
+   "robotics foundation models",
+   "scarce robot training data",
+   "cross-domain transfer for manipulation"
+  ],
+  "a_can_offer_b": "Analysis of how general pretraining transfers to domain-specific robotics tasks, which is loosely relevant to robo67's vehicle-to-manipulation transfer question.",
+  "b_can_offer_a": "Wearable-sensor gait data (insoles, IMUs, EMG) and sim-to-real calibration expertise. These are only loosely related to amanjalan1997's need for action labels from human video.",
+  "reason": "Both are interested in getting around scarce robot data for foundation models, but amanjalan1997 is focused on VLA models, human video and business strategy, while robo67 works on simulation, design optimization and locomotion; the offers do not concretely match the needs.",
+  "intro_for_a": "You and robo67 are both interested in how robotics foundation models can avoid depending on scarce robot data. A possible first topic is how transfer from general pretraining compares with robo67's vehicle-data pretraining idea.",
+  "intro_for_b": "You and amanjalan1997 are both interested in cross-domain data sources for robot foundation models. A possible first topic is whether general pretraining or human video could help with the vehicle-to-manipulation domain gap."
+ },
+ "87dd73de015780fe5f6ffcfb9de4e8aec18418d4568f2a0485178ea1dcbefb30": {
+  "similarity": 6,
+  "complementarity": 4,
+  "verdict": "similar",
+  "shared_topics": [
+   "human/egocentric video as robot training data",
+   "real-world data collection for robot learning",
+   "data business models for robotics"
+  ],
+  "a_can_offer_b": "Analysis of how well general pretraining transfers to robotics tasks, and strategy and differentiation analysis for companies collecting human-task video.",
+  "b_can_offer_a": "A business model framework for monetizing egocentric video and a perspective on real-world data collection workflows for robot learning.",
+  "reason": "Both are interested in human or egocentric video as a way around scarce robot data, but neither holds the action-label derivation or labeling methods the other needs, so the overlap is in topic rather than in a concrete capability gap.",
+  "intro_for_a": "You and szoliwer are both looking at whether human task video can ease the real-world data bottleneck in robotics. szoliwer is working on egocentric data collection and monetization in skilled trades, so a good first topic is how such footage could be turned into usable training data and where the differentiation lies.",
+  "intro_for_b": "You and amanjalan1997 are both interested in first-person or human task video as a source of robot learning data. amanjalan1997 is thinking about how action labels get derived from raw footage and what makes a video-data company stand out, so a good first topic is what a defensible egocentric data offering would look like."
+ },
+ "59d5444a4c0a1b862f706f2c63f196b11e1923c09d8fd720e9c845e7ce29a518": {
+  "similarity": 6,
+  "complementarity": 7,
+  "verdict": "both",
+  "shared_topics": [
+   "pesticide and fire-retardant exposure",
+   "environmental drivers of cancer",
+   "regional exposure mapping"
+  ],
+  "a_can_offer_b": "High-resolution US pesticide and fire retardant usage data that could supply the regional exposure mapping researcher_cancer needs for glioblastoma incidence analyses.",
+  "b_can_offer_a": "Mutational signature analysis linking specific chemical exposures to DNA damage patterns, which could help test whether pesticide-linked cancer also occurs in exposed ecosystems.",
+  "reason": "Both study health and ecological effects of pesticide and fire-retardant exposure, and ecology_expert's high-resolution usage data matches researcher_cancer's stated need for exposure mapping.",
+  "intro_for_a": "You and researcher_cancer both look at pesticide and fire-retardant exposure, but researcher_cancer approaches it through rare glioblastoma variants and mutational signatures. Your high-resolution usage data could fill their exposure-mapping gap, so a good first topic is which regions and time windows would best test a link between exposure and glioma incidence.",
+  "intro_for_b": "You and ecology_expert are both interested in how pesticides and fire retardants affect health, and ecology_expert holds high-resolution US usage data for both. A good first topic is whether that data could serve as the regional exposure map for your glioblastoma incidence work, and whether mutational signatures could inform their questions about pesticide-linked cancer."
+ },
+ "90373906acd8899a2c3fe55bb48d34b2998f44612abd47bc60ef4b342fb91f12": {
+  "similarity": 2,
+  "complementarity": 2,
+  "verdict": "no_match",
+  "shared_topics": [
+   "variant-phenotype data",
+   "glioma genomics"
+  ],
+  "a_can_offer_b": "Methods for checking the reproducibility of LLM-based extraction of variant-phenotype mentions from papers, which might loosely support literature mining.",
+  "b_can_offer_a": "Mutational signature analysis for chemical exposure in glioma DNA, which does not address the membrane protein trafficking assay need.",
+  "reason": "researcher_014 works on LLM extraction reproducibility and needs a trafficking functional assay, while researcher_cancer studies environmental carcinogen exposure and mutational signatures in glioblastoma, and neither side's offer meets a concrete need of the other.",
+  "intro_for_a": "You and researcher_cancer work in quite different areas, so no introduction is suggested at this time.",
+  "intro_for_b": "You and researcher_014 work in quite different areas, so no introduction is suggested at this time."
+ },
+ "a0b5eb6c643b2a9e7c3b8dd9f1130e0f8e8d169f35f9d893fa470abf576cf215": {
+  "similarity": 1,
+  "complementarity": 1,
+  "verdict": "no_match",
+  "shared_topics": [],
+  "a_can_offer_b": "",
+  "b_can_offer_a": "",
+  "reason": "szoliwer works on egocentric data collection and monetization for robotics and skilled trades, while researcher_1 does quantitative political communication analysis; the fields do not overlap and neither holds a method or dataset that addresses the other's stated needs.",
+  "intro_for_a": "",
+  "intro_for_b": ""
+ },
+ "ed76d7a3e704bcd808098906fe62a4bb87161375ee6787b96df5b84bb634a792": {
+  "similarity": 4,
+  "complementarity": 3,
+  "verdict": "no_match",
+  "shared_topics": [
+   "real-world data for robot learning",
+   "human wearable data collection"
+  ],
+  "a_can_offer_b": "A business model framework for monetizing egocentric data and a perspective on real-world data collection workflows for robot learning.",
+  "b_can_offer_a": "Wearable gait data (insoles, IMUs, EMG), but this is locomotion data and not the egocentric, skilled-trades video that szoliwer needs processed and labeled.",
+  "reason": "Both care about real-world human and physical data for robot learning, but szoliwer focuses on business models for egocentric trades data while robo67 works on simulation, system identification and locomotion, so neither clearly fills the other's concrete bottleneck.",
+  "intro_for_a": "You and robo67 both care about getting real-world physical data into robot learning, though from different angles. This is only a loose overlap, so it is not a strong match.",
+  "intro_for_b": "You and szoliwer both care about real-world human data for robot learning, though szoliwer focuses on egocentric trades data and monetization. This is only a loose overlap, so it is not a strong match."
+ },
+ "9f08c0ccec7f0f8a5ff0bdbcbc15aff1edf5544cbe32ecc563b2c5f1c853a79b": {
+  "summary": "This researcher develops live-cell assays to study membrane-protein recycling defects in patient-derived cells, with a focus on distinguishing genuine trafficking phenotypes from imaging artifacts.",
+  "offers": [
+   {
+    "idea_id": "user_b_c01",
+    "text": "pH-sensitive reporter for timing protein arrival at the cell surface"
+   },
+   {
+    "idea_id": "user_b_c01",
+    "text": "Pulse-chase and surface-biotinylation assays in patient-derived fibroblasts"
+   },
+   {
+    "idea_id": "user_b_c02",
+    "text": "Comparison of live and fixed imaging to validate membrane-trafficking phenotypes"
+   }
+  ],
+  "needs": [
+   {
+    "idea_id": "user_b_c03",
+    "text": "Patient-derived cells with characterized mislocalization phenotypes"
+   },
+   {
+    "idea_id": "user_b_c04",
+    "text": "Few-shot segmentation model trained to automate endosome counting in fluorescence images"
+   }
+  ]
+ },
+ "6cfaa08acca9685cf25990b825b6ee0dd04d2663ec70d622d43bc48d2dc5bcd8": {
+  "summary": "This researcher investigates membrane-protein trafficking defects in Disease A using cell imaging and functional assays, and is developing quality-control methods for LLM-assisted literature extraction.",
+  "offers": [
+   {
+    "idea_id": "user_a_c01",
+    "text": "Quantitative comparison of total protein abundance versus surface-localized fraction in patient fibroblasts"
+   },
+   {
+    "idea_id": "user_a_c02",
+    "text": "High-resolution imaging data distinguishing protein mislocalization in Disease A cells from controls"
+   },
+   {
+    "idea_id": "user_a_c05",
+    "text": "Multi-run consistency evaluation framework for LLM-extracted biomedical data with human validation"
+   }
+  ],
+  "needs": [
+   {
+    "idea_id": "user_a_c03",
+    "text": "Design and execution of time-resolved functional trafficking assay with appropriate pathway and protein controls"
+   },
+   {
+    "idea_id": "user_a_c02",
+    "text": "Validation strategy to distinguish true functional effects from assay artifacts in Disease A cells"
+   },
+   {
+    "idea_id": "user_a_c04",
+    "text": "Optimization of LLM-based variant extraction to improve recall consistency across repeated literature mining runs"
+   }
+  ]
+ },
+ "560f89e3e1668d66bc5c69cfaa7a30378dc9284a9b92b943bd04df68b2f21778": {
+  "similarity": 1,
+  "complementarity": 1,
+  "verdict": "no_match",
+  "shared_topics": [],
+  "a_can_offer_b": "",
+  "b_can_offer_a": "",
+  "reason": "researcher_014 works on membrane-protein trafficking in Disease A and LLM literature-extraction quality control, while robo67 works on robot design optimization and sim-to-real transfer; the fields and needs do not meet.",
+  "intro_for_a": "",
+  "intro_for_b": ""
+ },
+ "90d2d83a7f7a3284ef4fa8c3cb5888c01c6fd7c082c855d431c285af9fee6d3d": {
+  "similarity": 1,
+  "complementarity": 2,
+  "verdict": "no_match",
+  "shared_topics": [],
+  "a_can_offer_b": "",
+  "b_can_offer_a": "",
+  "reason": "amanjalan1997 works on business strategy, GPU cloud performance and robotics foundation models, while cellbio_027 works on live-cell membrane-trafficking assays; the only link is a loose machine-learning connection to image segmentation, which does not address a concrete need on either side.",
+  "intro_for_a": "",
+  "intro_for_b": ""
+ },
+ "d460f25d999a42e82b3eaf0943cef824bea1aca63f4d872e01de2769dad80b03": {
+  "similarity": 1,
+  "complementarity": 1,
+  "verdict": "no_match",
+  "shared_topics": [],
+  "a_can_offer_b": "",
+  "b_can_offer_a": "",
+  "reason": "ecology_expert studies ecosystem-level pesticide and fire retardant impacts and wildlife cancer, while cellbio_027 develops live-cell membrane-trafficking assays in patient-derived fibroblasts; the overlap in 'disease' is only superficial and neither holds something the other concretely needs.",
+  "intro_for_a": "",
+  "intro_for_b": ""
+ },
+ "a31efa0f4306a6db57574b6e7f28a38f090747a43106315191942c6e25bc6cef": {
+  "similarity": 1,
+  "complementarity": 2,
+  "verdict": "no_match",
+  "shared_topics": [],
+  "a_can_offer_b": "A multi-run consistency framework for LLM literature extraction could in principle be applied to mining papers, but researcher_cancer needs geolocated incidence and exposure data, not literature extraction.",
+  "b_can_offer_a": "Mutational signature analysis of glioma DNA does not address the trafficking assay design or assay-artifact validation that researcher_014 needs.",
+  "reason": "researcher_014 works on membrane-protein trafficking in Disease A cells and LLM extraction quality control, while researcher_cancer studies environmental carcinogen exposure and glioblastoma mutational signatures; the fields and needs do not meaningfully connect.",
+  "intro_for_a": "",
+  "intro_for_b": ""
+ },
+ "020d1a455ff84b3cefad6d6a79852c360ed1e78e10411b50d66dfcad0f15b7e1": {
+  "similarity": 8,
+  "complementarity": 9,
+  "verdict": "both",
+  "shared_topics": [
+   "membrane-protein trafficking and recycling defects in patient fibroblasts",
+   "time-resolved pulse-chase and surface-labelling assays",
+   "separating true trafficking phenotypes from assay artifacts"
+  ],
+  "a_can_offer_b": "Disease A patient fibroblasts with a characterized mislocalization phenotype (about 60% of cells vs 15% in controls), plus total-versus-surface protein quantification, which is the disease cohort cellbio_027 needs to test its assays on.",
+  "b_can_offer_a": "A validated live-cell toolkit: a pH-sensitive reporter that times surface arrival, pulse-chase and surface-biotinylation assays, a standard control set (endocytosis block, Golgi-exit block, unaffected cargo), and live-versus-fixed imaging checks to rule out artifacts.",
+  "reason": "Both study membrane-protein mislocalization in patient fibroblasts. researcher_014 has a Disease A phenotype but no functional trafficking assay, and cellbio_027 has validated assays and artifact controls but no patient cells.",
+  "intro_for_a": "You're looking for a cell biologist to design a time-resolved trafficking assay, and cellbio_027 has built pulse-chase, surface-biotinylation and a pH-sensitive surface-arrival reporter in patient fibroblasts, with the control set you describe. A good first topic is whether live-versus-fixed imaging confirms the perinuclear accumulation you see in Disease A cells.",
+  "intro_for_b": "You need patient-derived cells with a clear mislocalization phenotype, and researcher_014 has Disease A fibroblasts where about 60% of cells show mislocalization versus 15% of controls, along with total-versus-surface protein data. A good first topic is running your live-cell recycling assays on these cells to separate slower delivery, faster internalisation and failed recycling."
+ }
+}

@@ -1,0 +1,25 @@
+{
+  "user_a|user_b": {
+    "messages": [
+      {
+        "from": "user_a",
+        "text": "Hi! Your live-cell recycling assays look like exactly what I need to test the trafficking hypothesis for Disease A. Would you be up for comparing notes?",
+        "at": "2026-10-04T02:39:49Z"
+      },
+      {
+        "from": "user_b",
+        "text": "Happy to! I could run two or three of your patient-derived lines through the assay. Which markers are you most sure about?",
+        "at": "2026-10-04T02:39:49Z"
+      },
+      {
+        "from": "user_a",
+        "text": "The transferrin receptor first: that's where the mislocalisation is clearest. I'll send you the construct list.",
+        "at": "2026-10-04T02:39:49Z"
+      }
+    ],
+    "read": {
+      "user_a": 3,
+      "user_b": 2
+    }
+  }
+}

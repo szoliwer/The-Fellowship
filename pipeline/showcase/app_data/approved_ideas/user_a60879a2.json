@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_a60879a2",
+  "approved_at": "2026-10-03T23:58:33Z",
+  "ideas": [
+    {
+      "user_id": "user_a60879a2",
+      "idea_id": "user_a60879a2_t1.s1",
+      "type": "interest",
+      "evidence": [
+        "src_5d6a9886909c"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 1,
+      "rank_score": 0.7,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 0.333,
+        "recency": 0.0
+      },
+      "summary": "egocentric data monetization in skilled trades",
+      "insights": [
+        "Skilled trades companies could collect technicians' first-person job data and turn it into scalable additional revenue streams."
+      ]
+    },
+    {
+      "user_id": "user_a60879a2",
+      "idea_id": "user_a60879a2_t1.s2",
+      "type": "interest",
+      "evidence": [
+        "src_f0cdc52f96db"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 1,
+      "rank_score": 0.7,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 0.333,
+        "recency": 0.0
+      },
+      "summary": "real-world data collection for robot learning",
+      "insights": [
+        "Collecting real-world physical interaction data is a central unresolved challenge in current robotics automation."
+      ]
+    },
+    {
+      "user_id": "user_a60879a2",
+      "idea_id": "user_a60879a2_t2.s1",
+      "type": "interest",
+      "evidence": [
+        "src_aca40d16fbba"
+      ],
+      "first_seen": null,
+      "last_seen": null,
+      "mentions": 3,
+      "rank_score": 0.4,
+      "score_parts": {
+        "primary": 0.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "future space economy technologies",
+      "insights": [
+        "Space technologies, conceptual and in development, can be learned as a sequence where each concept builds on fundamentals.",
+        "Conceptual grasp of key future space technologies, without deep technical detail, can support contributing to the space economy."
+      ]
+    }
+  ],
+  "review": {
+    "ideas_off": [],
+    "ideas_removed": [],
+    "details_off": [],
+    "details_removed": [],
+    "approved": {
+      "user_a60879a2_t1.s1": [
+        "user_a60879a2_t1.s1::f720760c"
+      ],
+      "user_a60879a2_t1.s2": [
+        "user_a60879a2_t1.s2::90ddbd29"
+      ],
+      "user_a60879a2_t2.s1": [
+        "user_a60879a2_t2.s1::414ec5cd",
+        "user_a60879a2_t2.s1::f72826ab"
+      ]
+    }
+  }
+}

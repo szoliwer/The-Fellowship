@@ -1,0 +1,9 @@
+{
+  "user_a|user_b": {
+    "decisions": {
+      "user_a": "connect",
+      "user_b": "connect"
+    },
+    "updated_at": "2026-10-04T02:39:49Z"
+  }
+}

@@ -21,5 +21,8 @@ The shared app (`app.py` at the repo root) shows one page per step for the logge
 - **`discover_page.py`** (Step 6, Oliver + Colin): a plain match screen. Provide a `render(user)` in your step folder and point page 6 in `app.py` at it. `matches.py` already gives each user their own side of every match, hides a "pass" until both decide, and only shows the warm intro after both said yes. Reuse it or replace it.
 - **`messages_page.py` / `messages.py`** (Step 6, Oliver + Colin): text chat between two people who both said yes, laid out like the desktop mockup (connections on the left, conversation on the right, warm intro pinned at the top; open pages check for new messages every 3 seconds). Only a connected pair can write; a later "pass" closes the chat. Not built yet: voice notes, sharing a past AI chat, the AI's nudges, sounds (D-017).
 
+## Hosted demo
+- **`showcase.py`** fills an empty app (the hosted demo, after every restart) from **`showcase/`**, never overwriting anything; on a laptop with data it does nothing. **`build_showcase.py`** rebuilds that folder from this laptop: synthetic demo researchers plus the team's usernames, approved ideas and matches (D-018). `showcase/` is public: the checks scan it for email addresses and allow only approved-idea fields.
+
 ## Checks
 Free and offline (no API calls): `.venv/bin/python -m unittest discover -s pipeline -t .`. They include a Step 4 → 5 → 6 run on the synthetic sample users.

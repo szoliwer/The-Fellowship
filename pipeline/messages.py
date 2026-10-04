@@ -6,7 +6,7 @@ Rules:
     other. If either later passes, the conversation is closed and hidden.
   • Conversations are keyed by the pair of users (like match decisions), so they survive
     re-running Step 5.
-  • Messages are stored on this laptop only, in data/messages.json (git-ignored).
+  • Messages are stored only by this app, in data/messages.json (git-ignored).
 
 File format:
   {"<user_a>|<user_b>": {"messages": [{"from": user_id, "text": str, "at": "...Z"}],

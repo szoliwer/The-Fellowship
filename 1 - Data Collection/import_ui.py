@@ -32,7 +32,7 @@ def _confirm_removal(user_id, sources, on_removed):
         return
     what = f"“{titles[ids[0]]}”" if len(ids) == 1 else f"all {len(ids)} imported chats"
     with st.container(border=True):
-        st.warning(f"Remove {what}? It is deleted from this laptop, together with its screening result. "
+        st.warning(f"Remove {what}? It is deleted, together with its screening result. "
                    "This can't be undone.", icon=":material/delete:")
         yes, no = st.columns(2)
         if yes.button("Yes, remove", type="primary", use_container_width=True):
@@ -67,7 +67,7 @@ def render(user, on_removed=None):
     """on_removed(user_id) is called after chats are removed, so later steps can forget them."""
     user_id = user["user_id"]
     st.title("Import your research chats")
-    brand.lead("Bring in the conversations you want to be matched on. Files stay private on this laptop.")
+    brand.lead("Bring in the conversations you want to be matched on. Only you can see them.")
 
     is_demo = user_id in im.DEMO_FIXTURES
     tabs = st.tabs(["Upload files", "Paste a chat"] + (["Demo history"] if is_demo else []))

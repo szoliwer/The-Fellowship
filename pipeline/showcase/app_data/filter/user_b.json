@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_b",
+  "entries": [
+    {
+      "source_id": "b_s01",
+      "title": "Functional readouts beyond localization in Disease B",
+      "content_hash": "4ea2790e90bc263a60ed0cd140611860ceae71da7567cd55618c02dafbd732fa",
+      "prompt_version": "v8",
+      "screened_at": "2026-10-04T02:36:29Z",
+      "rule_hits": [],
+      "model": "claude-sonnet-5-5",
+      "status": "screened",
+      "decision": "eligible",
+      "exclusion_reason": "none",
+      "sensitive_category": [],
+      "explanation": "This is a research discussion about functional readouts for transporter trafficking, with no personal information and only a preliminary pilot result described.",
+      "removed_message_ids": [],
+      "redacted_spans": [],
+      "total_messages": 5,
+      "recheck": [],
+      "error": null,
+      "owner_excluded": false
+    },
+    {
+      "source_id": "b_s02",
+      "title": "Controls to separate assay artifacts from a real trafficking effect",
+      "content_hash": "268a2d44235498b8dc9bb2f7798e85976344bf694b1014e7f39982922c021591",
+      "prompt_version": "v8",
+      "screened_at": "2026-10-04T02:36:31Z",
+      "rule_hits": [],
+      "model": "claude-sonnet-5-5",
+      "status": "screened",
+      "decision": "eligible",
+      "exclusion_reason": "none",
+      "sensitive_category": [],
+      "explanation": "The conversation is purely about assay controls and methods for studying protein trafficking, with no personal information.",
+      "removed_message_ids": [],
+      "redacted_spans": [],
+      "total_messages": 4,
+      "recheck": [],
+      "error": null,
+      "owner_excluded": false
+    }
+  ]
+}

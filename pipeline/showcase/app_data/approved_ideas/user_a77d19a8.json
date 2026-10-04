@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_a77d19a8",
+  "approved_at": "2026-10-03T23:45:04Z",
+  "ideas": [
+    {
+      "user_id": "user_a77d19a8",
+      "idea_id": "user_a77d19a8_t1.s2",
+      "type": "project",
+      "evidence": [
+        "src_87c587f8d3de"
+      ],
+      "first_seen": "2026-09-13",
+      "last_seen": "2026-09-13",
+      "mentions": 4,
+      "rank_score": 0.97,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 0.8,
+        "recency": 1.0
+      },
+      "summary": "quantitative party-leader rhetoric analysis",
+      "insights": [
+        "Comparing all leaders' speeches at identical recurring occasions can show whether distinct language proportions substantiate a party's distinctiveness.",
+        "Quantified rhetorical patterns across decades of parliamentary speeches may predict subsequent gains in party electoral support."
+      ]
+    },
+    {
+      "user_id": "user_a77d19a8",
+      "idea_id": "user_a77d19a8_t2.s1",
+      "type": "interest",
+      "evidence": [
+        "src_9b2843cea184_clean"
+      ],
+      "first_seen": "2026-06-27",
+      "last_seen": "2026-06-27",
+      "mentions": 2,
+      "rank_score": 0.761,
+      "score_parts": {
+        "primary": 1.0,
+        "chats": 1.0,
+        "mentions": 0.4,
+        "recency": 0.257
+      },
+      "summary": "national sporting success effects",
+      "insights": [
+        "Economic and political returns from unexpectedly strong World Cup performance likely differ systematically across governance structures."
+      ]
+    },
+    {
+      "user_id": "user_a77d19a8",
+      "idea_id": "user_a77d19a8_t1.s1",
+      "type": "interest",
+      "evidence": [
+        "src_be695ea5c084"
+      ],
+      "first_seen": "2026-05-31",
+      "last_seen": "2026-05-31",
+      "mentions": 5,
+      "rank_score": 0.4,
+      "score_parts": {
+        "primary": 0.0,
+        "chats": 1.0,
+        "mentions": 1.0,
+        "recency": 0.0
+      },
+      "summary": "coordinated political influencer campaigns",
+      "insights": [
+        "Claims that consultancies covertly pay political influencers can be empirically tested using only public data, without FOIA records.",
+        "If two accounts posting jointly makes a third far likelier to post than either alone, that indicates coordination.",
+        "Topic-coding posts from a fixed set of top partisan influencers could expose surprising cross-account timing coordination."
+      ]
+    },
+    {
+      "user_id": "user_a77d19a8",
+      "idea_id": "user_a77d19a8_t3.s1",
+      "type": "interest",
+      "evidence": [
+        "src_9b2843cea184_clean"
+      ],
+      "first_seen": "2026-06-27",
+      "last_seen": "2026-06-27",
+      "mentions": 2,
+      "rank_score": 0.361,
+      "score_parts": {
+        "primary": 0.0,
+        "chats": 1.0,
+        "mentions": 0.4,
+        "recency": 0.257
+      },
+      "summary": "generative AI adoption in firms",
+      "insights": [
+        "Generative AI access alone may yield little productivity; gains depend on workflow redesign and review structures within firms."
+      ]
+    }
+  ],
+  "review": {
+    "ideas_off": [],
+    "ideas_removed": [],
+    "details_off": [],
+    "details_removed": [],
+    "approved": {
+      "user_a77d19a8_t1.s2": [
+        "user_a77d19a8_t1.s2::3cca810e",
+        "user_a77d19a8_t1.s2::a0d90978"
+      ],
+      "user_a77d19a8_t2.s1": [
+        "user_a77d19a8_t2.s1::5a0f0ce8"
+      ],
+      "user_a77d19a8_t1.s1": [
+        "user_a77d19a8_t1.s1::4dbc4913",
+        "user_a77d19a8_t1.s1::b9738a00",
+        "user_a77d19a8_t1.s1::4885fda2"
+      ],
+      "user_a77d19a8_t3.s1": [
+        "user_a77d19a8_t3.s1::3dfc9a9b"
+      ]
+    }
+  }
+}

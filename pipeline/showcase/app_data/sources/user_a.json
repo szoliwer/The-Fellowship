@@ -1,0 +1,341 @@
+{
+  "schema_version": "1.0",
+  "user_id": "user_a",
+  "sources": [
+    {
+      "user_id": "user_a",
+      "source_id": "a_s01",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s01-m00",
+          "role": "user",
+          "text": "In fibroblasts from Disease A patients we keep seeing a membrane protein piling up near the nucleus instead of reaching the cell surface. Could altered intracellular trafficking explain the phenotype, or am I over-reading one observation?",
+          "created_at": "2026-09-04T12:10:00Z"
+        },
+        {
+          "message_id": "a_s01-m01",
+          "role": "assistant",
+          "text": "It's a reasonable hypothesis, but the same picture could come from several causes: slower delivery from the Golgi, faster internalisation, failure to recycle from endosomes, or simply more of the protein being made. Each predicts something different about where and how fast the protein moves, so the next step is to separate them.",
+          "created_at": "2026-09-04T12:11:00Z"
+        },
+        {
+          "message_id": "a_s01-m02",
+          "role": "user",
+          "text": "So I should treat 'trafficking defect' as a hypothesis to test, not a conclusion. What would most cleanly separate those explanations?",
+          "created_at": "2026-09-04T12:12:00Z"
+        },
+        {
+          "message_id": "a_s01-m03",
+          "role": "assistant",
+          "text": "Comparing total protein levels with the surface fraction rules expression in or out. Timing how quickly the protein reaches or leaves the surface separates delivery from recycling. Co-staining with compartment markers shows where it is stuck.",
+          "created_at": "2026-09-04T12:13:00Z"
+        }
+      ],
+      "raw_text": "User: In fibroblasts from Disease A patients we keep seeing a membrane protein piling up near the nucleus instead of reaching the cell surface. Could altered intracellular trafficking explain the phenotype, or am I over-reading one observation?\n\nAssistant: It's a reasonable hypothesis, but the same picture could come from several causes: slower delivery from the Golgi, faster internalisation, failure to recycle from endosomes, or simply more of the protein being made. Each predicts something different about where and how fast the protein moves, so the next step is to separate them.\n\nUser: So I should treat 'trafficking defect' as a hypothesis to test, not a conclusion. What would most cleanly separate those explanations?\n\nAssistant: Comparing total protein levels with the surface fraction rules expression in or out. Timing how quickly the protein reaches or leaves the surface separates delivery from recycling. Co-staining with compartment markers shows where it is stuck.",
+      "provenance": {
+        "original_conversation_id": "a_s01",
+        "title": "Could trafficking explain the Disease A phenotype?",
+        "created_at": "2026-09-04T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s01-m00",
+          "a_s01-m01",
+          "a_s01-m02",
+          "a_s01-m03"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s02",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s02-m00",
+          "role": "user",
+          "text": "Our immunofluorescence shows mislocalization in about 60% of Disease A cells versus 15% of controls. Does that tell us anything about function, or only about location?",
+          "created_at": "2026-09-07T12:10:00Z"
+        },
+        {
+          "message_id": "a_s02-m01",
+          "role": "assistant",
+          "text": "On its own it tells you about location. A protein can be in an unusual place and still work, or look normal and be impaired. To link location to the phenotype you need a functional readout: for example, a cargo-uptake measurement, a pulse-chase to follow delivery over time, or surface labelling to quantify how much arrives.",
+          "created_at": "2026-09-07T12:11:00Z"
+        },
+        {
+          "message_id": "a_s02-m02",
+          "role": "user",
+          "text": "We've only ever done imaging. I'm not sure which functional measurement fits our question, or how to tell a real effect from an artifact of the assay itself.",
+          "created_at": "2026-09-07T12:12:00Z"
+        },
+        {
+          "message_id": "a_s02-m03",
+          "role": "assistant",
+          "text": "That's the key gap: picking a functional readout that matches the hypothesis, with controls that rule out artifacts. Someone who has designed trafficking assays before would help you choose.",
+          "created_at": "2026-09-07T12:13:00Z"
+        }
+      ],
+      "raw_text": "User: Our immunofluorescence shows mislocalization in about 60% of Disease A cells versus 15% of controls. Does that tell us anything about function, or only about location?\n\nAssistant: On its own it tells you about location. A protein can be in an unusual place and still work, or look normal and be impaired. To link location to the phenotype you need a functional readout: for example, a cargo-uptake measurement, a pulse-chase to follow delivery over time, or surface labelling to quantify how much arrives.\n\nUser: We've only ever done imaging. I'm not sure which functional measurement fits our question, or how to tell a real effect from an artifact of the assay itself.\n\nAssistant: That's the key gap: picking a functional readout that matches the hypothesis, with controls that rule out artifacts. Someone who has designed trafficking assays before would help you choose.",
+      "provenance": {
+        "original_conversation_id": "a_s02",
+        "title": "Does mislocalization mean function changed?",
+        "created_at": "2026-09-07T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s02-m00",
+          "a_s02-m01",
+          "a_s02-m02",
+          "a_s02-m03"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s03",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s03-m00",
+          "role": "user",
+          "text": "I'm honestly uncertain here. If the trafficking idea is right, what assay would test it, and what kind of expertise would I need? Nobody in our group has run functional trafficking assays.",
+          "created_at": "2026-09-10T12:10:00Z"
+        },
+        {
+          "message_id": "a_s03-m01",
+          "role": "assistant",
+          "text": "You'd want a measurement of movement over time rather than a snapshot, plus controls: a condition known to block the pathway, a protein that should be unaffected, and a check that the labelling itself doesn't change trafficking. A cell biologist with assay-design experience could tell you which is feasible with your cells.",
+          "created_at": "2026-09-10T12:11:00Z"
+        },
+        {
+          "message_id": "a_s03-m02",
+          "role": "user",
+          "text": "Good. Then the open question is really: which functional measurement, with which controls, and who could help design it.",
+          "created_at": "2026-09-10T12:12:00Z"
+        }
+      ],
+      "raw_text": "User: I'm honestly uncertain here. If the trafficking idea is right, what assay would test it, and what kind of expertise would I need? Nobody in our group has run functional trafficking assays.\n\nAssistant: You'd want a measurement of movement over time rather than a snapshot, plus controls: a condition known to block the pathway, a protein that should be unaffected, and a check that the labelling itself doesn't change trafficking. A cell biologist with assay-design experience could tell you which is feasible with your cells.\n\nUser: Good. Then the open question is really: which functional measurement, with which controls, and who could help design it.",
+      "provenance": {
+        "original_conversation_id": "a_s03",
+        "title": "What assay or expertise could test the hypothesis?",
+        "created_at": "2026-09-10T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s03-m00",
+          "a_s03-m01",
+          "a_s03-m02"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s04",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s04-m00",
+          "role": "user",
+          "text": "We're using an LLM to pull variant-phenotype mentions out of papers for a literature review. Running the same paper twice gives slightly different lists. How worried should I be about reproducibility?",
+          "created_at": "2026-09-13T12:10:00Z"
+        },
+        {
+          "message_id": "a_s04-m01",
+          "role": "assistant",
+          "text": "Some variation is expected. It matters most if the differences change your conclusions. Measure it before deciding: run each paper several times and check how often the extracted items agree.",
+          "created_at": "2026-09-13T12:11:00Z"
+        },
+        {
+          "message_id": "a_s04-m02",
+          "role": "user",
+          "text": "Here's a screenshot of two runs on the same paper. The second run missed two variants.",
+          "created_at": "2026-09-13T12:12:00Z"
+        },
+        {
+          "message_id": "a_s04-m03",
+          "role": "assistant",
+          "text": "Missing items between runs suggests recall is the weak spot. Track agreement per item, not just per paper, so you can see which mentions are unstable.",
+          "created_at": "2026-09-13T12:13:00Z"
+        }
+      ],
+      "raw_text": "User: We're using an LLM to pull variant-phenotype mentions out of papers for a literature review. Running the same paper twice gives slightly different lists. How worried should I be about reproducibility?\n\nAssistant: Some variation is expected. It matters most if the differences change your conclusions. Measure it before deciding: run each paper several times and check how often the extracted items agree.\n\nUser: Here's a screenshot of two runs on the same paper. The second run missed two variants.\n\nAssistant: Missing items between runs suggests recall is the weak spot. Track agreement per item, not just per paper, so you can see which mentions are unstable.",
+      "provenance": {
+        "original_conversation_id": "a_s04",
+        "title": "How reproducible is LLM-assisted literature extraction?",
+        "created_at": "2026-09-13T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s04-m00",
+          "a_s04-m01",
+          "a_s04-m02",
+          "a_s04-m03"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s05",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s05-m00",
+          "role": "user",
+          "text": "Following up on extraction reproducibility: if I run each paper three times, how do I handle items that appear in only one or two runs?",
+          "created_at": "2026-09-15T12:10:00Z"
+        },
+        {
+          "message_id": "a_s05-m01",
+          "role": "assistant",
+          "text": "Treat agreement as a signal. Items found in all runs can be accepted with spot checks, while items that appear inconsistently go to a human reviewer. Record how often the reviewer overturns the model so you can report an error rate.",
+          "created_at": "2026-09-15T12:11:00Z"
+        },
+        {
+          "message_id": "a_s05-m02",
+          "role": "user",
+          "text": "So the workflow is repeated extraction, then agreement scoring, then human checking of the disagreements, with the human decisions logged.",
+          "created_at": "2026-09-15T12:12:00Z"
+        }
+      ],
+      "raw_text": "User: Following up on extraction reproducibility: if I run each paper three times, how do I handle items that appear in only one or two runs?\n\nAssistant: Treat agreement as a signal. Items found in all runs can be accepted with spot checks, while items that appear inconsistently go to a human reviewer. Record how often the reviewer overturns the model so you can report an error rate.\n\nUser: So the workflow is repeated extraction, then agreement scoring, then human checking of the disagreements, with the human decisions logged.",
+      "provenance": {
+        "original_conversation_id": "a_s05",
+        "title": "Checking disagreements between extraction runs",
+        "created_at": "2026-09-15T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s05-m00",
+          "a_s05-m01",
+          "a_s05-m02"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s06",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s06-m00",
+          "role": "user",
+          "text": "I've had headaches most mornings for three weeks and I'm sleeping badly. I'm also taking a new medication. Should I be worried about my own health here?",
+          "created_at": "2026-09-17T12:10:00Z"
+        },
+        {
+          "message_id": "a_s06-m01",
+          "role": "assistant",
+          "text": "I can't diagnose you, but headaches that persist for weeks, especially after starting a new medication, are worth raising with your doctor soon.",
+          "created_at": "2026-09-17T12:11:00Z"
+        }
+      ],
+      "raw_text": "User: I've had headaches most mornings for three weeks and I'm sleeping badly. I'm also taking a new medication. Should I be worried about my own health here?\n\nAssistant: I can't diagnose you, but headaches that persist for weeks, especially after starting a new medication, are worth raising with your doctor soon.",
+      "provenance": {
+        "original_conversation_id": "a_s06",
+        "title": "Headaches and poor sleep",
+        "created_at": "2026-09-17T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s06-m00",
+          "a_s06-m01"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s07",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s07-m00",
+          "role": "user",
+          "text": "Help me plan repayments. Take-home pay is 3,100 a month, rent is 1,400, and the loan on account TEST-0000-4471 has 8,200 left at 6.5%.",
+          "created_at": "2026-09-19T12:10:00Z"
+        },
+        {
+          "message_id": "a_s07-m01",
+          "role": "assistant",
+          "text": "After rent you have 1,700 a month. Paying 400 a month toward the loan would clear it in roughly two years. Want a month-by-month table?",
+          "created_at": "2026-09-19T12:11:00Z"
+        }
+      ],
+      "raw_text": "User: Help me plan repayments. Take-home pay is 3,100 a month, rent is 1,400, and the loan on account TEST-0000-4471 has 8,200 left at 6.5%.\n\nAssistant: After rent you have 1,700 a month. Paying 400 a month toward the loan would clear it in roughly two years. Want a month-by-month table?",
+      "provenance": {
+        "original_conversation_id": "a_s07",
+        "title": "Budget and loan repayment",
+        "created_at": "2026-09-19T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s07-m00",
+          "a_s07-m01"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s08",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s08-m00",
+          "role": "user",
+          "text": "I land at 14:20 on the 12th and the hotel check-in is 15:00. Can you draft a schedule that fits three 30-minute meetings before the 18:00 reception?",
+          "created_at": "2026-09-21T12:10:00Z"
+        },
+        {
+          "message_id": "a_s08-m01",
+          "role": "assistant",
+          "text": "Here's one option: 15:30, 16:15 and 17:00, each with a 15-minute buffer.",
+          "created_at": "2026-09-21T12:11:00Z"
+        }
+      ],
+      "raw_text": "User: I land at 14:20 on the 12th and the hotel check-in is 15:00. Can you draft a schedule that fits three 30-minute meetings before the 18:00 reception?\n\nAssistant: Here's one option: 15:30, 16:15 and 17:00, each with a 15-minute buffer.",
+      "provenance": {
+        "original_conversation_id": "a_s08",
+        "title": "Conference travel and meeting logistics",
+        "created_at": "2026-09-21T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s08-m00",
+          "a_s08-m01"
+        ],
+        "derived_from_source_id": null
+      }
+    },
+    {
+      "user_id": "user_a",
+      "source_id": "a_s09",
+      "source_type": "demo",
+      "messages": [
+        {
+          "message_id": "a_s09-m00",
+          "role": "user",
+          "text": "One of our clinic patients, Jordan Ellery, 34, from Millbrook, record number MRN-0000123, has the strongest mislocalization we've seen. Her family history might explain why. Does her case support the trafficking hypothesis?",
+          "created_at": "2026-09-23T12:10:00Z"
+        },
+        {
+          "message_id": "a_s09-m01",
+          "role": "assistant",
+          "text": "A single case can motivate the hypothesis but can't confirm it. I'd avoid sharing identifying details; the useful part for your question is the phenotype pattern, which you could compare across de-identified samples.",
+          "created_at": "2026-09-23T12:11:00Z"
+        }
+      ],
+      "raw_text": "User: One of our clinic patients, Jordan Ellery, 34, from Millbrook, record number MRN-0000123, has the strongest mislocalization we've seen. Her family history might explain why. Does her case support the trafficking hypothesis?\n\nAssistant: A single case can motivate the hypothesis but can't confirm it. I'd avoid sharing identifying details; the useful part for your question is the phenotype pattern, which you could compare across de-identified samples.",
+      "provenance": {
+        "original_conversation_id": "a_s09",
+        "title": "Clinic case notes and the trafficking phenotype",
+        "created_at": "2026-09-23T12:00:00Z",
+        "imported_at": "2026-10-03T20:33:13Z",
+        "message_ids": [
+          "a_s09-m00",
+          "a_s09-m01"
+        ],
+        "derived_from_source_id": null
+      }
+    }
+  ]
+}

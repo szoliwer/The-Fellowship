@@ -4,19 +4,22 @@
 """
 
 import json
+import re
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-for folder in ["3 - Idea Generation", "4 - Idea Ranking", "5 - Match Generation"]:
+for folder in ["0 - User Registration", "3 - Idea Generation", "4 - Idea Ranking", "5 - Match Generation"]:
     sys.path.insert(0, str(ROOT / folder))
 
 import review as rv  # noqa: E402  (Step 4)
 from pipeline import matches as mt  # noqa: E402
 from pipeline import messages as msg  # noqa: E402
 from pipeline import ranking  # noqa: E402
+from pipeline import showcase  # noqa: E402
+import registration as reg  # noqa: E402  (Step 0)
 
 STEP3_SAMPLE = ROOT / "3 - Idea Generation" / "samples" / "output" / "user_a.json"
 
@@ -158,6 +161,55 @@ class MessageTests(TwoPersonMatch):
         self.assertEqual(msg.conversations("user_a", **self.files()), [])
         with self.assertRaises(msg.MessageError):
             self.send("user_a", "user_b", "Are you there?")
+
+
+class ShowcaseTests(unittest.TestCase):
+    """The hosted demo's data (pipeline/showcase/) is public: check what it may contain, and how it loads."""
+
+    DEMO = {"user_a", "user_b"}
+
+    def test_bundle_holds_no_private_details(self):
+        files = [f for f in showcase.BUNDLE.rglob("*") if f.is_file()]
+        self.assertTrue(files, "run: .venv/bin/python -m pipeline.build_showcase")
+        email = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
+        for f in files:
+            self.assertIsNone(email.search(f.read_text(encoding="utf-8", errors="ignore")), f"email-like text in {f}")
+        people = json.loads((showcase.BUNDLE / "people.json").read_text())
+        self.assertTrue(all(set(p) == {"user_id", "pseudonym"} for p in people))
+        app_data = showcase.BUNDLE / "app_data"
+        for folder in ("sources", "filter"):  # chats and screening results: synthetic researchers only
+            self.assertLessEqual({f.stem for f in (app_data / folder).glob("*.json")}, self.DEMO)
+        self.assertLessEqual({d.name for d in (showcase.BUNDLE / "handoff").iterdir()}, self.DEMO)
+        allowed = set(rv.METADATA_FIELDS) | {"main_idea", "summary", "idea", "title", "insights",
+                                             "subtopics", "specific_insights", "keywords"}
+        for f in (app_data / "approved_ideas").glob("*.json"):
+            for row in json.loads(f.read_text())["ideas"]:
+                self.assertLessEqual(set(row), allowed, f"unexpected idea fields in {f.name}")
+
+    def test_loads_into_an_empty_app_once_and_never_overwrites(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root, db = Path(tmp), Path(tmp) / "data" / "fellowship.db"
+            (root / "data").mkdir()
+            (root / "data" / "match_status.json").write_text("{}")   # something already there
+            self.assertTrue(showcase.load_if_empty(root=root, db_file=db))
+            self.assertTrue((root / "data" / "ideas.json").exists())
+            self.assertTrue((root / "data" / "matches.json").exists())
+            self.assertEqual((root / "data" / "match_status.json").read_text(), "{}")  # not overwritten
+            people = json.loads((showcase.BUNDLE / "people.json").read_text())
+            users = {u["user_id"]: u for u in reg.load_users(db)}
+            for p in people:  # profiles nobody can log in as, and not offered as demo accounts
+                self.assertEqual(users[p["user_id"]]["pseudonym"], p["pseudonym"])
+                self.assertIsNone(users[p["user_id"]]["private"]["email"])
+                self.assertFalse(users[p["user_id"]]["is_demo_account"])
+            self.assertFalse(showcase.load_if_empty(root=root, db_file=db))   # only once
+
+    def test_does_nothing_when_the_app_has_data(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "data").mkdir()
+            (root / "data" / "ideas.json").write_text('{"ideas": []}')
+            self.assertFalse(showcase.load_if_empty(root=root, db_file=root / "data" / "fellowship.db"))
+            self.assertFalse((root / "data" / "matches.json").exists())
 
 
 class OfflineFlowTests(unittest.TestCase):

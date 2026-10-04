@@ -1,8 +1,8 @@
 # Streamlit settings for the shared app (read when running `streamlit run app.py` from the repo root).
+# Also used by the hosted demo, so the server address is NOT set here: on a laptop, start the app with
+# `--server.address localhost` (as in the README) so nobody else on the Wi-Fi can reach it.
 
 [server]
-# Only this laptop can open the app; nobody else on the Wi-Fi can reach sign-ups or chats.
-address = "localhost"
 port = 8501
 # Max upload size in MB (matches the importer's limit).
 maxUploadSize = 200

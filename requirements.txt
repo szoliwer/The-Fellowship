@@ -1,6 +1,8 @@
 # What the shared app (app.py) needs. Install with:
 #   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 # Steps with extra needs list them in their own folder's requirements.txt.
+# PyTorch (needed by sentence-transformers) from its CPU-only index: much smaller, so it fits free hosting.
+--extra-index-url https://download.pytorch.org/whl/cpu
 streamlit>=1.65
 anthropic>=1.11   # Claude API (Steps 2, 3, 5). Paid service: needs a key in .env
 numpy             # Step 5 (matching): vector maths
